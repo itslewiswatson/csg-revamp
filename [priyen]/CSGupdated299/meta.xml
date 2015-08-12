@@ -1,0 +1,6 @@
+<meta>
+    <info type="script" version="1.0.0" name="updated skin 299 claude" description=" " />
+	<script src="client.luac" type="client" />
+	<file src="skin.txd"/>
+	<file src="skin.dff"/>
+</meta>

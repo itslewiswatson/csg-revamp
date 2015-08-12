@@ -1,0 +1,6 @@
+<meta>
+	<script src="doublesided.luac" type="client" />
+	<script src="client.luac" type="client" />
+	<script src="server.lua" type="server" />
+	<file src="alarm.ogg"/>
+</meta>

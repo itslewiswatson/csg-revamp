@@ -1,0 +1,8 @@
+<meta>
+    <info author="[CSG]FabioGNR" name="CSG-Trucking" version="1" type="script"/>
+	
+    <script src="server.lua"/>
+	
+    <script src="client.luac" type="client"/>
+	
+</meta>

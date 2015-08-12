@@ -1,0 +1,6 @@
+<meta>
+    <info type="script" version="1.0.0" name="fisher job" description="priyen" />
+
+	<script src="pptest_c.lua" type="client" />
+
+</meta>

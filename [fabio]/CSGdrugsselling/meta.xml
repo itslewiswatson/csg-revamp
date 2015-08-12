@@ -1,0 +1,6 @@
+
+<meta>
+    <info type="script" version="1.0.0" name="arms dealer" description="priyen" />	
+	<script src="pp_s.lua" type="server" />
+    <script src="pp_c.luac" type="client" />
+</meta>

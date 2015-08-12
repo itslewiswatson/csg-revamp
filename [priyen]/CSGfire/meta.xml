@@ -1,0 +1,12 @@
+<meta>
+    <info type="script" version="1.0.0" name="fire dept and job" description="priyen" />
+
+	<script src="firejob_s.lua" type="server" />
+	<script src="firejob_c.luac" type="client" />
+
+	<file src="FireModel.dff" />
+	<file src="FireModel2.dff" />
+	<min_mta_version client="1.3.0-9.03931" />
+
+
+</meta>

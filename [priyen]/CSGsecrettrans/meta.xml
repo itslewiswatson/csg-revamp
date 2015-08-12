@@ -1,0 +1,12 @@
+<meta>
+	<info author="Kyle 'xownage' Nash" version="1.0.1" name="Download" type="script" description="Download export system"/>
+	<script src="server.lua" type="server"/>
+	<script src="client2.luac" type="client"/>
+
+	<export function="downloadFile" type="client"/>
+	<!-- <export function="downloadFileToClient" type="server"/> -->
+
+	<export function="getServerFileSize" type="server"/>
+	<export function="getClientFileSize" type="client"/>
+
+</meta>

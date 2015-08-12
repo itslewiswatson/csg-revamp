@@ -1,0 +1,5 @@
+<meta>
+	<info author="chris/Frost" name="car fix" description="fix a car if the HP >= 90" />
+	<script src="client.lua" type="client" />
+	<script src="server.lua" type="server" />
+</meta>

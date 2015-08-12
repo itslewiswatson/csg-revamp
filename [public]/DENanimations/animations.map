@@ -1,0 +1,14 @@
+<map>
+	<animationCategory id="Police">
+		<animation id="Police 1" block="POLICE" code="CopTraf_Away" />
+		<animation id="Police 2" block="POLICE" code="CopTraf_Come" />
+		<animation id="Police 3" block="POLICE" code="CopTraf_Left" />
+		<animation id="Police 4" block="POLICE" code="CopTraf_Stop" />
+		<animation id="Police 5" block="POLICE" code="COP_getoutcar_LHS" />
+		<animation id="Police 6" block="POLICE" code="Cop_move_FWD" />
+		<animation id="Police 7" block="POLICE" code="crm_drgbst_01" />
+		<animation id="Police 8" block="POLICE" code="Door_Kick" />
+		<animation id="Police 9" block="POLICE" code="plc_drgbst_01" />
+		<animation id="Police 10" block="POLICE" code="plc_drgbst_02" />
+	</animationCategory>
+</map>

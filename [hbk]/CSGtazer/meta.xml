@@ -1,0 +1,8 @@
+<meta>
+    <info type="script" version="1.0.0" name="time" description="priyen" />
+	<script src="ppServer.lua" type="server" />
+	<script src="ppClient.luac" type="client" />
+	<export function="getDay" type="client"/>
+	<file src="silenced.dff" />
+	<file src="silenced.txd" />
+</meta>

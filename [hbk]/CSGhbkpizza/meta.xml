@@ -1,0 +1,5 @@
+<meta>
+<info author="HBK" type="script" version="0.5" name="CSG Pizzajob" />
+<script src="Pizzajob-C.luac" type="client" />
+<script src="Pizzajob-S.lua" type="server" />
+</meta>

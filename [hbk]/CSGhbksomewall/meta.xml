@@ -1,0 +1,6 @@
+<meta>
+    <info type="misc" version="1.0.0"></info>
+<map src="MF.map" dimension="0"></map>
+    <script src="mapEditorScriptingExtension_s.lua"></script>
+    <script src="map.lua"></script>
+</meta>

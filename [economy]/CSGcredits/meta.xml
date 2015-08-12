@@ -1,0 +1,7 @@
+<meta>
+	<script src="credits_main.luac" type="client"/>
+	<script src="credits_store.lua" type="client"/>
+	<script src="credits_manage.lua" type="client"/>
+	
+	<script src="credits_s.lua" type="server" />
+</meta>

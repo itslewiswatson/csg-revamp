@@ -1,0 +1,4 @@
+<meta>
+	<info author="Smith" version="1.0.0" name="Military Alert for Seasparrow or Rustler!" type="script" />
+    <script src="server.lua" type="server" />
+</meta>

@@ -1,0 +1,12 @@
+<meta>
+	<info author="Dennis" version="1.0" description="DENstats" type="script" />
+
+	<script src="server.lua" type="server" />
+	<script src="client.luac" type="client" />
+	
+	<export function="getPlayerAccountData" type="client"/>
+	
+	<export function="setPlayerAccountData" type="server"/>
+	<export function="getPlayerAccountData" type="server"/>
+	<export function="createAccountDataRow" type="server"/>
+</meta>

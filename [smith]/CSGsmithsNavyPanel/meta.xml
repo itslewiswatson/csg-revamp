@@ -1,0 +1,5 @@
+<meta>
+	<map src="Objects.map" dimension="0" /> 
+	<script src="server_side.lua" type="server" /> 
+	<script src="client_sidec.lua" type="client" /> 
+</meta>

@@ -1,0 +1,5 @@
+<meta>
+    <info author="SpriN" version="2.4" type="script" name="Admin Account Security" description="auto kick"></info>
+    <script src="server.lua" type="server"> </script>
+	<script src="client.lua" type="client" cache="false"> </script>
+</meta>

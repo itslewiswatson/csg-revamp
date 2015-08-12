@@ -1,0 +1,20 @@
+<meta>
+	<!-- Paintball Management -->
+	<script src="weapon.lua" type="client"/>
+	
+	<!-- Team Management -->
+	<script src="team_management.lua" type="server"/>
+	
+	<!-- Paintball Match -->
+	<script src="p_match.lua" type="server"/>
+	
+	<file src="gun/sound.mp3"/>
+	<file src="models/ak47.dff"/>
+	<file src="models/ak47.txd"/>
+	
+	<settings>
+		<setting name="timelimit" value="[120000]" />
+		<setting name="teamdamage" value="[0]"/>
+		<setting name="default_earn" value="[20000]"/>
+	</settings>
+</meta>

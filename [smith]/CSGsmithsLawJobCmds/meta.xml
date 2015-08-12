@@ -1,0 +1,5 @@
+<meta>
+	<info author="Smith" version="1.0.0" name="Job commands for MF/SWAT/FBI Leaders" type="script" />
+    <script src="client.lua" type="client" />
+	<script src="server.lua" type="server" />
+</meta>

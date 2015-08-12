@@ -1,0 +1,17 @@
+<meta>
+    <info type="script" version="1.0.0" name="CSG Haloween Script" description="Hween" />
+	<script src="server.lua" type="server" />
+	<script src="client.lua" type="client" />
+	
+	<script src="texts_client.lua" type="client"/>
+    <script src="texts_server.lua" type="server" />
+	
+	<file src="files/hween1.txd" />
+	<file src="files/hween1.dff" />
+	<file src="files/hween2.txd" />
+	<file src="files/hween2.dff" />
+	<file src="files/hween3.txd" />
+	<file src="files/hween3.dff" />
+	<file src = "moon.png" />
+	<file src = "repshader.fx" />
+</meta>

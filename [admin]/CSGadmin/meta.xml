@@ -1,0 +1,23 @@
+<meta>
+	<script src="Admin Mute/server.lua" type="server"/>
+	<script src="Admin Mute/client.luac" type="client" protected="true" />
+	
+	<script src="Admin Jail/server.lua" type="server"/>
+	<script src="Admin Jail/client.lua" type="client" protected="true" />
+	
+	<script src="Admin Ban/server.lua" type="server"/>
+	
+	<export function="adminMutePlayer" type="server"/>
+	<export function="adminUnmutePlayer" type="server"/>
+	<export function="getPlayerMute" type="server"/>
+	
+	<export function="setPlayerJailed" type="server"/>
+	<export function="removePlayerJailed" type="server"/>
+	<export function="isPlayerJailed" type="server"/>
+	
+	<export function="getServerBans" type="server"/>
+	<export function="banServerPlayer" type="server"/>
+	<export function="banServerAccount" type="server"/>
+	<export function="banServerSerial" type="server"/>
+	<export function="removeServerBan" type="server"/>
+</meta>

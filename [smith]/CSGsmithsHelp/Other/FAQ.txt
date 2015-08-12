@@ -1,0 +1,61 @@
+About Admin Rights:
+Remember that asking for an admin position completely ruins your chances to become an admin to 0%. So please don't ask for it or there should be bad consequences.
+
+How can I be Supporter?
+You can apply to be a Supporter in the Supporter's application board (Click here IG witch consists of helping players IG in order to be promoted to a New L1 staff.
+
+What's a staff?
+A staff is a player that has been given admin rights so he's got many special controls as an admin. A staff is able to Ban, Jail, Freeze, Mute, Slap (Kill), Warp to a player, Warp a player to him, and much more. Staff's power has got levels, from Level 1 (L1) until Level 6 (L6)
+And here are the descriptions of each level:
+
+L1: Trial staff
+
+L2: New Staff
+
+L3: Loyal Staff
+
+L4: Experienced staff
+
+L5: Important Staff
+
+L6: Leading staff
+
+Some staffs own their own duties such as: Leading Developer, Staff Manager, Developer, SWAT commander, Event Organizer, Military Force Leader. But these duties shown may also be owned by ex-staffs, means a player that's close to be a staff.
+But all these features as staff aren't used for fun, but to protect the server from rule breakers and helping players that needs help.
+
+Are we allowed to Deathmatch?
+CSG server isn't about DM in general, but LV city has been appropriated especially for DeathMatching. As rule #1 says, you're not able to DM but in LV. But it's just that you shouldn't abuse it to avoid getting punished by a staff.
+
+
+What's rule breaking?
+Rule breaking is breaking a rule of a server, not just a server, any where. To check this server rules press F1 once you're In-game and read all rules carefully and don't break them to avoid getting punished.
+About flaming, those words are allowed and shouldn't be complained for:
+- Nab/Noob/Nub
+- F-uck (In an unabused way) 
+- WTF
+- And all small flames..
+Now those aren't allowed, unless you're joking with your friend and isn't complained:
+- D*ick
+- B*itch
+And more.
+
+However, flaming in general with a local unknown player will result in a mute.
+
+What's spamming?
+Spamming in general is repeating a word or a phrase more then 1 time, and will result in a mute, duration depends on how much you spammed. However, spamming is one of the biggest rule-breaks on the server.
+
+What's the support Channel?
+Support Channel is used to ask questions Related to the server. Chatting, Adverting or spamming is considered as a rule breaking and is called: "Misuse" as "Misusing Support channel".
+To write on support channel, press "J" and select support, then ask your question.
+NOTE: You're still able to post on Support Channel if you're muted, but spamming in Support Channel will make you get a global mute from a staff, or a support channel misuse mute from a supporter. 
+
+
+What's a Punishlog?
+Your punish-log holds your punishments on the server such as: Admin Jails, Bans, Mutes, Freezes, Kicks and slaps. Kicks or Slaps do not count as 'punishments' also they will be remove once every week. To see your current Punish-log type /punishments once IG
+
+What's a license?
+There are multiple licenses IG allowing you to drive: Planes-Boats-Cars-Bikes-Heli's. To get one, go to a Red Dragon blip on the map as: RDB (Red Dragon Blip) in mid LS town is for car license, RDB in LS's airport is for Heli License, RDB in Ocean Docks is for Boat License, RDB in mid SF is for bike License, RDB in SF airport is for Plane license. You can also mark them with you'r phone (N > Maps > Mark List).
+
+About bugs:
+A bug is a glitch on the server, a problem by another way to explain.  If you see a bug, then please report it here: http://www.csgmta.net/mantisor at Quality Assurance.
+NOTE that if you abuse a bug, this will result in an Admin jail as a punishment.

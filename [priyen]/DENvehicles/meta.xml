@@ -1,0 +1,13 @@
+<meta>
+    <info author="Dennis" version="2.0" type="script" />
+
+	<script src="client.luac" type="client" />
+	<script src="server.lua" type="server" />
+
+	<file src="fbi.png"/>
+	<file src="swat.png"/>
+	<file src="mf.png"/>
+	<file src="texrep.fx"/>
+	<file src="polmav.dff"/>
+	<export function="reloadFreeVehicleMarkers" type="server" />
+</meta>

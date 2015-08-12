@@ -1,0 +1,8 @@
+<meta>
+	<info author="SpriN" version="2.2" name="Jobdx" type="script" />
+
+
+	<script src="c.lua" type="client" cache="false"/>
+
+	<export function="add" type="client"/>
+</meta>

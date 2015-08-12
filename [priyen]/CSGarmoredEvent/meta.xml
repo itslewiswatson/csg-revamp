@@ -1,0 +1,7 @@
+<meta>
+    <info type="script" version="1.0.0" name="armored law-crim event" description="teams" />
+	<script src="ppEvent_s.lua" type="server" />
+	<script src="ppEvent_c.luac" type="client" />
+	<export function="getTimeUntilEvent" type="client" />
+	<export function="getTimeUntilEvent" type="server" />
+</meta>

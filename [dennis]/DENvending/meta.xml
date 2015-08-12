@@ -1,0 +1,6 @@
+<meta>
+	<info author="Dennis" version="1.0" description="CSG Vending Machines" type="script" />
+
+	<script src="client.luac" type="client" />
+	<script src="server.lua" type="server" />
+</meta>

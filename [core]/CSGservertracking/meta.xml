@@ -1,0 +1,5 @@
+<meta>
+	<script src="server.lua" type="server"/>
+	
+	<script src="lagdetector/client.lua" type="client"/>
+</meta>

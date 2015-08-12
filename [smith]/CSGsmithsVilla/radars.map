@@ -1,0 +1,10 @@
+<map>
+    <object id="object (CE_safeground) (1)" doublesided="false" model="13816" interior="0" dimension="0" posX="949.20001220703" posY="-1936.1999511719" posZ="-0.30000001192093" rotX="0" rotY="0" rotZ="286"></object>
+    <object id="object (poolwater_SFS) (1)" doublesided="false" model="10444" interior="0" dimension="0" posX="942.5" posY="-1938.1999511719" posZ="1.7999999523163" rotX="0" rotY="0" rotZ="16"></object>
+    <object id="object (cos_sbanksteps03) (1)" doublesided="false" model="12950" interior="0" dimension="0" posX="940.70001220703" posY="-1935.4000244141" posZ="3.5499994754791" rotX="0" rotY="0" rotZ="286"></object>
+    <object id="object (helipad01) (3)" doublesided="false" model="3934" interior="0" dimension="0" posX="937.79998779297" posY="-1949.6999511719" posZ="7" rotX="0" rotY="0" rotZ="16"></object>
+    <object id="object (CARRIER_LIFT1_SFSE) (1)" doublesided="false" model="3115" interior="0" dimension="0" posX="973.29998779297" posY="-1945" posZ="1.779997587204" rotX="0" rotY="0" rotZ="196"></object>
+    <object id="object (lhouse_barrier1) (1)" doublesided="false" model="996" interior="0" dimension="0" posX="966.40002441406" posY="-1956.4000244141" posZ="2.5999999046326" rotX="0" rotY="0" rotZ="16"></object>
+    <object id="object (Gen_doorINT01) (1)" doublesided="false" model="1491" interior="0" dimension="0" posX="959.19995117188" posY="-1933" posZ="2.0799617767334" rotX="0" rotY="0" rotZ="106"></object>
+    <object id="object (Gen_doorINT01) (2)" doublesided="false" model="1491" interior="0" dimension="0" posX="958.38684082031" posY="-1930.0988769531" posZ="2.0999999046326" rotX="0" rotY="0" rotZ="286"></object>
+</map>

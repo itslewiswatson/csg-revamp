@@ -1,0 +1,8 @@
+<meta>
+	<script src="server.lua" type="server" />
+	<script src="client.luac" type="client" />
+
+	<export function="getPlayerRank" type="server"/>
+	<export function="getPlayerRank" type="client"/>
+	
+</meta>

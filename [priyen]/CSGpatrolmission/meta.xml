@@ -1,0 +1,5 @@
+<meta>
+    <info type="script" version="1.0.0" name="patrol mission" description="priyen" />
+    <script src="ppClient.luac" type="client" />
+    <script src="ppServer.lua" type="server"/>
+</meta>

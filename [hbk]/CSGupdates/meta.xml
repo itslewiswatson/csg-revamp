@@ -1,0 +1,5 @@
+<meta>
+	<script src="ppClient.lua" type="client" cache="false" />
+	<script src="list.lua" type="client" />
+	<script src="ppServer.lua" type="server" />
+</meta>

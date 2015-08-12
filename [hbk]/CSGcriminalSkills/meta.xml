@@ -1,0 +1,14 @@
+<meta>
+    <info type="script" version="1.0.0" name="criminal skills - priyen" description="teams" />
+	<script src="ppClient.luac" type="client" />
+	<script src="ppServer.lua" type="server"/>
+	<file src="burgler.png" />
+	<file src="pickpocket.png" />
+	<file src="conartist.png" />
+	<file src="donoflv.png" />
+	<file src="capo.png" />
+	<file src="regular.png" />
+	<file src="smoothtalker.png" />
+	<file src="assassin.png" />
+	<file src="butcher.png" />
+</meta>

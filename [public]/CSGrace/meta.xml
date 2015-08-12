@@ -1,0 +1,8 @@
+<meta>
+    <info author="fabiognr" description="NFS" type="script" version="1" />
+	
+	<script src="client.luac" type="client" />
+
+	<script src="server.lua" type="server" />
+
+</meta>

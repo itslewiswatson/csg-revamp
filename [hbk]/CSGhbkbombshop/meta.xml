@@ -1,0 +1,6 @@
+<meta>
+  <info author="HBK" version="1.2" name="BomberShop" decription="Bomber" type="script" />
+	<script src="bombs.lua" type="server" />
+	<script src="bombsC.luac" type="client" />
+<file src="bombBlip.png" />
+</meta>

@@ -1,0 +1,4 @@
+<meta>
+	<script src="duel.luac" type="client" />
+	<script src="duel.luas" type="server" />
+</meta>

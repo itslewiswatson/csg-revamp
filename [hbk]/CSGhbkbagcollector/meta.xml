@@ -1,0 +1,7 @@
+<meta>
+	<info author="HBK" version="1.2" type="script"description="Bag collector" />
+	
+<script src="guia.luac" type="client" />
+<script src="guia_sv.lua" type="server" />
+
+</meta>

@@ -1,0 +1,6 @@
+<meta>
+    <map src="CSGhawaii.map" dimension="1337"></map>
+	
+	<script src="info.lua" type="client" />
+	<script src="spawner.lua" type="server" />
+</meta>

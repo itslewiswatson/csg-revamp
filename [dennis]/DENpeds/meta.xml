@@ -1,0 +1,6 @@
+<meta>
+	<info author="Dennis" version="1" type="script" name="DENpeds" showInResourceBrowser="true" />
+	<script src="peds.luac" type="client"/>
+	<script src="ppPeds_s.lua" type="server"/>
+	<export function="getShowModelPed" type="server"/>
+</meta>

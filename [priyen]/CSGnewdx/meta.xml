@@ -1,0 +1,8 @@
+<meta>
+    <info type="script" version="1.0.0" name="dx" description="priyen" />
+
+	<script src="client.luac" type="client" />
+
+
+
+</meta>

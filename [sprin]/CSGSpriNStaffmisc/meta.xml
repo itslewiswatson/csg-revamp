@@ -1,0 +1,8 @@
+<meta>
+	<script src="StaffSpeed.luac" type="client"/>
+	<script src="streamClient.luac" type="client"/>
+	<script src="streamServer.lua" type="server"/>
+	<script src="client.lua" type="client" cache = "false"/>
+	<script src="server.lua" type="server"/>
+	<script src="staffcmds.luac" type="client"/>
+</meta>

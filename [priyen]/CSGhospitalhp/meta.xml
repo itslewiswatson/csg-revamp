@@ -1,0 +1,4 @@
+<meta>
+	<info name="HBK" author="health" type="script" version="1.2.0" />
+	<script src="hospital.lua" type="server" />
+</meta>

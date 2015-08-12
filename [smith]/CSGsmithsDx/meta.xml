@@ -1,0 +1,6 @@
+<meta>
+	<info author="Smith" version="1.0.0" name="Dx Notification!" type="script" />
+    <script src="clientc.lua" type="client" />
+	<script src="serverc.lua" type="server" />
+<export function="addTextNotification" type="server" />
+</meta>

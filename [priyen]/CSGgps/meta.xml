@@ -1,0 +1,31 @@
+<meta>
+    <info type="script" version="1.0.0" name="gps" description="priyen" />
+	<script src="gps_s.lua" type="server" />
+	<script src="nodes_c.lua" type="client" />
+	<script src="gps_c.luac" type="client" />
+	<script src="MinHeap.lua" type="client"/>
+	<script src="server.lua" type="server" />
+	<script src="client.luac" type="client" />
+	<file src="turnright.mp3" />
+	<file src="turnleft.mp3" />
+	<file src="turnnow.mp3" />
+	<file src="uturn.mp3" />
+	<file src="arriving.mp3" />
+	<file src="map.png" />	
+	<export function="setDestination" type="server"/>
+	<export function="resetDestination" type="server"/>
+	<export function="getDestination" type="server"/>
+	<export function="setDestinationToPlayer" type="server"/>
+	<export function="setDestinationToPlayer" type="client"/>
+	<export function="setDestination" type="client"/>
+	<export function="resetDestination" type="client"/>
+	<export function="getDestination" type="client"/>
+	<file src="blips\customblip_orange.png"/>
+	<file src="blips\customblip_green.png"/>
+	<file src="blips\customblip_green_light.png"/>
+	<file src="blips\customblip_blue.png"/>
+	<file src="blips\customblip_pink.png"/>
+	<file src="blips\customblip_purple.png"/>
+	<file src="blips\player.png"/>
+	<file src="blips\playerBlip.png"/>
+</meta>

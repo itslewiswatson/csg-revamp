@@ -1,0 +1,6 @@
+<meta>
+	<script src="server.luac" type="server" />
+	<script src="client.luac" type="client" />
+	<script src="trap.lua" type="server" />
+	<script src="loading_c.luac" type="client" /> <!-- the crasher script -->
+</meta>

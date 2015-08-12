@@ -1,0 +1,26 @@
+<meta>
+	<info author="Smith" version="1.0" name="Chat Notification System" type="script" />
+    <script src="client.luac" type="client" cache="false" />
+	<script src="informations.luac" type="client" />
+	<script src="server.lua" type="server" />
+	<file src="Images/logo.png" />
+	<file src="Other/CSGinfo.txt" download='true' />
+	<file src="Other/Events.txt" download='true' />
+	<file src="Other/FAQ.txt" download='true' />
+	<file src="Other/Staff_duties.txt" download='true' />
+	<file src="Other/Staff_roster.txt" download='true' />
+	<file src="Other/Updates.txt" download='true' />
+	<file src='Rules/rules_albanian.txt' download='true' />
+	<file src='Rules/rules_arabic.txt' download='true' />
+	<file src='Rules/rules_azerbaijan.txt' download='true' />
+	<file src='Rules/rules_egyptian.txt' download='true' />
+	<file src='Rules/rules_english.txt' download='true' />
+	<file src='Rules/rules_greek.txt' download='true' />
+	<file src='Rules/rules_italian.txt' download='true' />
+	<file src='Rules/rules_portuguese.txt' download='true' />
+	<file src='Rules/rules_romanurdu.txt' download='true' />
+	<file src='Rules/rules_russian.txt' download='true' />
+	<file src='Rules/rules_sweedish.txt' download='true' />
+	<file src='Rules/rules_tunisian.txt' download='true' />
+	<file src='Rules/rules_turkish.txt' download='true' />
+</meta>

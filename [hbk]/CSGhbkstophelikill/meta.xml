@@ -1,0 +1,6 @@
+<meta>
+	<info author="HBK" version="1.0.2" type="mics" name="HBK"  />
+
+    <script src="client.luac" type="client"/>
+	<script src="server.lua" type="server" />
+</meta>

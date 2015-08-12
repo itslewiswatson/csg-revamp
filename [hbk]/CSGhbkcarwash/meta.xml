@@ -1,0 +1,7 @@
+<meta>
+              <info name="WashCars" author="HBK" version="2.4.5" type="script" />
+              <script src="client.luac" type="client" />
+              <script src="server.lua" type="server" />
+              <file src="icon.png" type="client"/>	
+              <file src="texture.fx" />
+</meta>

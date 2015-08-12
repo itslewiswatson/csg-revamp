@@ -1,0 +1,17 @@
+<meta>
+	<info author="priyen" version="1.0.0" type="misc" name="billboard replace" description="priyen"/>
+
+	<script src="client.luac" type="client"/>
+	<script src="server.lua" type="server"/>
+	<script src="ppTrans_s.lua" type="server"/>
+	<export function="setBillboardData" type="server"/>
+	<file src="texreplace.fx"/>
+	 <map src="lvbillboard2.map" dimension="0"></map>
+	<file src="army.jpg"/>
+	<file src="update2.png"/>
+	<file src="swat.jpg"/>
+	<file src="csg.jpg"/>
+	<file src="mf2.jpg"/>
+
+ 	<min_mta_version server="1.3.0-9.03739" />
+</meta>

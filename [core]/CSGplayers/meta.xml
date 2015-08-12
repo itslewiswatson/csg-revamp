@@ -1,0 +1,6 @@
+<meta>
+	<script src="server.lua" type="server"/>
+	
+	<export function="getPlayers" type="server" http="true"/>
+	<export function="getMaxPlayers" type="server" http="true"/>
+</meta>

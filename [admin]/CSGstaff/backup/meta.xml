@@ -1,0 +1,40 @@
+<meta>
+	<script src="client.luac" type="client"/>
+	<script src="server.lua" type="server"/>
+	<script src="warnings.lua" type="server"/>
+	
+	<script src="Admin Panel/spectate.luac" type="client"/>
+	
+	<script src="Admin Panel/server.lua" type="server"/>
+	<script src="Admin Panel/client.luac" type="client"/>
+	<script src="Admin Panel/ACL.luac" type="client"/>
+	
+	<script src="Admin Functions/eventmarker.lua" type="server" />
+	<script src="Admin Functions/glue.luac" type="client"/>
+	<script src="Admin Functions/warping.luac" type="client"/>
+	
+	<file	src="Admin Skins/wfyclot.txd" type="client"/>
+	<file	src="Admin Skins/wmyclot.dff" type="client"/>
+	<file	src="Admin Skins/wmyclot.txd" type="client"/>
+	
+	<export function="isPlayerStaff" type="client"/>
+	<export function="isPlayerDeveloper" type="client"/>
+	<export function="isPlayerEventManager" type="client"/>
+	<export function="getPlayerAdminLevel" type="client"/>
+	<export function="getOnlineAdmins" type="client"/>
+	
+	<export function="isPlayerStaff" type="server"/>
+	<export function="isPlayerDeveloper" type="server"/>
+	<export function="isPlayerEventManager" type="server"/>
+	<export function="getPlayerAdminLevel" type="server"/>
+	<export function="getOnlineAdmins" type="server"/>
+	<export function="createNewAdminDxMessage" type="server"/>
+	
+	<export function="setAdminActive" type="server"/>
+	<export function="setAdminEventManager" type="server"/>
+	<export function="setAdminDeveloper" type="server"/>
+	<export function="kickAdmin" type="server"/>
+	<export function="demoteAdmin" type="server"/>
+	<export function="promoteAdmin" type="server"/>
+	<export function="getAllAdmins" type="server"/>
+</meta>

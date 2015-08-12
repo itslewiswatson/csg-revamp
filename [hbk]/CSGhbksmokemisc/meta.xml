@@ -1,0 +1,6 @@
+<meta>
+<info author="HBK" type="script" version="2" name="CSG smokemisc" />
+
+<script src="smokemisc.lua" type="server" />
+
+</meta>

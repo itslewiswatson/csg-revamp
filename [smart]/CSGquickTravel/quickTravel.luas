@@ -1,0 +1,62 @@
+------------------------------------------------------------------------------------
+-- PROJECT:				CSG ~ Community of Social Gaming
+-- DEVELOPERS: 				Smart
+-- RIGHTS: 				All rights reserved by developers
+------------------------------------------------------------------------------------
+
+local destinationT = {}
+
+local travelLocations = 	
+	{
+		[1] = {1681, 1454, 9.6}, -- LV Airport
+		[2] = {-1432, -284, 13.3}, -- SF Airport
+		[3] = {1655, -2328, 12.3} -- LS Airport
+	}
+	
+function quickTravelStart()
+	for index, qMarkers in ipairs(travelLocations) do
+		qMarker = createMarker(qMarkers[1], qMarkers[2], qMarkers[3], "cylinder", 2, 225, 225, 0, 150)
+		addEventHandler("onMarkerHit", qMarker, quickTravel)
+		local blip = createBlipAttachedTo(qMarker, 42)
+		setBlipVisibleDistance(blip, 250)
+	end
+end
+addEventHandler("onResourceStart", resourceRoot, quickTravelStart)
+
+function quickTravel(client)
+	if getElementType(client) == "player" then 
+		if getPlayerMoney(client) < 500 then exports.DENdxmsg:createNewDxMessage(client, "You need atleast $500 to travel!", 225, 0, 0) return end
+		local x, y, z = getElementPosition(client)
+		local zone = getZoneName(x, y, z, true)
+		triggerClientEvent(client, "CSGtravelQuick.showGUIForPlayer", client, zone)
+	end
+end
+
+function setPlayerDestination(destination)
+	exports.DENdxmsg:createNewDxMessage(source, "You're now travelling to "..destination.. " and will take approximately 5 seconds", 225, 225, 0)
+	takePlayerMoney(source, 500)
+	setElementPosition(source, 1.64, 25.45, 1199.59)
+	setElementInterior(source, 1)
+	setTimer(onPlayerLandDestination, 5000, 1, source, destination)
+	setTimer(fadeCamera, 4000, 1, source, false)
+end
+addEvent("CSGtravelQuick.setPlayerDestination", true)
+addEventHandler("CSGtravelQuick.setPlayerDestination", root, setPlayerDestination)
+
+function onPlayerLandDestination(player, destination)
+	setTimer(fadeCamera, 1500, 1, player, true, 0)
+	exports.DENdxmsg:createNewDxMessage(player, "You have now landed at your destination ("..destination.. ")", 0, 225, 0)
+	if destination == "Los Santos" then
+		setElementInterior(player, 0)
+		setElementPosition(player, 1641.98, -2334.14, 13.54)
+		setElementRotation(player, 0, 0, 0)
+	elseif destination == "Las Venturas" then
+		setElementInterior(player, 0)
+		setElementPosition(player, 1673.87, 1447.48, 10.78)
+		setElementRotation(player, 0, 0, 270)
+	elseif destination == "San Fierro" then
+		setElementInterior(player, 0)
+		setElementPosition(player, -1422.82, -289.46, 14.14)
+		setElementRotation(player, 0, 0, 135)
+	end
+end

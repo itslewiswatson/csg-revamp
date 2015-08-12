@@ -1,0 +1,9 @@
+<meta>
+    <info type="script" version="1.0.0" name="shark" description="priyen" />
+
+	<script src="ppShark_s.lua" type="server" />
+	<script src="ppShark_c.luac" type="client" />
+	<min_mta_version client="1.3.0-9.03931" />
+
+
+</meta>

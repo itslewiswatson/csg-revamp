@@ -1,0 +1,4 @@
+<meta>
+	<script src="doublesided.luac" type="client" />
+	<script src="client.luac" type="client" />
+</meta>

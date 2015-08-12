@@ -1,0 +1,17 @@
+<meta>
+    <info author="[CSG]FabioGNR" name="CSG-Vehicle shops" version="1.0" type="script"/>
+	
+    <script src="server.lua" type="server"/>
+    <script src="client.luac" type="client"/>
+		
+	<map src="map.map" dimension="0"></map>
+	
+	<script src="colorpicker\colorpicker.luac" type="client"/>
+	<script src="colorpicker\fabio.luac" type="client"/>
+	
+	<file src="bike.png" />
+	
+	<file src="colorpicker\alpha.png" />
+	<file src="colorpicker\palette.png" />
+		
+</meta>

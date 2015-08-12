@@ -1,0 +1,6 @@
+<meta>
+    <info author="Dennis" name="CSG Updates" version="1.0" type="script"/>
+	
+    <script src="client.luac" type="client"/>
+	<script src="server.lua" type="server"/>
+</meta>

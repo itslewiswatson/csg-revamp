@@ -1,0 +1,7 @@
+<map edf:definitions="editor_main">
+    <object id="object (sw_block09) (2)" doublesided="false" model="12979" interior="0" dimension="0" posX="-2087.5" posY="-89.2998046875" posZ="34.200000762939" rotX="0" rotY="0" rotZ="90"></object>
+    <object id="object (sw_jetty) (4)" doublesided="false" model="12990" interior="0" dimension="0" posX="-19" posY="-1586.5" posZ="1" rotX="0" rotY="0" rotZ="0"></object>
+    <object id="object (sw_jetty) (5)" doublesided="false" model="12990" interior="0" dimension="0" posX="-19.299999237061" posY="-1614.5" posZ="1" rotX="0" rotY="0" rotZ="0"></object>
+    <object id="object (sw_jetty) (6)" doublesided="false" model="12990" interior="0" dimension="0" posX="-19.39999961853" posY="-1642.6999511719" posZ="1" rotX="0" rotY="0" rotZ="0"></object>
+
+	</map>

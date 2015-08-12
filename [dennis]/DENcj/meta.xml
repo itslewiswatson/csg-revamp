@@ -1,0 +1,8 @@
+<meta>
+    <info author="Dennis" name="CJ Clothes" version="1.0" type="script"/>
+		
+    <script src="clothes.luac" type="client"/>
+	<script src="client.luac" type="client"/>
+	<script src="server.lua" type="server"/>
+	
+</meta>

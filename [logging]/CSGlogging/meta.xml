@@ -1,0 +1,6 @@
+<meta>	
+	<script src="server.lua" type="server"/>
+	
+	<export function="createLogRow" type="server"/>
+	<export function="createAdminLogRow" type="server"/>
+</meta>

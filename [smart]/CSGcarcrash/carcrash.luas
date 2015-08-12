@@ -1,0 +1,170 @@
+------------------------------------------------------------------------------------
+-- PROJECT:				CSG ~ Community of Social Gaming
+-- DEVELOPERS: 				Smart
+-- RIGHTS: 				All rights reserved by developers
+------------------------------------------------------------------------------------
+
+local rescueVehicle = {}
+local fireBlip = {}
+local medicBlip = {}
+local rescueTimer = {}
+local vehicleMarker = {}
+
+
+function onVehicleCrash(damageLoss)
+	local damageLoss = math.floor(damageLoss)
+	if (damageLoss > 300) then
+		local player = getVehicleOccupant(source)
+		local team = getTeamFromName("Firefighters")
+		if (countPlayersInTeam(team) < tonumber(1)) then return end
+		if (getElementData(player, "isPlayerPremium")) then return end
+		triggerClientEvent(player, "CSGcarcrash.showCrashGUI", root, damageLoss)
+		setElementFrozen(player, true)
+		setTimer(setElementFrozen, 3000, 1, source, true)
+		--setElementFrozen(source, true)
+		toggleControl(player, "enter_exit", false)
+		setVehicleEngineState(source, false)
+		setElementData(source, "vehicelTypeRescue", "currentlyRescuing")
+	end
+end
+addEventHandler("onVehicleDamage", root, onVehicleCrash)
+
+function retrevieClientClick(clickOption)
+	if (clickOption == "dieInstantly") then
+		setElementFrozen(getPedOccupiedVehicle(source), false)
+		setElementFrozen(source, false)
+		killPed(source)
+		takePlayerMoney(source, 500)
+		toggleControl(source, "enter_exit", true)
+		setElementData(source, "vehicelTypeRescue", false)
+	elseif (clickOption == "wait") then
+		local x, y, z = getElementPosition(getPedOccupiedVehicle(source))
+		vehicleMarker[getPedOccupiedVehicle(source)] = createMarker(x, y, z, "cylinder", 15, 250, 250, 250, 0)
+		addEventHandler("onMarkerHit", vehicleMarker[getPedOccupiedVehicle(source)], onRescuerMarkerHit)
+		addEventHandler("onMarkerLeave", vehicleMarker[getPedOccupiedVehicle(source)], onRescuerMarkerLeave)
+		rescueVehicle[getPedOccupiedVehicle(source)] = true
+		alertFireDepartment(source)
+		rescueTimer[source] = setTimer(cancelRescueMission, 60000, 1, source)
+		if (getElementHealth(source) < 10) then
+			alertMedicServices(source)
+		end	
+	end		
+end
+addEvent("CSGcarcrash.retrevieClientClick", true)
+addEventHandler("CSGcarcrash.retrevieClientClick", root, retrevieClientClick)
+
+function onRescuerMarkerLeave(hitPlayer)
+	if (getElementType(hitPlayer) ~= "player") then return end
+	if (getElementData(hitPlayer, "Occupation") == "Firefighter") then
+		if not isElement(hitPlayer) then return end
+		triggerClientEvent(hitPlayer, "CSGcarcrash.revmoveInformationGUI", hitPlayer)
+	end
+end
+
+function onRescuerMarkerHit(hitPlayer)
+	if (getElementType(hitPlayer) ~= "player") then return end
+	if (getElementData(hitPlayer, "Occupation") == "Firefighter") then
+		if not isElement(hitPlayer) then return end
+		triggerClientEvent(hitPlayer, "CSGcarcrash.showInformationGUI", hitPlayer)
+	end
+end
+
+function onFireFigherClick(button, state, element, posX, posY, posZ)
+	if (not element) then return end
+	if (getElementData(source, "Occupation") == "Firefighter") then
+		if (rescueVehicle[element]) then
+			local victim = getVehicleOccupant(element)
+			local rescuer = source
+			startRescuingHim(victim, rescuer, element)
+			triggerClientEvent(rescuer, "CSGcarcrash.startRescue", rescuer)
+		end
+	end
+end
+addEventHandler("onPlayerClick", root, onFireFigherClick)
+
+function startRescuingHim(victim, rescuer, vehicle)
+	if (isTimer(rescueTimer[victim])) then killTimer(rescueTimer[victim]) end
+	if (isElement(fireBlip[victim])) then destroyElement(fireBlip[victim]) end
+	if (isElement(medicBlip[victim])) then destroyElement(medicBlip[victim]) end
+	if (isElement(vehicleMarker[vehicle])) then destroyElement(vehicleMarker[vehicle]) end
+	if not isElement(victim) or not isElement(rescuer) or not isElement(vehicle) then return end
+	if (rescuer == victim) then exports.DENdxmsg:createNewDxMessage(victim, "You can't rescue yourself", 225, 225, 0) return end
+	exports.DENdxmsg:createNewDxMessage(victim, getPlayerName(rescuer).. " is trying to rescue you, please wait 10 seconds!", 225, 225, 0)
+	exports.DENdxmsg:createNewDxMessage(rescuer, "Rescuing this person will take 10 seconds, please wait.", 225, 225, 0)
+	setElementData(vehicle, "vehicelTypeRescue", false)
+	rescueVehicle[vehicle] = false
+	rescueTimer[rescuer] = setTimer(finishRescueMission, 10000, 1, victim, rescuer)
+	toggleControl(rescuer, "walk", false)
+	toggleControl(rescuer, "fowards", false)
+	toggleControl(rescuer, "backwards ", false)
+	toggleControl(rescuer, "left", false)
+	toggleControl(rescuer, "right ", false)
+	setVehicleEngineState(vehicle, true)
+end
+
+function finishRescueMission(victim, rescuer)
+	if (isTimer(rescueTimer[rescuer])) then killTimer(rescueTimer[rescuer]) end
+	if not isElement(victim) or not isElement(rescuer) then return end
+	local payment = math.random(500, 1500)
+	givePlayerMoney(rescuer, payment)
+	if (isElementFrozen(getPedOccupiedVehicle(victim))) then setElementFrozen(getPedOccupiedVehicle(victim), false) end
+	toggleControl(victim, "enter_exit", true)
+	setElementFrozen(victim, false)
+	toggleControl(rescuer, "walk", true)
+	toggleControl(rescuer, "fowards", true)
+	toggleControl(rescuer, "backwards ", true)
+	toggleControl(rescuer, "left", true)
+	toggleControl(rescuer, "right ", true)
+	exports.CSGscore:givePlayerScore(rescuer, 1)
+	triggerClientEvent(rescuer, "CSGcarcrash.revmoveInformationGUI", rescuer)
+	exports.DENdxmsg:createNewDxMessage(victim, getPlayerName(rescuer).. " has sucesfully rescued you!", 0, 225, 0)
+	exports.DENdxmsg:createNewDxMessage(rescuer, "You succesfully rescued this person and earned $"..payment, 0, 225, 0)
+end
+
+function cancelRescueMission(player)
+	if (isTimer(rescueTimer[player])) then killTimer(rescueTimer[player]) end
+	if (isElement(fireBlip[player])) then destroyElement(fireBlip[player]) end
+	if (isElement(medicBlip[player])) then destroyElement(medicBlip[player]) end
+	if not isElement(player) then return end
+	local vehicle = getPedOccupiedVehicle(player)
+	if (isElementFrozen(vehicle)) then setElementFrozen(vehicle, false) end
+	setElementFrozen(player, false)
+	setVehicleEngineState(vehicle, true)
+	rescueVehicle[vehicle] = false
+	setElementData(vehicle, "vehicelTypeRescueRescue", false)
+	toggleControl(player, "enter_exit", true)
+	if (isElement(vehicleMarker[vehicle])) then destroyElement(vehicleMarker[vehicle]) end
+end
+
+function onPlayerQuit()
+	if (isTimer(rescueTimer[source])) then killTimer(rescueTimer[source]) end
+	if (isElement(fireBlip[source])) then destroyElement(fireBlip[source]) end
+	if (isElement(medicBlip[source])) then destroyElement(medicBlip[source]) end
+end
+addEventHandler("onPlayerQuit", root, onPlayerQuit)
+
+function alertFireDepartment(victim)
+	local x, y, z = getElementPosition(victim)
+	for index, firefighters in ipairs(getElementsByType("player")) do
+		if (getElementData(firefighters, "Occupation") == "Firefighter") then
+			exports.DENdxmsg:createNewDxMessage(firefighters, "A crash has been spotted in: "..getZoneName(x, y, z).. ", "..getZoneName(x, y, z, true).. " respond to the scene and rescue him!", 225, 225, 0)
+			fireBlip[victim] = createBlipAttachedTo(victim, 59)
+			setElementVisibleTo(fireBlip[victim], root, false)
+			setElementVisibleTo(fireBlip[victim], firefighters, true)
+		end
+	end
+end
+
+
+
+function alertMedicServices(victim)
+	local x, y, z = getElementPosition(victim)
+	for index, medics in ipairs(getElementsByType("player")) do
+		if (getElementData(medics, "Occupation") == "Paramedic") then
+			exports.DENdxmsg:createNewDxMessage(firefighters, "A crash has been spotted in: "..getZoneName(x, y, z).. ", "..getZoneName(x, y, z, true).. " respond to the scene and give him medical service!", 225, 225, 0)
+			medicBlip[victim] = createBlipAttachedTo(victim, 59)
+			setElementVisibleTo(medicBlip[victim], root, false)
+			setElementVisibleTo(medicBlip[victim], medics, true)
+		end
+	end
+end

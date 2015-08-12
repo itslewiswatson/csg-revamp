@@ -1,0 +1,10 @@
+<meta>
+	<info name="Shader - Skybox" description="Shader - Skybox" author="Ren712" version="1.05" type="script" />
+	<script src="shader_skybox.lua" type="client" />
+	<file src="shader_skybox.fx" type="client" />
+	<file src="mta-helper.fx" type="client" />
+	<file src="textures/skybox.dds" type="client" />
+	<file src="models/skybox_model.dff" type="client" />
+	<file src="models/skybox_model.txd" type="client" />
+
+</meta>

@@ -1,0 +1,7 @@
+<meta>
+    <info type="script" description="Pchief chat" author="HBK" version="1.0.0" name="HBK" />
+    <script src="script.lua" type="server" />
+
+</meta>
+
+

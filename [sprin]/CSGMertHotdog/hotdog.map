@@ -1,0 +1,16 @@
+<map edf:definitions="editor_main">
+    <object id="object (CJ_HOT_DOG1) (1)" interior="0" alpha="255" doublesided="false" model="1772" scale="1" dimension="0" posX="1187" posY="-1377.90002" posZ="14" rotX="0" rotY="0" rotZ="270"></object>
+    <object id="object (CJ_HOT_DOG1) (2)" interior="0" alpha="255" doublesided="false" model="1772" scale="1" dimension="0" posX="1424" posY="-1250.19995" posZ="14" rotX="0" rotY="0" rotZ="0"></object>
+    <object id="object (CJ_HOT_DOG1) (3)" interior="0" alpha="255" doublesided="false" model="1772" scale="1" dimension="0" posX="1543.30005" posY="-1699.09998" posZ="14" rotX="0" rotY="0" rotZ="0"></object>
+    <object id="object (CJ_HOT_DOG1) (4)" interior="0" alpha="255" doublesided="false" model="1772" scale="1" dimension="0" posX="1591.90002" posY="1820.59998" posZ="11.2" rotX="0" rotY="0" rotZ="0"></object>
+    <object id="object (CJ_HOT_DOG1) (5)" interior="0" alpha="255" doublesided="false" model="1772" scale="1" dimension="0" posX="2019.09998" posY="-1409.5" posZ="17.4" rotX="0" rotY="0" rotZ="0"></object>
+    <object id="object (CJ_HOT_DOG1) (6)" interior="0" alpha="255" doublesided="false" model="1772" scale="1" dimension="0" posX="1230.5" posY="335.39999" posZ="20.2" rotX="0" rotY="0" rotZ="0"></object>
+    <object id="object (CJ_HOT_DOG1) (7)" interior="0" alpha="255" doublesided="false" model="1772" scale="1" dimension="0" posX="-7.9" posY="1210.90002" posZ="19.8" rotX="0" rotY="0" rotZ="0"></object>
+    <object id="object (CJ_HOT_DOG1) (8)" interior="0" alpha="255" doublesided="false" model="1772" scale="1" dimension="0" posX="-231.60001" posY="990.90002" posZ="20" rotX="0" rotY="0" rotZ="0"></object>
+    <object id="object (CJ_HOT_DOG1) (9)" interior="0" alpha="255" doublesided="false" model="1772" scale="1" dimension="0" posX="-1543.5" posY="703" posZ="7.6" rotX="0" rotY="0" rotZ="0"></object>
+    <object id="object (CJ_HOT_DOG1) (10)" interior="0" alpha="255" doublesided="false" model="1772" scale="1" dimension="0" posX="-1913.19995" posY="874" posZ="35.7" rotX="0" rotY="0" rotZ="0"></object>
+    <object id="object (CJ_HOT_DOG1) (11)" interior="0" alpha="255" doublesided="false" model="1772" scale="1" dimension="0" posX="1986.30005" posY="-1095" posZ="25.7" rotX="0" rotY="0" rotZ="0"></object>
+    <object id="object (CJ_HOT_DOG1) (12)" interior="0" alpha="255" doublesided="false" model="1772" scale="1" dimension="0" posX="2477.8999" posY="-1686.30005" posZ="13.9" rotX="0" rotY="0" rotZ="0"></object>
+    <object id="object (CJ_HOT_DOG1) (13)" interior="0" alpha="255" doublesided="false" model="1772" scale="1" dimension="0" posX="2503.5" posY="-1755.19995" posZ="13.8" rotX="0" rotY="0" rotZ="0"></object>
+    <object id="object (CJ_HOT_DOG1) (14)" interior="0" alpha="255" doublesided="false" model="1772" scale="1" dimension="0" posX="2796.69995" posY="-1824.80005" posZ="10.3" rotX="0" rotY="0" rotZ="220.75"></object>
+</map>

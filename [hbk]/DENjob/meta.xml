@@ -1,0 +1,37 @@
+<meta>
+	<info author="Dennis" type="script" version="1.0" name="Job" />
+
+	<script src="server.lua" type="server" />
+	<script src="client.luac" type="client" />
+	<script src="jobmenu.luac" type="client" />
+	<export function="banFromJob" type="server"/>
+	<export function="unbanFromJob" type="Server"/>
+	<file src="images/policeBlipn.png" />
+	<file src="images/medicBlipn.png" />
+	<file src="images/civBlipn.png" />
+	<file src="images/fireBlips.png" />
+
+
+
+	<file src="swat.txd"/>
+	<file src="swat.dff"/>
+
+	<file src="wolf.txd"/>
+	<file src="wolf.dff"/>
+
+	<file src="tq.txd"/>
+	<file src="tq.dff"/>
+
+
+
+	<file src="sm.txd"/>
+	<file src="sm.dff"/>
+
+	<file src="mf1july26.txd"/>
+	<file src="mf1july26.dff"/>
+
+
+
+	<file src="fbi0.txd"/>
+	<file src="fbi0.dff"/>
+</meta>

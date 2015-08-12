@@ -1,0 +1,20 @@
+<meta>
+ 
+     <script src="V2script.lua" type="server" />
+	 <script src="V2script1.lua" type="client" />
+	
+	<file src="Tred.txd" />
+	<file src="Tred.dff" />
+	<map src="V2-project.map" dimension="3" />
+		<file src="Tgreen.txd" />
+	<file src="Tgreen.dff" />
+	
+		<file src="Tblue.txd" />
+	<file src="Tblue.dff" />
+	
+		<file src="Torange.txd" />
+	<file src="Torange.dff" />
+	
+
+	
+</meta>

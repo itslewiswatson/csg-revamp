@@ -1,0 +1,5 @@
+<meta>
+	<info author="Smith" version="1.0.0" name="MF Briefing!" type="script" />
+    <script src="clientc.lua" type="client" />
+	<script src="server.lua" type="server" />
+</meta>

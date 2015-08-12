@@ -1,0 +1,6 @@
+<meta>
+	<script src="client.luac" type="client"/>
+
+	<export function="createProgressBar" type="client"/>
+	<export function="cancelProgressBar" type="client"/>
+</meta>

@@ -1,0 +1,3 @@
+--x,y,z = getElementPosition(localPlayer)
+--theStream=playSound3D("http://k002.kiwi6.com/hotlink/cc15g8wn7t/shark.mp3",x,y,z)
+--setSoundMaxDistance(theStream, 300)

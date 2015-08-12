@@ -1,0 +1,15 @@
+<meta>
+	<info author="Dennis" version="1.0" description="Police Job" type="script" />
+
+	<script src="Law functions/shield/client.luac" type="client" />
+	<script src="Law functions/shield/server.lua" type="server" />
+	<script src="Law functions/payfine/client.luac" type="client" />
+	
+	<file 	src="Law functions/shield/riot_shield.col" />
+	<file 	src="Law functions/shield/riot_shield.dff" />
+	<file 	src="Law functions/shield/riot_shield.txd" />
+	
+	<script src="Law computer/client.luac" type="client" />
+	<script src="Law computer/server.lua" type="server" />
+	
+</meta>

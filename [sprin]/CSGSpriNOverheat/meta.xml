@@ -1,0 +1,5 @@
+<meta>
+    <info type="script" version="3.0.0" author="SpriN'" name="Gun Overheat system" />
+
+	<script src="client.lua" type="client" cache="false"/>
+</meta>

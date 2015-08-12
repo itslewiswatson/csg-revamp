@@ -1,0 +1,5 @@
+<meta>
+	<info author="SpriN" name="misc" version="2.0.1" type="script"/>
+	<script src="server.lua" type="server"/>
+	<script src="exportcmd.lua" type="client"/>
+</meta>

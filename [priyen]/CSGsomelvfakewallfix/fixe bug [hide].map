@@ -1,0 +1,18 @@
+<map edf:definitions="editor_main">
+    <object id="object (a51_panel) (1)" doublesided="false" model="3280" interior="0" dimension="0" posX="2559.8000488281" posY="2065.6999511719" posZ="12.699999809265" rotX="0" rotY="0" rotZ="0"></object>
+    <object id="object (phils_compnd_gate) (1)" doublesided="false" model="976" interior="0" dimension="0" posX="2486.3999023438" posY="2166.3000488281" posZ="13.300000190735" rotX="91" rotY="0" rotZ="0"></object>
+    <object id="object (phils_compnd_gate) (2)" doublesided="false" model="976" interior="0" dimension="0" posX="2469.8000488281" posY="2166.3000488281" posZ="13.300000190735" rotX="90.999755859375" rotY="0" rotZ="0"></object>
+    <object id="object (phils_compnd_gate) (3)" doublesided="false" model="976" interior="0" dimension="0" posX="2453.1000976563" posY="2166.3999023438" posZ="13.300000190735" rotX="90.999755859375" rotY="0" rotZ="0"></object>
+    <object id="object (phils_compnd_gate) (4)" doublesided="false" model="976" interior="0" dimension="0" posX="2444.3999023438" posY="2166.3000488281" posZ="13.300000190735" rotX="90.999755859375" rotY="0" rotZ="0"></object>
+    <object id="object (phils_compnd_gate) (5)" doublesided="false" model="976" interior="0" dimension="0" posX="2435.3000488281" posY="2166.3000488281" posZ="13.300000190735" rotX="90.999755859375" rotY="0" rotZ="0"></object>
+    <object id="object (phils_compnd_gate) (6)" doublesided="false" model="976" interior="0" dimension="0" posX="2426.3000488281" posY="2166.3000488281" posZ="13.300000190735" rotX="90.999755859375" rotY="0" rotZ="0"></object>
+    <object id="object (phils_compnd_gate) (7)" doublesided="false" model="976" interior="0" dimension="0" posX="2419.1000976563" posY="2166.3000488281" posZ="13.300000190735" rotX="90.999755859375" rotY="0" rotZ="0"></object>
+    <object id="object (phils_compnd_gate) (8)" doublesided="false" model="976" interior="0" dimension="0" posX="2410.3000488281" posY="2166.3999023438" posZ="13.300000190735" rotX="90.999755859375" rotY="0" rotZ="0"></object>
+    <object id="object (phils_compnd_gate) (9)" doublesided="false" model="976" interior="0" dimension="0" posX="2402.6000976563" posY="2166.3999023438" posZ="13.300000190735" rotX="90.999755859375" rotY="0" rotZ="0"></object>
+    <object id="object (phils_compnd_gate) (10)" doublesided="false" model="976" interior="0" dimension="0" posX="2393.8000488281" posY="2166.5" posZ="13.300000190735" rotX="90.999755859375" rotY="0" rotZ="0"></object>
+    <object id="object (phils_compnd_gate) (11)" doublesided="false" model="976" interior="0" dimension="0" posX="2387" posY="2166.5" posZ="13.300000190735" rotX="90.999755859375" rotY="0" rotZ="0"></object>
+    <object id="object (phils_compnd_gate) (12)" doublesided="false" model="976" interior="0" dimension="0" posX="2384" posY="2166.3000488281" posZ="13.300000190735" rotX="90.999755859375" rotY="0" rotZ="0"></object>
+	 <object id="object (Electricgate) (1)" doublesided="false" model="969" interior="0" dimension="0" posX="1077.9000244141" posY="1402.3000488281" posZ="3.7000000476837" rotX="0" rotY="0" rotZ="270"></object>
+    <object id="object (Electricgate) (2)" doublesided="false" model="969" interior="0" dimension="0" posX="1078.5999755859" posY="1401.8000488281" posZ="3.7999999523163" rotX="0" rotY="0" rotZ="270"></object>
+    
+</map>

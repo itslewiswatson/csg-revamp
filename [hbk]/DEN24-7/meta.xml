@@ -1,0 +1,22 @@
+<meta>
+  <info author="Dennis" version="1.0" description="24/7 SHOP" type="script" />
+  <script src="client.luac" type="client" />
+  <script src="server.lua" type="server" />
+  <file src="blip.png" />
+  <file src="images/BAT.png" />
+  <file src="images/BRASSKNUCKLES.png" />
+  <file src="images/CAMERA.png" />
+  <file src="images/CANE.png" />
+  <file src="images/DILDO1.png" />
+  <file src="images/FIREEXT.png" />
+  <file src="images/FLOWERS.png" />
+  <file src="images/GOLF.png" />
+  <file src="images/IRGOGGLES.png" />
+  <file src="images/KNIFE.png" />
+  <file src="images/NVGOGGLES.png" />
+  <file src="images/PARACHUTE.png" />
+  <file src="images/POOLCUE.png" />
+  <file src="images/SHOVEL.png" />
+  <file src="images/SPRAYCAN.png" />
+  <file src="images/VIBE1.png" />
+</meta>

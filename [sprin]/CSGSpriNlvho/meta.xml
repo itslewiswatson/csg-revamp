@@ -1,0 +1,4 @@
+<meta>
+    <info type="script" version="2.0.0" author="SpriN'" name="anti kill in hospital" />
+	<script src="client.lua" type="client" cache="false" />
+</meta>

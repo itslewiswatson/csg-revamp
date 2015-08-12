@@ -1,0 +1,14 @@
+<meta>
+	<info author="Smith" version="1.0"  type="script" />
+    <script src="client.luac" type="client"/>
+	<script src="clientblip.luac" type="client" />
+	<script src="server.lua" type="server" />
+	
+	<file src="Images/ritalin.png"/>
+	<file src="Images/weed.png"/>
+	<file src="Images/lsd.png"/>
+	<file src="Images/cocaine.png"/>
+	<file src="Images/ecstasy.png"/>
+	<file src="Images/heroine.png"/>
+	<file src="Images/blip.png"/>
+</meta>

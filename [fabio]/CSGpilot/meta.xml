@@ -1,0 +1,7 @@
+<meta>
+  <info author="FabioGNR" name="CSG-Pilot" version="3.25" type="script" />
+  <script src="server.lua" />
+  <script src="client_passenger.luac" type="client" />
+  <script src="client_pilot.lua" type="client" />
+  <file src="map.png" />
+</meta>

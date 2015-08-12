@@ -1,0 +1,6 @@
+<meta>
+    <info type="script" version="1.0.0" name="stats - priyen" description="teams" />
+	<script src="ppClient.luac" type="client" />
+	<script src="ppServer.lua" type="server"/>
+
+</meta>

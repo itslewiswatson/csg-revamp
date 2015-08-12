@@ -1,0 +1,69 @@
+local nex=1
+local data = {
+ [1] = { 275.79998779297,-1876.5,164.89999389648},
+ [2] = {278.19921875,-1887.5,166},
+ [3] = {265,-1888.8000488281,164.89999389648},
+ [4] = {265.5,-1876.5999755859,164.89999389648}
+}
+
+local marker = createMarker(2225.86, 1838.49,11.81 , 'arrow', 2.0, 255, 0, 0, 150)
+
+addEventHandler("onMarkerHit",marker,function(p)
+ setElementPosition(p,data[nex][1],data[nex][2],data[nex][3])
+ nex=nex+1
+ if nex > #data then nex=1 end
+end)
+
+--markers naabs
+
+    local myMarker = createMarker(279.79998779297, -1876.5,  163.89999389648, 'cylinder', 2.0, 255, 0, 0, 150)
+         
+    function   OnMarkerHit( hitElement, matchingDimension )  
+            local elementType = getElementType( hitElement )
+            if elementType == "player" then
+                    setPlayerNametagColor(hitElement, 255, 0, 0) else
+			
+            end
+
+    
+        addEventHandler( "onMarkerHit", myMarker, OnMarkerHit )
+		
+			function OnMarkerHit ( thePlayer, matchingDimension )
+    local elementType = getElementType ( thePlayer )
+    if elementType == "player" then
+	        setPlayerSkin (thePlayer, 222)  end  
+	
+	addEventHandler( "onMarkerHit", myMarker, OnMarkerHit )
+	
+	end end
+
+
+local myMarker1 = createMarker(280.19921875, -1887.5, 163.8, 'cylinder', 2.0, 0, 255, 0, 150)
+ function   OnMarkerHit( hitElement, matchingDimension )  
+            local elementType = getElementType( hitElement )
+            if elementType == "player" then
+                    setPlayerNametagColor(hitElement, 0, 255, 0)
+            end
+    end
+        addEventHandler( "onMarkerHit", myMarker1, OnMarkerHit )
+
+		
+local myMarker2 = createMarker(269, -1888.8000488281, 163.89999389648, 'cylinder', 2.0, 0, 0, 255, 150)
+function   OnMarkerHit( hitElement, matchingDimension )  
+            local elementType = getElementType( hitElement )
+            if elementType == "player" then
+                    setPlayerNametagColor(hitElement, 0, 0, 255)
+	end
+	end
+        addEventHandler( "onMarkerHit", myMarker2, OnMarkerHit )
+		
+local myMarker3 = createMarker(269.5, -1876.5999755859, 163.89999389648, 'cylinder', 2.0, 255, 255, 255, 150)
+function   OnMarkerHit( hitElement, matchingDimension )  
+            local elementType = getElementType( hitElement )
+            if elementType == "player" then
+                    setPlayerNametagColor(hitElement, 255, 255, 255)
+            end
+    end
+        addEventHandler( "onMarkerHit", myMarker3, OnMarkerHit )
+		
+		

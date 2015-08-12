@@ -1,0 +1,9 @@
+<meta>
+	<info author="HBK" name="Skateboard" version="1.0" type="script"/>
+	<script src="client.luac" type="client"/>
+	<script src="server.lua"/>
+	 <file src="skicon.png" type="client"/>	
+	<file src="Skateboarding.txd" />
+	<file src="Skateboarding.dff" />
+	
+</meta>

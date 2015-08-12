@@ -1,0 +1,32 @@
+<meta>
+	<info name="Helicopter Grabbing" author="Remp&Cazomino05" type="misc" version="1.2.1"/>
+
+	<min_mta_version client="1.1.1-9.03250"/>
+
+   	<script src="fastrope_manager.lua" type="server" />
+    	<script src="fastrope.lua" type="client" />
+
+   	<export function="createFastRopeOnHeli" type="server" />
+    	<export function="createFastRope" type="server" />
+   	<export function="addPlayerToFastRope" type="server" />
+    	<export function="hasFastRopeExpired" type="server" />
+
+	<script src="helidrop_c.lua" type="client"/>
+	<script src="helidrop_s.lua"/>
+
+	<export function="ToggleHangingWeightLimit" type="server" />
+	<export function="SetPlayerGrabbedHeli" type="server"/>
+	<export function="IsPlayerHangingFromHeli" type="server"/>
+	<export function="GetPlayerHangingData" type="server"/>
+	<export function="GetPlayersHangingFromHeli" type="server"/>
+	
+	<settings>
+		<!-- these can be either control names or key names -->
+		<setting name="hang_binds" value="[[ 'jump' ]]"/>
+		<!-- command names -->
+		<setting name="hang_commands" value="[[ 'grab','heligrab' ]]"/>
+		
+		<setting name="drop_binds" value="[[ 'backspace' ]]"/>
+		<setting name="drop_commands" value="[[ 'drop','helidrop' ]]"/>
+	</settings>
+</meta>

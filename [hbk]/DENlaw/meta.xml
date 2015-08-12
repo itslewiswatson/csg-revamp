@@ -1,0 +1,10 @@
+<meta>
+	<info author="Dennis" version="1.1.0" type="script" name="DENlaw" description="LAW System" />
+
+	<script src="server.lua" type="server"/>
+	<script src="client.luac" type="client"/>
+	<script src="ppClient.luac" type="client"/>
+	<export function="isPlayerLawEnforcer" type="client" />
+	<export function="isPlayerLawEnforcer" type="server" />
+	<export function="updateWantedLevel" type="server" />
+</meta>

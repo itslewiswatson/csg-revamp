@@ -1,0 +1,14 @@
+<meta>
+	<script src="exp_s.lua" type="server"/>
+	<script src="exp_c.lua" type="client"/>
+	
+	<export function="getPlayerEXP"/>
+	<export function="getPlayerLevel"/>
+	<export function="getPlayerNeededEXP"/>
+	<export function="setPlayerEXP"/>
+	<export function="setPlayerLevel"/>
+	<export function="resetPlayerEXP"/>
+	<export function="givePlayerEXP"/>
+	
+	<file src="sound/levelup.ogg" />
+</meta>

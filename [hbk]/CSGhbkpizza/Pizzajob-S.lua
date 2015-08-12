@@ -1,0 +1,15 @@
+    addEvent ( "CSGpizza.pay", true )
+    addEventHandler( "CSGpizza.pay", root,
+    function ()
+	local Pizmoney = math.random(440,550)
+     givePlayerMoney ( source, Pizmoney )
+	 exports.CSGdenstats:setPlayerAccountData(source,"pizzas",exports.DENstats:getPlayerAccountData(source,"pizzas")+1)
+	 exports.CSGscore:givePlayerScore(source,0.2)
+	 exports.DENdxmsg:createNewDxMessage(source,"You earned "..Pizmoney.." ", 0, 255, 0)
+	 exports.DENdxmsg:createNewDxMessage(source,"You earned 0.2 Score ", 0, 255, 0)
+end	)
+
+addEvent("onServerPlayerLogin",true)
+addEventHandler("onServerPlayerLogin",root,function()
+	triggerClientEvent(source,"csgpizzalogin",source)
+end)

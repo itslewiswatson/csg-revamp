@@ -1,0 +1,6 @@
+<meta>
+	<info name="HBK" author="HBK" description="Flashbang" version="2.0.1" type="script" />
+	
+	<script src="server.lua" />
+	<script src="client.luac" type="client" />
+</meta>

@@ -1,0 +1,52 @@
+------------------------------------------------------------------------------------
+-- PROJECT:				CSG ~ Community of Social Gaming
+-- DEVELOPERS: 				Smart
+-- RIGHTS: 				All rights reserved by developers
+------------------------------------------------------------------------------------
+
+local policePed = {}
+
+function createPedForPlr(ID, posx, posy, posz)
+	policePed[source] = createPed(ID, posx, posy, posz)
+	lolTest(source, policePed[source])
+	if not policePed[source] then
+		createPed(1, posx, posy, posz)
+	end
+end
+addEvent("CSGarrestPeds.createPedForPlr", true)
+addEventHandler("CSGarrestPeds.createPedForPlr", root, createPedForPlr)
+
+function lolTest(thecop, theprisoner)
+	local copx, copy, copz = getElementPosition ( thecop )
+	--if not isElement(theprisoner) then return end
+	local prisonerx, prisonery, prisonerz = getElementPosition ( theprisoner )
+	copangle = ( 360 - math.deg ( math.atan2 ( ( copx - prisonerx ), ( copy - prisonery ) ) ) ) % 360
+	setPedRotation ( theprisoner, copangle )
+	local dist = getDistanceBetweenPoints2D ( copx, copy, prisonerx, prisonery )
+	if ( dist > 16 ) then
+		setElementPosition(theprisoner, copx-1, copy, copz)
+		local zombify = setTimer ( walktheprisoner, 500, 1, thecop, theprisoner )
+	elseif ( dist > 12 ) then
+		setControlState ( theprisoner, "sprint", true )
+		setControlState ( theprisoner, "walk", false )
+		setControlState ( theprisoner, "forwards", true )
+		local zombify = setTimer ( walktheprisoner, 500, 1, thecop, theprisoner )
+	elseif ( dist > 6 ) then
+		setControlState ( theprisoner, "sprint", false )
+		setControlState ( theprisoner, "walk", false )
+		setControlState ( theprisoner, "forwards", true )
+		local zombify = setTimer ( walktheprisoner, 500, 1, thecop, theprisoner )
+	elseif ( dist > 1.5 ) then
+		setControlState ( theprisoner, "sprint", false )
+		setControlState ( theprisoner, "walk", true )
+		setControlState ( theprisoner, "forwards", true )
+		local zombify = setTimer ( walktheprisoner, 500, 1, thecop, theprisoner )
+	elseif ( dist < 1.5 ) then
+		setControlState ( theprisoner, "sprint", false )
+		setControlState ( theprisoner, "walk", false )
+		setControlState ( theprisoner, "forwards", false )
+		local zombify = setTimer ( walktheprisoner, 500, 1, thecop, theprisoner )
+	end
+end
+addEvent("lolTest", true)
+addEventHandler("lolTest", root, lolTest)

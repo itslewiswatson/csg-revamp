@@ -1,0 +1,15 @@
+<meta>
+    <info type="script" description="Fireworks by Jesseunit" author="Jesseunit" version="1.0.0" name="Fireworks"></info>
+    <settings>
+         <setting name="command" value="fw" /> 
+         <setting name="maxRockets" value="2" /> 
+     </settings>
+
+    <script src="server.lua" type="server"></script>
+    <script src="client.luac" type="client"></script>
+
+    <file src="files/shootlight.dff"></file>
+    <file src="files/smoke_flare.dff"></file>
+    <file src="files/fwSound.mp3"></file>
+    <file src="files/smoke30m.dff"></file>
+</meta>

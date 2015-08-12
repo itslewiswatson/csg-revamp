@@ -1,0 +1,95 @@
+<meta>
+	<info author="Dennis" description="RRC Server" version="1.0" type="script" />
+	
+	<script src="GUI/client.lua" type="client" cache="false" />
+	
+	<script src="Server/server.lua" type="server" />
+	
+	<script src="Client/client.luac" type="client" />
+	
+	<script src="Exports/client.luac" type="client" />
+	<script src="Exports/server.lua" type="server" />
+
+	<file src="Files/logo.png" />
+	<file src="Files/disc-logo.png" />
+	
+	<export function="playerID" type="client" />
+	<export function="getPlayerAccountId" type="client" />
+	<export function="getPlayerAccountID" type="client" />
+	<export function="getPlayerAccountName" type="client" />
+	<export function="getPlayerFromAccountname" type="client" />
+	<export function="getPlayerAccountEmail" type="client" />
+	<export function="isPlayerPremium" type="client" />
+	<export function="isPlayerArrested" type="client" />
+	<export function="getPlayerGroupID" type="client" />
+	<export function="getPlayerPlayTime" type="client" />
+	<export function="getPlayChatZone" type="client" />
+	<export function="getPlayerGroupName" type="client" />
+	<export function="doesPlayerHaveCreditcard" type="client" />
+	<export function="getPlayerOccupation" type="client" />
+	<export function="isPlayerStaff" type="client" />
+	<export function="getPlayerStaffLevel" type="client" />
+	<export function="isPlayerDeveloper" type="client" />
+	<export function="isPlayerEventOrganizer" type="client" />
+	<export function="getPlayerWantedPoints" type="client" />
+	<export function="setPlayerWantedPoints" type="client" />
+	<export function="givePlayerWantedPoints" type="client" />
+	<export function="removePlayerWantedPoints" type="client" />
+	<export function="removeAllPlayerWantedPoints" type="client" />
+	<export function="isPlayerLoggedIn" type="client" />
+	<export function="convertNumber" type="client" />
+	<export function="getPlayerFromNamePart" type="client" />
+	<export function="convertRGBToHEX" type="client" />
+	<export function="randomString" type="client" />
+	<export function="stringExplode" type="client" />
+	<export function="setClientPlayerInterior" type="client" />
+	<export function="setClientPlayerDimension" type="client" />
+	<export function="getPlayerFPS" type="client"/>
+	<export function="isPlayerJailed" type="client"/>
+
+	<export function="playerID" type="server" />
+	<export function="getPlayerAccountId" type="server" />
+	<export function="getPlayerAccountID" type="server" />
+	<export function="updatePlayerDatabasePosition" type="server" />
+	<export function="getPlayerAccountName" type="server" />
+	<export function="updatePlayerEmail" type="server" />
+	<export function="updatePlayerPassword" type="server" />
+	<export function="getPlayerPlayTime" type="server" />
+	<export function="getPlayerGroupID" type="server" />
+	<export function="getPlayChatZone" type="server" />
+	<export function="isPlayerLoggedIn" type="server" />
+	<export function="getPlayerAccountEmail" type="server" />
+	<export function="getPlayerPremiumHours" type="server" />
+	<export function="isPlayerPremium" type="server" />
+	<export function="getPlayerVehicles" type="server" />
+	<export function="getPlayerGroupName" type="server" />
+	<export function="getPlayerBankBalance" type="server" />
+	<export function="givePlayerBankMoney" type="server" />
+	<export function="takePlayerBankMoney" type="server" />
+	<export function="doesPlayerHaveCreditcard" type="server" />
+	<export function="getGroupColor" type="server" />
+	<export function="setGroupColor" type="server" />
+	<export function="getPlayerBankTransactions" type="server" />
+	<export function="getPlayerOccupation" type="server" />
+	<export function="isPlayerStaff" type="server" />
+	<export function="getPlayerStaffLevel" type="server" />
+	<export function="isPlayerDeveloper" type="server" />
+	<export function="isPlayerEventOrganizer" type="server" />
+	<export function="isPlayerArrested" type="server" />
+	<export function="getPlayerWantedPoints" type="server" />
+	<export function="setPlayerWantedPoints" type="server" />
+	<export function="givePlayerWantedPoints" type="server" />
+	<export function="removePlayerWantedPoints" type="server" />
+	<export function="removeAllPlayerWantedPoints" type="server" />
+	<export function="convertNumber" type="server" />
+	<export function="getPlayerFromNamePart" type="server" />
+	<export function="convertRGBToHEX" type="server" />
+	<export function="addPlayerVehicle" type="server" />
+	<export function="stringExplode" type="server" />
+	<export function="updatePlayerJobSkin" type="server" />
+	<export function="getPlayerGroup" type="server"/>
+	<export function="getPlayerGroupRank" type="server"/>
+	<export function="getPlayerFPS" type="server"/>
+	<export function="isPlayerJailed" type="server"/>
+	<export function="isAllowedToSave" type="server"/> <!-- Security related -->
+</meta>

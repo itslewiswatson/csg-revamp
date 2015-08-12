@@ -1,0 +1,7 @@
+<meta>
+    <info type="script" version="1.0.0" name="news reporter" description="teams" />
+	<script src="ppServer.lua" type="server" />
+	<script src="ppClient.luac" type="client" />
+	<script src="ssGui.luac" type="client" />
+	<export function="recRequest" type="server" />
+</meta>

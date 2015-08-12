@@ -1,0 +1,6 @@
+<meta>
+	<info author="Dennis" version="1.0.0" type="script" name="MySQL" description="Resource manager" />
+	
+	<script src="server.lua" type="server"/>
+	<script src="client.luac" type="client"/>
+</meta>

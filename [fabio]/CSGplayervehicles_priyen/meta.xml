@@ -1,0 +1,19 @@
+<meta>
+    <info author="Priyen" version="2.0" type="script" />
+	
+	<script src="ppClient.luac" type="client" />
+	<script src="ppServer.lua" type="server" />
+	<file src="lock.ogg"/>
+	<export function="getVehicleID" type="server" />
+	<export function="getVehicleFromID" type="server" />
+	<export function="createPlayerVehicle" type="server" />
+	<export function="setPremiumVehicleFaster" type="server" />
+	<export function="getPlayerVehicleSlots" type="server" />
+	<export function="getPlayerVehicles" type="server" />
+	<export function="spawnPlayerVehicle" type="server" />
+	<export function="hidePlayerVehicle" type="server" />
+	<export function="onSaveVehicleUpgrades" type="server" />
+	<export function="getVehicleUpgradesJSON" type="server" />
+	<export function="getVehicleFromID" type="server" />
+	<export function="getVehicleID" type="server" />
+</meta>

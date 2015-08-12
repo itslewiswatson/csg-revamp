@@ -1,0 +1,6 @@
+<meta>
+  <info author="FabioGNR" version="1.0" description="Clothes/skins shop" type="script" />
+  <script src="client.luac" type="client" />
+  <script src="skins.lua" type="client" />
+  <script src="server.lua" />
+</meta>

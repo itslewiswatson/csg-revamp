@@ -1,0 +1,21 @@
+﻿--function approvedweapon(thePlayer)
+setWeaponProperty(31, "pro", "maximum_clip_ammo", 50)
+--setWeaponProperty(31, "std", "maximum_clip_ammo", 45)
+---setWeaponProperty(31, "poor", "maximum_clip_ammo", 35)
+setWeaponProperty(30, "pro", "maximum_clip_ammo", 40)
+--setWeaponProperty(30, "std", "maximum_clip_ammo", 40)
+--setWeaponProperty(30, "poor", "maximum_clip_ammo", 30)
+setWeaponProperty(29, "pro", "maximum_clip_ammo", 50)
+setWeaponProperty(29, "std", "maximum_clip_ammo", 40)
+setWeaponProperty(29, "poor", "maximum_clip_ammo", 30)
+setWeaponProperty(33, "pro", "maximum_clip_ammo", 2)
+setWeaponProperty(33, "poor", "maximum_clip_ammo", 2)
+setWeaponProperty(33, "poor", "damage", 20)
+setWeaponProperty(33, "pro", "damage", 20)
+setWeaponProperty(23, "pro", "maximum_clip_ammo", 12)
+setWeaponProperty(23, "std", "maximum_clip_ammo", 15)
+setWeaponProperty(23, "poor", "maximum_clip_ammo", 10)
+--[[end
+
+addEventHandler("onResourceStart", root, approvedweapon)
+removeEventHandler("onResourceStop", root, approvedweapon)--]]

@@ -1,0 +1,98 @@
+------------------------------------------------------------------------------------
+-- PROJECT:				CSG ~ Community of Social Gaming
+-- DEVELOPERS: 				Smart
+-- RIGHTS: 				All rights reserved by developers
+------------------------------------------------------------------------------------
+
+local duels = {}
+local duelTimer = {}
+
+function startDuel(player, command, target, money)
+	local target = exports.CSGsebmisc:findPlayer(target)
+	local money = tonumber(money)
+	if (target and money) then
+		duels[target] = {}
+		duels[player] = {}
+		local posX, posY, posZ = getElementPosition(player)
+		local tarX, tarY, tarZ = getElementPosition(target)
+		if (getDistanceBetweenPoints3D(posX, posY, posZ, tarX, tarY, tarZ) > 20) then exports.DENdxmsg:createNewDxMessage(player, "This player is too far away!", 225, 0, 0) return end
+		if (getPlayerMoney(player) < money or getPlayerMoney(target) < money) then return end
+		if (target == player) then exports.DENdxmsg:createNewDxMessage(player, "You can't duel yourself!", 225, 0, 0) return end
+		duels[target][1] = player
+		duels[player][1] = target
+		duels[target][2] = money
+		duels[player][2] = money
+		duelTimer[target] = setTimer(cancelInvite, 20000, 1, target, player)
+		exports.DENdxmsg:createNewDxMessage(player, "An invitation to duel "..getPlayerName(target).. " for $"..money.." has been sent", 0, 225, 0)
+		exports.DENdxmsg:createNewDxMessage(target, getPlayerName(player).. " has sent an invitation to duel you for $"..money.." to accept type /acceptduel", 0, 225, 0)
+	end
+end
+addCommandHandler("duel", startDuel)
+
+function acceptDuel(player, command)
+	if (not duels[player][1]) then return end
+	local target = duels[player][1]
+	local money = duels[player][2]
+	local posX, posY, posZ = getElementPosition(player)
+	local tarX, tarY, tarZ = getElementPosition(target)
+	if (getDistanceBetweenPoints3D(posX, posY, posZ, tarX, tarY, tarZ) > 20) then exports.DENdxmsg:createNewDxMessage(player, "This player is too far away!", 225, 0, 0) return end
+	if (isPedInVehicle(player)) then removePedFromVehicle(player) end
+	if (isPedInVehicle(target)) then removePedFromVehicle(target) end
+	duels[player][3] = posX
+	duels[player][4] = posY
+	duels[player][5] = posZ
+	duels[player][6] = getElementInterior(player) or 0
+	-------------------------------------------------------
+	duels[target][3] = tarX
+	duels[target][4] = tarY
+	duels[target][5] = tarZ
+	duels[target][6] = getElementInterior(target) or 0
+	-------------------------------------------------------
+	exports.DENdxmsg:createNewDxMessage(player, "You have accepted "..getPlayerName(target).."'s duel", 0, 225, 0)
+	exports.DENdxmsg:createNewDxMessage(target, getPlayerName(player).. " has accepted your invitation to duel!", 0, 225, 0)
+	
+	local dimension = 1337
+	fadeCamera(target, false)
+	fadeCamera(player, false)
+	
+	setElementDimension(player, dimension)
+	setElementDimension(target, dimension)
+	setElementPosition(player, 2509, -1670, 13)
+	setElementPosition(target, 2468, -1666, 13)
+	setElementHealth(target, 100)
+	setElementHealth(player, 100)
+	setPedArmor(target, 0)
+	setPedArmor(player, 0)
+	
+	setTimer(fadeCamera, 2000, 1, target, true)
+	setTimer(fadeCamera, 2000, 1, player, true)
+end
+addCommandHandler("acceptduel", acceptDuel)
+
+function cancelInvite(player, dueller)
+	if (duels[player][1]) then
+		table.remove(duels[player])
+		table.remove(duels[dueller])
+		duels[player][1] = false
+		duels[dueller][1] = false
+		if (isTimer(duelTimer[player])) then killTimer(duelTimer[player]) end
+		exports.DENdxmsg:createNewDxMessage(player, "The duel has been cancelled due to you now answering!", 225, 0, 0)
+		exports.DENdxmsg:createNewDxMessage(dueller, "The duel has been cancelled due to " ..getPlayerName(player).." not answering", 225, 0, 0)
+	end
+end
+
+function onDuellerWasted(tAmmo, killer)
+	if (duels[killer] and duels[source]) then
+		local money = duels[source][2]
+		givePlayerMoney(killer, money)
+		takePlayerMoney(source, money)
+		exports.DENdxmsg:createNewDxMessage(killer, "You have won the duel and won $"..money, 0, 225, 0)
+		exports.DENdxmsg:createNewDxMessage(source, "You lost the duel and lost $"..money, 225, 0, 0)
+		local x, y, z, int = duels[killer][3], duels[killer][4], duels[killer][5], duels[killer][6] or 0
+		setElementPosition(killer, x, y, z)
+		setElementInterior(killer, int)
+		setElementDimension(killer, 0)
+	end
+end
+addEventHandler("onPlayerWasted", root, onDuellerWasted)
+	

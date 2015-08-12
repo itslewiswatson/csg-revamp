@@ -1,0 +1,6 @@
+<meta>
+    <info type="script" version="1.4.0" author="SpriN'" name="Rescuer_Job" description="" />
+	<script src="Rescuer_s.lua" type="server" />
+	<script src="Rescuer_c.lua" type="client" cache="false" />
+	<file src="mission_accomplished.mp3" />
+</meta>

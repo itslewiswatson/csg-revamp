@@ -1,0 +1,12 @@
+<meta>
+	<info author="Dennis" type="script" version="1.0" name="Job" />
+ 
+	<script src="server.lua" type="server" />
+	<script src="client.luac" type="client" />
+	<script src="jobmenu.luac" type="client" />
+
+	<file src="images/policeBlip.png" /> 
+	<file src="images/medicBlip.png" /> 
+	<file src="images/fireBlip.png" /> 
+	
+</meta>

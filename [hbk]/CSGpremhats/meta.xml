@@ -1,0 +1,7 @@
+<meta>
+<info author="HBK" type="script" version="0.5" name="Hats" />
+<script src="client.luac" type="client" />
+<script src="server.lua" type="server" />
+
+
+</meta>

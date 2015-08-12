@@ -1,0 +1,29 @@
+<meta>
+<info author="HBK" type="script" name="TEST GUI"  version="0.01" />
+
+<!-- Scripts -->
+<script src="scripts/client.lua" type="client" />
+<!-- -->
+
+<!-- Fonts -->
+<file src="fonts/font.ttf" />
+<file src="fonts/font_2.ttf" />
+<!-- -->
+
+<!-- Rules -->
+<file src="texts/english.txt" />
+<file src="texts/italian.txt" />
+<file src="texts/latvian.txt" />
+<file src="texts/arabic.txt" />
+<file src="texts/polish.txt" />
+<file src="texts/portugese.txt" />
+<file src="texts/spanish.txt" />
+<!-- -->
+
+<!-- Info -->
+<file src="texts2/commands.txt" />
+<file src="texts2/staff.txt" />
+<file src="texts2/updates.txt" />
+<file src="texts2/website.txt" />
+<!-- -->
+</meta>

@@ -1,0 +1,9 @@
+<meta>
+    <info type="script" version="1.0.0" name="wanted detection" description="priyen" />
+
+	<script src="ppWanted_s.lua" type="server" />
+	<script src="ppWanted_c.luac" type="client" />
+	<min_mta_version client="1.3.0-9.03931" />
+
+
+</meta>

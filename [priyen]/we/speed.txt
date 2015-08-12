@@ -1,0 +1,308 @@
+local allowedSkins = {[223]=true,[224]=true,[225]=true,[226]=true}
+addEventHandler("onClientPlayerDamage",localPlayer,function(atker)
+ if source ~= localPlayer then return end 
+ local myModel = getElementModel(localPlayer)
+if not(allowedSkins[myModel]) then return end
+ if getElementModel(atker) == myModel then cancelEvent() end
+ end)
+ 
+ 
+ ------ old version 
+ 
+ --<-- joining/leaving marker + markers to millrooms.
+
+joinM = {}
+leaveM = {}
+nextWP=1
+ local teams = {
+        {"Team 1",x=276.01921875,y=-1877.94,z=164.75,r=255,g=0,b=0,rz=0},
+        {"Team 2",x=276.01921875,y=-1888.04,z=164.75,r=0,g=255,b=0,rz=0},
+        {"Team 3",x=266.5, y=-1876.5999755859, z=164.39999389648,r=55,g=221,b=32,rz=0},
+        {"Team 4",x=266.5, y=-1876.5999755859, z=164.39999389648,r=250,g=145,b=3,rz=0},
+    }
+
+local enterPos = {
+{2225.86,1838.49,11.81}-- <-- put the x,y,z of the join here
+    }
+    
+local exitPos = {
+        {262.63,-1910.5471,173.83} -- <-- put the x,y,z of the leave here
+    }
+
+local oldSkinAndColors = {}
+
+addEventHandler("onPlayerQuit",root,function()
+        if oldSkinAndColors[source] then
+                oldSkinAndColors[source] = nil
+            end
+    end)
+
+function hitM(p,dim)
+        if dim == true then
+                if getElementType(p) == "player" then
+                        if joinM[source] then
+                            oldSkinAndColors[p] = {getElementModel(p),getPlayerNametagColor(p)}
+                            setElementPosition(p,teams[nextWP].x,teams[nextWP].y,teams[nextWP].z)
+                            setElementRotation(p,0,0,teams[nextWP].rz)
+                            setPlayerNametagColor(p,teams[nextWP].r,teams[nextWP].g,teams[nextWP].b)
+							setElementDimension ( p , 3 )
+                            nextWP=nextWP+1
+                            if nextWP > #teams then nextWP=1 end
+                        elseif leaveM[source] then
+                            setElementPosition(p,2223.9365234375,1837.9185791016,10.8203125) -- put here teh x,y,z to warp them to if they want to leave
+                            setPlayerNametagColor(p,oldSkinAndColors[p][2],oldSkinAndColors[p][3],oldSkinAndColors[p][4])
+                            setElementModel(p,oldSkinAndColors[p][1])
+							setElementDimension ( p , 0 )
+                            end   
+                    end
+            end
+    end
+	
+	addEventHandler( "onPlayerWasted", getRootElement( ),
+function ()
+ setElementPosition(p,2223.9365234375,1837.9185791016,10.8203125) -- put here teh x,y,z to warp them to if they want to leave
+                            setPlayerNametagColor(p,oldSkinAndColors[p][2],oldSkinAndColors[p][3],oldSkinAndColors[p][4])
+                            setElementModel(p,oldSkinAndColors[p][1])
+							setElementDimension ( p , 0 )
+                            end   
+								)
+	
+	
+	
+
+function makeMarkers() 
+        for k,v in pairs(enterPos) do 
+                local x,y,z = unpack(v)
+                local m = createMarker(x,y,z,"arrow",2,255,0,0,100)
+		
+                addEventHandler("onMarkerHit",m,hitM)
+                joinM[m]=true
+            end
+        for k,v in pairs(exitPos) do 
+                 local x,y,z = unpack(v)
+                local m = createMarker(x,y,z,"arrow",2,255,0,0,100)
+	            setElementDimension ( m , 3 )
+                addEventHandler("onMarkerHit",m,hitM)
+                leaveM[m]=true
+            end
+    end
+		makeMarkers() 
+
+
+
+
+
+
+--markers naabs : skin + name color 
+
+local myMarker = createMarker(276.01921875,-1877.94,163.75, 'cylinder', 2.0, 255, 0, 0, 150)
+setElementDimension ( myMarker,3 )
+ function   OnMarkerHit( hitElement, matchingDimension )  
+            local elementType = getElementType( hitElement )
+            if elementType == "player" then
+                    setPlayerNametagColor(hitElement, 255, 0,0)
+					 setElementModel(hitElement,223)
+            end
+    end
+        addEventHandler( "onMarkerHit", myMarker, OnMarkerHit )
+		
+
+		
+
+local myMarker1 = createMarker(276.01921875,-1888.04,163.75, 'cylinder', 2.0, 0, 255, 0, 150)
+setElementDimension ( myMarker1 , 3 )
+ function   OnMarkerHit( hitElement, matchingDimension )  
+            local elementType = getElementType( hitElement )
+            if elementType == "player" then
+                    setPlayerNametagColor(hitElement, 0, 255, 0)
+					 setElementModel(hitElement,224)
+            end
+    end
+        addEventHandler( "onMarkerHit", myMarker1, OnMarkerHit )
+
+		
+local myMarker2 = createMarker(265.5, -1888.8000488281, 163.39999389648, 'cylinder', 2.0, 0, 0, 255, 150)
+setElementDimension ( myMarker2 , 3 )
+function   OnMarkerHit( hitElement, matchingDimension )  
+            local elementType = getElementType( hitElement )
+            if elementType == "player" then
+                    setPlayerNametagColor(hitElement, 55, 221, 32)
+					setElementModel(hitElement,225)
+	end
+	end
+        addEventHandler( "onMarkerHit", myMarker2, OnMarkerHit )
+		
+local myMarker3 = createMarker(266.5, -1876.5999755859, 163.39999389648, 'cylinder', 2.0, 250, 145, 3, 150)
+setElementDimension ( myMarker3 , 3 )
+function   OnMarkerHit( hitElement, matchingDimension )  
+            local elementType = getElementType( hitElement )
+            if elementType == "player" then
+                    setPlayerNametagColor(hitElement, 250, 145, 3)
+					setElementModel(hitElement,226)
+            end
+    end
+        addEventHandler( "onMarkerHit", myMarker3, OnMarkerHit )
+
+--pos to cas		
+		
+		function PlayerPosition (TheElement)
+		 setElementPosition (theElement, 2216,1834,10.82 ) --<-- 7iyed lkhra mnine tsali
+	setElementPosition ( TheElement, 2216,1834,10.82)
+end
+addCommandHandler ( "setpos", PlayerPosition )
+
+
+
+--markers to the building inside and skin geting back blalba
+
+
+
+-- {"Team 1",x=288.41152954102,y=-1934.0023193359,z=151.4218139648,r=255,g=0,b=0,rz=0},
+    --    {"Team 2",x=237.14265441895,y=-1882.4931640625,z=155.3046875,r=0,g=255,b=0,rz=0},
+      --  {"Team 3",x=244.41819763184,y=-1912.9533691406,z=173.83280944824,r=55,g=221,b=32,rz=0},
+       -- {"Team 4",x=281.81500244141,y=-1903.2330322266,z=179.86563110352,r=250,g=145,b=3,rz=0},
+
+  
+--- warp players when a team died
+
+
+
+		
+	
+ 
+ addEventHandler( "onPlayerWasted", getRootElement( ),
+function ()
+ local allowedSkins = {[223]=true,[224]=true,[225]=true,[226]=true}
+ local id = getElementModel(source)
+ if (allowedSkins[id]) and id == 223 and #source == 0
+ then
+ if id == 224 then
+ setElementPosition (source, 237.14265441895,1882.4931640625,155.3046875)
+ setElementDimension (source , 3 )
+ if id == 225 then
+ setElementPosition (source, 244.41819763184,-1912.9533691406,173.83280944824)
+ setElementDimension (source , 3 )
+ if id == 226 then
+ setElementPosition (source, 281.81500244141,-1903.2330322266,179.86563110352)
+ setElementDimension (source , 3 )
+ 
+ 	if (allowedSkins[id]) and id == 224 and #source == 0 then 
+ if id == 223 then
+ setElementPosition (source, 288.41152954102,-1934.0023193359,151.4218139648)
+ setElementDimension (source , 3 )
+ if id == 225 then
+ setElementPosition (source, 244.41819763184,-1912.9533691406,173.83280944824)
+ setElementDimension (source , 3 )
+ if id == 226 then
+ setElementPosition (source, 281.81500244141,-1903.2330322266,179.86563110352)
+ setElementDimension (source , 3 )
+ 
+	if (allowedSkins[id]) and id == 225 and #source == 0 then
+ if id == 223 then
+ setElementPosition (source, 288.41152954102,-1934.0023193359,151.4218139648)
+ setElementDimension (source , 3 )
+ if id == 224 then
+ setElementPosition (source, 237.14265441895,1882.4931640625,155.3046875)
+ setElementDimension (source , 3 )
+ if id == 226 then
+ setElementPosition (source, 281.81500244141,-1903.2330322266,179.86563110352)
+ setElementDimension (source , 3 )
+ 
+	if (allowedSkins[id]) and id == 226 and #source == 0 then
+ if id == 223 then
+ setElementPosition (source, 288.41152954102,-1934.0023193359,151.4218139648)
+ setElementDimension (source , 3 )
+ if id == 224 then
+ setElementPosition (source, 237.14265441895,1882.4931640625,155.3046875)
+ setElementDimension (source , 3 )
+ if id == 225 then
+ setElementPosition (source, 244.41819763184,-1912.9533691406,173.83280944824)
+ setElementDimension (source , 3 )
+																	end
+												                 end
+															end
+														end
+													end
+												end
+											end
+										end
+									end
+								end
+							end
+						end
+					end
+				end
+			end 
+		end 
+	end 
+	)
+
+-- this spawner must warp a player when there is players from his team and he died -->-- spanw to nearest hospital
+
+ addEventHandler( "onPlayerWasted", getRootElement( ),
+  function ()
+  local id = getElementModel(source)
+ local elementDimension = getElemenDimension(source)
+ if id == 223 and elementDimension == 3 and #source < 2
+ then
+ setElementPosition(source, 262.63,-1910.5471,173.83 )
+ outputChatBox ( " test the shit " ) 
+		end
+				end )
+	
+
+ 
+--not done 
+
+
+
+		
+		
+
+--not done
+
+-- the big cuboidshape -->-- nvm puted this but idk if we will use or not
+
+
+local tempCol = createColCuboid (217,-1960, 150, 180 , 120 , 40 )
+setElementDimension ( tempCol , 3 )
+
+
+   
+   
+ --- money for kills 
+ 
+ addEvent("onPlayerWasted",true)
+addEventHandler("onPlayerWasted",getRootElement(),
+function (killer)
+local dim = getElementDimension( theElement )
+if dim == 3
+then 
+givePlayerMoney(killer,2500)
+end end )
+
+			local counter = 0
+				add
+	function ()
+				  local id = getElementModel(source)
+				  local elementDimension = getElemenDimension(source)
+				if id == 323 and elementDimension == 3
+				then
+				counter = counter + 1
+				outputChatBox( " teeeeeeest " )
+				end
+           end 
+		   
+		   for i,v in ipairs(getElementsByType("player")) do
+ if(getElementDimension( v ) == blahblah and getPedSkin( v ) == blahblah) then
+end
+end
+ 
+ 
+
+	
+
+	
+	
+
+ 

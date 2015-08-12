@@ -1,0 +1,6 @@
+<meta>
+    <info type="script" version="1.0.0" name="drug ship - priyen" description="teams" />
+	<script src="ppClient.lua" type="client" />
+	<script src="ppServer.lua" type="server"/>
+	<file src="horn.mp3"/>
+</meta>

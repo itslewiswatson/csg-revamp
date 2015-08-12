@@ -1,0 +1,6 @@
+<meta>
+<info author="HBK" type="script" version="0.5" name="CSG drinkmisc" />
+
+<script src="drinkmisc.lua" type="server" />
+
+</meta>

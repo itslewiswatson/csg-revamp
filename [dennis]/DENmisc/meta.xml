@@ -1,0 +1,6 @@
+<meta>
+	<info author="Dennis" type="script" version="1.0" name="Misc resource" />
+ 
+	<script src="misc.lua" type="server" />
+	
+</meta>

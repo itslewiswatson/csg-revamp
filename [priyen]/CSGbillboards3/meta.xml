@@ -1,0 +1,21 @@
+<meta>
+	<info name="bb2" author="priyen" version="1.0.0" type="misc" />
+
+	<script src="ppClient.luac" type="client" />
+	<file src="texrep.fx" type="client" />
+	<file src="anything.jpg"/>
+	<file src="traffic.jpg"/>
+	<file src="fisherman.jpg"/>
+	<file src="mf.jpg"/>
+	<file src="swat.jpg"/>
+	<file src="mf2.jpg"/>
+	<file src="army.jpg"/>
+	<file src="swat2.jpg"/>
+	<file src="truckers.jpg"/>
+	<file src="busted.jpg"/>
+	<file src="stats.jpg"/>
+	<file src="fbi.png"/>
+	 <file src="dio.png"/>
+	<file src="sas.png"/>
+	<min_mta_version client="1.3.0-9.04431" />
+</meta>

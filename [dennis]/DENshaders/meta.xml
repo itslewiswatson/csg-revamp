@@ -1,0 +1,25 @@
+<meta>
+  <script src="watershader/c_water.luac" type="client" />
+  <file src="watershader/water.fx" type="client" />
+  <file src="watershader/mta-helper.fx" type="client" />
+  <file src="watershader/images/smallnoise3d.dds" type="client" />
+  <file src="watershader/images/cube_env256.dds" type="client" />
+  <script src="detailshader/c_detail.luac" type="client" />
+  <file src="detailshader/fx/detail.fx" type="client" />
+  <file src="detailshader/fx/mta-helper.fx" type="client" />
+  <file src="detailshader/media/dirty.png" type="client" />
+  <file src="detailshader/media/detail04.png" type="client" />
+  <file src="detailshader/media/detail22.png" type="client" />
+  <file src="detailshader/media/detail29.png" type="client" />
+  <file src="detailshader/media/detail35T.png" type="client" />
+  <file src="detailshader/media/detail55.png" type="client" />
+  <file src="detailshader/media/detail58.png" type="client" />
+  <file src="detailshader/media/detail63.png" type="client" />
+  <file src="detailshader/media/detail68.png" type="client" />
+  <script src="carreflect/c_car_reflect.luac" type="client" />
+  <file src="carreflect/car_refgrun.fx" type="client" />
+  <file src="carreflect/car_refgene.fx" type="client" />
+  <file src="carreflect/mta-helper.fx" type="client" />
+  <file src="carreflect/images/smallnoise3d.dds" type="client" />
+  <script src="shaders_client.luac" type="client" />
+</meta>

@@ -1,0 +1,39 @@
+<content>
+Chat related commands and binds:
+1. /local or /localchat - Talk with people near your position, you get also a text baloon above your head
+2. /group or /groupchat - Talk with people in your group
+3. /teamsay - Talk with people in the same team
+4. /advert - When you have something to advertise for example house for sell, one message cost $500 (1 minute spam protection)
+5. Press T to talk in the mainchat
+6. Press Y to talk in the teamchat
+7. Press U to talk in the localchat
+8. Press J to open the chatbox GUI
+9. /clearchat - Clear the whole chat
+
+NOTE: You can bind all these commands by using /bind [KEYBOARD KEY] chatbox [COMMANDNAME]
+
+Other commands:
+1. /payfine - When you have 1 wanted star you can pay a fine, this will remove your wanted star
+2. /bribe [COPNAME] [AMOUNT MONEY] - When you have less that 4 wanted stars you can bribe a cop, if the cop accepts the bribe your stars get removed
+3. /911 [SERVICE] (Police, Paramedic) - Call the emergency services to your current location
+4. /latestchanges - See the latest updates on the server
+5. /punishments - See all your serial and account punishments
+6. /showfps - Enable the FPS meter
+7. /showhud [0 OR 1] - Disable or enable the MTA hud
+8. /screenshot or F12 - Take a screenshot (will be saved on your PC)
+9. /shownametags [0 OR 1] - Disabled or enable the nametags
+10. /showchat [0 OR 1] - Disabled or enable the chatbox
+11. SWAT and Military Forces can use /riotshield to use a riotshield (THIS KEY NEED TO BE BINDED!)
+
+NOTE: You can bind all these command by using /bind [KEYBOARD KEY] [COMMANDNAME]
+NOTE: Use /help to see all MTA commands (output is in the console (F8))
+
+Function key binds:
+1. F1 - Information screen with the rules and information about thing in the server
+2. F2 - Job window, here you can quit your job or end/start your shift
+3. F3 - Vehicle system, manage all your personal vehicles here
+4. F4 - Animations windows
+5. F5 - Inventory, here you find all your items like drugs, food and other things
+6. F6 - Group system, manage your group or the group your currently in
+
+</content>

@@ -1,0 +1,5 @@
+<meta>
+<info author="HBK"  name="money+drugsBag" version="1.0.0" type="script" />
+	<script src="Server.lua" type="server"/>
+
+</meta>

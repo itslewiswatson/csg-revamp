@@ -1,0 +1,8 @@
+<meta>
+	<info name="HBK" author="HBK" description="CSG Mine" version="2.0.1" type="misc" />
+	
+	<script src="server.lua" />
+	<script src="client.luac" type="client" />
+<file src="sound.wav"/>
+        <file src="mission.mp3"/>
+</meta>

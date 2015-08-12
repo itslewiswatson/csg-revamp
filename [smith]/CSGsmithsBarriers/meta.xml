@@ -1,0 +1,6 @@
+<meta>
+	<info author="Smith" version="1.0.0" name="Barriers for MF" type="script" />
+    <script src="clientc.lua" type="client" />
+	<script src="client.lua" type="client" />
+	<script src="server.lua" type="server" />
+</meta>

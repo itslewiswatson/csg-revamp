@@ -1,0 +1,4 @@
+<meta>
+    <info type="script" version="1.0.0" author="mert" name="" />
+	<script src="server.lua" type="server" />
+</meta>

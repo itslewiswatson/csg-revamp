@@ -1,0 +1,4 @@
+<meta>
+    <info type="script" version="1.0.0" name="sm job" description="priyen" />
+	<script src="ppServer.lua" type="server" />
+</meta>

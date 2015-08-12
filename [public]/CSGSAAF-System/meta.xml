@@ -1,0 +1,7 @@
+<meta>
+	<info author="Will" description="TDM System" version="1" type="script"/>
+	<script src="saaf_client.lua" type="client" />
+	<script src="saaf_server.lua" type="server" />
+	
+	<map src="base_map.map" dimension="0"></map>
+</meta>

@@ -1,0 +1,85 @@
+Dice Event
+
+This event concludes it's own map. 
+Dice event is played like this: Players are obviously warped there, using the command /eventwarp.
+Once they're warped there and the game starts, the admins/staff use a special command to open gates and close gates.
+Players must choose a room, before the gates closes in some short few seconds. 
+After all players have chosen the room and the gates are closed, the admin/staff use's another special command to roll dice. If you'r room number is "1" for example and the number on the dice is, "1", the players in the room die. The final player in the event is the winner.
+
+
+
+Maze Event
+
+This is the latest event added in the server, made by the staff -[CSG]Mr.Guso[SWAT]-.
+This is a 'maze' kind of event. Simple, it has it's own map. The staff warps the players to the place and it starts. 
+The first one to find the 'Marker'/'Goal', is the winner obviously.
+
+
+
+Destruction Derby (DD) Event
+
+This is an old event. It has an original GTA map, 'The Arena'. Once you'r warped there, enter the cars given by the staff/admin and park you'r car, hopefully you'll all ways find it parked. When the staff/admin say's "Go", all players with the car, start ramming each other, until they explode. Crazy event.. The last one is obviously the winner.
+
+
+
+Race Event
+
+This is an old event too. It doesn't all ways have it's own map, usually it doesn't. Especially in CSG. 
+It's a simple event. You park you'r 'car' or shall we say "Vehicle" on the start 'line', when the staff/admin say's "Go" all go challenging each other, until the finish line. Usually the 1st, 2nd and 3rd will win a prize. They are the winners.
+
+
+
+Car Show
+
+This event is not all ways hosted by staff/admins. It's normally hosted by normal players. 
+Simple event, a little bit hard to host though. You find a good location for the car show.. After you did you can use '/advert >text<' for the WHOLE CSG to know about you'r car show. You make a 'fee' to enter and a prize for the winner(s).
+Simple..
+
+
+
+F.F.A -Free For All-
+
+This is an event, which isn't all ways known. It doesn't have a familiar name.
+Any way's, this event concludes Death Matching, don't worry, you won't get punished for it, it's an event.
+An amount of players warp to an area, which is chosen by a staff member. When the staff/admin say's "Go" all start fighting with Weapons. The last one, is the winner.
+
+
+
+T.D.M - Team Death Match -
+
+T.D.M or known as -Team Death Match- is an event, which require's Team Work and skill.
+Teams, maximum to 4 usually, are warped to a different area, not far from each other. 
+All the teams get full Armor and HP. A leader is elected or chosen and leads the team. You must wear you'r team tag and not wear it off, before the event finishes. When the Staff/Admin say's "Go" all teams start fighting, last team alive wins.
+
+
+
+Hydra/Hunter DF
+
+This event is a fight between Hunters or Hydra's. They will all have the ability to fly at a certain area given by the staff/admin.
+Once the Hydra or Hunter is given, you spread out, and when the staff/admin say's "Go" all of the players fight each other with missiles. The last one with the hydra win's.
+
+
+
+Survival Event
+
+This event requires driving skills.
+They all start out at a certain area, then they spread out while being chased by an armed plane or Vehicle. Important Rules are given. Especially the camping Rule. The last player on the map alive, with vehicle given, is winner.
+
+
+
+Running Event
+
+In a running event you must race each other, not via car, but! Via foot!, Obviously the first one to reach the winning marker is the winner.
+In these type's of events, they're aren't any long map's. In this event, no Deathmatching isnt' concluded.
+
+
+
+Parachute Event
+
+In this event, you have to take a parachute and jump from the place that the event manager ordered you to stay, in order to land on a marked location. Winner is considered the person who will reach first the marker.
+
+
+
+Fallout Event
+
+Once you warp, you will see yourself on some platforms. After some seconds/minutes, some pieces of the platform will start falling. Your goal is to survive by choosing the stable one.

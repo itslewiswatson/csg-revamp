@@ -1,0 +1,82 @@
+<meta>
+    <info author="[CSG]FabioGNR" name="CSG-Phone" version="1.5" type="script"/>
+	
+    <script src="client.luac" type="client"/>
+	<script src="server.lua" type="server"/>
+		
+    <script src="apps\alarm.luac" type="client"/>
+		<file src="apps\alarm.mp3" />
+    <script src="apps\calculator.luac" type="client"/>
+    <script src="apps\settings.luac" type="client"/>
+    <script src="apps\sms.luac" type="client"/>
+		<file src="apps\ringtones\1.mp3" />
+		<file src="apps\ringtones\2.mp3" />
+		<file src="apps\ringtones\3.mp3" />
+		<file src="apps\ringtones\4.mp3" />
+		
+    <script src="apps\contacts.luac" type="client"/>
+    <script src="apps\clock.luac" type="client"/>
+    <script src="apps\iPod.luac" type="client"/>
+    <script src="apps\phone.luac" type="client"/>
+    <script src="apps\notes.luac" type="client"/>
+	<script src="apps\houses.luac" type="client"/>
+	<script src="apps\weapons.luac" type="client"/>
+	<script src="apps\money.luac" type="client"/>
+	<script src="apps\maps.luac" type="client"/>
+	<script src="apps\backwep.luac" type="client"/>
+	<script src="apps\Games\minesweep.luac" type="client" />
+	<script src="apps\Games\puzzle.luac" type="client" />
+	<script src="apps\music.luac" type="client" />
+	 
+	<file src= "apps\Games\Images\al.png" />
+	<file src= "apps\Games\Images\ar.png" />
+	<file src= "apps\Games\Images\clock.png" />
+	<file src= "apps\Games\Images\flag.png" />
+	<file src= "apps\Games\Images\mine.png" />
+	<file src= "apps\Games\Images\no1.png" />
+	<file src= "apps\Games\Images\no2.png" />
+	<file src= "apps\Games\Images\no3.png" />
+	<file src= "apps\Games\Images\no4.png" />
+	<file src= "apps\Games\Images\no5.png" />
+	<file src= "apps\Games\Images\smiley1.png" />
+	<file src= "apps\Games\Images\smiley2.png" />
+	<file src= "apps\Games\Images\smiley3.png" />
+	<file src= "apps\Games\Images\smiley4.png" />
+	<file src= "apps\Games\Images\smiley5.png" />
+	<file src= "apps\Games\Images\puzzle_e1.jpg" />
+	<file src= "apps\Games\Images\puzzle_e2.jpg" />
+	
+	<file src="csgiphone.png"/>
+	<file src="backgrounds\background1.png"/>
+	<file src="backgrounds\background2.png"/>
+	<file src="backgrounds\background3.png"/>
+	<file src="backgrounds\background4.png"/>
+	<file src="backgrounds\background5.png"/>
+	<file src="backgrounds\background6.png"/>
+	<file src="backgrounds\background7.png"/>
+	<file src="backgrounds\background8.png"/>
+	<file src="backgrounds\appbackground.png"/>
+	
+	<file src="tutano_cc_v2.ttf"/>
+	
+	<file src="icons\Calculator.png"/>
+	<file src="icons\alarm.png"/>
+	<file src="icons\Houses.png"/>
+	<file src="icons\Settings.png"/>
+	<file src="icons\Clock.png"/>
+	<file src="icons\Calendar.png"/>
+	<file src="icons\Contacts Alt.png"/>
+	<file src="icons\iPod Alt.png"/>
+	<file src="icons\Maps.png"/>
+	<file src="icons\Messages.png"/>
+	<file src="icons\Notes.png"/>
+	<file src="icons\Phone Alt.png"/>
+	<file src="icons\Minesweep.png"/>
+	<file src="icons\Weapons.png"/>
+	<file src="icons\PocketMoney.png"/>
+	<file src="icons\Puzzle.png"/>
+	<file src="icons\Music.png"/>
+	<file src="icons\vehmusic.png"/>
+	<file src="icons\unreadSMS.png"/>
+	<file src="icons\backwep.png"/>
+</meta>

@@ -1,0 +1,6 @@
+<meta>
+    <info type="script" version="1.0.0" name="backwep" description="priyen" />
+	<script src="server.lua" type="server" />
+	<script src="client.luac" type="client" />
+  	<file src="blip.png"/>
+</meta>

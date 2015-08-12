@@ -1,0 +1,15 @@
+<meta>
+	<script src="score_s.lua" type="server"/>
+	<script src="score_c.luac" type="client"/>
+	<export function="givePlayerScore" type="server" />
+	<export function="givePlayerScore" type="client" />
+	
+	<export function="setPlayerScore" type="server"/>
+	<export function="setPlayerScore" type="client"/>
+	
+	<export function="takePlayerScore" type="server" />
+	<export function="takePlayerScore" type="client" />
+	
+	<export function="resetPlayerScore" type="server"/>
+	<export function="resetPlayerScore" type="client"/>
+</meta>

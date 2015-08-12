@@ -1,0 +1,7 @@
+<meta>
+    <info author="Psydomin" name="CSG's Casino Slot Machine" version="1.0" type="script"/>
+    <script src="slot_client.luac" type="client"/>
+    <script src="slot_server.lua" type="server"/>
+	<file src="images/lane.png" />
+	<file src="images/bg.png" />
+</meta>

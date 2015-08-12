@@ -1,0 +1,25 @@
+<meta>
+	<info author="Dennis" version="1.0" type="script" name="AmmoNation" description="Ammo Nation" />
+	<script src="client.luac" type="client"/>
+	<script src="armorshop.luac" type="client"/>
+	<script src="server.lua" type="server"/>
+
+	<file src="images/AK47.png" type="client"/>
+	<file src="images/CHAINSAW.png" type="client"/>
+	<file src="images/COLT45.png" type="client"/>
+	<file src="images/COMBAT.png" type="client"/>
+	<file src="images/DEAGLE.png" type="client"/>
+	<file src="images/GRENADE.png" type="client"/>
+	<file src="images/KATANA.png" type="client"/>
+	<file src="images/M4.png" type="client"/>
+	<file src="images/MICROUZI.png" type="client"/>
+	<file src="images/MP5.png" type="client"/>
+	<file src="images/RIFLE.png" type="client"/>
+	<file src="images/laser.png" type="client"/>
+	<file src="images/SAWNOFF.png" type="client"/>
+	<file src="images/SHOTGUN.png" type="client"/>
+	<file src="images/SILENCED.png" type="client"/>
+	<file src="images/SNIPER.png" type="client"/>
+	<file src="images/TEARGAS.png" type="client"/>
+	<file src="images/TEC9.png" type="client"/>
+</meta>

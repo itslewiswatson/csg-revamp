@@ -1,0 +1,6 @@
+<meta>
+    <info type="script" version="1.0.0" author="SpriN'" name="Limo_Job" description="" />
+	<script src="limo_c.lua" type="client" cache="false" />
+	<script src="limo_s.lua" type="server" />
+	<file src="mission_accomplished.mp3" />
+</meta>

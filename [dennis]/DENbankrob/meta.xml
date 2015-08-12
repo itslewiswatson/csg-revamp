@@ -1,0 +1,9 @@
+<meta>
+    <info author="Dennis & UniQ" name="CSGBankrob" version="1.0" type="script"/>
+		
+    <script src="client.luac" type="client"/>
+	<script src="server.lua" type="server"/>
+	
+	<script src="doublesided.luac" type="client"/>
+	<script src="bankrob.luac" type="client"/>
+</meta>

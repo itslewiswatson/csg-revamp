@@ -1,0 +1,11 @@
+<map edf:definitions="editor_main">
+   <removeWorldObject id="removeWorldObject (mil_samsite) (1)" radius="3.8754134178162" interior="0" model="3267" lodModel="0" posX="238.51093" posY="1697.40381" posZ="24.33067" rotX="0" rotY="0" rotZ="0"></removeWorldObject>
+    <removeWorldObject id="removeWorldObject (mil_sambase) (1)" radius="5.482813835144" interior="0" model="3277" lodModel="0" posX="237.67969" posY="1696.88281" posZ="22.375" rotX="0" rotY="0" rotZ="0"></removeWorldObject>
+    <removeWorldObject id="removeWorldObject (a51_extfence03) (1)" radius="23.916032791138" interior="0" model="16293" lodModel="0" posX="238.07031" posY="1697.55469" posZ="21.63281" rotX="0" rotY="0" rotZ="0"></removeWorldObject>
+    <removeWorldObject id="removeWorldObject (mil_hangar1_) (1)" radius="27.481317520142" interior="0" model="3268" lodModel="3366" posX="276.65625" posY="2023.75781" posZ="16.63281" rotX="0" rotY="0" rotZ="0"></removeWorldObject>
+    <removeWorldObject id="removeWorldObject (mil_hangar1_) (2)" radius="27.481317520142" interior="0" model="3268" lodModel="3366" posX="276.65625" posY="1989.54688" posZ="16.63281" rotX="0" rotY="0" rotZ="0"></removeWorldObject>
+    <removeWorldObject id="removeWorldObject (mil_hangar1_) (3)" radius="27.481317520142" interior="0" model="3268" lodModel="3366" posX="276.65625" posY="1955.76563" posZ="16.63281" rotX="0" rotY="0" rotZ="0"></removeWorldObject>
+    <removeWorldObject id="removeWorldObject (des_a51infenc) (1)" radius="120.60289001465" interior="0" model="16094" lodModel="0" posX="191.14063" posY="1870.03906" posZ="21.47656" rotX="0" rotY="0" rotZ="0"></removeWorldObject>
+    <removeWorldObject id="removeWorldObject (a51_ventcover) (1)" radius="3.5160918235779" interior="0" model="16732" lodModel="0" posX="226.45393" posY="1859.125" posZ="14.25885" rotX="0" rotY="0" rotZ="0"></removeWorldObject>
+    
+</map>

@@ -1,0 +1,4 @@
+<meta>
+	<script src="hitman.luac" type="client" />
+	<script src="hitman.luas" type="server" />
+</meta>

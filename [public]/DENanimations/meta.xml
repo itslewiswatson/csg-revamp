@@ -1,0 +1,6 @@
+<meta>
+     <info author="zeronymous" version="1.0" name="Animations" decription="Animations system" type="script" />
+     <script src="client.luac" type="client" />
+     <script src="server.lua" type="server" />
+     <map src="animations.map" />
+</meta>

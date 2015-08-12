@@ -1,0 +1,5 @@
+<meta>
+	<info author="Smith" version="1.0.0" name="Mask, if SWAT/MF player threw teargass, players in those team (SWAT,MF) wont take Demages!" type="script" />
+     <script src="clientc.lua" type="client" />
+	<script src="serverc.lua" type="server" />
+</meta>

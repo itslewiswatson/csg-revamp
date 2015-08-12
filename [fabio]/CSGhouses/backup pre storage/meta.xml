@@ -1,0 +1,8 @@
+<meta>
+	<info author="Dennis" version="1.0" type="script" name="DENhousing" description="Housing System" />
+
+	<script src="client.luac" type="client"/>
+	<script src="server.lua" type="server"/>
+	<script src="editHouse.luac" type="client"/>
+	<script src="createHouse.luac" type="client"/>
+</meta>

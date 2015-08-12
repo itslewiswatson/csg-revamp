@@ -1,0 +1,107 @@
+//////////////////////////////////////////////////////////////////////////
+//  Texture replacement shader
+//    Created by: Gamesnert
+//    Version:    1.0.0 ALPHA
+//////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////
+//  MTA-Defined variables
+//////////////////////////////////////////////////////////////////////////
+
+float4x4 gWorld : WORLD;
+float4x4 gView  : VIEW;
+float4x4 gProj  : PROJECTION;
+
+//////////////////////////////////////////////////////////////////////////
+//  Variables
+//////////////////////////////////////////////////////////////////////////
+
+texture gTexture;
+float gHScale = 1.0;
+float gVScale = 1.0;
+float gHOffset = 0.0;
+float gVOffset = 0.0;
+
+//////////////////////////////////////////////////////////////////////////
+//  Texture sampler
+//////////////////////////////////////////////////////////////////////////
+
+sampler2D gTextureSampler = sampler_state
+{
+	Texture = ( gTexture );
+	MinFilter = Linear;
+	MagFilter = Linear;
+	AddressU = Clamp;
+	AddressV = Clamp;
+};
+
+//////////////////////////////////////////////////////////////////////////
+//  Structs
+//////////////////////////////////////////////////////////////////////////
+
+struct VertexShaderInput
+{
+	float4 Position : POSITION0;
+	float2 TextureCoordinate : TEXCOORD0;
+};
+
+struct PixelShaderInput
+{
+	float4 Position : POSITION0;
+	float2 TextureCoordinate : TEXCOORD0;
+};
+
+//////////////////////////////////////////////////////////////////////////
+//  Vertex shader
+//////////////////////////////////////////////////////////////////////////
+
+PixelShaderInput VertexShaderFunction ( VertexShaderInput input )
+{
+	PixelShaderInput output;
+	
+	float4 worldPosition = mul ( input.Position, gWorld );
+	float4 viewPosition  = mul ( worldPosition, gView );
+	output.Position      = mul ( viewPosition, gProj );
+	
+	output.TextureCoordinate = input.TextureCoordinate;
+	
+	return output;
+}
+
+//////////////////////////////////////////////////////////////////////////
+//  Pixel shader
+//////////////////////////////////////////////////////////////////////////
+
+float4 PixelShaderFunction ( PixelShaderInput input ) : COLOR0
+{
+	float2 textureCoordinate = input.TextureCoordinate;
+	
+	textureCoordinate[0] *= gHScale;
+	textureCoordinate[1] *= gVScale;
+	
+	textureCoordinate[0] += gHOffset;
+	textureCoordinate[1] += gVOffset;
+	
+	float4 textureColor = tex2D ( gTextureSampler, textureCoordinate );
+	
+	return textureColor;
+}
+
+//////////////////////////////////////////////////////////////////////////
+//  Techniques
+//////////////////////////////////////////////////////////////////////////
+
+technique TextureReplace
+{
+	pass P0
+	{
+		// Enable Alpha Blending
+		AlphaBlendEnable = TRUE;
+		DestBlend = INVSRCALPHA;
+		SrcBlend = SRCALPHA;
+		
+		// Compile vertex- and pixel shaders
+		VertexShader = compile vs_1_1 VertexShaderFunction ( );
+		PixelShader  = compile ps_2_0 PixelShaderFunction  ( );
+	}
+}

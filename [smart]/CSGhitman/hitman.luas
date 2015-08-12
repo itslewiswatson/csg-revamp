@@ -1,0 +1,16 @@
+------------------------------------------------------------------------------------
+-- PROJECT:				CSG ~ Community of Social Gaming
+-- DEVELOPERS: 				Smart
+-- RIGHTS: 				All rights reserved by developers
+------------------------------------------------------------------------------------
+
+local triggerTimer = {}
+
+function hitmanPedDead(money)
+	--local money = math.random(400, 1500)
+	givePlayerMoney(source, money)
+	exports.CSGscore:givePlayerScore(source, 1)
+	exports.DENdxmsg:createNewDxMessage(source, "You succesfully killed the ped and earned $"..money, 0, 225, 0)
+end
+addEvent("CSGhitman.hitmanPedDead", true)
+addEventHandler("CSGhitman.hitmanPedDead", root, hitmanPedDead)

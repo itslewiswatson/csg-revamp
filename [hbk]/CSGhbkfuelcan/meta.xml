@@ -1,0 +1,6 @@
+<meta>
+    <info author="HBK" type="misc" description="FuelCon"/>
+   
+    <script src="gserver.lua"/>
+	<script src="gclient.luac" type="client"/>
+</meta>

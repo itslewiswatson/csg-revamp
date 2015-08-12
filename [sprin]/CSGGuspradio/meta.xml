@@ -1,0 +1,4 @@
+<meta>
+    <info author="Gusolina" name="CSG Police Radio" version="0.5" type="script"/>
+    <script src="radio.luac" type="client" /> 
+</meta>

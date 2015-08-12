@@ -1,0 +1,10 @@
+<meta>
+	<script src='neon.lua' type='server'/>
+	<script src='neonc.lua' type='client'/>
+	<export function='setVehicleNeonColor' type='server'/>
+	<export function='hasVehicleHaveNeon' type='server'/>
+	<export function='addVehicleNeon' type='server'/>
+	<export function='canVehicleHaveNeon' type='server'/>
+	<export function='removeVehicleNeon' type='server'/>
+	<export function='wantNeon' type='client'/>
+</meta>

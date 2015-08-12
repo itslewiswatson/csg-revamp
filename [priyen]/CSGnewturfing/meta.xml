@@ -1,0 +1,9 @@
+<meta>
+    <info author="[CSG]Dennis and [CSG]FabioGNR" name="CSG-Turf" version="1.0" type="script"/>
+	
+    <script src="server.lua" type="server"/>
+	<script src="client.luac" type="client"/>
+	<file src="full.png" />
+	<file src="half.png" />
+
+</meta>

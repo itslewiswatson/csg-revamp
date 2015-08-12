@@ -1,0 +1,18 @@
+<meta>
+    <info author="Dennis" version="3.0" type="script" />
+
+	<script src="client.luac" type="client" />
+	<script src="server.lua" type="server" />
+
+	<script src="alliance.luac" type="client" />
+	<script src="allianceGUI.luac" type="client" />
+	<script src="GUI.luac" type="client" />
+	<script src="ACL.luac" type="client" />
+
+	<export function="alliances_getGroupAlliance" type="server" />
+	<export function="alliances_getAllianceName" type="server" />
+	<export function="alliances_getAllianceSettings" type="server" />
+	<export function="alliances_getAllianceIDByName" type="server" />
+	<export function="alliances_getAllianceSettings" type="client" />
+	<export function="getAllianceColor" type="server" />
+</meta>

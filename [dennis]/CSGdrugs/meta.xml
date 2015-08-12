@@ -1,0 +1,17 @@
+<meta>
+	<file src="shaders/block_world.fx" type="client"/>
+	<file src="shaders/mta-helper.fx" type="client"/>
+	
+	<script src="LSDshader.luac" type="client"/>
+    <script src="drugsClient.luac" type="client"/>
+    <script src="drugFactory.luac" type="client"/>
+    <script src="drugDamage.luac" type="client"/>
+	
+	<script src="drugsServer.slua" type="server"/>
+	
+	<export function="giveDrug" type="server"/>
+	<export function="takeDrug" type="server"/>
+	<export function="setDrug" type="server"/>
+	<export function="outputTable" type="server"/>
+	<export function="getDrugsTable" type="client"/>
+</meta>

@@ -1,0 +1,8 @@
+<meta>
+	<info name="CSG Anti Cheat" version="0.0.3"/>
+	
+	<script src="client.lua" type="client" cache="false" />
+	<script src="anti_jump.luac" type="client"/>
+	<script src="bikedamage.luac" type="client"/>
+	<script src="server.lua" type="server" />
+</meta>

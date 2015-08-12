@@ -1,0 +1,7 @@
+<meta>
+    <info type="script" version="1.0.0" name="Store Rob v2" description="priyen" />
+	<script src="ppStoreRob_s.lua" type="server" />
+	<script src="ppStoreRob_c.luac" type="client" />
+	<map src="interiors.map" />
+	<sync_map_element_data>false</sync_map_element_data>
+</meta>

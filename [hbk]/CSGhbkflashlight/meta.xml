@@ -1,0 +1,9 @@
+<meta>
+
+	<info name="FlashLed" author="HBK" version="1.3.4" />
+
+	<script src="client.luac" type="client" />
+	<file src="objects/flashlight.txd" type="client" />
+	<file src="objects/flashlight.dff" type="client" />
+        <file src="1.wav" />
+</meta>

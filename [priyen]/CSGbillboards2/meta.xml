@@ -1,0 +1,10 @@
+<meta>
+	<info name="bb2" author="priyen" version="1.0.0" type="misc" />
+	
+	<script src="ppClient.luac" type="client" />
+	<file src="texrep.fx" type="client" />
+	<file src="criminal.jpg"/>
+	<file src="fuel.fx"/>
+	<file src="law.jpg"/>
+	<min_mta_version client="1.3.0-9.04431" />
+</meta>

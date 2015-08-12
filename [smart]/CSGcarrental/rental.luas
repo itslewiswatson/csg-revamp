@@ -1,0 +1,65 @@
+------------------------------------------------------------
+--		Project: CSG
+--		Author: Sebastian Cronberg
+--		Copyright: All rights reserved to the author(s)
+------------------------------------------------------------
+
+local rentalCar, rentalTimer = {}, {}
+
+function onPlayerRent(rr, gg, bb, rentalID, rentalPrice)
+	rentalCar[source] = createVehicle(rentalID, 2065.62720, -1903.45593, 13.54688)
+	if (rr) then
+		setVehicleColor(rentalCar[source], rr, gg, bb) 
+	else
+		setVehicleColor(rentalCar[source], 0, 0, 0) 
+	end
+	takePlayerMoney(source, rentalPrice)
+	setElementData(rentalCar[source], "rentalCar", true)
+	if (rentalCar[source]) then
+		rentalTimer[source] = setTimer(destroyRentalCar, 1800000 , 1, source)
+	end
+	warpPedIntoVehicle(source, rentalCar[source])
+	exports.DENdxmsg:createNewDxMessage(source, "You've succesfully rented a '"..getVehicleNameFromModel(rentalID).."' for $"..rentalPrice, 0, 225, 0)
+	addEventHandler("onPlayerVehicleEnter", rentalCar[source], onPlayerVehicleEnter)
+end
+addEvent("onPlayerRent", true)
+addEventHandler("onPlayerRent", root, onPlayerRent)
+
+function destroyRentalCar(client)
+	if (isElement(rentalCar[client])) then
+		exports.DENdxmsg:createNewDxMessage(client, "Your rental time has expired and the vehicle was destroyed, go back to the rental place to rent a new one", 225, 0, 0)
+		destroyElement(rentalCar[client])
+	end
+end
+
+function onPlayerVehicleEnter(vehicle)
+	if (getElementData(vehicle, "rentalCar")) then
+		local time = getTimerDetails(rentalTimer[source]) / 60000
+		exports.DENdxmsg:createNewDxMessage(source, "This is a rental car and it will get deleted in "..math.floor(time).." minutes", 225, 225, 0)
+	end
+end
+
+function getVehicleTime(player)
+	if (isElement(rentalCar[player])) then 
+		local time = getTimerDetails(rentalTimer[player])
+		local minutes = time / 60000
+		local seconds = time / 1000
+		exports.DENdxmsg:createNewDxMessage(player, "This car will expire in "..math.floor(minutes).. " minutes ("..math.floor(seconds).. " seconds)", 225, 225, 0)
+	end
+end
+addCommandHandler("rentaltime", getVehicleTime)
+
+function onRentalCarExplore()
+	if (getElementData(source, "rentalCar")) then
+		destroyElement(source)
+	end
+end
+addEventHandler("onVehicleExplode", root, onRentalCarExplore)
+
+function destroyCarOnQuit()
+	if (isElement(rentalCar(source))) then
+		destroyElement(rentalCar[source])
+		killTimer(rentalTimer[source])
+	end
+end
+addEventHandler("onPlayerQuit", root, destroyCarOnQuit)

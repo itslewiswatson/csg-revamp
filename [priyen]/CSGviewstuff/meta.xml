@@ -1,0 +1,5 @@
+<meta>
+<info type="script" version="1.0.0" name="priyen" description="check wep" />
+ 
+	<script src="ppServer.lua" type="server"/>
+</meta>

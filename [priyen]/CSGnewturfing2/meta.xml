@@ -1,0 +1,14 @@
+<meta>
+    <info author="[CSG]Dennis and [CSG]FabioGNR" name="CSG-Turf" version="1.0" type="script"/>
+
+    <script src="server.lua" type="server"/>
+	<script src="client.luac" type="client"/>
+	<script src="bags.luac" type="client"/>
+	<file src="full.png" />
+	<file src="half.png" />
+	<file src="crim.png" />
+	<file src="law.png" />
+	<file src="noone.png" />
+	<export function="isPlayerInRT" type="server"/>
+	<export function="isPlayerInRegTurf" type="server"/>
+</meta>

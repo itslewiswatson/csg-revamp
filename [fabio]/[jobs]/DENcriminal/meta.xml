@@ -1,0 +1,12 @@
+<meta>
+    <info author="Dennis" version="2.0" type="script" />
+
+	<script src="client.luac" type="client" />
+	<script src="server.lua" type="server" />
+
+	<export function="setPlayerCriminal" type="server" />
+	<export function="givePlayerCJClothes" type="server" />
+	
+  	<file src="image.png" /> 
+
+</meta>

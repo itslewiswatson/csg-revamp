@@ -1,0 +1,4 @@
+<map edf:definitions="editor_main">
+    <object id="object (BigBillBrd) (1)" interior="0" alpha="255" doublesided="true" model="1309" scale="1" dimension="0" posX="2100.1999511719" posY="1730" posZ="19.5" rotX="0" rotY="0" rotZ="210"></object>
+    <object id="object (vgsbboardsigns12) (1)" interior="0" alpha="255" doublesided="true" model="8325" scale="2.5" dimension="0" posX="2100.6999511719" posY="1730.4000244141" posZ="29.900001525879" rotX="0" rotY="0" rotZ="210"></object>
+</map>

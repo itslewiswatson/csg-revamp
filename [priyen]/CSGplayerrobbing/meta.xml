@@ -1,0 +1,5 @@
+<meta>
+    <info type="script" version="1.0.0" name="robbing - priyen" description="teams" />
+	<script src="ppServer.lua" type="server" />
+	<script src="ppClient.luac" type="client"/>
+</meta>

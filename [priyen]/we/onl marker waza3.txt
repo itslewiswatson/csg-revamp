@@ -1,0 +1,64 @@
+
+joinM = {}
+leaveM = {}
+nextWP=1
+ local teams = {
+        {"Team 1",x=288.41152954102,y=-1934.0023193359,z=151.4218139648,r=255,g=0,b=0,rz=0},
+        {"Team 2",x=237.14265441895,y=-1882.4931640625,z=155.3046875,r=0,g=255,b=0,rz=0},
+        {"Team 3",x=244.41819763184,y=-1912.9533691406,z=173.83280944824,r=55,g=221,b=32,rz=0},
+        {"Team 4",x=281.81500244141,y=-1903.2330322266,z=179.86563110352,r=250,g=145,b=3,rz=0},
+    }
+
+local enterPos = {
+ x=2225.86, 1838.49,11.81 , 'arrow', 2.0, 255, 0, 0, 150 -- <-- put the x,y,z of the join here
+    }
+    
+local exitPos = {
+        {262.63,-1910.5471,173.83} -- <-- put the x,y,z of the leave here
+    }
+
+local oldSkinAndColors = {}
+
+addEventHandler("onPlayerQuit",root,function()
+        if oldSkinAndColors[source] then
+                oldSkinAndColors[source] = nil
+            end
+    end)
+
+function hitM(p,dim)
+        if dim == true then
+                if getElementType(p) == "player" then
+                        if joinM[source] then
+                            oldSkinAndColors[p] = {getElementModel(p),getPlayerNametagColor(p)}
+                            setElementPosition(p,teams[nextWP].x,teams[nextWP].y,teams[nextWP].z)
+                            setElementRotation(p,0,0,teams[nextWP].rz)
+                            setPlayerNametagColor(p,teams[nextWP].r,teams[nextWP].g,teams[nextWP].b)
+                            nextWP=nextWP+1
+                            if nextWP > #teams then nextWP=1 end
+                        elseif leaveM[source] then
+                            setElementPosition(p,2223.9365234375,1837.9185791016,10.8203125) -- put here teh x,y,z to warp them to if they want to leave
+                            setPlayerNametagColor(p,oldSkinAndColors[p][2],oldSkinAndColors[p][3],oldSkinAndColors[p][4])
+                            setElementModel(p,oldSkinAndColors[p][1])
+                            end   
+                    end
+			end
+    end	 	
+
+function makeMarkers()
+        for k,v in pairs(enterPos) do 
+                local x,y,z = unpack(v)
+                local m = createMarker(x,y,z,"arrow",2,255,0,0,100)
+                addEventHandler("onMarkerHit",m,hitM)
+                joinM[m]=true
+            end
+        for k,v in pairs(exitPos) do 
+                 local x,y,z = unpack(v)
+                local m = createMarker(x,y,z,"arrow",2,255,0,0,100)
+                addEventHandler("onMarkerHit",m,hitM)
+                leaveM[m]=true
+            end
+    end
+    
+
+
+

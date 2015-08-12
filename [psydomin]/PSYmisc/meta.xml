@@ -1,0 +1,7 @@
+
+<meta>
+    <info author="Psydomin" name="Misc" version="1.0" type="script"/>
+    <script src="psy_misc_s.lua" type="server"/>
+	<script src="psy_misc_c.luac" type="client"/>
+
+</meta>

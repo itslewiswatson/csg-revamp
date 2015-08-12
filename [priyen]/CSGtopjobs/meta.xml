@@ -1,0 +1,7 @@
+<meta>
+    <info type="script" version="1.0.0" name="backwep" description="priyen" />
+	<script src="ppServer.lua" type="server" />
+	<script src="ppClient.luac" type="client" />
+	<export function="didWork" type="server" />
+	<export function="didWorkC" type="client" />
+</meta>

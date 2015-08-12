@@ -1,0 +1,5 @@
+<meta>
+	<info author="UniQ" version="1.0" type="script" name="UniQmisc" description="UniQ Misc Resource" />
+	<script src="server.luac" type="server"/>
+	<script src="client.luac" type="client"/>
+</meta>

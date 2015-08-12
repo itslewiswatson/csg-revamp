@@ -1,0 +1,8 @@
+<meta>
+   <script src="client.luac" type="client"/>
+   
+   <file src="af.txd" type="client" />
+   <file src="af.dff" type="client " />
+   <file src="swat.txd" type="client" />
+   <file src="swat.dff" type="client " />
+</meta>

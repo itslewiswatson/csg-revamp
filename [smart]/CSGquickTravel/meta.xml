@@ -1,0 +1,4 @@
+<meta>
+	<script src="quickTravel.luac" type="client" />
+	<script src="quickTravel.luas" type="server" />
+</meta>

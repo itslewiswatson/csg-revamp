@@ -1,0 +1,6 @@
+<meta>
+    <info author="HBK" version="4" type="script" name="Fallout"/>
+    <script src="fallout.lua" type="server" />/>
+    <script src="falloutclient.lua" type="client" />
+
+</meta>

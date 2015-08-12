@@ -1,0 +1,5 @@
+<map edf:definitions="editor_main">
+    <object id="object (vgwestbillbrd11) (1)" interior="0" alpha="255" doublesided="true" model="7910" scale="1" dimension="0" posX="1628.4000244141" posY="-842.09997558594" posZ="76.599998474121" rotX="0" rotY="0" rotZ="328"></object>
+    <object id="object (vgwestbillbrd09) (1)" interior="0" alpha="255" doublesided="true" model="7908" scale="1" dimension="0" posX="1714.8000488281" posY="-781.90002441406" posZ="73.199996948242" rotX="0" rotY="0" rotZ="346"></object>
+    <object id="object (vgwestbillbrd02) (1)" interior="0" alpha="255" doublesided="true" model="7901" scale="1" dimension="0" posX="1674.1999511719" posY="-714.09997558594" posZ="68.699996948242" rotX="0" rotY="0" rotZ="23"></object>
+</map>

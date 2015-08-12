@@ -1,0 +1,10 @@
+<meta>
+	<script src="misclibs.lua" type="server" />
+	<script src="misclibc.lua" type="client" protected="true" />
+	<script src="core.lua" type="server" />
+	<script src="core.lua" type="client" protected="true" />	<export function="findPlayer" type="server"/>
+	<export function="findPlayer" type="client"/>
+	<export function="convertMoneyToString" type="client"/>
+	<export function="getPlayerFPS" type="client"/>
+	<export function="getPlayerFPS" type="server"/>
+</meta>

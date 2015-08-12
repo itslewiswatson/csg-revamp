@@ -1,0 +1,18 @@
+<meta>
+	<info author="Dennis" description="CSG Setting System" version="1.5" type="script" />
+	
+	<script src="settings.luac" type="client" />
+	<script src="friends.luac" type="client" />
+	<script src="blacklist.luac" type="client" />
+
+	<export function="getPlayerSetting" type="client" />
+	<export function="setPlayerSetting" type="client" />
+	<export function="addPlayerSetting" type="client" />
+	<export function="getPlayerFriends" type="client" />
+	<export function="addPlayerFriend" type="client" />
+	<export function="removePlayerFriend" type="client" />
+	<export function="getBlacklistedPlayers" type="client" />
+	<export function="isPlayerBlacklisted" type="client" />
+	<export function="addPlayerBlacklisted" type="client" />
+	<export function="removePlayerBlacklisted" type="client" />
+</meta>

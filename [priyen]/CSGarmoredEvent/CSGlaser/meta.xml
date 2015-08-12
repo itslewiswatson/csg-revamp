@@ -1,0 +1,17 @@
+<meta>
+    <info author="vick" name="laserpointer" version="1.0.0" type="script"/>
+	<script src="server.lua" type="server"/>
+	<script src="client.luac" type="client"/>
+	
+	<export function="SetLaserEnabled" type="server"/>
+	<export function="IsLaserEnabled" type="server"/>
+	<export function="SetLaserColor" type="server"/>
+	<export function="GetLaserColor" type="server"/>
+	<export function="IsPlayerWeaponValidForLaser" type="server"/>
+	
+	<export function="SetLaserEnabled" type="client"/>
+	<export function="IsLaserEnabled" type="client"/>
+	<export function="SetLaserColor" type="client"/>
+	<export function="GetLaserColor" type="client"/>
+	<export function="IsPlayerWeaponValidForLaser" type="client"/>
+</meta>

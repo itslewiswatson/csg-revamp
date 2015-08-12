@@ -1,0 +1,6 @@
+<meta>
+    <info type="script" version="1.0.0" name="Store Rob v2" description="priyen" />
+	<script src="ppServer.lua" type="server" />
+	<script src="ppClient.luac" type="client" />
+<min_mta_version server="1.3.0-9.03968" />
+</meta>

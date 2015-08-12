@@ -1,0 +1,12 @@
+<meta>
+    <info type="script" version="1.0.0" name="time" description="priyen" />
+	<script src="ppServer.lua" type="server" />
+	<script src="ppClient.luac" type="client" />
+	<export function="getMaskedYoutube" type="server"/>
+	<export function="isYoutubeLink" type="server"/>
+	<export function="doesAlreadyExistLink" type="server"/>
+	<export function="isValidYoutubeLink" type="server"/>
+	<export function="attemptProcessLink" type="server"/>
+	<export function="isValidYoutubeLink" type="client"/>
+	<export function="isYoutubeLink" type="client"/>
+</meta>

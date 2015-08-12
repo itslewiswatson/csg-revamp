@@ -1,0 +1,16 @@
+<meta>
+    <info type="script" version="1.0.0" name="law skills - priyen" description="teams" />
+	<script src="ppClient.luac" type="client" />
+	<script src="ppServer.lua" type="server"/>
+	<file src="chief.png" />
+	<file src="rangeunit.png" />
+	<file src="supportunit.png" />
+	<file src="highspeed.png" />
+	<file src="bombsquad.png" />
+	<file src="explosives.png" />
+	<file src="k9.png" />
+	<file src="taskforce.png" />
+	<file src="tank.png"/>
+	<file src="mechanic.png"/>
+	<file src="sapd.png"/>
+</meta>

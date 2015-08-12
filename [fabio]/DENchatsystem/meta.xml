@@ -1,0 +1,46 @@
+<meta>
+	<script src="sms_client.luac" type="client"/>
+	<script src="client.luac" type="client"/>
+	<script src="chatbubbles.luac" type="client"/>
+	
+	<script src="server.lua" type="server"/>
+	<script src="localchat.lua" type="server"/>
+	<script src="groupchat.lua" type="server"/>
+	<script src="sms.lua" type="server"/>
+	<script src="exports.lua" type="server"/>
+	
+	<export function="outPutGroupMessage" type="server"/>
+	<export function="outPutGroupMessageByPlayer" type="server"/>
+	<export function="onPlayerSendSMS"  type="client"/>
+	<export function="getColorForIRC" type="server"/>
+	
+		<settings>
+			<setting
+				name="*DefaultTime"
+				value="10000"
+				accept="number"
+				desc="The default time every bubble will be visible."
+			/>
+
+			<setting
+				name="*PerCharacterAddition"
+				value="50"
+				accept="number"
+				desc="The time every character in a message adds to the total time visible."
+			/>
+
+			<setting
+				name="*MaxBubbles"
+				value="3"
+				accept="number/false"
+				desc="The max number of bubbles stacked above one's head. To disable enter 'false'."
+			/>
+
+			<setting
+				name="*HideOwn"
+				value="true"
+				accept="true/false"
+				desc="Decides whether players are able to see their own bubbles or not."
+			/>
+    	</settings>
+</meta>

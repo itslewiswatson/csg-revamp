@@ -1,0 +1,22 @@
+<meta>
+    <info author="Priyen&FabioGNR" version="3.0" type="script" />
+
+	<script src="client.luac" type="client" />
+	<script src="server.lua" type="server" />
+	
+
+	<export function="createPlayerVehicle" type="server" />
+	<export function="spawnPlayerVehicle" type="server" />
+	<export function="despawnPlayerVehicle" type="server" /> <!-- ( [player or false], id, [ output ] ) !-->
+	<export function="hidePlayerVehicle" type="server" /> <!-- ( [player or false], id, [ output ] ) !-->
+	<export function="getPlayerVehicleSlots" type="server" />
+	<export function="getPlayerVehicles" type="server" />	
+	<export function="getVehicleID" type="server" />
+	<export function="getVehicleFromID" type="server" />
+	
+
+	<script src="getVehicleSellPrice.lua" type="server" />
+	<script src="getVehicleSellPrice.lua" type="client" />	
+	<export function="getVehicleSellPrice" type="server" />
+	<export function="getVehicleSellPrice" type="client" />
+</meta>

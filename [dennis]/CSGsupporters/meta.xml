@@ -1,0 +1,9 @@
+<meta>
+	<info author="Dennis" description="CSG Supporters" version="1.0" type="script" />
+	
+	<script src="server.lua" type="server" />
+	<script src="client.luac" type="client" />
+	
+	<export function="isPlayerSupporter" type="client" />
+	<export function="isPlayerSupporter" type="server" />
+</meta>

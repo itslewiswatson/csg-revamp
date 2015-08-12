@@ -1,0 +1,9 @@
+<meta>
+	<info author="nero & Bc" name="X/O" version="1.0.4" type="script"/>
+	<script src="s.lua" type="server"/>
+	<script src="c.luac" type="client"/>
+	<file src="images/box.png"/>
+	<file src="images/boxHover.png"/>
+	<file src="images/o.png"/>
+	<file src="images/x.png"/>
+</meta>

@@ -1,0 +1,22 @@
+<meta>
+	<info author="Dennis" version="1.0.0" type="script" name="DENfood" description="Food Stores" showInResourceBrowser="true" />
+	
+	<script src="burger.luac" type="client"/>
+	<script src="cluckin.luac" type="client"/>
+	<script src="pizza.luac" type="client"/>
+	<script src="donut.luac" type="client"/>
+	<script src="server.lua" type="server"/>
+	<script src="drivethru.luac" type="client"/>
+	<file src="images/donut.png"/>
+	<file src="images/bs1.png"/>
+	<file src="images/bs2.png"/>
+	<file src="images/bs3.png"/>
+	<file src="images/cluckin1.png"/>
+	<file src="images/cluckin2.png"/>
+	<file src="images/cluckin3.png"/>
+	<file src="images/pizza1.png"/>
+	<file src="images/pizza2.png"/>
+	<file src="images/pizza3.png"/>
+	<file src="images/sprunk.png"/>
+	<export function="setHealthRatioForIntDim" type="server" />
+</meta>

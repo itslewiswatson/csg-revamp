@@ -1,0 +1,6 @@
+<meta>
+	<info author="HBK" name="TrainTravelSystem" version="0.1.1" type="script" />
+	
+	<script src="trainc.lua" type="client"/>
+	<script src="trains.lua" type="server"/>
+</meta>

@@ -1,0 +1,8 @@
+<meta>
+    <info author="Will" name="Car Mod" version="1.0.0" type="script"/>
+	
+    <script src="client.lua" type="client"/>
+	
+    <file src="data/club.txd"/>
+    <file src="data/club.dff"/>
+</meta>

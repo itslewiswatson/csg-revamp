@@ -1,0 +1,6 @@
+<meta>
+              <info name="ProProject/Smoke" author="HBK" version="2.4.5" type="script" />
+            
+              <script src="Smokecrim.lua" type="server" />
+           
+</meta>

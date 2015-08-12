@@ -1,0 +1,21 @@
+<meta>
+    <info type="script" version="1.0.0" name="priyen misc" description="exports" />
+	<script src="exports_c.luac" type="client" />
+	<map src="lvradiotowers.map" />
+ 	 
+	<script src="exports_s.lua" type="server" />
+	<script src="stream_c.luac" type="client" />
+	<script src="stream_s.lua" type="server"/>
+	<script src="ppTrans_s.lua" type="server"/>
+	<script src="bmxMap.luac" type="client" />
+	<script src="lvnorthturffix.luac" type="client" />
+	<file src="cuff.dff"/>
+	<file src="cuff.txd"/>
+ 	<export function="dxDrawColorText" type="client" />
+	<export function="isWithinCityBoundary" type="client" />
+	<export function="getTimeStampYYYYMMDD" type="server" />
+<export function="getTimeStampYYYYMMDD" type="client" />
+	<export function="playCustomSound" type="client" />
+	<file src="complete.mp3"/>
+	<file src="fail.mp3"/>
+</meta>

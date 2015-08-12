@@ -1,0 +1,26 @@
+<meta>
+	<script src="client.luac" type="client" />
+	
+	<file	src="Others/commands.xml" type="client" />
+	<file	src="Others/jobs.xml" type="client" />
+	
+	<file	src="Rules/GM.xml" type="client" />
+	<file	src="Rules/GR.xml" type="client" />
+	<file	src="Rules/GM.xml" type="client" />
+	<file	src="Rules/HR.xml" type="client" />
+	<file	src="Rules/ID.xml" type="client" />
+	<file	src="Rules/NL.xml" type="client" />
+	<file	src="Rules/PT.xml" type="client" />
+	<file	src="Rules/RU.xml" type="client" />
+	<file	src="Rules/SP.xml" type="client" />
+	<file	src="Rules/TI.xml" type="client" />
+	<file	src="Rules/TN.xml" type="client" />
+	<file	src="Rules/TR.xml" type="client" />
+	<file	src="Rules/EN.xml" type="client" />
+	<file	src="Rules/FR.xml" type="client" />
+	<file	src="Rules/CN.xml" type="client" />
+	<file	src="Rules/AR.xml" type="client" />
+	<file	src="Rules/EG.xml" type="client" />
+	<file	src="Rules/SE.xml" type="client" />
+
+</meta>

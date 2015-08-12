@@ -1,0 +1,27 @@
+------------------------------------------------------------------------------------
+------------------ Speed Hack Logs - by [CSG]Smith ---------------------------------
+------------------------------------------------------------------------------------
+
+[ 6/ 8/2013  4:17.39] [CSG]nero#[Sm] has tryed to abuse /sgs command with value =10
+[ 6/ 8/2013  4:17.47] [CSG]nero#[Sm] has tryed to abuse /sgs command with value =10
+[ 6/ 8/2013 14:27. 1] [CSG]Sensei has tryed to abuse /sgs command with value =4
+[ 6/ 8/2013 15:37.15] [CSG]SpriN' has tryed to abuse /sgs command with value =10
+[ 6/ 8/2013 18: 4.23] [CSG]Khan#B|W| has tryed to abuse /sgs command with value =10
+[ 6/ 8/2013 18: 4.28] [CSG]Khan#B|W| has tryed to abuse /sgs command with value =10
+[ 6/ 8/2013 18: 5. 7] [CSG]Khan#B|W| has tryed to abuse /sgs command with value =10
+[ 6/ 8/2013 18: 5.14] [CSG]Khan#B|W| has tryed to abuse /sgs command with value =10
+[ 6/ 8/2013 18:27.11] [CSG]Khan#B|W| has tryed to abuse /sgs command with value =10
+[ 6/ 8/2013 18:27.20] [CSG]Khan#B|W| has tryed to abuse /sgs command with value =10
+[ 6/ 8/2013 19:36.28] [CSG]Khan#B|AFK~ has tryed to abuse /sgs command with value =10
+[ 6/ 8/2013 19:56. 0] [CSG]Thekiller[Sm] has tryed to abuse /sgs command with value =10
+[11/ 8/2013 16:46.32] [CSG]Jocke|busy has tryed to abuse /sgs command with value =10
+[11/ 8/2013 16:46.38] [CSG]Jocke|busy has tryed to abuse /sgs command with value =10
+[11/ 8/2013 17:11. 3] [CSG]Khan#B|W| has tryed to abuse /sgs command with value =10
+[14/ 8/2013  1: 1.53] [CSG]Mad.A#B[FBI] has tryed to abuse /sgs command with value =10
+[14/ 8/2013  5:44.44] [CSG]-MaxiL[SWAT] has tryed to abuse /sgs command with value =10
+[14/ 8/2013 11:55.45] [CSG]Mert has tryed to abuse /sgs command with value =1
+[14/ 8/2013 14:21.56] [CSG]nero#[Sm] has tryed to abuse /sgs command with value =0
+[15/ 8/2013  2: 9.46] [CSG]Jocke|busy has tryed to abuse /sgs command with value =10
+[16/ 8/2013 10:16.59] [CSG]Khan|W| has tryed to abuse /sgs command with value =10
+[17/ 8/2013 16:38.48] [CSG]nero#busy has tryed to abuse /sgs command with value =10
+[20/ 9/2013  2:25.44] [CSG]MaxiL has tryed to abuse /sgs command with value =10

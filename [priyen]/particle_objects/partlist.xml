@@ -1,0 +1,9 @@
+<particles>
+    
+    <particle id="2052" name="petrolcan" />
+     
+    <particle id="2060" name="smoke_flare" />
+   
+    <particle id="2070" name="water_speed" />
+     
+</particles>

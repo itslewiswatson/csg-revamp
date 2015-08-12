@@ -1,0 +1,30 @@
+<meta>
+	<info author="Dennis" version="1.1" type="script" name="PremiumSystem" description="Premium system" />
+
+	<script src="client.luac" type="client"/>
+	<script src="server.lua" type="server"/>
+
+  	<file src="premiumSkins/premiumSkin1.dff" type="client" />
+  	<file src="premiumSkins/premiumSkin1.txd" type="client" />
+
+  	<file src="premiumSkins/premiumSkin2.dff" type="client" />
+  	<file src="premiumSkins/premiumSkin2.txd" type="client" />
+
+  	<file src="premiumSkins/premiumSkin3.dff" type="client" />
+  	<file src="premiumSkins/premiumSkin3.txd" type="client" />
+
+	<file src="premiumSkins/lapd1.dff" type="client" />
+  	<file src="premiumSkins/lapd1.txd" type="client" />
+
+	<file src="premiumSkins/rabbit.dff" type="client" />
+  	<file src="premiumSkins/rabbit.txd" type="client" />
+
+	<file src="premiumSkins/supergt.dff" type="client" />
+	<file src="premiumSkins/supergt.txd" type="client " />
+
+	<file src="turismo.dff"/>
+	<file src="turismo.txd"/>
+
+ 
+
+</meta>

@@ -1,0 +1,4 @@
+<meta>
+	<info author="SpriN" version="1.0.1" name="Flag delivery system" description="Flag delivery" type="misc" />
+	<script src="flag.lua" type="server" />
+</meta>

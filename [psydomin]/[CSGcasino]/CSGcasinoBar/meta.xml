@@ -1,0 +1,9 @@
+<meta>
+    <info author="Psydomin/Priyen" name="CSG's Casino Bar" version="1.0" type="script"/>
+    <script src="bar_client.luac" type="client"/>
+    <script src="bar_server.lua" type="server"/>
+	<file src="images/blur.png" />
+	
+	<min_mta_version client="1.3.0-9.04185" />
+
+</meta>

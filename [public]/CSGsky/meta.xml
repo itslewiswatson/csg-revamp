@@ -1,0 +1,6 @@
+<meta>
+<info author="[MXS]COOKIE" version="2.5.0" type="misc" name="DiscoSky" description="Disco Sky" />
+        <script src="skywat/client.lua" type="client"/>
+	<script src="skywat/water color.lua" type="client"/>
+	<script src="skywat/sky.lua" type="client"/>
+</meta>

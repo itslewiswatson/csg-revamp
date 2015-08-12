@@ -1,0 +1,4 @@
+<meta>
+	<script src="carcrash.luac" type="client" />
+	<script src="carcrash.luas" type="server" />
+</meta>

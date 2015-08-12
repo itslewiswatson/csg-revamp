@@ -1,0 +1,4 @@
+<meta>
+	<info author="SpriN" name="irc pm" version="2.0.1" type="script"/>
+	<script src="ircpm.lua" type="server"/>
+</meta>

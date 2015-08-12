@@ -1,0 +1,4 @@
+<meta>
+	<info author="Dennis" version="1.0.0" type="script"/>
+	<script src="pos.lua" />
+</meta>
