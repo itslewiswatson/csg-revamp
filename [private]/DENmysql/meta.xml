@@ -1,16 +1,10 @@
-<!--
-	Last updated by Jack.
-	Copyright (c) csgmta.net, all rights reserved.
-	Do not use anything in ths resource without permission of a leading developer;
--->
-
 <meta>
-	<info author="Jack" version="2.3.0" type="script" name="MySQL" description="MySQL config resource" />
+	<info author="Jack" version="2.3" type="script" name="DENmysql" description="MySQL configuration resource" />
 	
 	<script src="mysql.lua" protected="true" />
 	<!--<script src="mysql_backup.lua"/> --> <!-- remove commenter off if new version is bugged! -->
 	
-	<!-- The Exports -->
+	<!-- Exported functions -->
 	<export function="getConnection"/> <!-- returns the MySQL connection (if there is one) -->
 	<export function="query"/> <!-- get a chunk of data from the database -->
 	<export function="querySingle"/> <!-- get 1 row of data from the database -->

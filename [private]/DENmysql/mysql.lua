@@ -48,7 +48,7 @@ function exec(str, ...)
 	return false
 end
 
-function doesColumnExist(aTable,column)
+function doesColumnExist(aTable, column)
 	local theTable = query("DESCRIBE `??`", aTable)
 	if theTable then
 		for k, v in ipairs(theTable) do
