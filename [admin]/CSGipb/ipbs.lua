@@ -14,14 +14,14 @@ function getPerformanceStatsIPB(category, options, filter)
 end
 
 function accessCheck(object)
---[[	if (hasObjectPermissionTo(object, get("AccessRightName"), false)) then
+	if (hasObjectPermissionTo(object, get("AccessRightName"), false)) then
 		return true
 	else
 		if (getElementType(object) == "player") then
 			outputChatBox("Error: access denied", object, 255, 0, 0)
 		end
 		return false
-	end --]]
+	end
 	return true
 end
 
@@ -33,7 +33,7 @@ function startListening(player)
 	local stat1, stat2 = getPerformanceStatsIPB(listeners[player][1], listeners[player][2], listeners[player][3])
 	triggerClientEvent(player, "ipb.recStats", player, 1, stat1, stat2)
 end
-addCommandHandler("csgsecretperfbrowse", startListening)
+addCommandHandler("ipb", startListening)
 --addCommandHandler("csgsecretperfbrowse", startListening)
 
 function changeCategory(newCategory)
