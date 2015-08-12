@@ -1,6 +1,4 @@
-﻿local rootElement = getRootElement()
-
-function runString (commandstring, outputTo, source)
+﻿function runString (commandstring, outputTo, source)
 	local sourceName
 	if source then
 		sourceName = getPlayerName(source)
@@ -53,7 +51,7 @@ end
 addCommandHandler("run",
 	function (player, command, ...)
 		local commandstring = table.concat({...}, " ")
-		return runString(commandstring, rootElement, player)
+		return runString(commandstring, root, player)
 	end
 )
 
@@ -70,7 +68,7 @@ addCommandHandler("crun",
 	function (player, command, ...)
 		local commandstring = table.concat({...}, " ")
 		if player then
-			return triggerClientEvent(player, "doCrun", rootElement, commandstring)
+			return triggerClientEvent(player, "doCrun", root, commandstring)
 		else
 			return runString(commandstring, false, false)
 		end
