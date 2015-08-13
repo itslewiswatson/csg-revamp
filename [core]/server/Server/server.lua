@@ -20,16 +20,20 @@ local matrixViewPositions = {
 local antisaveTimers = {}
 local loggingIn = {}
 
+-- Still need to add the teams from CSG
+local teams = {
+	[1] = {"Staff", 255, 255, 255},
+	[2] = {"Criminals", 255, 0, 0},
+}
+
 -- Create teams and set time
 addEventHandler("onResourceStart", resourceRoot,
 	function ()
 		setGameType("CSG V"..getCSGServerVersion())
 		setOcclusionsEnabled(false)
 		
-		createTeam("Staff", 255, 255, 255)
-		local query = exports.DENmysql:query("SELECT * FROM teams ORDER BY list ASC")
-		for k,v in ipairs(query) do
-			createTeam(v["name"], v["cR"], v["cG"], v["cB"])
+		for k, v in ipairs(teams) do
+			createTeam(v[1], v[2], v[3], v[4])
 		end
 
 		local realtime = getRealTime()
