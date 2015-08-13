@@ -175,7 +175,7 @@ function savePlayerData(thePlayer)
 			playerOccupation,
 			playerTeam,
 			playerPlayTime,
-			playerAccountID,
+			playerAccountID
 		)
 		return true
 	else
