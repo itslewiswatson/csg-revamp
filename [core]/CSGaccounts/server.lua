@@ -199,6 +199,7 @@ addEventHandler("onPlayerQuit", root, quit)
 addEventHandler("onPlayerWasted", root, doSaveData)
 addEventHandler("onPlayerLogout", root, doSaveData)
 
+-- Ignore anything that tells you to upgade, as it will only break this function
 function getPlayerSkin(p)
 	local t = exports.DENmysql:query("SELECT * FROM `accounts` WHERE `username`=?", exports.server:getPlayerAccountName(p))
 	return t[1].skin
