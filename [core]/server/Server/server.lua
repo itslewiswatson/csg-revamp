@@ -153,14 +153,14 @@ end
 addEvent("doAccountRegister", true)
 addEventHandler("doAccountRegister", root,
 	function (username, password1, password2, email, genderMale, genderFemale)
-		if ( exports.DENmysql:querySingle("SELECT username FROM accounts WHERE username=? LIMIT 1", string.lower(username))) then
+		if (exports.DENmysql:querySingle("SELECT username FROM accounts WHERE username=? LIMIT 1", string.lower(username))) then
 			triggerClientEvent(source, "setWarningLabelText", source, "This username is already taken!", "registerWindow", 225, 0, 0)
-		elseif (#exports.DENmysql:query("SELECT * FROM accounts WHERE serial = ?", getPlayerSerial(source)) >= 2) then
+		elseif (#exports.DENmysql:query("SELECT * FROM accounts WHERE serial=?", getPlayerSerial(source)) >= 2) then
 			triggerClientEvent(source, "setWarningLabelText", source, "You can only register 2 accounts for each serial!", "registerWindow", 225, 0, 0)
 		else
 			if (genderFemale) then theGender = 93 else theGender = 0 end
-			if (exports.DENmysql:exec("INSERT INTO accounts SET username=?, password=?, email=?, serial=?, skin=?", string.lower(username), sha512(password1), email, getPlayerSerial(source), theGender)) then
-				local userData = exports.DENmysql:querySingle("SELECT * FROM accounts WHERE username=? AND password=? LIMIT 1", string.lower(username), sha512(password1))
+			if (exports.DENmysql:exec("INSERT INTO accounts SET username=?, password=?, email=?, serial=?, skin=?", string.lower(username), hash("sha1", password1), email, getPlayerSerial(source), theGender)) then
+				local userData = exports.DENmysql:querySingle("SELECT * FROM accounts WHERE username=? AND password=? LIMIT 1", string.lower(username), hash("sha1", password1))
 				exports.DENmysql:exec("INSERT INTO weapons SET userid=?", tonumber(userData.id))
 				exports.DENmysql:exec("INSERT INTO playerstats SET userid=?", tonumber(userData.id))
 				triggerClientEvent(source, "setPopupWindowVisable", source)
@@ -183,11 +183,11 @@ addEventHandler("doPlayerPasswordReset", root,
 			if (userData.email == "") or (userData.email == " ") then
 				triggerClientEvent(source, "setWarningLabelText", source, "No email found with this account!", "passwordWindow", 225, 0, 0)
 			elseif not (string.match(tostring(userData.email), "^.+@.+%.%a%a%a*%.*%a*%a*%a*"))then
-				triggerClientEvent(source, "setWarningLabelText", source, "You didn't enter a vaild email adress!", "passwordWindow", 225, 0, 0)
+				triggerClientEvent(source, "setWarningLabelText", source, "You didn't enter a valid email address!", "passwordWindow", 225, 0, 0)
 			elseif not (string.lower(userData.email) == string.lower(email)) then
 				triggerClientEvent(source, "setWarningLabelText", source, "The email with this account doesn't match!", "passwordWindow", 225, 0, 0)
 			else
-				if (exports.DENmysql:exec("UPDATE accounts SET password=? WHERE username=? AND email=?", sha512(newPassword), string.lower(username), email)) then
+				if (exports.DENmysql:exec("UPDATE accounts SET password=? WHERE username=? AND email=?", hash("sha1", newPassword), string.lower(username), email)) then
 					callRemote("http://csgmta.net/mail/password.php", onPasswordRequestCallback, username, email, newPassword)
 					exports.DENdxmsg:createNewDxMessage(source, "Your password is changed and sent to your email!", 0, 225, 0)
 					triggerClientEvent(source, "setWarningLabelText", source, "A new password has been sent!", "passwordWindow", 225, 0, 0)
@@ -205,7 +205,7 @@ addEvent("doPlayerLogin", true)
 addEventHandler("doPlayerLogin", root,
 	function (username, password, usernameTick, passwordTick)
 		if not (exports.DENmysql:getConnection()) then
-			triggerClientEvent(source,"setWarningLabelText",source,"Database is down! Please contact a developer!","loginWindow",255,0,0)
+			triggerClientEvent(source,"setWarningLabelText",source,"Database is down! Please contact a developer!", "loginWindow", 255, 0, 0)
 			return false
 		end
 		
@@ -219,12 +219,15 @@ addEventHandler("doPlayerLogin", root,
 			triggerClientEvent(source,"toggleLoginButton",source,true)
 			return
 		end
+		
+		-- Redundant code for old CSG system
+		--[[
 		if (#exports.DENmysql:query("SELECT id FROM accounts WHERE id=? AND password=? LIMIT 1", accountID, md5(password)) == 1) then
 			-- If the password is a MD5 password from the old system then force the player to change it
 			triggerClientEvent(source, "setWarningLabelText", source, "Unable to login, please change password first!", "loginWindow", 225, 0, 0)
 			triggerClientEvent(source, "setNewPasswordWindowVisable", source) setElementData(source, "temp:UsernameData", string.lower(username)) setElementData(source, "temp:PasswordData", md5(password))
-		elseif (#exports.DENmysql:query("SELECT id FROM accounts WHERE id=? AND password=? LIMIT 1", accountID, sha512(password)) == 1) then
-			-- If the password is correct and a SHA512 password then log the player in
+		--]]
+		if (#exports.DENmysql:query("SELECT id FROM accounts WHERE id=? AND password=? LIMIT 1", accountID, hash("sha1", password)) == 1) then
 			--exports.irc:outputIRC(tostring(loggingIn[username]))
 			if (loggingIn[username] == nil) then
 				loggingIn[username] = true --set this true to prevent it from logging in again
@@ -248,14 +251,14 @@ addEventHandler("doPlayerLogin", root,
 				end
 			else
 				removeElementData(source, "temp:UsernameData") removeElementData(source, "temp:PasswordData")
-				triggerClientEvent (source, "updateAccountXMLData", source, username, password, usernameTick, passwordTick)
+				triggerClientEvent(source, "updateAccountXMLData", source, username, password, usernameTick, passwordTick)
 
 				local accountData = exports.DENmysql:query("SELECT * FROM accounts WHERE id=? LIMIT 1", accountID)
 				local groupData = exports.DENmysql:query("SELECT groupname,grouprank,groupid FROM groups_members WHERE memberid=? LIMIT 1", accountID)
 				
 				for k, v in ipairs(getElementsByType("player")) do
 					if (getElementData(v, "accountUserID") == accountData[1].id) then
-						kickPlayer(v, "Accounts",getPlayerName(source).." has logged into your account.")
+						kickPlayer(v, "Accounts", getPlayerName(source).." has logged into your account.")
 					end
 				end
 				
