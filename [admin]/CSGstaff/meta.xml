@@ -1,18 +1,18 @@
 <meta>
-  <script src="client.luac" type="client" protected="true" />
+  <script src="client.lua" type="client" protected="true" />
   <script src="server.lua" type="server" />
   <script src="warnings.lua" type="server" />
   
-  <script src="Admin Panel/spectate.luac" type="client" protected="true" />
+  <script src="Admin Panel/spectate.lua" type="client" protected="true" />
   <script src="Admin Panel/server.lua" type="server" />
-  <script src="Admin Panel/client.luac" type="client" protected="true" />
-  <script src="Admin Panel/ACL.luac" type="client" protected="true" />
+  <script src="Admin Panel/client.lua" type="client" protected="true" />
+  <script src="Admin Panel/ACL.lua" type="client" protected="true" />
   
   <script src="Admin Functions/eventmarker.lua" type="server" />
-  <script src="Admin Functions/glue.luac" type="client" protected="true" />
-  <script src="Admin Functions/warping.luac" type="client" protected="true" />
+  <script src="Admin Functions/glue.lua" type="client" protected="true" />
+  <script src="Admin Functions/warping.lua" type="client" protected="true" />
   
-  <script src="Admin basemods/basemod_resList.luac" type="client" />
+  <script src="Admin basemods/basemod_resList.lua" type="client" />
   <script src="Admin basemods/basemod_resList.lua" type="server" />
   <script src="Admin basemods/basemod_client.lua" type="client" />
   <script src="Admin basemods/basemod_server.lua" type="server" />
@@ -42,5 +42,5 @@
   <export function="demoteAdmin" type="server" />
   <export function="promoteAdmin" type="server" />
   <export function="getAllAdmins" type="server" />
-  <min_mta_version server="1.3.0-9.03772" />
+  <min_mta_version server="1.5" />
 </meta>
