@@ -148,6 +148,8 @@ addCommandHandler("setswatjob",setLawJob)
 addCommandHandler("setfbijob",setLawJob)
 addCommandHandler("setmfjob",setLawJob)
 
+-- Incomplete function, we'll leave it for now
+--[[
 function removeLawJob(player,cmd,target,...)
 	local cmdUsed
 	local account = exports.server:getPlayerAccountName(player)
@@ -175,3 +177,4 @@ function removeLawJob(player,cmd,target,...)
 			else
 				access = false
 			end
+]]
