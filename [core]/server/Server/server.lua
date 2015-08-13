@@ -331,7 +331,7 @@ addEvent("onPlayerUpdatePasswords", true)
 addEventHandler("onPlayerUpdatePasswords", root,
 	function (password)
 		if (getElementData(source, "temp:UsernameData")) then
-			if (exports.DENmysql:exec("UPDATE accounts SET password=? WHERE username=?", sha512(password), getElementData(source, "temp:UsernameData"))) then
+			if (exports.DENmysql:exec("UPDATE accounts SET password=? WHERE username=?", hash("sha1", password), getElementData(source, "temp:UsernameData"))) then
 				triggerClientEvent(source, "setLoginWindowVisable", source)
 				exports.DENdxmsg:createNewDxMessage(thePlayer, "Your password is changed!", 0, 225, 0)
 			else
