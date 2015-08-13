@@ -18,12 +18,6 @@ Now these resources are the last of what is left of the "original" CSG game mode
 - The plan is to preserve CSG as closely as possible. We want to keep it original and pure to what it was. So no major changes to game values or meta.
 
 ## Commits
-- All commits should be on per a resource basis, so do not modify multiple resources in one commit
-	- Include [resourceName] in the commit title, followed by one of the types
-	- [UT] means untested. These are for [CC] or some [Misc] commits that don't change code logic or some syntax.
-- [CC] - Code cleanup
-- [Misc] - Small changes that don't fall into other caterogies
-- [Removal] - Removal of resources, files or anything commit that doesn't include an addition of code
-- [Fix] - A bug fix
-- oldName --> newName - Renaming of resources or merging one resource into another
-- [Feature] - The addition of an improved feature that was already implemented (use this for rewrites and not new features)
+- All commits should be on per a resource basis, so do not modify multiple resources in one commit.
+- Include [resourceName] in the commit title.
+- [UT] means untested.
