@@ -5,9 +5,9 @@
 	
 	<script src="Server/server.lua" type="server" />
 	
-	<script src="Client/client.luac" type="client" />
+	<script src="Client/client.lua" type="client" />
 	
-	<script src="Exports/client.luac" type="client" />
+	<script src="Exports/client.lua" type="client" />
 	<script src="Exports/server.lua" type="server" />
 
 	<file src="Files/logo.png" />
