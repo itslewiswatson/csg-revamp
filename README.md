@@ -16,3 +16,13 @@ Now these resources are the last of what is left of the "original" CSG game mode
 - You are able to commit to this. I'm leaving it open for everyone. Though, your commits must be purely bug fixes or purely code cleanup. No new features.
 - Not every commit will be tested. So, with saying that, if you're going to use this, be very cautious. If commits are untested, they will contain a "[UT]" prefix.
 - The plan is to preserve CSG as closely as possible. We want to keep it original and pure to what it was. So no major changes to game values or meta.
+
+## Commits
+- All commits should be on per a resource basis, so do not modify multiple resources in one commit
+	- Include [resourceName] in the commit title, followed by one of the types
+- [CC] - Code cleanup
+- [Misc] - Small changes that don't fall into other caterogies
+- [Removal] - Removal of resources, files or anything commit that doesn't include an addition of code
+- [Fix] - A bug fix
+- oldName --> newName - Renaming of resources or merging one resource into another
+- [Feature] - The addition of an improved feature that was already implemented (use this for rewrites and not new features)
