@@ -42,6 +42,7 @@ addEventHandler("onResourceStart", resourceRoot,
 		setTime(realtime.hour, realtime.minute)
 		setMinuteDuration(60000)
 		setServerPassword("") --set the password to nothing if any password is set.
+		setFPSLimit(70)
 	end
 )
 
