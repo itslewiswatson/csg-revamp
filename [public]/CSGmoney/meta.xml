@@ -1,4 +1,0 @@
-<meta>
-    <info type="script" version="1.0.0" name="CSG Haloween Script" description="Hween" />
-	<script src="client.lua" type="client" />
-</meta>
