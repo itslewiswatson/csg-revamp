@@ -100,7 +100,7 @@ addCommandHandler("staff",
 		if (isPlayerStaff(thePlayer)) then
 			setPlayerTeam(thePlayer, getTeamFromName("Staff"))
 			setElementData(thePlayer, "Occupation", staffRanks[getPlayerAdminLevel(thePlayer)], true)
-			-- setElementData( thePlayer, "Rank", staffRanks[getPlayerAdminLevel ( thePlayer )], true)
+			-- setElementData(thePlayer, "Rank", staffRanks[getPlayerAdminLevel (thePlayer)], true)
 
 			if (adminTable[thePlayer].gender == 0) then skin = 217 else skin = 211 end
 			setElementModel(thePlayer, skin)
@@ -122,8 +122,8 @@ addCommandHandler("staff",
 )
 
 -- Set the rank of a staff when he login
-addEvent( "onServerPlayerLogin" )
-addEventHandler( "onServerPlayerLogin", root,
+addEvent("onServerPlayerLogin")
+addEventHandler("onServerPlayerLogin", root,
 	function (userID)
 		local theTable = exports.DENmysql:query("SELECT * FROM staff WHERE userid=? LIMIT 1", userID)
 		if theTable and #theTable == 1 and theTable[1].active == 1 then
@@ -149,7 +149,7 @@ addEventHandler("onResourceStart", resourceRoot,
 	function ()
 		local theTable = exports.DENmysql:query("SELECT * FROM `staff`")
 		completeAdminTable = theTable
-		for k, thePlayer in ipairs( getElementsByType("player")) do
+		for k, thePlayer in ipairs(getElementsByType("player")) do
 			local accountID = exports.server:getPlayerAccountID(thePlayer)
 			if (accountID) then
 				for i = 1, #theTable do
@@ -173,97 +173,97 @@ addEventHandler("onRequestSyncAdminTable", root,
 -- Function to promote a admin
 function promoteAdmin(adminNick)
 	for i=1,#completeAdminTable do
-		if ( completeAdminTable[i].nickname == adminNick ) and ( completeAdminTable[i].rank ~= 6 )  then
+		if (completeAdminTable[i].nickname == adminNick) and (completeAdminTable[i].rank ~= 6)  then
 			completeAdminTable[i].rank = completeAdminTable[i].rank +1
-			local thePlayer = getPlayerFromID ( completeAdminTable[i].userid )
-			if ( thePlayer ) and ( isElement( thePlayer ) ) then adminTable[thePlayer].rank = completeAdminTable[i].rank end
-			exports.DENmysql:query( "UPDATE staff SET rank=? WHERE userid=?", completeAdminTable[i].rank, completeAdminTable[i].userid )
+			local thePlayer = getPlayerFromID (completeAdminTable[i].userid)
+			if (thePlayer) and (isElement(thePlayer)) then adminTable[thePlayer].rank = completeAdminTable[i].rank end
+			exports.DENmysql:query("UPDATE staff SET rank=? WHERE userid=?", completeAdminTable[i].rank, completeAdminTable[i].userid)
 			break;
 		end
 	end
-	triggerClientEvent( "onSyncAdminTable", root, adminTable[thePlayer], thePlayer )
-	completeAdminTable = exports.DENmysql:query( "SELECT * FROM staff" )
+	triggerClientEvent("onSyncAdminTable", root, adminTable[thePlayer], thePlayer)
+	completeAdminTable = exports.DENmysql:query("SELECT * FROM staff")
 end
 
 -- Function to demote a admin
-function demoteAdmin ( adminNick )
+function demoteAdmin (adminNick)
 	for i=1,#completeAdminTable do
-		if ( completeAdminTable[i].nickname == adminNick ) and ( completeAdminTable[i].rank ~= 1 ) then
+		if (completeAdminTable[i].nickname == adminNick) and (completeAdminTable[i].rank ~= 1) then
 			completeAdminTable[i].rank = completeAdminTable[i].rank -1
-			local thePlayer = getPlayerFromID ( completeAdminTable[i].userid )
-			if ( thePlayer ) and ( isElement( thePlayer ) ) then adminTable[thePlayer].rank = completeAdminTable[i].rank end
-			exports.DENmysql:query( "UPDATE staff SET rank=? WHERE userid=?", completeAdminTable[i].rank, completeAdminTable[i].userid )
+			local thePlayer = getPlayerFromID (completeAdminTable[i].userid)
+			if (thePlayer) and (isElement(thePlayer)) then adminTable[thePlayer].rank = completeAdminTable[i].rank end
+			exports.DENmysql:query("UPDATE `staff` SET `rank`=? WHERE `userid`=?", completeAdminTable[i].rank, completeAdminTable[i].userid)
 			break;
 		end
 	end
-	triggerClientEvent( "onSyncAdminTable", root, adminTable[thePlayer], thePlayer )
-	completeAdminTable = exports.DENmysql:query( "SELECT * FROM staff" )
+	triggerClientEvent("onSyncAdminTable", root, adminTable[thePlayer], thePlayer)
+	completeAdminTable = exports.DENmysql:query("SELECT * FROM `staff`")
 end
 
 -- Function to kick a admin
-function kickAdmin ( adminNick )
+function kickAdmin (adminNick)
 	for i=1,#completeAdminTable do
-		if ( completeAdminTable[i].nickname == adminNick ) then
-			local thePlayer = getPlayerFromID ( completeAdminTable[i].userid )
-			exports.DENmysql:query( "DELETE FROM staff WHERE userid=?", completeAdminTable[i].userid )
-			if ( thePlayer ) and ( isElement( thePlayer ) ) then
+		if (completeAdminTable[i].nickname == adminNick) then
+			local thePlayer = getPlayerFromID (completeAdminTable[i].userid)
+			exports.DENmysql:query("DELETE FROM `staff` WHERE `userid`=?", completeAdminTable[i].userid)
+			if (thePlayer) and (isElement(thePlayer)) then
 				adminTable[thePlayer] = false
-				setPlayerTeam( thePlayer, getTeamFromName( "Unemployed" ) )
-				setElementData( thePlayer, "Occupation", "", true)
-				setElementData( thePlayer, "Rank", "", true)
-				exports.DENvehicles:reloadFreeVehicleMarkers( thePlayer, true )
+				setPlayerTeam(thePlayer, getTeamFromName("Unemployed"))
+				setElementData(thePlayer, "Occupation", "", true)
+				setElementData(thePlayer, "Rank", "", true)
+				exports.DENvehicles:reloadFreeVehicleMarkers(thePlayer, true)
 			end
 			break;
 		end
 	end
-	triggerClientEvent( "onSyncAdminTable", root, adminTable[thePlayer], thePlayer )
-	completeAdminTable = exports.DENmysql:query( "SELECT * FROM staff" )
+	triggerClientEvent("onSyncAdminTable", root, adminTable[thePlayer], thePlayer)
+	completeAdminTable = exports.DENmysql:query("SELECT * FROM staff")
 end
 
 -- Set admin developer
-function setAdminDeveloper ( adminNick )
+function setAdminDeveloper (adminNick)
 	for i=1,#completeAdminTable do
-		if ( completeAdminTable[i].nickname == adminNick ) then
-			if ( completeAdminTable[i].developer == 1 ) then completeAdminTable[i].developer = 0 else completeAdminTable[i].developer = 1 end
-			local thePlayer = getPlayerFromID ( completeAdminTable[i].userid )
-			if ( thePlayer ) and ( isElement( thePlayer ) ) then adminTable[thePlayer].developer = completeAdminTable[i].developer end
-			exports.DENmysql:query( "UPDATE staff SET developer=? WHERE userid=?", completeAdminTable[i].developer, completeAdminTable[i].userid )
+		if (completeAdminTable[i].nickname == adminNick) then
+			if (completeAdminTable[i].developer == 1) then completeAdminTable[i].developer = 0 else completeAdminTable[i].developer = 1 end
+			local thePlayer = getPlayerFromID (completeAdminTable[i].userid)
+			if (thePlayer) and (isElement(thePlayer)) then adminTable[thePlayer].developer = completeAdminTable[i].developer end
+			exports.DENmysql:query("UPDATE `staff` SET `developer`=? WHERE `userid`=?", completeAdminTable[i].developer, completeAdminTable[i].userid)
 			break;
 		end
 	end
-	triggerClientEvent( "onSyncAdminTable", root, adminTable[thePlayer], thePlayer )
-	completeAdminTable = exports.DENmysql:query( "SELECT * FROM staff" )
+	triggerClientEvent("onSyncAdminTable", root, adminTable[thePlayer], thePlayer)
+	completeAdminTable = exports.DENmysql:query("SELECT * FROM `staff`")
 end
 
 -- Set admin eventmanager
-function setAdminEventManager( adminNick )
+function setAdminEventManager(adminNick)
 	for i=1,#completeAdminTable do
-		if ( completeAdminTable[i].nickname == adminNick ) then
-			if ( completeAdminTable[i].eventmanager == 1 ) then completeAdminTable[i].eventmanager = 0 else completeAdminTable[i].eventmanager = 1 end
-			local thePlayer = getPlayerFromID ( completeAdminTable[i].userid )
-			if ( thePlayer ) and ( isElement( thePlayer ) ) then adminTable[thePlayer].eventmanager = completeAdminTable[i].eventmanager end
+		if (completeAdminTable[i].nickname == adminNick) then
+			if (completeAdminTable[i].eventmanager == 1) then completeAdminTable[i].eventmanager = 0 else completeAdminTable[i].eventmanager = 1 end
+			local thePlayer = getPlayerFromID (completeAdminTable[i].userid)
+			if (thePlayer) and (isElement(thePlayer)) then adminTable[thePlayer].eventmanager = completeAdminTable[i].eventmanager end
 			outputChatBox(tostring(thePlayer)) outputChatBox(tostring(adminTable[thePlayer].eventmanager))
-			exports.DENmysql:query( "UPDATE staff SET eventmanager=? WHERE userid=?", completeAdminTable[i].eventmanager, completeAdminTable[i].userid )
+			exports.DENmysql:query("UPDATE `staff` SET `eventmanager`=? WHERE `userid`=?", completeAdminTable[i].eventmanager, completeAdminTable[i].userid)
 			break;
 		end
 	end
-	triggerClientEvent( "onSyncAdminTable", root, adminTable[thePlayer], thePlayer )
-	completeAdminTable = exports.DENmysql:query( "SELECT * FROM staff" )
+	triggerClientEvent("onSyncAdminTable", root, adminTable[thePlayer], thePlayer)
+	completeAdminTable = exports.DENmysql:query("SELECT * FROM `staff`")
 end
 
 -- Set admin inactive
-function setAdminActive( adminNick )
+function setAdminActive(adminNick)
 	for i=1,#completeAdminTable do
-		if ( completeAdminTable[i].nickname == adminNick ) then
-			if ( completeAdminTable[i].active == 1 ) then completeAdminTable[i].active = 0 else completeAdminTable[i].active = 1 end
-			local thePlayer = getPlayerFromID ( completeAdminTable[i].userid )
-			if ( thePlayer ) and ( isElement( thePlayer ) ) then adminTable[thePlayer] = false end
-			exports.DENmysql:query( "UPDATE staff SET active=? WHERE userid=?", completeAdminTable[i].active, completeAdminTable[i].userid )
+		if (completeAdminTable[i].nickname == adminNick) then
+			if (completeAdminTable[i].active == 1) then completeAdminTable[i].active = 0 else completeAdminTable[i].active = 1 end
+			local thePlayer = getPlayerFromID (completeAdminTable[i].userid)
+			if (thePlayer) and (isElement(thePlayer)) then adminTable[thePlayer] = false end
+			exports.DENmysql:query("UPDATE `staff` SET `active`=? WHERE `userid`=?", completeAdminTable[i].active, completeAdminTable[i].userid)
 			break;
 		end
 	end
-	triggerClientEvent( "onSyncAdminTable", root, adminTable[thePlayer], thePlayer )
-	completeAdminTable = exports.DENmysql:query( "SELECT * FROM staff" )
+	triggerClientEvent("onSyncAdminTable", root, adminTable[thePlayer], thePlayer)
+	completeAdminTable = exports.DENmysql:query("SELECT * FROM `staff`")
 end
 
 -- Function to get all admins
@@ -272,9 +272,9 @@ function getAllAdmins ()
 end
 
 -- Get player from ID function
-function getPlayerFromID ( userID )
-	for k, thePlayer in ipairs ( getElementsByType ( "player" ) ) do
-		if ( exports.server:getPlayerAccountID ( thePlayer ) == userID ) then
+function getPlayerFromID(userID)
+	for k, thePlayer in ipairs(getElementsByType("player")) do
+		if (exports.server:getPlayerAccountID(thePlayer) == userID) then
 			return thePlayer
 		end
 	end
@@ -282,18 +282,18 @@ function getPlayerFromID ( userID )
 end
 
 -- Remove again on quit
-addEventHandler( "onPlayerQuit", root,
+addEventHandler("onPlayerQuit", root,
 	function ()
-		if ( adminTable[source] ) then
+		if (adminTable[source]) then
 			adminTable[source] = {}
-			triggerClientEvent( "onSyncAdminTable", root, adminTable )
+			triggerClientEvent("onSyncAdminTable", root, adminTable)
 		end
 	end
 )
 
 -- Function to check if a player is staff
-function isPlayerStaff ( thePlayer )
-	if ( adminTable[thePlayer] ) then
+function isPlayerStaff (thePlayer)
+	if (adminTable[thePlayer]) then
 		return true
 	else
 		return false
@@ -301,9 +301,9 @@ function isPlayerStaff ( thePlayer )
 end
 
 -- Function to check if a player is a developer
-function isPlayerDeveloper ( thePlayer )
-	if ( adminTable[thePlayer] ) then
-		if ( adminTable[thePlayer].developer == 1 ) then
+function isPlayerDeveloper (thePlayer)
+	if (adminTable[thePlayer]) then
+		if (adminTable[thePlayer].developer == 1) then
 			return true
 		else
 			return false
@@ -314,9 +314,9 @@ function isPlayerDeveloper ( thePlayer )
 end
 
 -- Check is a player is a eventmanager
-function isPlayerEventManager ( thePlayer )
-	if ( adminTable[thePlayer] ) then
-		if ( adminTable[thePlayer].eventmanager == 1 ) then
+function isPlayerEventManager (thePlayer)
+	if (adminTable[thePlayer]) then
+		if (adminTable[thePlayer].eventmanager == 1) then
 			return true
 		else
 			return false
@@ -326,8 +326,8 @@ function isPlayerEventManager ( thePlayer )
 	end
 end
 
-function isPlayerBaseMod ( thePlayer )
-	if ( adminTable[thePlayer] ) then
+function isPlayerBaseMod (thePlayer)
+	if (adminTable[thePlayer]) then
 		return adminTable[thePlayer].basemod == 1
 	else
 		return false
@@ -335,9 +335,9 @@ function isPlayerBaseMod ( thePlayer )
 end
 
 -- Function that gets the staff level of a player
-function getPlayerAdminLevel ( thePlayer )
-	if ( adminTable[thePlayer] ) then
-		if ( adminTable[thePlayer].rank ) then
+function getPlayerAdminLevel (thePlayer)
+	if (adminTable[thePlayer]) then
+		if (adminTable[thePlayer].rank) then
 			return adminTable[thePlayer].rank
 		else
 			return false
@@ -348,13 +348,13 @@ function getPlayerAdminLevel ( thePlayer )
 end
 
 -- Staff note
-addCommandHandler( "note",
-	function ( thePlayer, cmd, ... )
-		if ( isPlayerStaff ( thePlayer ) ) then
-			local theMessage = table.concat( {...}, " " )
-			outputChatBox( "#FF0000(NOTE) " .. getPlayerName( thePlayer ) .. ": #FFFFFF" .. theMessage, root, 255, 255, 255, true )
-			triggerEvent( "onAdminNote", thePlayer, theMessage )
-			exports.CSGlogging:createLogRow ( thePlayer, "notes", theMessage )
+addCommandHandler("note",
+	function (thePlayer, cmd, ...)
+		if (isPlayerStaff (thePlayer)) then
+			local theMessage = table.concat({...}, " ")
+			outputChatBox("#FF0000(NOTE) "..getPlayerName(thePlayer)..": #FFFFFF" .. theMessage, root, 255, 255, 255, true)
+			triggerEvent("onAdminNote", thePlayer, theMessage)
+			exports.CSGlogging:createLogRow(thePlayer, "notes", theMessage)
 		end
 	end
 )
@@ -365,56 +365,52 @@ function outputStaffChatMessage(nick, message, thePlayer)
 		local _nick = getPlayerName(thePlayer)
 	end
 
-	for k, aPlayer in pairs( getOnlineAdmins() ) do
-		outputChatBox ( "#FF0000(CSG) "..tostring( nick )..": #FFFFFF"..tostring( message ), aPlayer, 255, 255, 255, true )
+	for k, aPlayer in pairs(getOnlineAdmins()) do
+		outputChatBox ("#FF0000(CSG) "..tostring(nick)..": #FFFFFF"..tostring(message), aPlayer, 255, 255, 255, true)
 	end
-	if (_nick == "Jack") then
-		nick = "J*ck"
-	elseif (_nick == "[CSG]Jack") then
-		nick = "[CSG]J*ck"
-	end
+
 	local staffEchoChan = exports.irc:ircGetChannelFromName("#staff.echo")
 	if staffEchoChan and isElement(thePlayer) then -- channel found and message was sent from ingame
-		exports.irc:ircSay(staffEchoChan,"(CSG) 07"..tostring( nick )..": "..tostring( message ) )
+		exports.irc:ircSay(staffEchoChan,"(CSG) 07"..tostring(nick)..": "..tostring(message))
 	end
-	exports.CSGlogging:createLogRow ( thePlayer, "staffchat", theMessage )
+	exports.CSGlogging:createLogRow(thePlayer, "staffchat", theMessage)
 
 end
 
-addEventHandler("onIRCMessage",root,
+addEventHandler("onIRCMessage", root,
 	function (channel,message)
 		local server = exports.irc:ircGetServers()[1]
 		if exports.irc:ircGetUserNick(source) == exports.irc:ircGetServerNick(server) then -- speaker = echobot
 			return false
-		elseif string.sub(message,1,1) ~= "!" and exports.irc:ircGetChannelName(channel) == "#staff.echo" then
+		elseif string.sub(message, 1, 1) ~= "!" and exports.irc:ircGetChannelName(channel) == "#staff.echo" then
 			outputStaffChatMessage((exports.irc:ircGetUserNick(source) .. " (IRC)"), message)
 		end
 	end
 )
 
-addCommandHandler( "csg",
-	function ( thePlayer, cmd, ... )
-		if ( isPlayerStaff ( thePlayer ) ) then
-			local theMessage = table.concat( {...}, " " )
+addCommandHandler("csg",
+	function (thePlayer, cmd, ...)
+		if (isPlayerStaff(thePlayer)) then
+			local theMessage = table.concat({...}, " ")
 			if #(string.gsub(theMessage," ","")) < 1 then
-				exports.dendxmsg:createNewDxMessage(thePlayer,"Enter a message!",255,0,0)
+				exports.dendxmsg:createNewDxMessage(thePlayer, "Enter a message!", 255, 0, 0)
 				return false
 			else
-				outputStaffChatMessage(getPlayerName( thePlayer ), theMessage, thePlayer)
+				outputStaffChatMessage(getPlayerName(thePlayer), theMessage, thePlayer)
 			end
 		end
 	end
 )
 
 -- Sup chat
-addCommandHandler( "sup",
-	function ( thePlayer, cmd, ... )
-		if ( isPlayerStaff ( thePlayer ) ) or ( exports.CSGsupporters:isPlayerSupporter( thePlayer ) ) then
-			local theMessage = table.concat( {...}, " " )
-			for k, aPlayer in pairs( getOnlineSupporters() ) do
-				outputChatBox ( "#FF0000(SUPPORTERS) "..tostring( getPlayerName( thePlayer ) )..": #FFFFFF"..tostring( theMessage ), aPlayer, 255, 255, 255, true )
+addCommandHandler("sup",
+	function (thePlayer, cmd, ...)
+		if (isPlayerStaff (thePlayer)) or (exports.CSGsupporters:isPlayerSupporter(thePlayer)) then
+			local theMessage = table.concat({...}, " ")
+			for k, aPlayer in pairs(getOnlineSupporters()) do
+				outputChatBox ("#FF0000(SUPPORTERS) "..tostring(getPlayerName(thePlayer))..": #FFFFFF"..tostring(theMessage), aPlayer, 255, 255, 255, true)
 			end
-			exports.CSGlogging:createLogRow ( thePlayer, "supporterschat", theMessage )
+			exports.CSGlogging:createLogRow (thePlayer, "supporterschat", theMessage)
 		end
 	end
 )
@@ -422,9 +418,9 @@ addCommandHandler( "sup",
 -- Returns a table with all staff players
 function getOnlineSupporters ()
     local theTable = {}
-    for k, thePlayer in pairs( getElementsByType( "player" ) ) do
-        if ( isPlayerStaff ( thePlayer ) ) or ( exports.CSGsupporters:isPlayerSupporter( thePlayer ) ) then
-            table.insert( theTable, thePlayer )
+    for k, thePlayer in pairs(getElementsByType("player")) do
+        if (isPlayerStaff (thePlayer)) or (exports.CSGsupporters:isPlayerSupporter(thePlayer)) then
+            table.insert(theTable, thePlayer)
         end
     end
     return theTable
@@ -432,27 +428,27 @@ end
 
 function getOnlineAdmins ()
     local theTable = {}
-    for k, thePlayer in pairs( getElementsByType( "player" ) ) do
-        if ( isPlayerStaff ( thePlayer ) ) then
-            table.insert( theTable, thePlayer )
+    for k, thePlayer in pairs(getElementsByType("player")) do
+        if (isPlayerStaff (thePlayer)) then
+            table.insert(theTable, thePlayer)
         end
     end
     return theTable
 end
 
 -- Make the car from a staff dmgproof
-addCommandHandler( "dmgproof",
-	function ( thePlayer )
-		if ( isPlayerStaff ( thePlayer ) and getTeamName(getPlayerTeam(thePlayer)) == "Staff" ) and (getPlayerAdminLevel(thePlayer) >= 2) then
-			local theVehicle = getPedOccupiedVehicle( thePlayer )
-			if ( theVehicle ) then
-				if ( isVehicleDamageProof( theVehicle ) ) then
-					exports.DENdxmsg:createNewDxMessage( thePlayer, "Your vehicle is no longer damageproof!", 0, 225, 0 )
-					setVehicleDamageProof( theVehicle, false )
+addCommandHandler("dmgproof",
+	function (thePlayer)
+		if (isPlayerStaff (thePlayer) and getTeamName(getPlayerTeam(thePlayer)) == "Staff") and (getPlayerAdminLevel(thePlayer) >= 2) then
+			local theVehicle = getPedOccupiedVehicle(thePlayer)
+			if (theVehicle) then
+				if (isVehicleDamageProof(theVehicle)) then
+					exports.DENdxmsg:createNewDxMessage(thePlayer, "Your vehicle is no longer damageproof!", 0, 225, 0)
+					setVehicleDamageProof(theVehicle, false)
 				else
-					exports.DENdxmsg:createNewDxMessage( thePlayer, "Your vehicle is now damageproof!", 0, 225, 0 )
-					exports.CSGlogging:createAdminLogRow ( thePlayer, getPlayerName( thePlayer ).." made the vehicle from " .. getPlayerName( getVehicleController( theVehicle ) ) .." damageproof" )
-					setVehicleDamageProof( theVehicle, true )
+					exports.DENdxmsg:createNewDxMessage(thePlayer, "Your vehicle is now damageproof!", 0, 225, 0)
+					exports.CSGlogging:createAdminLogRow (thePlayer, getPlayerName(thePlayer).." made the vehicle from " .. getPlayerName(getVehicleController(theVehicle)) .." damageproof")
+					setVehicleDamageProof(theVehicle, true)
 				end
 			end
 		end
@@ -460,75 +456,76 @@ addCommandHandler( "dmgproof",
 )
 
 -- Minigun command
-addCommandHandler( "minigun",
-	function ( thePlayer )
-		if ( isPlayerStaff ( thePlayer ) ) and ( getTeamName( getPlayerTeam( thePlayer ) ) == "Staff" ) and (getPlayerAdminLevel(thePlayer) == 6) then
-			if ( getPlayerAdminLevel( thePlayer ) >= 4 ) then
-				giveWeapon( thePlayer, 38, 9000, true )
-				exports.CSGlogging:createAdminLogRow ( thePlayer, getPlayerName( thePlayer ).." spawned a minigun" )
+addCommandHandler("minigun",
+	function (thePlayer)
+		if (isPlayerStaff (thePlayer)) and (getTeamName(getPlayerTeam(thePlayer)) == "Staff") and (getPlayerAdminLevel(thePlayer) == 6) then
+			if (getPlayerAdminLevel(thePlayer) >= 4) then
+				giveWeapon(thePlayer, 38, 9000, true)
+				exports.CSGlogging:createAdminLogRow(thePlayer, getPlayerName(thePlayer).." spawned a minigun")
 			end
 		end
 	end
 )
 
 -- Invis command
-addCommandHandler( "invis",
-	function ( thePlayer )
-		if ( isPlayerStaff ( thePlayer ) ) and ( getTeamName( getPlayerTeam( thePlayer ) ) == "Staff" ) then
-			if ( getElementAlpha( thePlayer ) == 255 ) then
-				exports.CSGlogging:createAdminLogRow ( thePlayer, getPlayerName( thePlayer ).." made himself invisible" )
-				setElementAlpha( thePlayer, 0 )
-				setPlayerNametagShowing ( thePlayer, false )
+addCommandHandler("invis",
+	function (thePlayer)
+		if (isPlayerStaff(thePlayer)) and (getTeamName(getPlayerTeam(thePlayer)) == "Staff") then
+			if (getElementAlpha(thePlayer) == 255) then
+				exports.CSGlogging:createAdminLogRow (thePlayer, getPlayerName(thePlayer).." made himself invisible")
+				setElementAlpha(thePlayer, 0)
+				setPlayerNametagShowing (thePlayer, false)
 			else
-				setElementAlpha( thePlayer, 255 )
-				setPlayerNametagShowing ( thePlayer, true )
+				setElementAlpha(thePlayer, 255)
+				setPlayerNametagShowing (thePlayer, true)
 			end
 		end
 	end
 )
 
 -- Glue stuff
-addEvent( "gluePlayer",true )
-addEventHandler( "gluePlayer", root,
-	function ( slot, vehicle, x, y, z, rotX, rotY, rotZ )
-		attachElements( source, vehicle, x, y, z, rotX, rotY, rotZ )
-		setPedWeaponSlot( source, slot )
+addEvent("gluePlayer",true)
+addEventHandler("gluePlayer", root,
+	function (slot, vehicle, x, y, z, rotX, rotY, rotZ)
+		attachElements(source, vehicle, x, y, z, rotX, rotY, rotZ)
+		setPedWeaponSlot(source, slot)
 	end
 )
 
-addEvent( "ungluePlayer", true )
-addEventHandler( "ungluePlayer", root,
+addEvent("ungluePlayer", true)
+addEventHandler("ungluePlayer", root,
 	function ()
-		detachElements( source )
+		detachElements(source)
 	end
 )
 
 -- self explanatory
 function CSGJockeAHelp(ps)
         if getPlayerTeam(ps) == getTeamFromName("Staff") then
-			outputChatBox(getPlayerName(ps) .. " is now available to help you!", root, 0, 255, 0)
+			outputChatBox(getPlayerName(ps).." is now available to help you!", root, 0, 255, 0)
 			setElementData(ps, "PlayerIsBusy", false)
         end
 end
 addCommandHandler("csgadmin", CSGJockeAHelp)
 
 addEventHandler ("onPlayerQuit", root,
-function()
-        if isElement(source) and exports.csgstaff:isPlayerStaff(source) then
-            if "sensei" == exports.server:getPlayerAccountName(source) then
-			else
-				exports.DENdxmsg:createNewDxMessage(root,getPlayerName(source).. " has logged out! ", 255,255,255)
-			end
-        end
- end
+	function()
+		if isElement(source) and exports.csgstaff:isPlayerStaff(source) then
+			exports.DENdxmsg:createNewDxMessage(root,getPlayerName(source).. " has logged out! ", 255,255,255)
+		end
+	 end
 )
-addEventHandler ("onPlayerLogin", root,
-function()
-    setTimer( function (player)
-    if isElement(player) and exports.csgstaff:isPlayerStaff(player) then
-       level = exports.CSGstaff:getPlayerAdminLevel(player)
-		name = getPlayerName(player)
-	   	exports.dendxmsg:createNewDxMessage(root,"" ..tostring(name).. " Logged in L" ..tostring(level),255,255,255)
-    end
-    end,1000,1,source)
- end )
+
+addEventHandler("onPlayerLogin", root,
+	function ()
+		setTimer(
+			function (player)
+				if isElement(player) and exports.csgstaff:isPlayerStaff(player) then
+					level = exports.CSGstaff:getPlayerAdminLevel(player)
+					name = getPlayerName(player)
+					exports.DENdxmsg:createNewDxMessage(root, tostring(name).." logged in [L"..tostring(level).."]", 255, 255, 255)
+				end
+			end, 1000, 1, source
+		)
+	end
+)
