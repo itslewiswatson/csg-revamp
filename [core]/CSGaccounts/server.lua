@@ -157,7 +157,7 @@ function savePlayerData(thePlayer)
 		local playerDimension = getElementDimension(thePlayer)
 		local playerRotation = getPedRotation(thePlayer)
 		local playerOccupation = exports.server:getPlayerOccupation(thePlayer)
-		local playerTeam = getTeamName(getPlayerTeam(thePlayer))
+		local playerTeam = getTeamName(getPlayerTeam(thePlayer)) or "Unemployed" -- We set them to the unemployed team to avoid it being set to 0, which becomes problematic
 		local playerPlayTime = getElementData(thePlayer, "playTime")
 		local playerAccountID = exports.server:getPlayerAccountID(thePlayer)
 
