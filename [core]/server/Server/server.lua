@@ -182,7 +182,7 @@ end
 addEvent("doPlayerPasswordReset", true)
 addEventHandler("doPlayerPasswordReset", root,
 	function (email, username, newPassword)
-		local userData = exports.DENmysql:querySingle("SELECT email FROM accounts WHERE username = ? LIMIT 1", string.lower(username))
+		local userData = exports.DENmysql:querySingle("SELECT `email` FROM `accounts` WHERE `username`=? LIMIT 1", string.lower(username))
 		if (userData) then
 			if (userData.email == "") or (userData.email == " ") then
 				triggerClientEvent(source, "setWarningLabelText", source, "No email found with this account!", "passwordWindow", 225, 0, 0)
@@ -220,7 +220,7 @@ addEventHandler("doPlayerLogin", root,
 		end
 		if not accountID then
 			triggerClientEvent(source, "setWarningLabelText", source, "Wrong username and/or password!", "loginWindow", 225, 0, 0)
-			triggerClientEvent(source,"toggleLoginButton",source,true)
+			triggerClientEvent(source, "toggleLoginButton", source, true)
 			return
 		end
 		
@@ -231,7 +231,7 @@ addEventHandler("doPlayerLogin", root,
 			triggerClientEvent(source, "setWarningLabelText", source, "Unable to login, please change password first!", "loginWindow", 225, 0, 0)
 			triggerClientEvent(source, "setNewPasswordWindowVisable", source) setElementData(source, "temp:UsernameData", string.lower(username)) setElementData(source, "temp:PasswordData", md5(password))
 		--]]
-		if (#exports.DENmysql:query("SELECT id FROM accounts WHERE id=? AND password=? LIMIT 1", accountID, hash("sha1", password)) == 1) then
+		if (#exports.DENmysql:query("SELECT `id` FROM `accounts` WHERE `id`=? AND `password`=? LIMIT 1", accountID, hash("sha1", password)) == 1) then
 			--exports.irc:outputIRC(tostring(loggingIn[username]))
 			if (loggingIn[username] == nil) then
 				loggingIn[username] = true --set this true to prevent it from logging in again
@@ -257,7 +257,7 @@ addEventHandler("doPlayerLogin", root,
 				removeElementData(source, "temp:UsernameData") removeElementData(source, "temp:PasswordData")
 				triggerClientEvent(source, "updateAccountXMLData", source, username, password, usernameTick, passwordTick)
 
-				local accountData = exports.DENmysql:query("SELECT * FROM accounts WHERE id=? LIMIT 1", accountID)
+				local accountData = exports.DENmysql:query("SELECT * FROM `accounts` WHERE `id`=? LIMIT 1", accountID)
 				local groupData = exports.DENmysql:query("SELECT `groupname`,`grouprank`,`groupid` FROM `groups_members` WHERE `memberid`=? LIMIT 1", accountID)
 				
 				for k, v in ipairs(getElementsByType("player")) do
@@ -269,7 +269,8 @@ addEventHandler("doPlayerLogin", root,
 				exports.DENmysql:exec("INSERT INTO `logins` SET `serial`=?, ip=?, `nickname`=?, `accountname`=?", getPlayerSerial(source), getPlayerIP (source), getPlayerName(source), username)
 				exports.DENmysql:exec("UPDATE `accounts` SET `serial`=?,`IP`=? WHERE `id`=?", getPlayerSerial(source), getPlayerIP(source), accountData[1].id)
 
-				setPlayerTeam (source, getTeamFromName(accountData[1].team))
+				-- We already set the team elsewhere, no need for duplicate
+				--setPlayerTeam (source, getTeamFromName(accountData[1].team))
 
 				setElementData(source, "accountUserID", accountID)
 				setElementData(source, "tempdata.accountUserID", accountID)
@@ -362,9 +363,9 @@ function createPlayerElementIntoGame (thePlayer, dataTable)
 		showPlayerHudComponent(thePlayer, "area_name", true)
 
 		if (dataTable.team == "Criminals") or (dataTable.team == "Unemployed") or (dataTable.team == "Unoccupied") then
-			spawnPlayer(thePlayer, dataTable.x, dataTable.y, dataTable.z +1, dataTable.rotation, dataTable.skin, dataTable.interior, dataTable.dimension, dataTable.team)
+			spawnPlayer(thePlayer, dataTable.x, dataTable.y, dataTable.z +1, dataTable.rotation, dataTable.skin, dataTable.interior, dataTable.dimension, getTeamFromName(dataTable.team))
 		else
-			spawnPlayer(thePlayer, dataTable.x, dataTable.y, dataTable.z +1, dataTable.rotation, dataTable.jobskin, dataTable.interior, dataTable.dimension, dataTable.team)
+			spawnPlayer(thePlayer, dataTable.x, dataTable.y, dataTable.z +1, dataTable.rotation, dataTable.jobskin, dataTable.interior, dataTable.dimension, getTeamFromName(dataTable.team))
 		end
 
 		local CJCLOTTable = fromJSON(tostring(dataTable.cjskin))
