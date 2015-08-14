@@ -44,7 +44,7 @@ guiSetVisible(window,false)
 
 addCommandHandler( "wp",
 	function ()
-		if ( getTeamName( getPlayerTeam( localPlayer ) ) == "Staff" ) and ( getPlayerAdminLevel( localPlayer ) >= 2 ) and  then
+		if ( getTeamName( getPlayerTeam( localPlayer ) ) == "Staff" ) and ( getPlayerAdminLevel( localPlayer ) >= 2 ) then
 			if ( guiGetVisible( window ) ) then
 				guiSetVisible( window, false )
 				showCursor( false )
