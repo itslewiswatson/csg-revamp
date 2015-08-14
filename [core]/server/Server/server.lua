@@ -31,18 +31,23 @@ local teams = {
 -- Create teams and set time
 addEventHandler("onResourceStart", resourceRoot,
 	function ()
-		setGameType("CSG V"..getCSGServerVersion())
-		setOcclusionsEnabled(false)
-		
-		for k, v in ipairs(teams) do
-			createTeam(v[1], v[2], v[3], v[4])
-		end
+		if (getResourceState(getResourceFromName("DENmysql")) == "running") then
+			setGameType("CSG V"..getCSGServerVersion())
+			setOcclusionsEnabled(false)
+			
+			for k, v in ipairs(teams) do
+				createTeam(v[1], v[2], v[3], v[4])
+			end
 
-		local realtime = getRealTime()
-		setTime(realtime.hour, realtime.minute)
-		setMinuteDuration(60000)
-		setServerPassword("") --set the password to nothing if any password is set.
-		setFPSLimit(70)
+			local realtime = getRealTime()
+			setTime(realtime.hour, realtime.minute)
+			setMinuteDuration(60000)
+			setServerPassword("") --set the password to nothing if any password is set.
+			setFPSLimit(70)
+		else
+			outputDebugString("DENmyql not started!")
+			cancelEvent("DENmysql not started!")
+		end
 	end
 )
 
@@ -266,7 +271,7 @@ addEventHandler("doPlayerLogin", root,
 					end
 				end
 				
-				exports.DENmysql:exec("INSERT INTO `logins` SET `serial`=?, ip=?, `nickname`=?, `accountname`=?", getPlayerSerial(source), getPlayerIP (source), getPlayerName(source), username)
+				exports.DENmysql:exec("INSERT INTO `logins` SET `serial`=?, `ip`=?, `nickname`=?, `accountname`=?", getPlayerSerial(source), getPlayerIP (source), getPlayerName(source), username)
 				exports.DENmysql:exec("UPDATE `accounts` SET `serial`=?,`IP`=? WHERE `id`=?", getPlayerSerial(source), getPlayerIP(source), accountData[1].id)
 
 				-- We already set the team elsewhere, no need for duplicate
@@ -351,7 +356,7 @@ addEventHandler("onPlayerUpdatePasswords", root,
 )
 
 -- Spawn the player into the world
-function createPlayerElementIntoGame (thePlayer, dataTable)
+function createPlayerElementIntoGame(thePlayer, dataTable)
 	if (exports.server:isPlayerLoggedIn(thePlayer)) then
 		local playerID = exports.server:getPlayerAccountID(thePlayer)
 
@@ -425,7 +430,7 @@ function createPlayerElementIntoGame (thePlayer, dataTable)
 end
 
 function getCSGServerVersion()
-	query = exports.DENmysql:querySingle("SELECT `value` FROM `settings` WHERE `settingName`= LIMIT 1", "serverVersion")
+	query = exports.DENmysql:querySingle("SELECT `value` FROM `settings` WHERE `settingName`=? LIMIT 1", "serverVersion")
 	if (query) then
 		return query["value"]
 	else
