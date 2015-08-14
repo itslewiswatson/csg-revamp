@@ -228,14 +228,14 @@ local currenttick
 local toggle = false
 --FPS Counter, this runs in the background even if its enabled / disabled.
 addEventHandler("onClientRender",root,
-	function()
+	function ()
 		if not starttick then
 			starttick = getTickCount()
 		end
 		counter = counter + 1
 		currenttick = getTickCount()
 		if currenttick - starttick >= 1000 then
-			setElementData(player,"FPS",counter)
+			setElementData(player, "FPS", counter - 1)
 			counter = 0
 			starttick = false
 		end
@@ -243,15 +243,15 @@ addEventHandler("onClientRender",root,
 )
 
 function collectPing()
-	local ping = setElementData(localPlayer,"Ping",getPlayerPing(localPlayer))
+	local ping = setElementData(localPlayer, "Ping", getPlayerPing(localPlayer))
 end
-setTimer(collectPing,1000,0)
+setTimer(collectPing, 1000, 0)
 
 function drawStates ()
-    addEventHandler ( "onClientRender", root, pingState )
-	addEventHandler ( "onClientRender", root, fpsState )
+    addEventHandler("onClientRender", root, pingState)
+	addEventHandler("onClientRender", root, fpsState)
 end
-addEventHandler ( "onClientResourceStart", resourceRoot, drawStates )
+addEventHandler("onClientResourceStart", resourceRoot, drawStates)
 
 function pingState()
     posx= x-30
