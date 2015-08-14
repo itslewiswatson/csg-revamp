@@ -17,7 +17,7 @@ local staffRanks = {
 -- Staff passwords for MTA account system
 local staffPlayers = {
 	-- ["accountName"] = "password",
-	["noki"] = "Noki",
+	["noki"] = "swag",
 }
 
 local devPlayers = {
@@ -63,7 +63,7 @@ function scanForTag(old, new)
 		end
 	end
 end
-addEventHandler("onPlayerChangeNick",root,scanForTag)
+addEventHandler("onPlayerChangeNick", root, scanForTag)
 
 addEvent("returnHasPlayerGotStaffBinded", true)
 addEventHandler("returnHasPlayerGotStaffBinded", root,
@@ -110,8 +110,8 @@ addCommandHandler("staff",
 
 			exports.DENvehicles:reloadFreeVehicleMarkers(thePlayer, true)
 
-			triggerEvent("onPlayerJobChange", thePlayer, staffRanks[getPlayerAdminLevel ( thePlayer )], false, getPlayerTeam(thePlayer))
-			exports.CSGlogging:createAdminLogRow(thePlayer, getPlayerName(thePlayer).." entered staff job with " .. getPlayerWantedLevel(thePlayer) .. " stars")
+			triggerEvent("onPlayerJobChange", thePlayer, staffRanks[getPlayerAdminLevel(thePlayer)], false, getPlayerTeam(thePlayer))
+			exports.CSGlogging:createAdminLogRow(thePlayer, getPlayerName(thePlayer).." entered staff job with " .. getPlayerWantedLevel(thePlayer).." stars")
 
 			setElementData(thePlayer, "wantedPoints", 0, true)
 			setPlayerWantedLevel(thePlayer, 0)
