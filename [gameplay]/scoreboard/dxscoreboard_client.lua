@@ -425,8 +425,10 @@ function doDrawScoreboard( rtPass, onlyAnim, sX, sY )
 				end
 				table.remove(teams,crimsk)
 				table.insert(teams,getTeamFromName("Criminals"))
-
-				local smurfsk = nil
+				
+				-- We don't have these teams, but this bit of code likes to fuck with the whole scoreboard
+				-- Update with new version of scoreboard soon
+				--[[local smurfsk = nil
 				for k,v in pairs(teams) do
 					if getTeamName(v) == "The Smurfs" then smurfsk = k break end
 				end
@@ -437,6 +439,7 @@ function doDrawScoreboard( rtPass, onlyAnim, sX, sY )
 				end
 				table.remove(teams,terroristsk)
 				table.insert(teams,getTeamFromName("The Terrorists"))
+				--]]
 				for key, team in ipairs( teams ) do
 
 					-- Add teams to sorting table first
