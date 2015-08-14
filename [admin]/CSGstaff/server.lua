@@ -16,109 +16,107 @@ local staffRanks = {
 
 -- Staff passwords for MTA account system
 local staffPlayers = {
-	[ "will"   ]   = "hjhdsjshjashdjahdja",
-	[ "sensei"   ]   = "sjhdksjhdkasjdksjdksdjksjd",
-	[ "jocke"     ]   = "kjxfjksfjksfjskfjksfjsk",
-
-
+	-- ["accountName"] = "password",
+	["noki"] = "Noki",
 }
-
 
 local devPlayers = {
-	["mashcof"] = "5et8ydsfd"
+	-- ["accountName"] = "password",
 }
 
-addEventHandler( "onPlayerLogin", root,
-	function ( a, b )
-		if not ( a ) and not ( b ) and ( devPlayers[ exports.server:getPlayerAccountName( source ) ] ) then
-			logIn( source, getAccount( exports.server:getPlayerAccountName( source ) ), devPlayers[ exports.server:getPlayerAccountName( source ) ] )
+-- Log staff and devs in with their respective MTA accounts
+addEventHandler("onPlayerLogin", root,
+	function (a, b)
+		if (not a) and (not b) and (devPlayers[exports.server:getPlayerAccountName(source)]) then
+			logIn(source, getAccount(exports.server:getPlayerAccountName(source)), devPlayers[exports.server:getPlayerAccountName(source)])
+		end
+		
+		if (not a) and (not b) and (staffPlayers[exports.server:getPlayerAccountName(source)]) then
+			logIn(source, getAccount(exports.server:getPlayerAccountName(source)), staffPlayers[exports.server:getPlayerAccountName(source)])
 		end
 	end
 )
-
 
 -- Loop through the table to make the accounts
-addEventHandler( "onResourceStart", resourceRoot,
+addEventHandler("onResourceStart", resourceRoot,
 	function ()
-		for accountname, password in pairs ( staffPlayers ) do
-			addAccount ( accountname, password )
+		for accountname, password in pairs(staffPlayers) do
+			addAccount(accountname, password)
 		end
 	end
 )
 
--- On player login
-addEventHandler( "onPlayerLogin", root,
-	function ( a, b )
-		if not ( a ) and not ( b ) and ( staffPlayers[ exports.server:getPlayerAccountName( source ) ] ) then
-			logIn( source, getAccount( exports.server:getPlayerAccountName( source ) ), staffPlayers[ exports.server:getPlayerAccountName( source ) ] )
-		end
-	end
-)
-
---Prevent imposters
-function scanForTag(old,new)
-	if type(string.find(string.lower(new),"[csg]",1,true)) == "number" then
-		if not(adminTable[source]) then
-			exports.dendxmsg:createNewDxMessage(source,"You are not a CSG Staff member, you cannot use [CSG] tag.",255,0,0)
-			setPlayerName(source,old)
-			for k,v in ipairs(getElementsByType("player")) do
-				exports.killmessages:outputMessage(new.." is an imposter. Renamed to "..old,v,255,0,0)
+--Prevent imposters using the staff tag
+function scanForTag(old, new)
+	if type(string.find(string.lower(new), "[csg]", 1, true)) == "number" then
+	
+		if (not adminTable[source]) then
+		
+			exports.dendxmsg:createNewDxMessage(source, "You are not a CSG Staff member, you cannot use the [CSG] tag.", 255, 0, 0)
+			setPlayerName(source, old)
+			
+			for k, v in pairs(getElementsByType("player")) do
+				exports.killmessages:outputMessage(new.." is an imposter. Renamed to "..old, v, 255, 0, 0)
 			end
+			
 			cancelEvent()
 		end
 	end
 end
 addEventHandler("onPlayerChangeNick",root,scanForTag)
---addEventHandler("onPlayerJoin",root,scanForTag)
 
-addEvent("returnHasPlayerGotStaffBinded",true)
-addEventHandler("returnHasPlayerGotStaffBinded",root,
-function(state)
-	outputDebugString("Got results, processing...")
-	if (state) then
-		outputDebugString("Got state, outputting..")
-		if (state == true) then
-			outputDebugString("[STAFF] "..getPlayerName(source).." has /staff binded.",0,255,0,0)
-		else
-			outputDebugString("[STAFF] "..getPlayerName(source).." does not have /staff binded",0,255,0,0)
+addEvent("returnHasPlayerGotStaffBinded", true)
+addEventHandler("returnHasPlayerGotStaffBinded", root,
+	function(state)
+		outputDebugString("Got results, processing...")
+		if (state) then
+			outputDebugString("Got state, outputting..")
+			if (state == true) then
+				outputDebugString("[STAFF] "..getPlayerName(source).." has /staff binded.", 0, 255, 0, 0)
+			else
+				outputDebugString("[STAFF] "..getPlayerName(source).." does not have /staff binded", 0, 255, 0, 0)
+			end
 		end
 	end
-end)
+)
 
 addCommandHandler("staffCmdBinded",
-function(_player,cmd,target)
-	outputDebugString("Finding player...")
-	local player = exports.server:getPlayerFromNamePart(target)
-	if (isElement(player)) then --he exists
-		outputDebugString("Player found, sending scan call...")
-		triggerClientEvent("checkForStaffCmdBind",player)
-	else
-		outputChatBox("Player not found!",_player,255,0,0)
+	function(_player, cmd, target)
+		outputDebugString("Finding player...")
+		local player = exports.server:getPlayerFromNamePart(target)
+		if (isElement(player)) then --he exists
+			outputDebugString("Player found, sending scan call...")
+			triggerClientEvent("checkForStaffCmdBind", player)
+		else
+			outputChatBox("Player not found!", _player, 255, 0, 0)
+		end
 	end
-end)
+)
+
+
 -- Staff Job
-addCommandHandler( "staff",
-	function ( thePlayer )
-		if ( isPlayerStaff ( thePlayer ) ) then
-			setPlayerTeam ( thePlayer, getTeamFromName( "Staff" ) )
-			setElementData( thePlayer, "Occupation", staffRanks[getPlayerAdminLevel ( thePlayer )], true)
+addCommandHandler("staff",
+	function (thePlayer)
+		if (isPlayerStaff(thePlayer)) then
+			setPlayerTeam(thePlayer, getTeamFromName("Staff"))
+			setElementData(thePlayer, "Occupation", staffRanks[getPlayerAdminLevel(thePlayer)], true)
 			-- setElementData( thePlayer, "Rank", staffRanks[getPlayerAdminLevel ( thePlayer )], true)
 
-			if ( adminTable[thePlayer].gender == 0 ) then skin = 217 else skin = 211 end
-			setElementModel( thePlayer, skin )
-			exports.server:updatePlayerJobSkin( thePlayer, skin )
+			if (adminTable[thePlayer].gender == 0) then skin = 217 else skin = 211 end
+			setElementModel(thePlayer, skin)
+			exports.server:updatePlayerJobSkin(thePlayer, skin)
 
-			setElementHealth( thePlayer, 100 )
+			setElementHealth(thePlayer, 100)
 
-			exports.DENvehicles:reloadFreeVehicleMarkers( thePlayer, true )
+			exports.DENvehicles:reloadFreeVehicleMarkers(thePlayer, true)
 
-			triggerEvent("onPlayerJobChange", thePlayer, staffRanks[getPlayerAdminLevel ( thePlayer )], false, getPlayerTeam( thePlayer ) )
-			exports.CSGlogging:createAdminLogRow ( thePlayer, getPlayerName( thePlayer ).." entered staff job with " .. getPlayerWantedLevel( thePlayer ) .. " stars" )
+			triggerEvent("onPlayerJobChange", thePlayer, staffRanks[getPlayerAdminLevel ( thePlayer )], false, getPlayerTeam(thePlayer))
+			exports.CSGlogging:createAdminLogRow(thePlayer, getPlayerName(thePlayer).." entered staff job with " .. getPlayerWantedLevel(thePlayer) .. " stars")
 
-			setElementData( thePlayer, "wantedPoints", 0, true )
-			setPlayerWantedLevel( thePlayer, 0 )
-			exports.DENlaw:updatedWantedLevel(thePlayer,0)
-			exports.DENdxmsg:createNewDxMessage( thePlayer, "You entered the staff job!", 0, 225, 0 )
+			setElementData(thePlayer, "wantedPoints", 0, true)
+			setPlayerWantedLevel(thePlayer, 0)
+			exports.DENlaw:updatedWantedLevel(thePlayer, 0)
+			exports.DENdxmsg:createNewDxMessage(thePlayer, "You entered the staff job!", 0, 225, 0)
 		end
 	end
 )
@@ -126,12 +124,12 @@ addCommandHandler( "staff",
 -- Set the rank of a staff when he login
 addEvent( "onServerPlayerLogin" )
 addEventHandler( "onServerPlayerLogin", root,
-	function ( userID )
-		local theTable = exports.DENmysql:query("SELECT * FROM staff WHERE userid=? LIMIT 1",userID)
+	function (userID)
+		local theTable = exports.DENmysql:query("SELECT * FROM staff WHERE userid=? LIMIT 1", userID)
 		if theTable and #theTable == 1 and theTable[1].active == 1 then
 			adminTable[source] = theTable[1]
-			triggerClientEvent( "onSyncAdminTable", root, adminTable[source], source )
-			outputChatBox( "Welcome admin, press 'P' to use your panel!", source, 255, 128, 0 )
+			triggerClientEvent("onSyncAdminTable", root, adminTable[source], source)
+			outputChatBox("Welcome admin, press 'P' to use your panel!", source, 255, 128, 0)
 		else
 			if type(string.find(string.lower(getPlayerName(source)),"[csg]",1,true)) == "number" then
 				local old = getPlayerName(source)
@@ -147,15 +145,15 @@ addEventHandler( "onServerPlayerLogin", root,
 )
 
 -- on Resource start
-addEventHandler( "onResourceStart", resourceRoot,
+addEventHandler("onResourceStart", resourceRoot,
 	function ()
-		local theTable = exports.DENmysql:query( "SELECT * FROM staff" )
+		local theTable = exports.DENmysql:query("SELECT * FROM `staff`")
 		completeAdminTable = theTable
-		for k, thePlayer in ipairs( getElementsByType( "player" ) ) do
-			local accountID = exports.server:getPlayerAccountID( thePlayer )
-			if ( accountID ) then
-				for i=1,#theTable do
-					if ( theTable[i].userid == accountID ) and ( theTable[i].active == 1 ) then
+		for k, thePlayer in ipairs( getElementsByType("player")) do
+			local accountID = exports.server:getPlayerAccountID(thePlayer)
+			if (accountID) then
+				for i = 1, #theTable do
+					if (theTable[i].userid == accountID) and (theTable[i].active == 1) then
 						adminTable[thePlayer] = theTable[i]
 					end
 				end
@@ -165,15 +163,15 @@ addEventHandler( "onResourceStart", resourceRoot,
 )
 
 -- Ask for a admin table sync
-addEvent( "onRequestSyncAdminTable", true )
-addEventHandler( "onRequestSyncAdminTable", root,
+addEvent("onRequestSyncAdminTable", true)
+addEventHandler("onRequestSyncAdminTable", root,
 	function ()
-		triggerClientEvent( source, "onSyncAdminTable", source, adminTable )
+		triggerClientEvent(source, "onSyncAdminTable", source, adminTable)
 	end
 )
 
 -- Function to promote a admin
-function promoteAdmin ( adminNick )
+function promoteAdmin(adminNick)
 	for i=1,#completeAdminTable do
 		if ( completeAdminTable[i].nickname == adminNick ) and ( completeAdminTable[i].rank ~= 6 )  then
 			completeAdminTable[i].rank = completeAdminTable[i].rank +1
