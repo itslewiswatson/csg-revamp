@@ -61,7 +61,8 @@ addEventHandler("onResourceStop", resourceRoot,
 -- Check if there is not already a player ingame with the same serial
 addEventHandler("onPlayerConnect", root,
 	function (playerNick, playerIP, playerUsername, playerSerial, playerVersionNumber)
-		for _, thePlayer in pairs(getElementsByType ("player")) do
+		local players = getElementsByType("player")
+		for _, thePlayer in pairs(players) do
 			if (getPlayerSerial(thePlayer) == playerSerial) then
 				cancelEvent(true, "There is already a player online with this serial!")
 				return
@@ -71,7 +72,7 @@ addEventHandler("onPlayerConnect", root,
 )
 
 -- When the player joins spawn him ingame
-addEventHandler( "onPlayerJoin", root,
+addEventHandler("onPlayerJoin", root,
 	function ()
 		if (spawnPlayer(source, 0, 0, 0)) then
 			setCameraTarget(source )
@@ -119,14 +120,14 @@ addEventHandler( "doKickPlayer", root,
 )]]--
 
 -- When the player spawns check if we show the login screen or draw a ban window
-addEvent( "doSpawnPlayer", true)
-addEventHandler( "doSpawnPlayer", root,
+addEvent("doSpawnPlayer", true)
+addEventHandler("doSpawnPlayer", root,
 	function ()
 		local time = getRealTime()
-		local banData = exports.DENmysql:query("SELECT banstamp,bannedby,reason,serial FROM bans WHERE serial=? LIMIT 1", getPlayerSerial(source))
+		local banData = exports.DENmysql:query("SELECT `banstamp`,`bannedby`,`reason`,`serial` FROM `bans` WHERE `serial`=? LIMIT 1", getPlayerSerial(source))
 		if banData and banData[1] then
 			if (time.timestamp > tonumber( banData[1].banstamp ) ) and not ( tonumber( banData[1].banstamp) == 0) then
-				exports.DENmysql:exec("DELETE FROM bans WHERE serial = ?", getPlayerSerial(source))
+				exports.DENmysql:exec("DELETE FROM `bans` WHERE `serial`=?", getPlayerSerial(source))
 				triggerClientEvent(source, "setLoginWindowVisable", source)
 			else
 				setElementData(source, "Occupation", "Banned")
@@ -149,23 +150,23 @@ function timestampConvert(timeStamp)
 	local hour = time.hour
 	local minute = time.minute
 
-	return "" .. hour ..":" .. minute .." - " .. month .."/" .. day .."/" .. year ..""
+	return hour..":"..minute.." - "..month.."/"..day.."/"..year
 end
 
 -- When the player creates a new account
 addEvent("doAccountRegister", true)
 addEventHandler("doAccountRegister", root,
 	function (username, password1, password2, email, genderMale, genderFemale)
-		if (exports.DENmysql:querySingle("SELECT username FROM accounts WHERE username=? LIMIT 1", string.lower(username))) then
+		if (exports.DENmysql:querySingle("SELECT `username` FROM `accounts` WHERE `username`=? LIMIT 1", string.lower(username))) then
 			triggerClientEvent(source, "setWarningLabelText", source, "This username is already taken!", "registerWindow", 225, 0, 0)
 		elseif (#exports.DENmysql:query("SELECT * FROM accounts WHERE serial=?", getPlayerSerial(source)) >= 2) then
 			triggerClientEvent(source, "setWarningLabelText", source, "You can only register 2 accounts for each serial!", "registerWindow", 225, 0, 0)
 		else
 			if (genderFemale) then theGender = 93 else theGender = 0 end
-			if (exports.DENmysql:exec("INSERT INTO accounts SET username=?, password=?, email=?, serial=?, skin=?", string.lower(username), hash("sha1", password1), email, getPlayerSerial(source), theGender)) then
-				local userData = exports.DENmysql:querySingle("SELECT * FROM accounts WHERE username=? AND password=? LIMIT 1", string.lower(username), hash("sha1", password1))
-				exports.DENmysql:exec("INSERT INTO weapons SET userid=?", tonumber(userData.id))
-				exports.DENmysql:exec("INSERT INTO playerstats SET userid=?", tonumber(userData.id))
+			if (exports.DENmysql:exec("INSERT INTO `accounts` SET `username`=?, `password`=?, `email`=?, `serial`=?, `skin`=?", string.lower(username), hash("sha1", password1), email, getPlayerSerial(source), theGender)) then
+				local userData = exports.DENmysql:querySingle("SELECT * FROM `accounts` WHERE `username`=? AND `password`=? LIMIT 1", string.lower(username), hash("sha1", password1))
+				exports.DENmysql:exec("INSERT INTO `weapons` SET `userid`=?", tonumber(userData.id))
+				exports.DENmysql:exec("INSERT INTO `playerstats` SET `userid`=?", tonumber(userData.id))
 				triggerClientEvent(source, "setPopupWindowVisable", source)
 			end
 		end
@@ -208,12 +209,12 @@ addEvent("doPlayerLogin", true)
 addEventHandler("doPlayerLogin", root,
 	function (username, password, usernameTick, passwordTick)
 		if not (exports.DENmysql:getConnection()) then
-			triggerClientEvent(source,"setWarningLabelText",source,"Database is down! Please contact a developer!", "loginWindow", 255, 0, 0)
+			triggerClientEvent(source, "setWarningLabelText", source, "Database is down! Please contact a developer!", "loginWindow", 255, 0, 0)
 			return false
 		end
 		
 		local accountID = false
-		local idQuery = exports.DENmysql:query("SELECT id FROM accounts WHERE username=? LIMIT 1",username:lower())
+		local idQuery = exports.DENmysql:query("SELECT `id` FROM `accounts` WHERE `username`=? LIMIT 1", username:lower())
 		if idQuery and #idQuery == 1 then
 			accountID = idQuery[1].id
 		end
@@ -243,13 +244,13 @@ addEventHandler("doPlayerLogin", root,
 				--exports.irc:outputIRC(tostring(loggingIn[username]))
 			end
 			
-			local banData = exports.DENmysql:query("SELECT banstamp FROM bans WHERE username=? LIMIT 1", username:lower())
+			local banData = exports.DENmysql:query("SELECT `banstamp` FROM `bans` WHERE `username`=? LIMIT 1", username:lower())
 			if (banData and #banData == 1) then
 				if (banData[1].banstamp == 0) then
-					triggerClientEvent(source, "setWarningLabelText", source, "This account is Permanently Banned from the server!", "loginWindow", 225, 0, 0)
+					triggerClientEvent(source, "setWarningLabelText", source, "This account is permanently banned from the server!", "loginWindow", 225, 0, 0)
 				elseif (getRealTime().timestamp < banData[1].banstamp) then
 					triggerClientEvent(source, "setWarningLabelText", source, "This account is banned from the server til: "..timestampConvert(banData[1].banstamp), "loginWindow", 225, 0, 0)
-				elseif (banData[1].banstamp > 0) and (getRealTime().timestamp > banData[1].banstamp) and (exports.DENmysql:exec("DELETE FROM bans WHERE account=?", username:lower())) then
+				elseif (banData[1].banstamp > 0) and (getRealTime().timestamp > banData[1].banstamp) and (exports.DENmysql:exec("DELETE FROM `bans` WHERE `account`=?", username:lower())) then
 					triggerClientEvent(source, "setWarningLabelText", source, "Your account is now unbanned! Try again.", "loginWindow", 0, 225, 0)
 				end
 			else
@@ -257,16 +258,16 @@ addEventHandler("doPlayerLogin", root,
 				triggerClientEvent(source, "updateAccountXMLData", source, username, password, usernameTick, passwordTick)
 
 				local accountData = exports.DENmysql:query("SELECT * FROM accounts WHERE id=? LIMIT 1", accountID)
-				local groupData = exports.DENmysql:query("SELECT groupname,grouprank,groupid FROM groups_members WHERE memberid=? LIMIT 1", accountID)
+				local groupData = exports.DENmysql:query("SELECT `groupname`,`grouprank`,`groupid` FROM `groups_members` WHERE `memberid`=? LIMIT 1", accountID)
 				
 				for k, v in ipairs(getElementsByType("player")) do
 					if (getElementData(v, "accountUserID") == accountData[1].id) then
-						kickPlayer(v, "Accounts", getPlayerName(source).." has logged into your account.")
+						kickPlayer(v, "CSGaccounts", getPlayerName(source).." has logged into your account.")
 					end
 				end
 				
-				exports.DENmysql:exec("INSERT INTO logins SET serial=?, ip=?, nickname=?, accountname=?", getPlayerSerial(source), getPlayerIP (source), getPlayerName(source), username)
-				exports.DENmysql:exec("UPDATE accounts SET serial=?,IP=? WHERE id=?", getPlayerSerial(source), getPlayerIP(source), accountData[1].id)
+				exports.DENmysql:exec("INSERT INTO `logins` SET `serial`=?, ip=?, `nickname`=?, `accountname`=?", getPlayerSerial(source), getPlayerIP (source), getPlayerName(source), username)
+				exports.DENmysql:exec("UPDATE `accounts` SET `serial`=?,`IP`=? WHERE `id`=?", getPlayerSerial(source), getPlayerIP(source), accountData[1].id)
 
 				setPlayerTeam (source, getTeamFromName(accountData[1].team))
 
@@ -309,7 +310,7 @@ addEventHandler("doPlayerLogin", root,
 				fadeCamera(source, false, 1.0, 0, 0, 0)
 				setTimer(fadeCamera, 2000, 1, source, true, 1.0, 0, 0, 0)
 				setTimer(createPlayerElementIntoGame, 1000, 1, source, accountData[1])
-				antisaveTimers[source] = setTimer(allowSaving,10000,1,source)
+				antisaveTimers[source] = setTimer(allowSaving, 10000, 1, source)
 
 				triggerEvent("onPlayerLogin", source)
 				loggingIn[username] = nil
@@ -334,16 +335,16 @@ addEvent("onPlayerUpdatePasswords", true)
 addEventHandler("onPlayerUpdatePasswords", root,
 	function (password)
 		if (getElementData(source, "temp:UsernameData")) then
-			if (exports.DENmysql:exec("UPDATE accounts SET password=? WHERE username=?", hash("sha1", password), getElementData(source, "temp:UsernameData"))) then
+			if (exports.DENmysql:exec("UPDATE `accounts` SET `password`=? WHERE `username`=?", hash("sha1", password), getElementData(source, "temp:UsernameData"))) then
 				triggerClientEvent(source, "setLoginWindowVisable", source)
-				exports.DENdxmsg:createNewDxMessage(thePlayer, "Your password is changed!", 0, 225, 0)
+				exports.DENdxmsg:createNewDxMessage(thePlayer, "Your password has been changed!", 0, 225, 0)
 			else
 				triggerClientEvent(source, "setLoginWindowVisable", source)
-				exports.DENdxmsg:createNewDxMessage(thePlayer, "We couldn't change your password try again!", 225, 0, 0)
+				exports.DENdxmsg:createNewDxMessage(thePlayer, "We couldn't change your password. Try again!", 225, 0, 0)
 			end
 		else
 			triggerClientEvent(source, "setLoginWindowVisable", source)
-			exports.DENdxmsg:createNewDxMessage(thePlayer, "We couldn't change your password try again!", 225, 0, 0)
+			exports.DENdxmsg:createNewDxMessage(thePlayer, "We couldn't change your password. Try again!", 225, 0, 0)
 		end
 	end
 )
@@ -353,12 +354,12 @@ function createPlayerElementIntoGame (thePlayer, dataTable)
 	if (exports.server:isPlayerLoggedIn(thePlayer)) then
 		local playerID = exports.server:getPlayerAccountID(thePlayer)
 
-		exports.DENdxmsg:createNewDxMessage(thePlayer, "Welcome back to CSG " .. getPlayerName(thePlayer) .. "!", 238, 154, 0)
+		exports.DENdxmsg:createNewDxMessage(thePlayer, "Welcome back to CSG "..getPlayerName(thePlayer).."!", 238, 154, 0)
 
 		setCameraTarget(thePlayer, thePlayer)
 		showChat(thePlayer, true)
-		showPlayerHudComponent (thePlayer, "radar", true)
-		showPlayerHudComponent (thePlayer, "area_name", true)
+		showPlayerHudComponent(thePlayer, "radar", true)
+		showPlayerHudComponent(thePlayer, "area_name", true)
 
 		if (dataTable.team == "Criminals") or (dataTable.team == "Unemployed") or (dataTable.team == "Unoccupied") then
 			spawnPlayer(thePlayer, dataTable.x, dataTable.y, dataTable.z +1, dataTable.rotation, dataTable.skin, dataTable.interior, dataTable.dimension, dataTable.team)
@@ -383,15 +384,15 @@ function createPlayerElementIntoGame (thePlayer, dataTable)
 			end
 		end
 
-		local playerStatus = exports.DENmysql:querySingle("SELECT * FROM playerstats WHERE userid=? LIMIT 1", playerID)
+		local playerStatus = exports.DENmysql:querySingle("SELECT * FROM `playerstats` WHERE `userid`=? LIMIT 1", playerID)
 		if (playerStatus) then
 			local wepSkills = fromJSON(playerStatus.weaponskills)
 			if (wepSkills) then
 				for skillint, valueint in pairs(wepSkills) do
 					if (tonumber(valueint) > 950) then
-						setPedStat (thePlayer, tonumber(skillint), 995)
+						setPedStat(thePlayer, tonumber(skillint), 995)
 					else
-						setPedStat (thePlayer, tonumber(skillint), tonumber(valueint))
+						setPedStat(thePlayer, tonumber(skillint), tonumber(valueint))
 					end
 				end
 			end
@@ -403,27 +404,27 @@ function createPlayerElementIntoGame (thePlayer, dataTable)
 			setElementHealth(thePlayer, tonumber(dataTable.health))
 		end
 
-		exports.DENmysql:exec("UPDATE groups_members SET lastonline=? WHERE memberid=?", getRealTime().timestamp, playerID)
+		exports.DENmysql:exec("UPDATE `groups_members` SET `lastonline`=? WHERE `memberid`=?", getRealTime().timestamp, playerID)
 
 		setPedArmor(thePlayer, tonumber(dataTable.armor))
 		setPlayerMoney(thePlayer, tonumber(dataTable.money))
 		setPedFightingStyle (thePlayer, tonumber(dataTable.fightstyle))
 
-		setElementData (thePlayer, "isPlayerLoggedin", true)
-		setElementData (thePlayer, "wantedPoints", tonumber(dataTable.wanted))
+		setElementData(thePlayer, "isPlayerLoggedin", true)
+		setElementData(thePlayer, "wantedPoints", tonumber(dataTable.wanted))
 		
-		local jailData = exports.DENmysql:querySingle("SELECT * FROM jail WHERE userid=? LIMIT 1",dataTable.id)
+		local jailData = exports.DENmysql:querySingle("SELECT * FROM `jail` WHERE `userid`=? LIMIT 1",dataTable.id)
 		if (jailData) then
 			triggerClientEvent(thePlayer, "onSetPlayerJailed", thePlayer, jailData.jailtime)
 		end
 
-		triggerEvent ("onServerPlayerLogin", thePlayer, playerID, dataTable.username)
+		triggerEvent("onServerPlayerLogin", thePlayer, playerID, dataTable.username)
 	    exports.DENvehicles:reloadFreeVehicleMarkers(thePlayer)
 	end
 end
 
 function getCSGServerVersion()
-	query = exports.DENmysql:querySingle("SELECT value FROM settings WHERE settingName=? LIMIT 1", "serverVersion")
+	query = exports.DENmysql:querySingle("SELECT `value` FROM `settings` WHERE `settingName`= LIMIT 1", "serverVersion")
 	if (query) then
 		return query["value"]
 	else
