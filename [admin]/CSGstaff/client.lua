@@ -2,11 +2,6 @@
 local staffTable = {}
 
 -- Staff skin mods
-txd2 = engineLoadTXD("Admin Skins/troll.txd")
-engineImportTXD(txd2, 211)
-dff = engineLoadDFF("Admin Skins/troll.dff", 211)
-engineReplaceModel(dff, 211)
-
 txd = engineLoadTXD("Admin Skins/wmyclot.txd")
 engineImportTXD(txd, 217)
 dff = engineLoadDFF("Admin Skins/wmyclot.dff", 217)

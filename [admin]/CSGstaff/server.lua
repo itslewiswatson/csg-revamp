@@ -131,9 +131,9 @@ addEventHandler("onServerPlayerLogin", root,
 			triggerClientEvent("onSyncAdminTable", root, adminTable[source], source)
 			outputChatBox("Welcome admin, press 'P' to use your panel!", source, 255, 128, 0)
 		else
-			if type(string.find(string.lower(getPlayerName(source)),"[csg]",1,true)) == "number" then
+			if type(string.find(string.lower(getPlayerName(source)), "[csg]", 1, true)) == "number" then
 				local old = getPlayerName(source)
-				setPlayerName(source,"Random"..math.random(255).."")
+				setPlayerName(source, "Random"..math.random(255))
 				local new = getPlayerName(source)
 				exports.dendxmsg:createNewDxMessage(source,"You are not a CSG Staff Member, you cannot use [CSG] tag.",255,0,0)
 				for k,v in pairs(getElementsByType("player")) do
