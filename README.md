@@ -20,4 +20,4 @@ Now these resources are the last of what is left of the "original" CSG game mode
 ## Commits
 - All commits should be on per a resource basis, so do not modify multiple resources in one commit.
 - Include [resourceName] in the commit title.
-- [UT] means untested.
+- [UT] means untested. This is for actual code changes, so don't use it on code cleanup commits. Use it for resource merges or bug fixes, if they are untested
