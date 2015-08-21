@@ -254,34 +254,25 @@ local countryName 	=
 	ZM = "Zambia",
 	ZW = "Zimbabwe"
 }
-local sqlite_geo_db = dbConnect( "sqlite", "GeoIP.db" )
+local sqlite_geo_db = dbConnect("sqlite", "GeoIP.db")
 
-local function toIPNum( ip )
-	local nums 	= split( ip, 46 )
-	local ipnum = ( nums[ 1 ] * 16777216 ) + ( nums[ 2 ] * 65536 ) + ( nums[ 3 ] * 256 ) + ( nums[ 4 ] )
+local function toIPNum(ip)
+	local nums 	= split(ip, 46)
+	local ipnum = (nums[1] * 16777216) + (nums[2] * 65536) + (nums[3] * 256) + (nums[4])
 	return ipnum
 end
 
-function getCountry( ip )
-	local num 	= tostring( toIPNum( ip ) )
-	local qh 	= dbQuery( sqlite_geo_db, "SELECT country FROM geoIPCountry WHERE ".. num .." BETWEEN begin_num AND end_num LIMIT 1" )
-	local res 	= dbPoll( qh, -1 )
-	if res[ 1 ] then
-		return res[ 1 ].country, countryName[ res[ 1 ].country ]
+function getPlayerCountry(ip)
+	local num 	= tostring(toIPNum(ip))
+	local qh 	= dbQuery(sqlite_geo_db, "SELECT country FROM geoIPCountry WHERE "..num.." BETWEEN begin_num AND end_num LIMIT 1")
+	local res 	= dbPoll(qh, -1)
+	if res[1] then
+		return res[1].country, countryName[res[1].country]
 	end
 	return false
 end
 
-function getCountryCity( ip )
-	local num 	= tostring( toIPNum( ip ) )
-	local qh 	= dbQuery( sqlite_geo_db, "SELECT city,region FROM geoIPCityLocation_RU WHERE locId = (SELECT locId FROM geoIPCityBlocks_RU WHERE ".. num .." BETWEEN begin_num AND end_num LIMIT 1) LIMIT 1" )
-	local res 	= dbPoll( qh, -1 )
-	if res[ 1 ] then
-		return res[ 1 ].city, res[ 1 ].region, "RU", "Russian Federation"
-	end
-	return false
-end
-
+-- Put any account names in here and their corresponding country code to manually set a client's country
 local manual = {
 	["tr2012"] = "us",
 	["fcpranav"] = "ca",
