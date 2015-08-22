@@ -691,22 +691,30 @@ end)
 addEvent("staffpanel.ban", true)
 addEventHandler("staffpanel.ban", root,
 	function (serialOrAccount, banType, reason, duration)
-		local theTime = getRealTime()
-		local timestamp = theTime.timestamp
-		local banstamp
+		-- Get the timestamp
+		local timestamp = getRealTime().timestamp
+		
+		-- If it's a permanent ban, we give a duration of 0
 		if (not duration) then
 			banstamp = 0
 		else
-			banstamp = timestamp+duration
+			banstamp = timestamp + duration
 		end
-		local serial = serialOrAccount
-		local account = ""
-		if banType == 'account' then
+		
+		-- Let's sort out the strings for serial or account
+		if banType == "account" then
 			serial = ""
 			account = serialOrAccount
+		else
+			account = ""
+			serial = serialOrAccount
 		end
-		exports.DENmysql:exec("INSERT INTO `bans` (serial, account, reason, banstamp, bannedby) VALUES (?,?,?,?,?)",serial,account,reason,banstamp,getPlayerName(source))
-		local players = getElementsByType('player')
+		
+		-- Insert the ban into the database
+		exports.DENmysql:exec("INSERT INTO `bans` (serial, account, reason, banstamp, bannedby) VALUES (?,?,?,?,?)", serial, account, reason, banstamp, getPlayerName(source))
+		
+		-- Let's loop through the players to see if that person is online, and kick them if they are online
+		local players = getElementsByType("player")
 		for i=1,#players do
 			if banType == "serial" then
 				local pSerial = getPlayerSerial(players[i])
@@ -719,6 +727,13 @@ addEventHandler("staffpanel.ban", root,
 					kickPlayer(players[i], source, reason)
 				end
 			end
+		end
+		
+		-- Alert the admin that their ban was successful
+		if (serial == "") then
+			exports.DENdxmsg:createNewDxMessage(source, "You have successfully banned account: "..account, 200, 200, 0)
+		else
+			exports.DENdxmsg:createNewDxMessage(source, "You have successfully banned serial: "..serial, 200, 200, 0)
 		end
 	end
 )
