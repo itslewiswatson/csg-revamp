@@ -99,8 +99,8 @@ end)
 addEvent("onRequestBansTable", true)
 addEventHandler("onRequestBansTable", root,
 	function ()
-		local globalbans = exports.denmysql:query("SELECT * FROM bans")
-		exports.dendxmsg:createNewDxMessage(source,"Transfering data, this may take a while.",255,255,0)
+		local globalbans = exports.denmysql:query("SELECT * FROM `bans`")
+		exports.dendxmsg:createNewDxMessage(source, "Transferring data, this may take a while.", 255, 255, 0)
 		triggerLatentClientEvent(source, "onRequestBansTable:callBack", 20000, false, source, exports.CSGadmin:getServerBans(), globalbansTable or {})
 	end
 )
@@ -118,7 +118,7 @@ addEventHandler("onRequestAccountsTable", root,
 				return false;
 			end
 			if #accounts <= 25 then
-				exports.dendxmsg:createNewDxMessage(source,#accounts.." hits found. Transfering data, this may take a while.",0,255,0)
+				exports.dendxmsg:createNewDxMessage(source,#accounts.." hits found. Transferring data, this may take a while.",0,255,0)
 				triggerLatentClientEvent(source,"onRequestAccountsTable:callBack", 15000, false, source, accounts)
 			else
 				exports.dendxmsg:createNewDxMessage(source,#accounts.." hits found. Please use a more specific search.",255,0,0)
@@ -126,7 +126,7 @@ addEventHandler("onRequestAccountsTable", root,
 		else
 			local accounts = exports.denmysql:query("SELECT username,id,money,email,team,occupation,score,playtime,premium FROM accounts WHERE username=?",userSearch)
 			if #accounts >= 1 then
-				exports.dendxmsg:createNewDxMessage(source,#accounts.." hit found. Transfering data.",0,255,0)
+				exports.dendxmsg:createNewDxMessage(source,#accounts.." hit found. Transferring data.",0,255,0)
 				triggerLatentClientEvent(source,"onRequestAccountsTable:callBack", 15000, false, source, accounts)
 			else
 				exports.dendxmsg:createNewDxMessage(source,#accounts.." hits found. No exact match found.",255,0,0)
@@ -138,12 +138,12 @@ addEventHandler("onRequestAccountsTable", root,
 addEvent("onRequestAccountBalance",true)
 addEventHandler("onRequestAccountBalance",root,
 	function (accountID)
-		local info = exports.DENmysql:query("SELECT balance FROM banking WHERE userid=? LIMIT 1",accountID);
+		local info = exports.DENmysql:query("SELECT `balance` FROM `banking` WHERE `userid`=? LIMIT 1", accountID)
 		local balance
-		if type(info[1]) == 'table' then
-			balance = info[1]['balance'];
+		if type(info[1]) == "table" then
+			balance = info[1]["balance"];
 		end
-		triggerClientEvent(source,"onRequestAccountBalance:callBack",source,accountID,balance or false);
+		triggerClientEvent(source,"onRequestAccountBalance:callBack",source,accountID,balance or false)
 	end
 )
 
@@ -794,9 +794,9 @@ addEventHandler("staffpanel.accounts.updateInfo",root,
 -- manage accounts that are logged in
 
 function isAccountLoggedIn(ID)
-	local players = getElementsByType('player');
+	local players = getElementsByType('player')
 	for i=1,#players do
-		local userID = getElementData(players[i],"accountUserID");
+		local userID = getElementData(players[i],"accountUserID")
 		if userID == ID then
 			return players[i];
 		end
