@@ -735,6 +735,9 @@ addEventHandler("staffpanel.ban", root,
 		else
 			exports.DENdxmsg:createNewDxMessage(source, "You have successfully banned serial: "..serial, 200, 200, 0)
 		end
+		
+		-- Send the table to the client to update the gridlist
+		triggerEvent("onRequestBansTable", source)
 	end
 )
 
@@ -745,8 +748,8 @@ addEventHandler("staffpanel.unban", root,
 	end
 )
 
-addEvent('staffpanel.accounts.delete',true)
-addEventHandler('staffpanel.accounts.delete',root,
+addEvent('staffpanel.accounts.delete', true)
+addEventHandler('staffpanel.accounts.delete', root,
 	function (id)
 		if not tonumber(id) then return false; end
 		local playerAccount = isAccountLoggedIn(tonumber(ID))
@@ -756,7 +759,7 @@ addEventHandler('staffpanel.accounts.delete',root,
 		end
 		exports.denmysql:exec("DELETE FROM accounts WHERE id=?",id)
 		exports.denmysql:exec("DELETE FROM banking WHERE userid=?",id)
-		exports.dendxmsg:createNewDxMessage(source,"Account deleted!",0,255,0)
+		exports.dendxmsg:createNewDxMessage(source, "Account deleted!", 0, 255, 0)
 	end
 )
 

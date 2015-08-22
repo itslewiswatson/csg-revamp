@@ -1103,7 +1103,7 @@ addEventHandler("onClientGUIDoubleClick", adminGUI.GUIgrids[2],function()
 				guiGridListSetItemColor (adminGUI.GUIgrids[2], row, 2, 225, 255, 255)
 				triggerServerEvent("CSGstaff.enablePunishRequest",localPlayer,data.id,text)			
 			end
-			guiGridListSetItemData (adminGUI.GUIgrids[2], row, 1, data )
+			guiGridListSetItemData(adminGUI.GUIgrids[2], row, 1, data )
 		end
 	end
 end)
@@ -1252,7 +1252,7 @@ function onBanClick()
 				exports.dendxmsg:createNewDxMessage("Please give a valid ban time (number)", 255, 0, 0)
 			end
 		else
-			exports.dendxmsg:createNewDxMessage("Please give a valid serial/account and reason.",255,0,0)
+			exports.dendxmsg:createNewDxMessage("Please give a valid serial/account and reason.", 255, 0, 0)
 		end
 	elseif (source == adminGUI.GUIbuttons[59]) then -- unban selected
 		local grids = {adminGUI.GUIgrids[6], adminGUI.GUIgrids[7]}
@@ -1260,24 +1260,24 @@ function onBanClick()
 		for i=1,#grids do
 			local selRow, _ = guiGridListGetSelectedItem(grids[i])
 			if selRow and selRow ~= -1 then
-				banInfo = guiGridListGetItemData(grids[i],selRow,1)
+				banInfo = guiGridListGetItemData(grids[i], selRow, 1)
 				break
 			end
 		end
 		if banInfo then
-			triggerServerEvent("staffpanel.unban", localPlayer, banInfo.id, banInfo.global)
+			triggerServerEvent("staffpanel.unban", localPlayer, banInfo.id)
 		end		
 	end	
 
 end
-addEventHandler('onClientGUIClick',adminGUI.GUIbuttons[54],onBanClick,false)
-addEventHandler('onClientGUIClick',adminGUI.GUIbuttons[58],onBanClick,false)
-addEventHandler('onClientGUIClick',adminGUI.GUIbuttons[59],onBanClick,false)
+addEventHandler("onClientGUIClick", adminGUI.GUIbuttons[54], onBanClick, false)
+addEventHandler("onClientGUIClick", adminGUI.GUIbuttons[58], onBanClick, false)
+addEventHandler("onClientGUIClick", adminGUI.GUIbuttons[59], onBanClick, false)
 
 -- Function get punishment reason
-function getPunishmentReason ()
-	if (guiComboBoxGetItemText (adminGUI.GUIcombos[1], guiComboBoxGetSelected(adminGUI.GUIcombos[1])) == "#00 - Custom reason") then
-		return guiGetText (adminGUI.GUIedits[2])
+function getPunishmentReason()
+	if (guiComboBoxGetItemText(adminGUI.GUIcombos[1], guiComboBoxGetSelected(adminGUI.GUIcombos[1])) == "#00 - Custom reason") then
+		return guiGetText(adminGUI.GUIedits[2])
 	else
 		return guiComboBoxGetItemText (adminGUI.GUIcombos[1], guiComboBoxGetSelected (adminGUI.GUIcombos[1]))
 	end
