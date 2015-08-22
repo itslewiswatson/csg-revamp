@@ -8,3 +8,14 @@ function convertNumber(theNumber)
 	end  
 	return formatted
 end
+
+function getPlayerFromPartialName(name)
+    if name then 
+        for i, player in ipairs(getElementsByType("player")) do
+            if string.find(getPlayerName(player):lower(), tostring(name):lower(), 1, true) then
+                return player 
+            end
+        end
+    end
+    return false
+end

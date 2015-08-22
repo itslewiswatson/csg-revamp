@@ -5,4 +5,6 @@
 	
 	<export function="convertNumber" type="server" />
 	<export function="convertNumber" type="client" />
+	<export function="getPlayerFromPartialName" type="server" />
+	<export function="getPlayerFromPartialName" type="client" />
 </meta>
