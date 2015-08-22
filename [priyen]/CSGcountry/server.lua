@@ -284,7 +284,8 @@ function getPlayerCountry(plr)
 	
 	local plrAccount = exports.server:getPlayerAccountName(plr)
 	if (manual[plrAccount]) then
-		return manual[plrAccount]
+		-- It still needs to return two values, so we get the other value from the countryName table
+		return manual[plrAccount], countryName[manual[plrAccount]:upper()]
 	else
 		return getCountryFromIP(getPlayerIP(plr))
 	end
