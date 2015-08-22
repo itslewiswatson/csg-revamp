@@ -744,7 +744,11 @@ addEventHandler("staffpanel.ban", root,
 addEvent("staffpanel.unban", true)
 addEventHandler("staffpanel.unban", root,
 	function (banID)
+		-- Remove the ban from the database
 		exports.DENmysql:exec("DELETE FROM `bans` WHERE `id`=?", banID)
+		
+		-- Send the table to the client to update the gridlist
+		triggerEvent("onRequestBansTable", source)
 	end
 )
 
