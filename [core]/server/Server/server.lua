@@ -24,8 +24,9 @@ local loggingIn = {}
 local teams = {
 	[1] = {"Staff", 255, 255, 255},
 	[2] = {"Criminals", 255, 0, 0},
-	[3] = {"Unemployed", 125, 125, 125},
-	[4] = {"Unoccupied", 255, 165, 0},
+	[3] = {"Civilian Workers", 200, 200, 0},
+	[4] = {"Unemployed", 125, 125, 125},
+	[5] = {"Unoccupied", 255, 165, 0},
 }
 
 -- Create teams and set time

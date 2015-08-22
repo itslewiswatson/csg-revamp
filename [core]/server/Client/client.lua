@@ -307,8 +307,10 @@ function fpsState()
 	else
 		local r,g,b = 0,212,14
 	end
-    dxDrawText ( getElementData(localPlayer,"FPS"), posx2-12, posy2-6, x, y, tocolor ( r,g,b, 255 ), 1.4, "default-bold" )
+	if getElementData(localPlayer,"FPS") then
+		dxDrawText ( getElementData(localPlayer,"FPS"), posx2-12, posy2-6, x, y, tocolor ( r,g,b, 255 ), 1.4, "default-bold" )
 
-    dxDrawText ( "FPS", posx2-13, posy2+10, x, y, tocolor ( r,g,b, 255 ), 1.0, "default-bold" )
-    dxDrawText ( "PING", posx2+23, posy2+10, x, y, tocolor ( 19,166,50, 255 ), 1.0, "default-bold" )
+		dxDrawText ( "FPS", posx2-13, posy2+10, x, y, tocolor ( r,g,b, 255 ), 1.0, "default-bold" )
+		dxDrawText ( "PING", posx2+23, posy2+10, x, y, tocolor ( 19,166,50, 255 ), 1.0, "default-bold" )
+	end
 end
