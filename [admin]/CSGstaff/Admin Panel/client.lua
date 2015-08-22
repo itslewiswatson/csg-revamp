@@ -994,28 +994,30 @@ function getUpdatedAccountValues(rowData)
 end
 
 -- Callback for bans
-addEvent( "onRequestBansTable:callBack", true )
-addEventHandler( "onRequestBansTable:callBack", root,
-	function ( theTable, globalBans )
+addEvent("onRequestBansTable:callBack", true)
+addEventHandler("onRequestBansTable:callBack", root,
+	function (theTable, globalBans)
+		--[[
 		if type(globalBans) == 'table' then
 			for i=1,#globalBans do
 				globalBans[i].global = true
 				table.insert(theTable,globalBans[i])
 			end
 		end
+		--]]
 		-- Serial bans
-		guiGridListClear( adminGUI.GUIgrids[6] )
-		guiGridListClear( adminGUI.GUIgrids[7] )
+		guiGridListClear(adminGUI.GUIgrids[6])
+		guiGridListClear(adminGUI.GUIgrids[7])
 		for i=1,#theTable do
-			if ( string.len( theTable[i].serial ) > 30 ) then -- serial ban
-				local row = guiGridListAddRow ( adminGUI.GUIgrids[6] )
-				guiGridListSetItemText ( adminGUI.GUIgrids[6], row, 1, theTable[i].serial, false, false )
-				guiGridListSetItemData ( adminGUI.GUIgrids[6], row, 1, theTable[i] )
+			if (string.len(theTable[i].serial) > 30) then -- serial ban
+				local row = guiGridListAddRow(adminGUI.GUIgrids[6])
+				guiGridListSetItemText(adminGUI.GUIgrids[6], row, 1, theTable[i].serial, false, false)
+				guiGridListSetItemData(adminGUI.GUIgrids[6], row, 1, theTable[i])
 			--	guiGridListSetItemText ( adminGUI.GUIgrids[6], row, 4, timestampConvert ( theTable[i].banstamp ), false, false )
 			else -- account ban
-				local row = guiGridListAddRow ( adminGUI.GUIgrids[7] )
-				guiGridListSetItemText ( adminGUI.GUIgrids[7], row, 1, theTable[i].account, false, false )
-				guiGridListSetItemData ( adminGUI.GUIgrids[7], row, 1, theTable[i] )
+				local row = guiGridListAddRow(adminGUI.GUIgrids[7])
+				guiGridListSetItemText(adminGUI.GUIgrids[7], row, 1, theTable[i].account, false, false)
+				guiGridListSetItemData(adminGUI.GUIgrids[7], row, 1, theTable[i])
 			--	guiGridListSetItemText ( adminGUI.GUIgrids[7], row, 4, timestampConvert ( theTable[i].banstamp ), false, false )				
 			end
 		end
