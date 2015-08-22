@@ -28,15 +28,16 @@ end
 
 addEventHandler("onClientKey", root,
 	function (button, press)
-		if (not isPlayerStaff(localPlayer)) and (getTeamName(getPlayerTeam(localPlayer)) ~= "Staff") then
-			return
-		end
-		theVehicle = getPedOccupiedVehicle(localPlayer)
-		getspeed = getElementSpeed(theVehicle, 2)
-		if (button == "mouse_wheel_up") and (theVehicle) and (isPedInVehicle(localPlayer)) and not (getspeed == 0) then
-			setElementSpeed(theVehicle, 2, getspeed+55)
-		elseif (button == "mouse_wheel_down") and (theVehicle) and (isPedInVehicle(localPlayer)) and not (getspeed == 0) then
-			setElementSpeed(theVehicle, 2, getspeed-55)
+		if (isPlayerStaff(localPlayer)) then
+			if (getTeamName(getPlayerTeam(localPlayer)) == "Staff") then
+				theVehicle = getPedOccupiedVehicle(localPlayer)
+				getspeed = getElementSpeed(theVehicle, 2)
+				if (button == "mouse_wheel_up") and (theVehicle) and (isPedInVehicle(localPlayer)) and not (getspeed == 0) then
+					setElementSpeed(theVehicle, 2, getspeed+55)
+				elseif (button == "mouse_wheel_down") and (theVehicle) and (isPedInVehicle(localPlayer)) and not (getspeed == 0) then
+					setElementSpeed(theVehicle, 2, getspeed-55)
+				end
+			end
 		end
 	end
 )
