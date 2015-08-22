@@ -4,6 +4,6 @@
 
 	<export function="createNewDxMessage" type="client"/>
 	<export function="createNewDxMessage" type="server"/>
-<export function="createNewDxMessageBot" type="client"/>
+	<export function="createNewDxMessageBot" type="client"/>
 	<export function="createNewDxMessageBot" type="server"/>
 </meta>

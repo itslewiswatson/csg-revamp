@@ -276,8 +276,8 @@ addEventHandler("onClientRender", root,
 
 
 
-function createNewDxMessageBot(text,r,g,b)
-	ContextBarBot.add(text,r,g,b)
+function createNewDxMessageBot(text, r, g, b)
+	ContextBarBot.add(text, r, g, b)
 end
 addEvent("CSGdx.createNewDxMessageBot",true)
 addEventHandler("CSGdx.createNewDxMessageBot",localPlayer,createNewDxMessageBot)
@@ -289,5 +289,5 @@ function toggleDxRendering(state)
 		return
 	end
 end
-addEventHandler("onClientMinimize",root,function() toggleDxRender(true) end)
-addEventHandler("onClientRestore",root,function() toggleDxRender(false) end)
+addEventHandler("onClientMinimize", root, function () toggleDxRendering(true) end)
+addEventHandler("onClientRestore", root, function () toggleDxRendering(false) end)
