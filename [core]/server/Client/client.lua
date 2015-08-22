@@ -69,7 +69,7 @@ function onClientPlayerPasswordRequest ()
 end
 
 -- Function to update the password
-function updatePlayerPasswords ()
+function updatePlayerPasswords()
 	local password1, password2 = getNewPasswordWindowData ()
 	if ( password1:match( "^%s*$" ) ) or ( password2:match( "^%s*$" ) ) then
 		setWarningLabelText ( "The password field is empty!", "newPasswordWindow", 225, 0, 0 )
@@ -77,7 +77,7 @@ function updatePlayerPasswords ()
 		setWarningLabelText ( "The passwords don't match!", "newPasswordWindow", 225, 0, 0 )
 	elseif ( string.len( password1 ) < 8 ) then
 		setWarningLabelText ( "Your password is too short!", "newPasswordWindow", 225, 0, 0 )
-	elseif ( md5( password1 ) == getElementData( source, "temp:UsernameData" ) ) then
+	elseif ( hash("sha1", password1 ) == getElementData( source, "temp:UsernameData" ) ) then
 		setWarningLabelText ( "You can't use the same password as your current!", "newPasswordWindow", 225, 0, 0 )
 	else
 		setWarningLabelText ( "Updating password...", "newPasswordWindow", 225, 80, 0 )
