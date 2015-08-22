@@ -262,7 +262,7 @@ local function toIPNum(ip)
 	return ipnum
 end
 
-function getPlayerCountry(ip)
+function getCountryFromIP(ip)
 	local num 	= tostring(toIPNum(ip))
 	local qh 	= dbQuery(sqlite_geo_db, "SELECT country FROM geoIPCountry WHERE "..num.." BETWEEN begin_num AND end_num LIMIT 1")
 	local res 	= dbPoll(qh, -1)
@@ -272,44 +272,50 @@ function getPlayerCountry(ip)
 	return false
 end
 
+function getPlayerCountry(plr)
+	if (not plr) or (getElementType(plr) ~= "player") then
+		return false
+	end
+	local plrIP = getPlayerIP(plr)
+	return getCountryFromIP(plrIP)
+end
+
 -- Put any account names in here and their corresponding country code to manually set a client's country
 local manual = {
-	["tr2012"] = "us",
-	["fcpranav"] = "ca",
-	["dehea"] = "ru",
-	["deried"] = "br",
-	["dejavu"] = "my",
+	["noki"] = "au",
 }
 
-addEventHandler("onPlayerJoin",root,function()
-	setElementData(source,"loc","",true)
-end)
-
-addEventHandler("onPlayerLogin",root,function()
-	local cont = ""
-	setElementData(source,"loc",cont,true)
-	local acc = exports.server:getPlayerAccountName(source)
-	if manual[acc] ~= nil then
-		cont=manual[acc]
+function setCountryData(plr)
+	-- If there is no player, or the argument passed is not a player, return false
+	if (not plr) or (getElementType(plr) ~= "player") then
+		return false
+	end
+	
+	local plrAccount = exports.server:getPlayerAccountName(plr)
+	
+	-- If they are not in the manual table
+	if (not manual[plrAccount]) then
+		-- Since getPlayerCountry returns two results, we're only getting the first one
+		plrLoc = getPlayerCountry(getPlayerIP(plr))
+		
+		-- If we cannot get their country, set it to unknown
+		if (not plrLoc) then
+			plrLoc = "unknown"
+		end
 	else
-		cont=getCountry(getPlayerIP(v))
-		if cont==false then cont = "" end
+		plrLoc = manual[plrAccount]
 	end
-	setElementData(source,"loc",string.lower(cont),true)
-end)
 
-setTimer(function()
-	for k,v in pairs(getElementsByType("player")) do
-		local source=v
-	local cont = ""
-	setElementData(source,"loc",cont,true)
-	local acc = exports.server:getPlayerAccountName(source)
-	if manual[acc] ~= nil then
-		cont=manual[acc]
-	else
-		cont=getCountry(getPlayerIP(v))
-		if cont==false then cont = "" end
-	end
-	setElementData(source,"loc",string.lower(cont),true)
-	end
-end,5000,1)
+	setElementData(plr, "loc", plrLoc:lower())
+end
+
+-- Loop through all players on resource start
+for _, v in pairs(getElementsByType("player")) do
+	setCountryData(v)
+end
+
+-- To check for manual account names
+function onPlayerLogin()
+	setCountryData(source)
+end
+addEventHandler("onPlayerLogin", root, onPlayerLogin)

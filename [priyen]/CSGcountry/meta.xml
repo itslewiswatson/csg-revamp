@@ -1,7 +1,9 @@
 <meta>
     <info type="script" version="1.0.0" name="CSGflags" description="Player countries" />
 	<script src="server.lua" type="server" />
+	
 	<export function="getPlayerCountry" type="server" />
+	<export function="getCountryFromIP" type="server" />
  
 	<file src="flags/ac.png" />
 	<file src="flags/ad.png" />
