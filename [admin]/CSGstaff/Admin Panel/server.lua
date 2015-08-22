@@ -45,31 +45,34 @@ addEventHandler( "onResourceStop",resourceRoot,
 )
 
 -- Event to get player information
-addEvent( "onRequestAdminPlayerInfo", true )
-addEventHandler( "onRequestAdminPlayerInfo", root,
-	function ( thePlayer )
-		if ( exports.server:getPlayerPremiumHours( thePlayer ) ) then premiumHours = math.floor( exports.server:getPlayerPremiumHours( thePlayer )/60 ) else premiumHours = "Not premium" end
-		if ( exports.server:getPlayerAccountEmail( thePlayer ) ) then playerEmail = exports.server:getPlayerAccountEmail( thePlayer ) else playerEmail = "Not logged in" end
-		if ( exports.server:getPlayerAccountName( thePlayer ) ) then accountname = exports.server:getPlayerAccountName( thePlayer ) else accountname = "Not logged in" end
-		if ( getElementData( thePlayer, "Play Time" ) ) then playTime = getElementData( thePlayer, "Play Time" ) else playTime = "Not logged in" end
-		if ( getElementData( thePlayer, "Group" ) ) then playerGroup = getElementData( thePlayer, "Group" ) else playerGroup = "Not in a group" end
-		if ( exports.server:getPlayerBankBalance(thePlayer)) then bBalance = exports.server:convertNumber(exports.server:getPlayerBankBalance(thePlayer)) end
-		local playerLogins = playerLoginsInfo[getPlayerSerial( thePlayer )]
+addEvent("onRequestAdminPlayerInfo", true)
+addEventHandler("onRequestAdminPlayerInfo", root,
+	function (thePlayer)
+		if (exports.server:getPlayerPremiumHours(thePlayer)) then premiumHours = math.floor(exports.server:getPlayerPremiumHours(thePlayer) / 60) else premiumHours = "Not premium" end
+		if (exports.server:getPlayerAccountEmail(thePlayer)) then playerEmail = exports.server:getPlayerAccountEmail( thePlayer ) else playerEmail = "Not logged in" end
+		if (exports.server:getPlayerAccountName(thePlayer)) then accountname = exports.server:getPlayerAccountName( thePlayer ) else accountname = "Not logged in" end
+		if (getElementData(thePlayer, "Play Time")) then playTime = getElementData(thePlayer, "Play Time") else playTime = "Not logged in" end
+		if (getElementData(thePlayer, "Group")) then playerGroup = getElementData(thePlayer, "Group") else playerGroup = "Not in a group" end
+		if (exports.server:getPlayerBankBalance(thePlayer)) then bBalance = exports.server:convertNumber(exports.server:getPlayerBankBalance(thePlayer)) end
+		local playerLogins = playerLoginsInfo[getPlayerSerial(thePlayer)]
+		local playerCountry = exports.CSGcountry:getPlayerCountry(thePlayer)
+		
 		local theTable = {
 			getPlayerMoney( thePlayer ) or "N/A",
-			bBalance,
+			bBalance or "N/A",
 			premiumHours,
 			playerGroup,
 			playerEmail,
 			playTime,
 			accountname,
-			getPlayerSerial( thePlayer ) or "N/A",
-			getPlayerIP ( thePlayer ) or "N/A",
-			"Feature not available",
+			getPlayerSerial(thePlayer) or "N/A",
+			getPlayerIP(thePlayer) or "N/A",
+			playerCountry or "N/A",
 			getPlayerVersion ( thePlayer ) or "N/A",
 			playerLogins,
 		}
-		triggerClientEvent ( source, "onRequestAdminPlayerInfo:callBack", source, theTable )
+		
+		triggerClientEvent(source, "onRequestAdminPlayerInfo:callBack", source, theTable)
 	end
 )
 
