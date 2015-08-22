@@ -55,7 +55,7 @@ addEventHandler("onRequestAdminPlayerInfo", root,
 		if (getElementData(thePlayer, "Group")) then playerGroup = getElementData(thePlayer, "Group") else playerGroup = "Not in a group" end
 		if (exports.server:getPlayerBankBalance(thePlayer)) then bBalance = exports.server:convertNumber(exports.server:getPlayerBankBalance(thePlayer)) end
 		local playerLogins = playerLoginsInfo[getPlayerSerial(thePlayer)]
-		local playerCountry = exports.CSGcountry:getPlayerCountry(thePlayer)
+		local _, playerCountry = exports.CSGcountry:getPlayerCountry(thePlayer)
 		
 		local theTable = {
 			getPlayerMoney(thePlayer) or "N/A",
