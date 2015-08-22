@@ -56,9 +56,10 @@ addEventHandler("onRequestAdminPlayerInfo", root,
 		if (exports.server:getPlayerBankBalance(thePlayer)) then bBalance = exports.server:convertNumber(exports.server:getPlayerBankBalance(thePlayer)) end
 		local playerLogins = playerLoginsInfo[getPlayerSerial(thePlayer)]
 		local _, playerCountry = exports.CSGcountry:getPlayerCountry(thePlayer)
+		local playerCashMoney = exports.CSGutil:convertNumber(getPlayerMoney(thePlayer))
 		
 		local theTable = {
-			exports.server:convertNumber(getPlayerMoney(thePlayer)) or "N/A",
+			playerCashMoney or "N/A",
 			bBalance or "N/A",
 			premiumHours,
 			playerGroup,
