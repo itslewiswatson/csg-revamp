@@ -671,7 +671,7 @@ addEventHandler( "onRequestAdminPlayerInfo:callBack", root,
 		guiSetText( adminGUI.GUIlabels[21], "Playtime: "..theTable[6] or "N/A" )
 		guiSetText( adminGUI.GUIlabels[4] , "Account name: "..theTable[7] or "N/A" )
 		guiSetText( adminGUI.GUIlabels[5] , "Serial: "..theTable[8] or "N/A" )
-		guiSetText( adminGUI.GUIlabels[6] , "IP Adress: "..theTable[9] or "N/A" )
+		guiSetText( adminGUI.GUIlabels[6] , "IP Address: "..theTable[9] or "N/A" )
 		guiSetText( adminGUI.GUIlabels[7] , "Country: "..theTable[10] or "N/A" )
 		guiSetText( adminGUI.GUIlabels[16], "MTA Version "..theTable[11] or "N/A" )
 		local loginsString = "Last logins with the same serial as the selected player:\n\n"
