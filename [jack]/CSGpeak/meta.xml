@@ -1,3 +1,4 @@
 <meta>
 	<script src="server.lua" type="server"/>
+	<export function="getCurrentPeak" type="server" />
 </meta>
