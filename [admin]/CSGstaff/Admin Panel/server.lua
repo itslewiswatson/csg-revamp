@@ -58,7 +58,7 @@ addEventHandler("onRequestAdminPlayerInfo", root,
 		local _, playerCountry = exports.CSGcountry:getPlayerCountry(thePlayer)
 		
 		local theTable = {
-			getPlayerMoney(thePlayer) or "N/A",
+			exports.server:convertNumber(getPlayerMoney(thePlayer)) or "N/A",
 			bBalance or "N/A",
 			premiumHours,
 			playerGroup,

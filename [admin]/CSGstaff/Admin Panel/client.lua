@@ -663,8 +663,8 @@ addEventHandler( "onClientGUIClick", adminGUI.GUIgrids[1],
 addEvent( "onRequestAdminPlayerInfo:callBack", true )
 addEventHandler( "onRequestAdminPlayerInfo:callBack", root,
 	function ( theTable )
-		guiSetText( adminGUI.GUIlabels[24], "Cash Money: "..theTable[1] or "N/A" )
-		guiSetText( adminGUI.GUIlabels[25], "Bank Money: "..theTable[2] or "N/A" )
+		guiSetText( adminGUI.GUIlabels[24], "Cash Money: $"..theTable[1] or "N/A" )
+		guiSetText( adminGUI.GUIlabels[25], "Bank Money: $"..theTable[2] or "N/A" )
 		guiSetText( adminGUI.GUIlabels[26], "Premium Hours: "..theTable[3] or "N/A" )
 		guiSetText( adminGUI.GUIlabels[27], "Group name: "..theTable[4] or "N/A" )
 		guiSetText( adminGUI.GUIlabels[29], "Email: "..theTable[5] or "N/A" )
