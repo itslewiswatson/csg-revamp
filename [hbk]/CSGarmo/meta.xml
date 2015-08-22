@@ -2,7 +2,7 @@
 <info author="HBK"  name="Weapon Armor" version="1.0.0" type="script" />
 	<script src="Client.lua" type="client"/>
 	<script src="Server.lua" type="server"/>
-	<file src="sound.ogg"/>
+	<!--<file src="sound.ogg"/>-->
 
 	<include resource="bone_attach"/>
   
