@@ -58,7 +58,7 @@ addEventHandler("onRequestAdminPlayerInfo", root,
 		local playerCountry = exports.CSGcountry:getPlayerCountry(thePlayer)
 		
 		local theTable = {
-			getPlayerMoney( thePlayer ) or "N/A",
+			getPlayerMoney(thePlayer) or "N/A",
 			bBalance or "N/A",
 			premiumHours,
 			playerGroup,
@@ -68,7 +68,7 @@ addEventHandler("onRequestAdminPlayerInfo", root,
 			getPlayerSerial(thePlayer) or "N/A",
 			getPlayerIP(thePlayer) or "N/A",
 			playerCountry or "N/A",
-			getPlayerVersion ( thePlayer ) or "N/A",
+			getPlayerVersion(thePlayer) or "N/A",
 			playerLogins,
 		}
 		
