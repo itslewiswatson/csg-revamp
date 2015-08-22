@@ -1226,14 +1226,14 @@ addEventHandler ( "onClientGUIClick", root,
 )
 
 function onBanClick()
-	if ( source == adminGUI.GUIbuttons[54] or source == adminGUI.GUIbuttons[58] ) then -- ban account/serial
+	if (source == adminGUI.GUIbuttons[54] or source == adminGUI.GUIbuttons[58]) then -- ban account/serial
 		local banInput = guiGetText(adminGUI.GUIedits[31])
 		local reason = guiGetText(adminGUI.GUIedits[32])
-		if ( banInput and string.match( banInput, '^[%w%s]*%w[%w%s]*$' ) and banInput ~= "Serial/Accountname" ) and ( reason and string.match( reason, '^[%w%s]*%w[%w%s]*$' ) and reason ~= "Reason" ) then
+		if ( banInput and string.match( banInput, '^[%w%s]*%w[%w%s]*$' ) and banInput ~= "Serial/Account name" ) and ( reason and string.match( reason, '^[%w%s]*%w[%w%s]*$' ) and reason ~= "Reason" ) then
 			local banTime = tonumber(guiGetText(adminGUI.GUIedits[33]))
 			if banTime and type(banTime) == 'number' then
 				local banType = "serial"
-				if source == adminGUI.GUIbuttons[54] then banType = 'account' end
+				if source == adminGUI.GUIbuttons[54] then banType = "account" end
 				local days = guiRadioButtonGetSelected(adminGUI.GUIradios[5])
 				local hours = guiRadioButtonGetSelected(adminGUI.GUIradios[6])
 				local permanent = guiRadioButtonGetSelected(adminGUI.GUIradios[7])

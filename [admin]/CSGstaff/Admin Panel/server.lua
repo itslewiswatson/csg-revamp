@@ -100,7 +100,7 @@ addEvent("onRequestBansTable", true)
 addEventHandler("onRequestBansTable", root,
 	function ()
 		local banTable = exports.denmysql:query("SELECT * FROM `bans`")
-		exports.dendxmsg:createNewDxMessage(source, "Transferring data, this may take a while.", 255, 255, 0)
+		exports.DENdxmsg:createNewDxMessage(source, "Transferring data, this may take a while.", 255, 255, 0)
 		triggerLatentClientEvent(source, "onRequestBansTable:callBack", 20000, false, source, banTable)
 	end
 )
@@ -375,16 +375,16 @@ addEvent("onServerPlayerPunish", true)
 addEventHandler("onServerPlayerPunish", root,
 	function (thePlayer, theType, theTime, theReason)
 		if (theType == "Mainchat/teamchat mute") then
-			exports.CSGadmin:adminMutePlayer (source, thePlayer, theReason, theTime, "Main")
+			exports.CSGadmin:adminMutePlayer(source, thePlayer, theReason, theTime, "Main")
 		elseif (theType == "Global mute") then
-			exports.CSGadmin:adminMutePlayer (source, thePlayer, theReason, theTime, "Global")
+			exports.CSGadmin:adminMutePlayer(source, thePlayer, theReason, theTime, "Global")
 		elseif (theType == "Jail") then
 			setElementData(thePlayer,"isPlayerArrested",false)
-			exports.CSGadmin:setPlayerJailed (source, thePlayer, theReason, theTime)
+			exports.CSGadmin:setPlayerJailed(source, thePlayer, theReason, theTime)
 		elseif (theType == "Account ban") then
-			exports.CSGadmin:banServerPlayer (source, thePlayer, theReason, theTime, "account" )
+			exports.CSGadmin:banServerPlayer(source, thePlayer, theReason, theTime, "account" )
 		elseif (theType == "Serial ban") then
-			exports.CSGadmin:banServerPlayer (source, thePlayer, theReason, theTime, "serial" )
+			exports.CSGadmin:banServerPlayer(source, thePlayer, theReason, theTime, "serial" )
 		end
 	end
 )
@@ -688,39 +688,41 @@ end)
 
 -- bans
 
-addEvent("staffpanel.ban",true)
-addEventHandler("staffpanel.ban",root,
-function(serialOrAccount,banType,reason,duration)
-	local theTime = getRealTime()
-	local timestamp = theTime.timestamp
-	local banstamp
-	if not duration then
-		banstamp = 0
-	else
-		banstamp = timestamp+duration
-	end
-	local serial = serialOrAccount
-	local account = ""
-	if banType == 'account' then
-		serial = ""
-		account = serialOrAccount
-	end
-	exports.denmysql:exec("INSERT INTO bans (serial,account,reason,banstamp,bannedby) VALUES (?,?,?,?,?)",serial,account,serialOrAccount,reason,banstamp,getPlayerName(source))
-	local players = getElementsByType('player')
-	for i=1,#players do
-		if banType == 'serial' then
-			local pSerial = getPlayerSerial(players[i])
-			if pSerial == serialOrAccount then
-				kickPlayer(players[i],source,reason)
-			end
+addEvent("staffpanel.ban", true)
+addEventHandler("staffpanel.ban", root,
+	function (serialOrAccount, banType, reason, duration)
+		local theTime = getRealTime()
+		local timestamp = theTime.timestamp
+		local banstamp
+		if (not duration) then
+			banstamp = 0
 		else
-			local pAccount = exports.server:getPlayerAccountName(players[i])
-			if pAccount == serialOrAccount then
-				kickPlayer(players[i],source,reason)
+			banstamp = timestamp+duration
+		end
+		local serial = serialOrAccount
+		local account = ""
+		if banType == 'account' then
+			serial = ""
+			account = serialOrAccount
+		end
+		exports.DENmysql:exec("INSERT INTO `bans` (serial, account, reason, banstamp, bannedby) VALUES (?,?,?,?,?)",serial,account,reason,banstamp,getPlayerName(source))
+		local players = getElementsByType('player')
+		for i=1,#players do
+			if banType == "serial" then
+				local pSerial = getPlayerSerial(players[i])
+				if pSerial == serialOrAccount then
+					kickPlayer(players[i], source, reason)
+				end
+			else
+				local pAccount = exports.server:getPlayerAccountName(players[i])
+				if pAccount == serialOrAccount then
+					kickPlayer(players[i], source, reason)
+				end
 			end
 		end
 	end
-end)
+)
+
 addEvent("staffpanel.unban", true)
 addEventHandler("staffpanel.unban", root,
 	function (banID)
