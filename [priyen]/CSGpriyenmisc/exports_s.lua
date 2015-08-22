@@ -408,5 +408,4 @@ addEventHandler("onPlayerLogin",root,function()
 end)
 
 
-setFPSLimit(69) -- to prevent weapons skills bug
 
