@@ -256,6 +256,11 @@ local countryName 	=
 }
 local sqlite_geo_db = dbConnect("sqlite", "GeoIP.db")
 
+-- Put any account names in here and their corresponding country code to manually set a client's country
+local manual = {
+	["noki"] = "au",
+}
+
 local function toIPNum(ip)
 	local nums 	= split(ip, 46)
 	local ipnum = (nums[1] * 16777216) + (nums[2] * 65536) + (nums[3] * 256) + (nums[4])
@@ -276,14 +281,14 @@ function getPlayerCountry(plr)
 	if (not plr) or (getElementType(plr) ~= "player") then
 		return false
 	end
-	local plrIP = getPlayerIP(plr)
-	return getCountryFromIP(plrIP)
+	
+	local plrAccount = exports.server:getPlayerAccountName(plr)
+	if (manual[plrAccount]) then
+		return manual[plrAccount]
+	else
+		return getCountryFromIP(getPlayerIP(plr))
+	end
 end
-
--- Put any account names in here and their corresponding country code to manually set a client's country
-local manual = {
-	["noki"] = "au",
-}
 
 function setCountryData(plr)
 	-- If there is no player, or the argument passed is not a player, return false
