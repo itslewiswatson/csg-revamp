@@ -17,6 +17,8 @@
   <script src="Admin basemods/basemod_client.lua" type="client" />
   <script src="Admin basemods/basemod_server.lua" type="server" />
   
+  <script src="Misc/booster.lua" type="client" />
+  
   <file src="Admin Skins/wfyclot.txd" type="client" />
   <file src="Admin Skins/wmyclot.dff" type="client" />
   <file src="Admin Skins/wmyclot.txd" type="client" />
