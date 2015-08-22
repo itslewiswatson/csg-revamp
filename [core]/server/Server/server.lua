@@ -361,7 +361,7 @@ function createPlayerElementIntoGame(thePlayer, dataTable)
 	if (exports.server:isPlayerLoggedIn(thePlayer)) then
 		local playerID = exports.server:getPlayerAccountID(thePlayer)
 
-		exports.DENdxmsg:createNewDxMessage(thePlayer, "Welcome back to CSG "..getPlayerName(thePlayer).."!", 238, 154, 0)
+		exports.DENdxmsg:createNewDxMessage(thePlayer, "Welcome back to CSG, "..getPlayerName(thePlayer).."!", 238, 154, 0)
 
 		setCameraTarget(thePlayer, thePlayer)
 		showChat(thePlayer, true)
@@ -435,7 +435,7 @@ function getCSGServerVersion()
 	if (query) then
 		return query["value"]
 	else
-		return "2.1.4"
+		return "2.3.1"
 	end
 end
 
