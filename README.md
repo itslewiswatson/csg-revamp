@@ -21,3 +21,11 @@ Now these resources are the last of what is left of the "original" CSG game mode
 - All commits should be on per a resource basis, so do not modify multiple resources in one commit.
 - Include [resourceName] in the commit title.
 - [UT] means untested. This is for actual code changes, so don't use it on code cleanup commits. Use it for resource merges or bug fixes, if they are untested
+
+## Current Status
+- Most things tested save correctly. Staff members, bans, some server settings, accounts, groups etc. Turfs, some player stats (not account data), job ranks etc do not currently save. I'm working on it.
+- We are nearing a stable release. That is, a release where everything just works easily and with no hassles. That is coming soon.
+- The database is still edging. The copy I have does not contain the `turfing` or `playerstats` tables. That sole fact has put the revamp further back than I would have liked. `playerstats` stores things like job ranks, muscle, CJ (I think), weapon stats and more. `turfing` contained all the turf coordinates. I'll need to get my hands on a database with them or remap them.
+- The codebase and resource structure is still messy. That is precisely what 2 years of lazy development does. People carelessly created new resources with peculiar names similarities between other resources. It has created a complex web that still needs time to restore to an acceptable state.
+- There are a lot of bugs within the code that were never fixed in CSG, or that have been fixed in NGC.
+- There is no documentation on anything. I will be working on that.
