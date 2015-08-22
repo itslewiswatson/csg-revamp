@@ -99,9 +99,9 @@ end)
 addEvent("onRequestBansTable", true)
 addEventHandler("onRequestBansTable", root,
 	function ()
-		local globalbans = exports.denmysql:query("SELECT * FROM `bans`")
+		local banTable = exports.denmysql:query("SELECT * FROM `bans`")
 		exports.dendxmsg:createNewDxMessage(source, "Transferring data, this may take a while.", 255, 255, 0)
-		triggerLatentClientEvent(source, "onRequestBansTable:callBack", 20000, false, source, exports.CSGadmin:getServerBans(), globalbansTable or {})
+		triggerLatentClientEvent(source, "onRequestBansTable:callBack", 20000, false, source, banTable)
 	end
 )
 
@@ -690,7 +690,7 @@ end)
 
 addEvent("staffpanel.ban",true)
 addEventHandler("staffpanel.ban",root,
-function(serialOrAccount,banType,reason,duration,global)
+function(serialOrAccount,banType,reason,duration)
 	local theTime = getRealTime()
 	local timestamp = theTime.timestamp
 	local banstamp
@@ -699,15 +699,13 @@ function(serialOrAccount,banType,reason,duration,global)
 	else
 		banstamp = timestamp+duration
 	end
-	local banTable = "bans"
-	if global then banTable = 'globalbans' end
 	local serial = serialOrAccount
 	local account = ""
 	if banType == 'account' then
 		serial = ""
 		account = serialOrAccount
 	end
-	exports.denmysql:exec("INSERT INTO ?? (serial,account,reason,banstamp,bannedby) VALUES (?,?,?,?,?)",banTable,serial,account,serialOrAccount,reason,banstamp,getPlayerName(source))
+	exports.denmysql:exec("INSERT INTO bans (serial,account,reason,banstamp,bannedby) VALUES (?,?,?,?,?)",serial,account,serialOrAccount,reason,banstamp,getPlayerName(source))
 	local players = getElementsByType('player')
 	for i=1,#players do
 		if banType == 'serial' then
@@ -723,13 +721,12 @@ function(serialOrAccount,banType,reason,duration,global)
 		end
 	end
 end)
-addEvent("staffpanel.unban",true)
-addEventHandler("staffpanel.unban",root,
-	function(banID,global)
-	local banTable = "bans"
-	if global then banTable = "globalbans" end
-	exports.denmysql:exec("DELETE FROM ?? WHERE id=?",banTable,banID)
-end)
+addEvent("staffpanel.unban", true)
+addEventHandler("staffpanel.unban", root,
+	function (banID)
+		exports.DENmysql:exec("DELETE FROM `bans` WHERE `id`=?", banID)
+	end
+)
 
 addEvent('staffpanel.accounts.delete',true)
 addEventHandler('staffpanel.accounts.delete',root,

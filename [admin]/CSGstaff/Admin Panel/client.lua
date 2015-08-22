@@ -421,15 +421,13 @@ adminGUI.GUIgrids[7] = guiCreateGridList(330, 3, 320,349, false, adminGUI.GUItab
 adminGUI.GUIlabels.banSerialUsername = guiCreateLabel(10, 356, 600, 16, "Serial/Username: N/A", false, adminGUI.GUItabs[7])
 adminGUI.GUIlabels.banReason = guiCreateLabel(10, 372, 600, 16, "Reason: N/A", false, adminGUI.GUItabs[7])
 adminGUI.GUIlabels.banBanner = guiCreateLabel(10, 388, 600, 16, "Banned by: N/A", false, adminGUI.GUItabs[7])
-adminGUI.GUIlabels.banGlobal = guiCreateLabel(10, 404, 600, 16, "Global: N/A", false, adminGUI.GUItabs[7])
-adminGUI.GUIlabels.banDate = guiCreateLabel(10, 420, 600, 16, "Unbanned on: N/A", false, adminGUI.GUItabs[7])
+adminGUI.GUIlabels.banDate = guiCreateLabel(10, 404, 600, 16, "Unbanned on: N/A", false, adminGUI.GUItabs[7])
 adminGUI.GUIedits[31] = guiCreateEdit(1, 518, 279, 28, "Serial/Account name", false, adminGUI.GUItabs[7])
 adminGUI.GUIbuttons[54] = guiCreateButton(281, 519, 122, 26, "Ban Account", false, adminGUI.GUItabs[7])
 adminGUI.GUIbuttons[58] = guiCreateButton(405, 519, 122, 26, "Ban Serial", false, adminGUI.GUItabs[7])
 adminGUI.GUIbuttons[59] = guiCreateButton(529, 519, 122, 26, "Unban Selected", false, adminGUI.GUItabs[7])
 
 adminGUI.GUIlabels[62] = guiCreateLabel(10, 499, 265, 16, "Enter a serial or account name:", false, adminGUI.GUItabs[7])
-adminGUI.globalBanCheckbox = guiCreateCheckBox(275, 499, 290, 16, "Global ban ( ban will count for all CSG servers )", false,false, adminGUI.GUItabs[7])
 adminGUI.GUIlabels[63] = guiCreateLabel(10, 443, 265, 16, "Choose a time and reason:", false, adminGUI.GUItabs[7])
 adminGUI.GUIedits[32] = guiCreateEdit(1, 465, 279, 28, "Reason", false, adminGUI.GUItabs[7])
 adminGUI.GUIedits[33] = guiCreateEdit(281, 465, 84, 28, "Time", false, adminGUI.GUItabs[7])
@@ -1045,8 +1043,7 @@ function onBanGridClick()
 	guiSetText(adminGUI.GUIlabels.banSerialUsername,"Serial/Username: "..serialUsername)
 	guiSetText(adminGUI.GUIlabels.banReason,"Reason: "..banReason)
 	guiSetText(adminGUI.GUIlabels.banBanner,"Banned by: "..bannedBy)
-	guiSetText(adminGUI.GUIlabels.banDate,"Unbanned on: "..banDate)	
-	guiSetText(adminGUI.GUIlabels.banGlobal,"Global: "..globalBan)	
+	guiSetText(adminGUI.GUIlabels.banDate,"Unbanned on: "..banDate)
 end
 addEventHandler('onClientGUIClick',adminGUI.GUIgrids[6],onBanGridClick,false)
 addEventHandler('onClientGUIClick',adminGUI.GUIgrids[7],onBanGridClick,false)
@@ -1233,7 +1230,6 @@ function onBanClick()
 		local banInput = guiGetText(adminGUI.GUIedits[31])
 		local reason = guiGetText(adminGUI.GUIedits[32])
 		if ( banInput and string.match( banInput, '^[%w%s]*%w[%w%s]*$' ) and banInput ~= "Serial/Accountname" ) and ( reason and string.match( reason, '^[%w%s]*%w[%w%s]*$' ) and reason ~= "Reason" ) then
-			local global = guiCheckBoxGetSelected(adminGUI.globalBanCheckbox)
 			local banTime = tonumber(guiGetText(adminGUI.GUIedits[33]))
 			if banTime and type(banTime) == 'number' then
 				local banType = "serial"
@@ -1251,15 +1247,15 @@ function onBanClick()
 				elseif minutes then
 					banTime = 60*banTime -- 1 minute * bantime
 				end
-				triggerServerEvent('staffpanel.ban',localPlayer,banInput,banType,reason,banTime,global)
+				triggerServerEvent("staffpanel.ban", localPlayer, banInput, banType, reason, banTime)
 			else
-				exports.dendxmsg:createNewDxMessage("Please give a valid ban time ( number )",255,0,0)
+				exports.dendxmsg:createNewDxMessage("Please give a valid ban time (number)", 255, 0, 0)
 			end
 		else
 			exports.dendxmsg:createNewDxMessage("Please give a valid serial/account and reason.",255,0,0)
 		end
 	elseif ( source == adminGUI.GUIbuttons[59] ) then -- unban selected
-		local grids = {adminGUI.GUIgrids[6],adminGUI.GUIgrids[7]}
+		local grids = {adminGUI.GUIgrids[6], adminGUI.GUIgrids[7]}
 		local banInfo
 		for i=1,#grids do
 			local selRow, _ = guiGridListGetSelectedItem(grids[i])
