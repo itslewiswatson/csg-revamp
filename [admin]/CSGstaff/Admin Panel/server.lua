@@ -743,9 +743,15 @@ addEventHandler("staffpanel.ban", root,
 
 addEvent("staffpanel.unban", true)
 addEventHandler("staffpanel.unban", root,
-	function (banID)
+	function (banTable)
 		-- Remove the ban from the database
-		exports.DENmysql:exec("DELETE FROM `bans` WHERE `id`=?", banID)
+		exports.DENmysql:exec("DELETE FROM `bans` WHERE `id`=?", banTable.id)
+		
+		if (banTable.serial == "") then
+			exports.DENdxmsg:createNewDxMessage(source, "You have successfully unbanned account: "..banTable.account, 200, 200, 0)
+		else
+			exports.DENdxmsg:createNewDxMessage(source, "You have successfully banned account: "..banTable.serial, 200, 200, 0)
+		end
 		
 		-- Send the table to the client to update the gridlist
 		triggerEvent("onRequestBansTable", source)

@@ -1265,7 +1265,8 @@ function onBanClick()
 			end
 		end
 		if banInfo then
-			triggerServerEvent("staffpanel.unban", localPlayer, banInfo.id)
+			-- Send the whole table over so we can pass a message back to the client
+			triggerServerEvent("staffpanel.unban", localPlayer, banInfo)
 		end		
 	end	
 
