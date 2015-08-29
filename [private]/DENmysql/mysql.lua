@@ -1,3 +1,6 @@
+-- Counter to keep an eye on how many queries are being processed
+totalQuerysRan = 0
+
 -- Enter your database information here (I highly recommend using MySQL for your database)
 local dbType, dbName, dbHost, dbUsr, dbPass = "mysql", "mta", "127.0.0.1", "root", ""
 
@@ -25,6 +28,7 @@ addEventHandler("onResourceStart", resourceRoot, onResourceStart)
 function query(...)
     if isElement(sql) then
         local qh = dbQuery(sql, ...)
+		totalQuerysRan = totalQuerysRan + 1
         return dbPoll(qh, -1)
     end
 	return false
@@ -43,6 +47,7 @@ end
 
 function exec(str, ...)
 	if isElement(sql) then
+		totalQuerysRan = totalQuerysRan + 1
 		return dbExec(sql, str, ...)
 	end
 	return false
@@ -65,3 +70,12 @@ function creatColumn(aTable,aColumn,aType)
 		return exec("ALTER TABLE `??` ADD `??` ??", aTable, aColumn, aType)
 	end
 end
+
+function outputTotal(ifReset)
+	outputDebugString("[DENmysql] Total querys ran in total from the past 5 minutes: "..totalQuerysRan)
+	if (ifReset == true) then
+		totalQuerysRan = 0
+	end
+end
+setTimer(outputTotal, 60000 * 5, 0, true)
+addCommandHandler("outputTotal", outputTotal, false, false)
