@@ -1,5 +1,5 @@
 <meta>
-	<script src="garbage_c.luac" type="client" />
+	<script src="garbage_c.lua" type="client" />
 	<script src="garbage_s.lua" type="server" />
-	<script src="garbage_pos.luac" type="client" />
+	<script src="garbage_pos.lua" type="client" />
 </meta>

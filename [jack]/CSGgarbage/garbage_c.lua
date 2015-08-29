@@ -272,8 +272,8 @@ end)
 
 function checkForJob(player)
 	if player then
+		if not getPlayerTeam(player) then return false end
 		team = getTeamName(getPlayerTeam(player))
-		if not team then return false end
 		if (team == "Civilian Workers") and (getElementData(player,"Occupation") == "Trash Collector") then
 			checkForTrashJob(localPlayer,true)
 			createDropoffMarker(true)
