@@ -61,7 +61,6 @@ function getPlayerAccountData(plr, data)
 	local userID = exports.server:getPlayerAccountID(plr)
 	-- If the player is in the table
 	if (statsTable[plr]) then
-		outputDebugString("plr in table")
 		if (data == "table") then
 			return statsTable[plr]
 		else
