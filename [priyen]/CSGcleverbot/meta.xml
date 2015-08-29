@@ -1,6 +1,0 @@
-<meta>
-	<info author="priyen" version="1.0.0" type="misc" name="clever bot" description="priyen"/>
-	
-	<script src="ppServer_s.lua" type="server"/>
-
-</meta>
