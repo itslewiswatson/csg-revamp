@@ -29,6 +29,7 @@ end
 addEventHandler("onClientKey", root,
 	function (button, press)
 		if (isPlayerStaff(localPlayer)) then
+			if (not getPlayerTeam(localPlayer)) then return false end
 			if (not getTeamName(getPlayerTeam(localPlayer)) == "Staff") then return false end
 			theVehicle = getPedOccupiedVehicle(localPlayer)
 			getspeed = getElementSpeed(theVehicle, 2)
