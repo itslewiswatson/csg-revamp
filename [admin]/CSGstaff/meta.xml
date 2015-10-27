@@ -43,4 +43,6 @@
   <export function="promoteAdmin" type="server" />
   <export function="getAllAdmins" type="server" />
   <min_mta_version server="1.5" />
+  
+  <oop>true</oop>
 </meta>
