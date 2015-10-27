@@ -1,6 +1,6 @@
 <meta>
 <info author="HBK" type="script" version="0.5" name="CSG staff" />
 <script src="fallout.lua" type="server" />
-<script src="stop.luac" type="client" />
+<script src="stop.lua" type="client" />
 
 </meta>

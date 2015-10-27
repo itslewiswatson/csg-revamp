@@ -1,10 +1,10 @@
 <meta>
 	<info author="Dennis" version="1.0" description="Medic Job" type="script" />
 
-	<script src="client.luac" type="client" />
-	<script src="medicpanel.luac" type="client" />
+	<script src="client.lua" type="client" />
+	<script src="medicpanel.lua" type="client" />
 	<script src="server.lua" type="server" />
-	<script src="docaddon/client.luac" type="client" />
+	<script src="docaddon/client.lua" type="client" />
 	 
 	<script src="docaddon/server.lua" type="server" />
 

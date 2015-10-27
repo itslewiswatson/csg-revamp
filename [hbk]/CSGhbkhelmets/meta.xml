@@ -1,7 +1,7 @@
 <meta>
     <info name="HBK" author="HelmetsMod" version="1.0.1" type="script" description="HelmetsMod"/>
 
-    <script src="client.luac" type="client"/>
+    <script src="client.lua" type="client"/>
     <script src="server.lua" type="server"/>
 
 	<file src="helmet.txd" />

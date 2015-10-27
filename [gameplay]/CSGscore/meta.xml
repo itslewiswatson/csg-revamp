@@ -1,6 +1,6 @@
 <meta>
 	<script src="score_s.lua" type="server"/>
-	<script src="score_c.luac" type="client"/>
+	<script src="score_c.lua" type="client"/>
 	<export function="givePlayerScore" type="server" />
 	<export function="givePlayerScore" type="client" />
 	

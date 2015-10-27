@@ -1,6 +1,6 @@
 <meta>
     <info type="misc" version="1.0.0" author="[SGC]Chang" name="Mud Shader" description=""></info>
-    <script src="mud.luac" type="client" protected="true" />
+    <script src="mud.lua" type="client" protected="true" />
     <file src="texreplace.fx"></file>
     <file src="uv_scroll.fx"></file>
 
@@ -26,7 +26,7 @@
     <file src="textures/gym.png" type="client"></file>
 
 
-    <script type="client" src="radar.luac" protected="true" />
+    <script type="client" src="radar.lua" protected="true" />
 	
 	<file src="sattelite/sattelite_0_0.jpeg"/>
     <file src="sattelite/sattelite_0_1.jpeg"/>

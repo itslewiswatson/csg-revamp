@@ -1,6 +1,6 @@
 <meta>
   <info author="Dennis" version="1.0" description="24/7 SHOP" type="script" />
-  <script src="client.luac" type="client" />
+  <script src="client.lua" type="client" />
   <script src="server.lua" type="server" />
   <file src="blip.png" />
   <file src="images/BAT.png" />

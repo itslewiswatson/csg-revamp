@@ -1,6 +1,6 @@
 <meta>
   <info author="FabioGNR" version="3.0" description="Mechanic Job" type="script" />
   <script src="mechpanel.luac" type="client" />
-  <script src="client.luac" type="client" />
+  <script src="client.lua" type="client" />
   <script src="server.lua" type="server" />
 </meta>

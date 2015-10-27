@@ -1,5 +1,5 @@
 <meta>
     <info author="UniQ" type="script" name="CSGstorerob" description="Script that allows criminals to rob stores." />
-    <script src="storerob.luac" type="client"/>
-	<script src="server.luac" type="server"/>
+    <script src="storerob.lua" type="client"/>
+	<script src="server.lua" type="server"/>
 </meta>

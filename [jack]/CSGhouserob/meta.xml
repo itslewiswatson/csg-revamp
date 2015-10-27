@@ -1,5 +1,5 @@
 <meta>
-	<script src="robbery_c.luac" type="client" />
+	<script src="robbery_c.lua" type="client" />
 	<script src="robbery_s.lua" type="server" />
 	
 	<export function="getScriptVersion" />

@@ -1,5 +1,5 @@
 <meta>
   <info author="UniQ" type="script" name="CSGanims" description="CSG animation system." />
-  <script src="client.luac" type="client" />
+  <script src="client.lua" type="client" />
   <script src="server.lua" type="server" />
 </meta>

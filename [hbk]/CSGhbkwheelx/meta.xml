@@ -2,5 +2,5 @@
     <info author="HBK" type="misc" description="WheelFix"/>
    
     <script src="wserver.lua"/>
-	<script src="wclient.luac" type="client"/>
+	<script src="wclient.lua" type="client"/>
 </meta>

@@ -2,5 +2,5 @@
 	<info type="misc" name="HBK" author="HBK" description="CSG terrorists skin" version="1" />
 	<file src="terrorists5.txd" />
 	<file src="terrorists5.dff" />
-	<script type="client" src="skins.luac" />
+	<script type="client" src="skins.lua" />
 </meta>

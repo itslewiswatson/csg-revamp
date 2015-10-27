@@ -1,7 +1,7 @@
 <meta>
 	<info author="HBK" name="TaxiBOTjob" version="0.1.1" type="script" />
 	<script src="job.lua" />
-	<script src="panelc.luac" type="client"/>
+	<script src="panelc.lua" type="client"/>
 	<script src="panels.lua" type="server"/>
         <script src="service.lua" type="server"/>
 	<script src="cmd.lua" type="server" />
