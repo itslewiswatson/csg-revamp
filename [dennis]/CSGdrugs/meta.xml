@@ -2,10 +2,10 @@
 	<file src="shaders/block_world.fx" type="client"/>
 	<file src="shaders/mta-helper.fx" type="client"/>
 	
-	<script src="LSDshader.luac" type="client"/>
-    <script src="drugsClient.luac" type="client"/>
-    <script src="drugFactory.luac" type="client"/>
-    <script src="drugDamage.luac" type="client"/>
+	<script src="LSDshader.lua" type="client"/>
+    <script src="drugsClient.lua" type="client"/>
+    <script src="drugFactory.lua" type="client"/>
+    <script src="drugDamage.lua" type="client"/>
 	
 	<script src="drugsServer.slua" type="server"/>
 	

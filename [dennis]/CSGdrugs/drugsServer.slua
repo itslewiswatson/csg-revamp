@@ -33,10 +33,13 @@ local heroineEffect = {}
 local droppedDrugs = {}
 local noPickup = {}
 local markEnt = {}
+local ecstasyEffect = {}
+
 local dFacEnter = createMarker(-1826.84, 43.76, 16.12, "arrow", 2, 255, 0, 0)
 local dFacExit = createMarker(2541.69, -1304.01, 1026.07, "arrow", 2, 255, 0, 0)
 setElementDimension(dFacExit, 10)
 setElementInterior(dFacExit, 2)
+
 function onmHit(element, dim)
 	if (dim and isElement(element) and getElementType(element) == "player" and not getPedOccupiedVehicle(element) and not markEnt[element]) then
 		if (getPlayerWantedLevel(element) > 0) then
@@ -228,6 +231,7 @@ addEventHandler("CSGdrugs.reportBot", root, bot)
 function startEffect(drug)
 	if (drug == "Ecstasy") then
 		setPedStat(client, 24, 1000)
+		ecstasyEffect[client] = true
 	end
 	if (drug == "Heroine") then
 		heroineEffect[client] = true
@@ -238,10 +242,13 @@ addEventHandler("CSGdrugs.drugEffectStart", root, startEffect)
 
 function stopEffect(drug)
 	if (drug == "Ecstasy") then
-		setPedStat(client, 24, 569)
-		local hp = getElementHealth(client)
-		if (hp < 90) then
-			setElementHealth(client, hp + 10)
+		if (ecstasyEffect[client]) then
+			setPedStat(client, 24, 569)
+			local hp = getElementHealth(client)
+			if (hp < 100) then
+				setElementHealth(client, 100)
+			end
+			ecstasyEffect[client] = nil
 		end
 	end
 	if (drug == "Heroine") then
