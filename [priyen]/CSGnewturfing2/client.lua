@@ -128,92 +128,94 @@ local myCol = createColCircle(1,1,60)
 attachElements(myCol,localPlayer)
 -- When player dies spawn him in the nearest turf of his own group
 addEvent ("onClientTurferDied", true)
-function onClientTurferDied ( theTable )
-	if ( getElementData( source, "isPlayerVip" ) ) then
+function onClientTurferDied (theTable)
+	if (getElementData(source, "isPlayerVip")) then
 		spawnTime = 5000
 	end
 
 	local turfDistance = nil
 	local turfID = nil
-	local px, py, pz = getElementPosition ( localPlayer )
+	local px, py, pz = getElementPosition (localPlayer)
 
-	if (getPlayerTeam(localPlayer)) and ( getTeamName( getPlayerTeam( localPlayer ) ) == "Criminals" ) then
-		if isElementWithinColShape(localPlayer,LVcol) == true or isElementWithinColShape(localPlayer,seaCol) then
-			for k,v in pairs(theTable) do
-					local x, y, z = v[1],v[2],v[3]
-					if turfDistance == nil or getDistanceBetweenPoints2D ( x, y, px, py ) < turfDistance then
-						turfDistance = getDistanceBetweenPoints2D ( x, y, px, py  )
-						turfID = v[4]
-					end
+	if (getPlayerTeam(localPlayer)) and (getTeamName(getPlayerTeam(localPlayer)) == "Criminals") then
+		if isElementWithinColShape(localPlayer, LVcol) == true or isElementWithinColShape(localPlayer, seaCol) then
+			for k, v in pairs(theTable) do
+				local x, y, z = v[1],v[2],v[3]
+				if turfDistance == nil or getDistanceBetweenPoints2D(x, y, px, py) < turfDistance then
+					turfDistance = getDistanceBetweenPoints2D(x, y, px, py)
+					turfID = v[4]
+				end
 			end
 		else
 			return
 		end
 	end
 
-	if ( turfDistance ) and ( turfID ) then
-		setTimer( respawnPlayer, spawnTime, 1, source, turfSpawnTable[turfID][1], turfSpawnTable[turfID][2], turfSpawnTable[turfID][3], turfSpawnTable[turfID][4] )
+	if (turfDistance and turfID) then
+		setTimer(respawnPlayer, spawnTime, 1, source, turfSpawnTable[turfID][1], turfSpawnTable[turfID][2], turfSpawnTable[turfID][3], turfSpawnTable[turfID][4])
 	end
 end
-addEventHandler ("onClientTurferDied", localPlayer, onClientTurferDied)
+addEventHandler("onClientTurferDied", localPlayer, onClientTurferDied)
 
 -- Trigger the gespawn
-function respawnPlayer ( thePlayer, x, y, z, rotation )
-	exports.DENdxmsg:createNewDxMessage( "You respawned in the nearest turf of your group!", 0, 225, 0)
-	triggerServerEvent ( "spawnTurfingPlayer", thePlayer, x, y, z, rotation )
+function respawnPlayer(thePlayer, x, y, z, rotation)
+	exports.DENdxmsg:createNewDxMessage("You respawned in the nearest turf of your group!", 0, 225, 0)
+	triggerServerEvent("spawnTurfingPlayer", thePlayer, x, y, z, rotation)
 end
 
-function AbsoluteToRelativ2( X, Y )
+function AbsoluteToRelativ2(X, Y)
     local rX, rY = guiGetScreenSize()
-    local x = math.floor(X*rX/1280)
-    local y = math.floor(Y*rY/768)
+    local x = math.floor(X * rX / 1280)
+    local y = math.floor(Y * rY / 768)
     return x, y
 end
 
 
 function getActualG(v)
 	local gr = getElementData(v,"Group")
-			local a = getElementData(v,"alliance")
-			if (a) then
-				if (getElementData(v,"ta")==true) then
-					return getElementData(v,"aName")
-				else
-					return gr
-				end
-			end
+	local a = getElementData(v,"alliance")
+	if (a) then
+		if (getElementData(v,"ta")==true) then
+			return getElementData(v,"aName")
+		else
+			return gr
+		end
+	end
 	return gr
 end
 
-
 currentTurfData = nil
 local barTimer = false
-addEvent("recTurfData",true)
-addEventHandler("recTurfData",localPlayer,function(t) currentTurfData=t
-	if isTimer(barTimer) then killTimer(barTimer) end
-	if t == nil then return end
-	myGroup=getActualG(localPlayer)
-	local gr = myGroup
-	if radStations[t.turfID] ~= nil then
-		if gr == "FBI" or gr == "SWAT Team" or teamName == "Police" or gr == "Military Forces" then gr = "CSG Law" else gr = "Criminals" end
-	end
-	myGroup=gr
-	if t.attackinggroup ~= myGroup and t.owner ~= myGroup then
-		currentTurfData.text = "You are attacking this turf!"
-		textr,textg,textb = 255,0,0
-	elseif t.owner == myGroup then
-		currentTurfData.text = "You are defending this turf!"
-		textr,textg,textb = 0,255,0
-		if t.health < 100 and t.health > t.oldHealth then
-			triggerServerEvent("CSGturfing.reqDefendingMoney",localPlayer)
+addEvent("recTurfData", true)
+addEventHandler("recTurfData", localPlayer,
+	function (t) 
+		currentTurfData=t
+		if isTimer(barTimer) then killTimer(barTimer) end
+		if t == nil then return end
+		myGroup = getActualG(localPlayer)
+		local gr = myGroup
+		if radStations[t.turfID] ~= nil then
+			if gr == "FBI" or gr == "SWAT Team" or teamName == "Police" or gr == "Military Forces" then gr = "CSG Law" else gr = "Criminals" end
 		end
-	else
-		currentTurfData.text = "You are attempting to take this turf!"
-		textr,textg,textb = 255,255,0
+		myGroup = gr
+		if t.attackinggroup ~= myGroup and t.owner ~= myGroup then
+			currentTurfData.text = "You are attacking this turf!"
+			textr, textg, textb = 255, 0, 0
+		elseif t.owner == myGroup then
+			currentTurfData.text = "You are defending this turf!"
+			textr, textg, textb = 0,255,0
+			if t.health < 100 and t.health > t.oldHealth then
+				triggerServerEvent("CSGturfing.reqDefendingMoney", localPlayer)
+			end
+		else
+			currentTurfData.text = "You are attempting to take this turf!"
+			textr, textg, textb = 255,255,0
+		end
+		local change = t.health - t.oldHealth
+		change = change / 100
+		barTimer = setTimer(function() currentTurfData.health = currentTurfData.health + change end, 50, 100)
 	end
-	local change = t.health - t.oldHealth
-	change=change/100
-	barTimer=setTimer(function() currentTurfData.health = currentTurfData.health + change end,50,100)
-end)
+)
 
 towerString1 = ""
 towerString2 = ""
@@ -266,18 +268,17 @@ function doNearestTowerCalculations()
 end
 
 addEventHandler("onClientRender", root,
-    function()
-		if getElementInterior(localPlayer) == 0 and getElementDimension(localPlayer) == 0 then
-		else
-		return
+    function ()
+		if getElementInterior(localPlayer) ~= 0 or getElementDimension(localPlayer) ~= 0 or isPlayerMapVisible() then
+			return
 		end
-		if isElementWithinColShape(localPlayer,LVcol) or isElementWithinColShape(localPlayer,seaCol) then
+		if isElementWithinColShape(localPlayer, LVcol) or isElementWithinColShape(localPlayer, seaCol) then
 			x,y=AbsoluteToRelativ2(63, 737)
-			x2,y2=AbsoluteToRelativ2(283, 762)
-			dxDrawText(towerString1, x,y,x2,y2, tocolor(towerr,towerg,towerb, 255), 1, "default-bold", "center", "top", false, false, true, false, false)
-			x,y=AbsoluteToRelativ2(63, 750)
-			x2,y2=AbsoluteToRelativ2(283, 775)
-			dxDrawText(towerString2, x,y,x2,y2, tocolor(towerr,towerg,towerb, 255), 1, "default-bold", "center", "top", false, false, true, false, false)
+			x2,y2 = AbsoluteToRelativ2(283, 762)
+			dxDrawText(towerString1, x, y, x2, y2, tocolor(towerr, towerg, towerb, 255), 1, "default-bold", "center", "top", false, false, true, false, false)
+			x,y = AbsoluteToRelativ2(63, 750)
+			x2,y2 = AbsoluteToRelativ2(283, 775)
+			dxDrawText(towerString2, x, y, x2, y2, tocolor(towerr, towerg, towerb, 255), 1, "default-bold", "center", "top", false, false, true, false, false)
 		end
 		if currentTurfData == nil then return end
 		if isPlayerMapVisible() then return end
@@ -285,127 +286,130 @@ addEventHandler("onClientRender", root,
 		x2,y2=AbsoluteToRelativ2(212, 21)
 		if currentTurfData.attackinggroup == "None" then
 			if currentTurfData.owner=="Unoccupied" then
-				dxDrawRectangle(x,y,x2*(currentTurfData.health/100),y2, tocolor(255,255,255, 255), true)
+				dxDrawRectangle(x, y, x2 * (currentTurfData.health / 100), y2, tocolor(255,255,255, 255), true)
 			elseif (currentTurfData.colors[currentTurfData.owner]) then
-				dxDrawRectangle(x,y,x2*(currentTurfData.health/100),y2, tocolor(currentTurfData.colors[currentTurfData.owner][1],currentTurfData.colors[currentTurfData.owner][2],currentTurfData.colors[currentTurfData.owner][3], 255), true)
+				dxDrawRectangle(x, y, x2 * (currentTurfData.health / 100), y2, tocolor(currentTurfData.colors[currentTurfData.owner][1], currentTurfData.colors[currentTurfData.owner][2], currentTurfData.colors[currentTurfData.owner][3], 255), true)
 			else
-				dxDrawRectangle(x,y,x2*(currentTurfData.health/100),y2, tocolor(255,255,255, 255), true)
+				dxDrawRectangle(x,y,x2*(currentTurfData.health /100),y2, tocolor(255,255,255, 255), true)
 			end
 		else
-			dxDrawRectangle(x,y,x2*(currentTurfData.health/100),y2, tocolor(currentTurfData.colors[currentTurfData.attackinggroup][1],currentTurfData.colors[currentTurfData.attackinggroup][2],currentTurfData.colors[currentTurfData.attackinggroup][3], 255), true)
+			dxDrawRectangle(x, y, x2 * (currentTurfData.health / 100), y2, tocolor(currentTurfData.colors[currentTurfData.attackinggroup][1], currentTurfData.colors[currentTurfData.attackinggroup][2], currentTurfData.colors[currentTurfData.attackinggroup][3], 255), true)
 		end
 
-		x,y=AbsoluteToRelativ2(1000, 234)
-		x2,y2=AbsoluteToRelativ2(217, 30)
-		dxDrawRectangle(x,y,x2,y2, tocolor(19, 0, 0, 100), true)
+		x, y = AbsoluteToRelativ2(1000, 234)
+		x2, y2 = AbsoluteToRelativ2(217, 30)
+		dxDrawRectangle(x, y, x2, y2, tocolor(19, 0, 0, 100), true)
 
-		x,y=AbsoluteToRelativ2(1120, 234)
-		x2,y2=AbsoluteToRelativ2(1120, 262)
-		dxDrawLine(x,y,x2,y2, tocolor(9, 130, 0, 255), 1, true)
+		x, y = AbsoluteToRelativ2(1120, 234)
+		x2,y2 = AbsoluteToRelativ2(1120, 262)
+		dxDrawLine(x, y, x2, y2, tocolor(9, 130, 0, 255), 1, true)
 
-		x,y=AbsoluteToRelativ2(1041, 234)
-		x2,y2=AbsoluteToRelativ2(1041, 262)
-		dxDrawLine(x,y,x2,y2, tocolor(129, 2, 20, 255), 1, true)
+		x, y = AbsoluteToRelativ2(1041, 234)
+		x2,y2 = AbsoluteToRelativ2(1041, 262)
+		dxDrawLine(x, y, x2, y2, tocolor(129, 2, 20, 255), 1, true)
 
-		x,y=AbsoluteToRelativ2(996, 236)
-		x2,y2=AbsoluteToRelativ2(1224, 262)
-		dxDrawText(currentTurfData.barText, x,y,x2,y2, tocolor(255, 255, 255, 255), 1, "default", "center", "center", false, false, true, false, false)
+		x, y = AbsoluteToRelativ2(996, 236)
+		x2, y2 = AbsoluteToRelativ2(1224, 262)
+		dxDrawText(currentTurfData.barText, x, y, x2, y2, tocolor(255, 255, 255, 255), 1, "default", "center", "center", false, false, true, false, false)
 
-		x,y=AbsoluteToRelativ2(1001, 292)
-		x2,y2=AbsoluteToRelativ2(1216, 318)
-		dxDrawText(">> Turf Influence <<", x,y,x2,y2, tocolor(0, 255, 0, 255), 1, "default", "center", "top", false, true, true, false, false)
+		x, y = AbsoluteToRelativ2(1001, 292)
+		x2, y2 = AbsoluteToRelativ2(1216, 318)
+		dxDrawText(">> Turf Influence <<", x, y, x2, y2, tocolor(0, 255, 0, 255), 1, "default", "center", "top", false, true, true, false, false)
 
-		local i=1
-		for k,v in pairs(currentTurfData.influences) do
-			local mult = 10^2
+		local i = 1
+		for k, v in pairs(currentTurfData.influences) do
+			local mult = 10 ^ 2
 
 			if k ~= "CSG Law" and k ~= "Criminals" then
-			i=i+1
-			local imgY=292+(30*(i-1))
-			 _,imgY=AbsoluteToRelativ2(0,imgY-7)
-			x,y=AbsoluteToRelativ2(1001, 292+(30*(i-1)))
-			x2,y2=AbsoluteToRelativ2(1216, 318)
-			v=v/2
+			i = i + 1
+			local imgY = 292 + (30 * (i - 1))
+			_, imgY = AbsoluteToRelativ2(0, imgY - 7)
+			x, y = AbsoluteToRelativ2(1001, 292 + (30 * (i - 1)))
+			x2, y2 = AbsoluteToRelativ2(1216, 318)
+			v = v / 2
 			v = (math.floor(v * mult + 0.5) / mult)
-			--v=math.floor(v)
 			local vpos = v
 			local vnum = v
 
-			if v < 0 then vpos=vpos*-1 end
+			if v < 0 then vpos = vpos * -1 end
 			local timesToDrawFull = math.floor(vpos)
 			local timesToDrawHalf = 0
-			if vpos-timesToDrawFull > 0 then timesToDrawHalf=1 end
-			if v > 0 then v="+"..v..""end
-			dxDrawText(""..k.."", x,y,x2,y2, tocolor(currentTurfData.colors[k][1], currentTurfData.colors[k][2], currentTurfData.colors[k][3], 255), 1, "default", "center", "top", false, true, true, false, false)
-			for i2=1,timesToDrawFull do
-			if vnum > 0 then
-				x3,y3=AbsoluteToRelativ2(1161+(30*(i2-1)), 317)
-			else
-				x3,y3=AbsoluteToRelativ2(1031-(30*(i2-1)), 317)
-			end
-			x4,y4=AbsoluteToRelativ2(36, 26)
-			dxDrawImage(x3,imgY,x4,y4, "full.png", 0, 0, 0, tocolor(255, 255, 255, 255), true)
+			if vpos - timesToDrawFull > 0 then timesToDrawHalf = 1 end
+			if v > 0 then v = "+"..v end
+			dxDrawText(tostring(k), x, y, x2, y2, tocolor(currentTurfData.colors[k][1], currentTurfData.colors[k][2], currentTurfData.colors[k][3], 255), 1, "default", "center", "top", false, true, true, false, false)
+			for i2 = 1, timesToDrawFull do
+				if vnum > 0 then
+					x3, y3 = AbsoluteToRelativ2(1161 + (30 * (i2 - 1)), 317)
+				else
+					x3, y3 = AbsoluteToRelativ2(1031 - (30 * (i2 - 1)), 317)
+				end
+				x4, y4 = AbsoluteToRelativ2(36, 26)
+				dxDrawImage(x3, imgY, x4, y4, "full.png", 0, 0, 0, tocolor(255, 255, 255, 255), true)
 			end
 			if timesToDrawHalf > 0 then
-			if vnum > 0 then
-				x3,y3=AbsoluteToRelativ2(1161+(30*(timesToDrawFull+1-1)), 317)
-			else
-				x3,y3=AbsoluteToRelativ2(1031-(30*(timesToDrawFull+1-1)), 317)
-			end
-			dxDrawImage(x3,imgY,x4,y4, "half.png", 0, 0, 0, tocolor(255, 255, 255, 255), true)
-			end
+				if vnum > 0 then
+					x3, y3 = AbsoluteToRelativ2(1161 + (30 * (timesToDrawFull + 1 - 1)), 317)
+				else
+					x3, y3 = AbsoluteToRelativ2(1031 - (30 * (timesToDrawFull + 1 - 1)), 317)
+				end
+					dxDrawImage(x3, imgY, x4, y4, "half.png", 0, 0, 0, tocolor(255, 255, 255, 255), true)
+				end
 			end
 		end
 
-		x,y=AbsoluteToRelativ2(1001, 265)
-		x2,y2=AbsoluteToRelativ2(1216, 291)
-		dxDrawText(""..currentTurfData.text.."", x,y,x2,y2, tocolor(textr,textg,textb, 255), 1, "default", "left", "top", false, false, true, false, false)
-
+		x, y = AbsoluteToRelativ2(1001, 265)
+		x2, y2 = AbsoluteToRelativ2(1216, 291)
+		dxDrawText(currentTurfData.text.."", x, y, x2, y2, tocolor(textr, textg, textb, 255), 1, "default", "left", "top", false, false, true, false, false)
     end
 )
 
-setTimer(function()
-	if (isElementWithinColShape(localPlayer,LVcol) or isElementWithinColShape(localPlayer,seaCol)) and getElementDimension(localPlayer) == 0 and getElementInterior(localPlayer) == 0 then
-		doNearestTowerCalculations()
-		for k,v in pairs(blips) do
-			if v == false then
-				blips[k] = exports.customblips:createCustomBlip ( turfSpawnTable[k][1], turfSpawnTable[k][2], 20, 20, ""..blipStats[k]..".png", 999999 )
+setTimer(
+	function ()
+		if (isElementWithinColShape(localPlayer, LVcol) or isElementWithinColShape(localPlayer, seaCol)) and getElementDimension(localPlayer) == 0 and getElementInterior(localPlayer) == 0 then
+			doNearestTowerCalculations()
+			for k, v in pairs(blips) do
+				if v == false then
+					blips[k] = exports.customblips:createCustomBlip(turfSpawnTable[k][1], turfSpawnTable[k][2], 20, 20, ""..blipStats[k]..".png", 999999)
+				end
 			end
-		end
-	else
-		local teamName = getTeamName(getPlayerTeam(localPlayer))
-		if teamName ~= "Criminals" and teamName ~= "Staff" and getElementDimension(localPlayer) == 0 and getElementInterior(localPlayer) == 0 then
-			if isLaw(localPlayer) == false then
-				for k,v in pairs(blips) do
+		else
+			local teamName = getTeamName(getPlayerTeam(localPlayer))
+			if teamName ~= "Criminals" and teamName ~= "Staff" and getElementDimension(localPlayer) == 0 and getElementInterior(localPlayer) == 0 then
+				if isLaw(localPlayer) == false then
+					for k, v in pairs(blips) do
+						if v ~= false then exports.customblips:destroyCustomBlip(v) blips[k] = false end
+					end
+				end
+			elseif (teamName == "Criminals" or teamName == "Staff" or isLaw(localPlayer)) and getElementDimension(localPlayer) == 0 and getElementInterior(localPlayer) == 0 then
+				for k, v in pairs(blips) do
+					if v == false then
+						blips[k] = exports.customblips:createCustomBlip(turfSpawnTable[k][1], turfSpawnTable[k][2], 20, 20, blipStats[k]..".png", 999999)
+					end
+				end
+			else
+				for k, v in pairs(blips) do
 					if v ~= false then exports.customblips:destroyCustomBlip(v) blips[k] = false end
 				end
 			end
-		elseif (teamName == "Criminals" or teamName == "Staff" or isLaw(localPlayer)) and getElementDimension(localPlayer) == 0 and getElementInterior(localPlayer) == 0 then
-			for k,v in pairs(blips) do
-				if v == false then
-					blips[k] = exports.customblips:createCustomBlip ( turfSpawnTable[k][1], turfSpawnTable[k][2], 20, 20, ""..blipStats[k]..".png", 999999 )
-				end
-			end
-		else
-			for k,v in pairs(blips) do
-				if v ~= false then exports.customblips:destroyCustomBlip(v) blips[k] = false end
-			end
 		end
-	end
-end,2500,0)
+	end, 2500, 0
+)
 
-addEvent("CSGturfing.updateBlips",true)
-addEventHandler("CSGturfing.updateBlips",localPlayer,function(i,v)
-	if stationToBlip[i] == nil then return end
-	blipStats[stationToBlip[i]] = v
-	for k,v in pairs(blips) do
-		if v ~= false then
-			exports.customblips:destroyCustomBlip(v)
-			blips[k]=exports.customblips:createCustomBlip ( turfSpawnTable[k][1], turfSpawnTable[k][2], 20, 20, ""..blipStats[k]..".png", 999999 )
-		else
-			blips[k]=exports.customblips:createCustomBlip ( turfSpawnTable[k][1], turfSpawnTable[k][2], 20, 20, ""..blipStats[k]..".png", 999999 )
+addEvent("CSGturfing.updateBlips", true)
+addEventHandler("CSGturfing.updateBlips", localPlayer, 
+	function (i, v)
+		if stationToBlip[i] == nil then return end
+		blipStats[stationToBlip[i]] = v
+		
+		for k, v in pairs(blips) do
+			if v ~= false then
+				exports.customblips:destroyCustomBlip(v)
+				blips[k] = exports.customblips:createCustomBlip(turfSpawnTable[k][1], turfSpawnTable[k][2], 20, 20, blipStats[k]..".png", 999999)
+			else
+				blips[k] = exports.customblips:createCustomBlip(turfSpawnTable[k][1], turfSpawnTable[k][2], 20, 20, blipStats[k]..".png", 999999)
+			end
 		end
+		doNearestTowerCalculations()
+		triggerEvent("CSGturfing.towerUpdates", localPlayer, blipStats)
 	end
-	doNearestTowerCalculations()
-	triggerEvent("CSGturfing.towerUpdates",localPlayer,blipStats)
-end)
+)
