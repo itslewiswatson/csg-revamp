@@ -1,12 +1,11 @@
 --Em
 -- Search for player
 function onClientSearchPlayerFromEmGrid()
-guiGridListClear(adminEmPlayerGrid)
-local name = guiGetText(adminEmPlayerSearch)
-	for id, player in ipairs(getElementsByType("player")) do
-        if string.find(getPlayerName(player):lower(), name:lower()) then
-			local playerTeam = getPlayerTeam(player)
-			if (playerTeam) then
+	guiGridListClear(adminEmPlayerGrid)
+	local name = guiGetText(adminEmPlayerSearch)
+	for _, player in ipairs(Element.getAllByType("player")) do
+		if string.find(plr.name:lower(), name:lower()) then
+			if (plr.team) then
 				local r, g, b = getTeamColor (playerTeam)
 				local row = guiGridListAddRow (adminEmPlayerGrid)
 				guiGridListSetItemText(adminEmPlayerGrid, row, 1, getPlayerName(player), false, false)
@@ -540,9 +539,9 @@ end
 
 -- Get the select player
 function getAdminPanelSelectedPlayer ()
-	local playerName = guiGridListGetItemText (adminGUI.GUIgrids[1], guiGridListGetSelectedItem (adminGUI.GUIgrids[1]), 1)
+	local playerName = guiGridListGetItemText(adminGUI.GUIgrids[1], guiGridListGetSelectedItem(adminGUI.GUIgrids[1]), 1)
 	local row, column = guiGridListGetSelectedItem (adminGUI.GUIgrids[1])
-	if (playerName) and (tostring(row) ~= "-1") then
+	if (playerName and tostring(row) ~= "-1") then
 		if (getPlayerFromName(playerName)) then
 			return getPlayerFromName(playerName)
 		end
@@ -550,13 +549,13 @@ function getAdminPanelSelectedPlayer ()
 end
 
 -- This puts all the players in a grid
-for k, thePlayer in ipairs (getElementsByType("player")) do
-	local row = guiGridListAddRow (adminGUI.GUIgrids[1])
-	if (getPlayerTeam(thePlayer)) then
-		guiGridListSetItemText (adminGUI.GUIgrids[1], row, 1, getPlayerName(thePlayer), false, false)
-		guiGridListSetItemColor(adminGUI.GUIgrids[1], row, 1, getTeamColor (getPlayerTeam(thePlayer)))
+for _, plr in ipairs(Element.getAllByType("player")) do
+	local row = guiGridListAddRow(adminGUI.GUIgrids[1])
+	if (plr.tam) then
+		guiGridListSetItemText(adminGUI.GUIgrids[1], row, 1, plr.name, false, false)
+		guiGridListSetItemColor(adminGUI.GUIgrids[1], row, 1, plr.team:getColor())
 	else
-		guiGridListSetItemText (adminGUI.GUIgrids[1], row, 1, getPlayerName(thePlayer), false, false)
+		guiGridListSetItemText(adminGUI.GUIgrids[1], row, 1, plr.name, false, false)
 	end
 end
 
@@ -564,7 +563,7 @@ end
 addEventHandler("onClientPlayerJoin", root,
 	function ()
 		local row = guiGridListAddRow (adminGUI.GUIgrids[1])
-		if (getPlayerTeam(source)) and (string.find(getPlayerName(thePlayer):lower(), guiGetText(adminGUI.GUIedits[1]):lower())) then
+		if (source.team and string.find(getPlayerName(thePlayer):lower(), guiGetText(adminGUI.GUIedits[1]):lower())) then
 			guiGridListSetItemText (adminGUI.GUIgrids[1], row, 1, getPlayerName(source), false, false)
 			guiGridListSetItemColor(adminGUI.GUIgrids[1], row, 1, getTeamColor (getPlayerTeam(source)))
 		else
@@ -576,7 +575,7 @@ addEventHandler("onClientPlayerJoin", root,
 -- Remove a player when they quit
 addEventHandler("onClientPlayerQuit", root,
 	function ()
-		for i=1,guiGridListGetRowCount (adminGUI.GUIgrids[1]) do
+		for i = 0, guiGridListGetRowCount(adminGUI.GUIgrids[1]) - 1 do
 			if (guiGridListGetItemText (adminGUI.GUIgrids[1], i, 1) == getPlayerName(source)) then
 				guiGridListRemoveRow (adminGUI.GUIgrids[1], i)
 			end
@@ -587,9 +586,9 @@ addEventHandler("onClientPlayerQuit", root,
 -- When a player changes his nick
 addEventHandler("onClientPlayerChangeNick", root,
 	function (oldNick, newNick)
-		for i=1,guiGridListGetRowCount (adminGUI.GUIgrids[1]) do
-			if (guiGridListGetItemText (adminGUI.GUIgrids[1], i, 1) == oldNick) then
-				guiGridListSetItemText (adminGUI.GUIgrids[1], i, 1, newNick, false, false)
+		for i = 0, guiGridListGetRowCount(adminGUI.GUIgrids[1]) - 1 do
+			if (guiGridListGetItemText(adminGUI.GUIgrids[1], i, 1) == oldNick) then
+				guiGridListSetItemText(adminGUI.GUIgrids[1], i, 1, newNick, false, false)
 			end
 		end
 	end
@@ -598,18 +597,18 @@ addEventHandler("onClientPlayerChangeNick", root,
 -- Check for team colors so they are up-to-date and to keep the player field op-to-date
 addEventHandler("onClientRender", root,
 	function ()
-		for i=1,guiGridListGetRowCount (adminGUI.GUIgrids[1]) do
-			local playerName = guiGridListGetItemText (adminGUI.GUIgrids[1], i, 1)
-			if (playerName) and (getPlayerFromName(playerName)) then
+		for i = 0, guiGridListGetRowCount(adminGUI.GUIgrids[1]) - 1 do
+			local playerName = guiGridListGetItemText(adminGUI.GUIgrids[1], i, 1)
+			if (playerName and getPlayerFromName(playerName)) then
 				if (getPlayerTeam(getPlayerFromName(playerName))) then
-					guiGridListSetItemColor(adminGUI.GUIgrids[1], i, 1, getTeamColor (getPlayerTeam(getPlayerFromName(playerName))))
+					guiGridListSetItemColor(adminGUI.GUIgrids[1], i, 1, getTeamColor(getPlayerTeam(getPlayerFromName(playerName))))
 				end
 			end
 		end
 
 		if (getAdminPanelSelectedPlayer ()) then
-			local thePlayer = getAdminPanelSelectedPlayer ()
-			local x, y, z = getElementPosition (thePlayer)
+			local thePlayer = getAdminPanelSelectedPlayer()
+			local x, y, z = getElementPosition(thePlayer)
 			if (getPedOccupiedVehicle(thePlayer)) then theVehicle = getVehicleName (getPedOccupiedVehicle(thePlayer)) vehicleHealth = math.floor(getElementHealth(getPedOccupiedVehicle(thePlayer))) else theVehicle = "Walking" vehicleHealth = "N/A" end
 			if (getPlayerTeam(thePlayer)) then playerTeam = getTeamName(getPlayerTeam(thePlayer)) else playerTeam = "N/A" end
 			if (exports.server:getPlayerOccupation(thePlayer)) then playerOccupation = exports.server:getPlayerOccupation(thePlayer) else playerOccupation = "N/A" end
