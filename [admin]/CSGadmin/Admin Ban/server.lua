@@ -58,14 +58,22 @@ function banServerPlayer (theAdmin, thePlayer, theReason, theTime, theType )
 end
 
 -- Ban a account
-function banServerAccount (theAccount, theTime, theReason, theAdmin)
-	if (theAccount) and (theTime) and (theReason) and (theAdmin) then
+function banServerAccount(theAccount, theTime, theReason, theAdmin)
+	if (theAccount and theTime and theReason and theAdmin) then
 		local timeHours = math.floor(theTime * 3600)
 		local banTime = (getRealTime().timestamp + theTime)
-		local accountTable = exports.DENmysql:querySingle("SELECT * FROM accounts WHERE username=? LIMIT 1", theAccount)
+		local accountTable = exports.DENmysql:querySingle("SELECT * FROM `accounts` WHERE `username`=? LIMIT 1", theAccount)
+		if (not accountTable or #accountTable == 0) then
+			-- We can't ban an account that doesn't exist
+			return false
+		end
+		local accountBans = exports.DENmysql:querySingle("SELECT * FROM `bans` WHERE `account`=?", theAccount)
+		if (accountBans and #accountBans > 0) then
+			return false
+		end
 		exports.DENmysql:exec("INSERT into bans SET account=?, reason=?, banstamp=?, bannedby=?", theAccount, theReason, banTime, getPlayerName(theAdmin))
 		exports.DENmysql:exec("INSERT INTO punishlog SET userid=?, serial=?, punishment=?", accountTable.id, accountTable.serial, getPlayerName(theAdmin).." account banned the account " .. theAccount .. " for " .. timeHours .. " hours (" .. theReason .. ")")
-		exports.CSGlogging:createAdminLogRow (theAdmin, getPlayerName(theAdmin).." banned the account " .. theAccount .. " for " .. timeHours .. " hours (" .. theReason .. ")")
+		exports.CSGlogging:createAdminLogRow(theAdmin, getPlayerName(theAdmin).." banned the account " .. theAccount .. " for " .. timeHours .. " hours (" .. theReason .. ")")
 		onPlayerBanned(theAccount, banTime, theReason, thePlayer)
 		return true
 	else
@@ -74,10 +82,15 @@ function banServerAccount (theAccount, theTime, theReason, theAdmin)
 end
 
 -- Ban a serial
-function banServerSerial (theSerial, theTime, theReason, theAdmin)
-	if (theSerial) and (theTime) and (theReason) and (theAdmin) then
-		local timeHours = math.floor(theTime * 3600)
+function banServerSerial(theSerial, theTime, theReason, theAdmin)
+	if (theSerial and theTime and theReason and theAdmin) then
+		local timeHours = math.floor(theTime * (60 * 60))
 		local banTime = (getRealTime().timestamp + theTime)
+		local serialTable = exports.DENmysql:querySingle("SELECT * FROM `bans` WHERE `serial`=?", theSerial)
+		if (theSerial and #theSerial > 0) then
+			-- This serial is already banned
+			return
+		end
 		exports.DENmysql:exec("INSERT into bans SET reason=?, banstamp=?, serial=?, bannedby=?", theReason, banTime, theSerial, getPlayerName(theAdmin))
 		exports.DENmysql:exec("INSERT INTO punishlog SET serial=?, punishment=?", theSerial, getPlayerName(theAdmin).." account banned the account " .. theAccount .. " for " .. timeHours .. " hours (" .. theReason .. ")")
 		exports.CSGlogging:createAdminLogRow (theAdmin, getPlayerName(theAdmin).." the serial " .. theSerial .. " for " .. timeHours .. " hours (" .. theReason .. ")")
