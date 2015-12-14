@@ -9,4 +9,6 @@
 	<export function="savePlayerData" type="server" />
 	<export function="forceWeaponSync" type="server"/>
 	<export function="getPlayerSkin" type="server" />
+	
+	<oop>true</oop>
 </meta>

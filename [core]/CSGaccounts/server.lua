@@ -1,3 +1,6 @@
+-- Database connection
+db = exports.DENmysql:getConnection()
+
 -- Tables
 local weaponStringTable = {}
 local playerWeaponTable = {}
@@ -6,9 +9,9 @@ local playerWeaponTable = {}
 addEvent("onServerPlayerLogin")
 addEventHandler("onServerPlayerLogin", root,
 	function (userID)
-		dbQuery(recCB, {source}, exports.DENmysql:getConnection(), "SELECT * FROM `weapons` WHERE `userid`=?", userID)
-		dbQuery(recCB, {source}, exports.DENmysql:getConnection(), "SELECT * FROM `accounts` WHERE `id`=?", userID)
-		dbQuery(recCBwep, {source}, exports.DENmysql:getConnection(), "SELECT * FROM `accounts` WHERE `id`=?", userID)
+		db:query(recCB, {source}, "SELECT * FROM `weapons` WHERE `userid`=?", userID)
+		db:query(recCB, {source}, "SELECT * FROM `accounts` WHERE `id`=?", userID)
+		db:query(recCBwep, {source}, "SELECT * FROM `accounts` WHERE `id`=?", userID)
 	end
 )
 
@@ -141,25 +144,26 @@ addEventHandler("onPlayerLogin", root,
 )
 
 -- Function that saves the important playerdata
-function savePlayerData(thePlayer)
-	if (exports.server:getPlayerAccountID(thePlayer)) and (getElementData(thePlayer, "joinTick")) and (getTickCount() - getElementData(thePlayer, "joinTick") > 5000) then
-		if (isPedDead(thePlayer)) then
+function savePlayerData(plr)
+	if (exports.server:getPlayerAccountID(plr)) and (getElementData(plr, "joinTick")) and (getTickCount() - getElementData(plr, "joinTick") > 5000) then
+		
+		if (isPedDead(plr)) then
 			playerArmor = 0
 		else
-			playerArmor = getPedArmor(thePlayer)
+			playerArmor = getPedArmor(plr)
 		end
 
-		local playerMoney = getPlayerMoney(thePlayer)
-		local playerHealth = getElementHealth(thePlayer)
-		local playerWP = getElementData(thePlayer, "wantedPoints") or 0
-		local pX, pY, pZ = getElementPosition(thePlayer)
-		local playerInterior = getElementInterior(thePlayer)
-		local playerDimension = getElementDimension(thePlayer)
-		local playerRotation = getPedRotation(thePlayer)
-		local playerOccupation = exports.server:getPlayerOccupation(thePlayer)
-		local playerTeam = getTeamName(getPlayerTeam(thePlayer)) or "Unemployed" -- We set them to the unemployed team to avoid it being set to 0, which becomes problematic
-		local playerPlayTime = getElementData(thePlayer, "playTime")
-		local playerAccountID = exports.server:getPlayerAccountID(thePlayer)
+		local playerMoney = getPlayerMoney(plr)
+		local playerHealth = getElementHealth(plr) or 100
+		local playerWP = getElementData(plr, "wantedPoints") or 0
+		local pX, pY, pZ = getElementPosition(plr)
+		local playerInterior = plr.interior or 0
+		local playerDimension = plr.dimension or 0
+		local playerRotation = getPedRotation(plr) or 0
+		local playerOccupation = exports.server:getPlayerOccupation(plr) or "Unemployed"
+		local playerTeam = plr.team.name or "Unemployed" -- We set them to the unemployed team to avoid it being set to 0, which becomes problematic
+		local playerPlayTime = getElementData(plr, "playTime")
+		local playerAccountID = exports.server:getPlayerAccountID(plr)
 
 		exports.DENmysql:exec("UPDATE `accounts` SET `money`=?, `health`=?, `armor`=?, `wanted`=?, `x`=?, `y`=?, `z`=?, `interior`=?, `dimension`=?, `rotation`=?, `occupation`=?, `team`=?, `playtime`=? WHERE `id`=?",
 			playerMoney,
@@ -178,9 +182,8 @@ function savePlayerData(thePlayer)
 			playerAccountID
 		)
 		return true
-	else
-		return false
 	end
+	return false
 end
 
 -- Triggers that should save playerdata
@@ -206,14 +209,13 @@ function getPlayerSkin(p)
 end
 
 setTimer(
-	function()
-		for k, v in pairs(getElementsByType("player")) do
-			if exports.server:isPlayerLoggedIn(v) then
-				local source=v
-				local userid = exports.server:getPlayerAccountID(source)
-				dbQuery(recCB, {source}, exports.DENmysql:getConnection(), "SELECT * FROM `weapons` WHERE `userid`=?", userID)
-				dbQuery(recCB, {source}, exports.DENmysql:getConnection(), "SELECT * FROM `accounts` WHERE `id`=?", userID)
-				dbQuery(recCBwep, {source}, exports.DENmysql:getConnection(), "SELECT * FROM `accounts` WHERE `id`=?", userID)
+	function ()
+		for _, plr in pairs(Element.getAllByType("player")) do
+			if (exports.server:isPlayerLoggedIn(v)) then
+				local userID = exports.server:getPlayerAccountID(plr)
+				db:query(recCB, {plr}, "SELECT * FROM `weapons` WHERE `userid`=?", userID)
+				db:query(recCB, {plr}, "SELECT * FROM `accounts` WHERE `id`=?", userID)
+				db:query(recCBwep, {plr}, "SELECT * FROM `accounts` WHERE `id`=?", userID)
 			end
 		end
 	end, 1000, 1

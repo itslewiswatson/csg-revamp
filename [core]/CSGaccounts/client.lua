@@ -46,12 +46,18 @@ setTimer (
 	end, 5000, 0
 )
 
-addEventHandler("onClientPlayerWasted",root,function() if source==localPlayer then getPlayerWeaponsJSON(true) end end)
+addEventHandler("onClientPlayerWasted", root, function() if source==localPlayer then getPlayerWeaponsJSON(true) end end)
 
-addEvent("startSaveWep",true)
-addEventHandler("startSaveWep",localPlayer,function()
-	setTimer(function() canSaveWeps=true end,10000,1)
-end)
+addEvent("startSaveWep", true)
+addEventHandler("startSaveWep", localPlayer,
+	function()
+		Timer(
+			function () 
+				canSaveWeps = true
+			end, 10000, 1
+		)
+	end
+)
 
-addEvent("forceWepSync",true)
-addEventHandler("forceWepSync",localPlayer,function() getPlayerWeaponsJSON(true) end)
+addEvent("forceWepSync", true)
+addEventHandler("forceWepSync", localPlayer, function() getPlayerWeaponsJSON(true) end)
