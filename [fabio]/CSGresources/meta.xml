@@ -2,5 +2,5 @@
 	<info author="Dennis" version="1.0.0" type="script" name="Resource manager" description="Resource manager" />
 	
 	<script src="server.lua" type="server"/>
-	<script src="client.luac" type="client"/>
+	<script src="client.lua" type="client"/>
 </meta>

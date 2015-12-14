@@ -1,9 +1,9 @@
 <meta>
 	<info author="Dennis" description="CSG Setting System" version="1.5" type="script" />
 	
-	<script src="settings.luac" type="client" />
-	<script src="friends.luac" type="client" />
-	<script src="blacklist.luac" type="client" />
+	<script src="settings.lua" type="client" />
+	<script src="friends.lua" type="client" />
+	<script src="blacklist.lua" type="client" />
 
 	<export function="getPlayerSetting" type="client" />
 	<export function="setPlayerSetting" type="client" />

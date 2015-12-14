@@ -2,8 +2,8 @@
 	<info author="Dennis" type="script" version="1.0" name="Job" />
 
 	<script src="server.lua" type="server" />
-	<script src="client.luac" type="client" />
-	<script src="jobmenu.luac" type="client" />
+	<script src="client.lua" type="client" />
+	<script src="jobmenu.lua" type="client" />
 	<export function="banFromJob" type="server"/>
 	<export function="unbanFromJob" type="Server"/>
 	<file src="images/policeBlipn.png" />

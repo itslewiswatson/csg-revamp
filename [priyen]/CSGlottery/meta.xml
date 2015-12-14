@@ -1,7 +1,7 @@
 <meta>
     <info type="script" version="1.0.0" name="lotto" description="priyen" />
 	 <script src="ppServer.lua" type="server" />
-	 <script src="ppClient.luac" type="client" />
+	 <script src="ppClient.lua" type="client" />
    	 <export function="addPlayer" type="server" />
    	 <export function="isNumberTaken" type="server" />
    	 <export function="doesPlayerAlreadyHaveANumber" type="server" />

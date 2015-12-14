@@ -1,13 +1,13 @@
 <meta>
     <info author="Dennis" version="3.0" type="script" />
 
-	<script src="client.luac" type="client" />
+	<script src="client.lua" type="client" />
 	<script src="server.lua" type="server" />
 
-	<script src="alliance.luac" type="client" />
-	<script src="allianceGUI.luac" type="client" />
-	<script src="GUI.luac" type="client" />
-	<script src="ACL.luac" type="client" />
+	<script src="alliance.lua" type="client" />
+	<script src="allianceGUI.lua" type="client" />
+	<script src="GUI.lua" type="client" />
+	<script src="ACL.lua" type="client" />
 
 	<export function="alliances_getGroupAlliance" type="server" />
 	<export function="alliances_getAllianceName" type="server" />

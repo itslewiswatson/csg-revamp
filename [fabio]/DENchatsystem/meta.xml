@@ -1,7 +1,7 @@
 <meta>
-	<script src="sms_client.luac" type="client"/>
-	<script src="client.luac" type="client"/>
-	<script src="chatbubbles.luac" type="client"/>
+	<script src="sms_client.lua" type="client"/>
+	<script src="client.lua" type="client"/>
+	<script src="chatbubbles.lua" type="client"/>
 	
 	<script src="server.lua" type="server"/>
 	<script src="localchat.lua" type="server"/>

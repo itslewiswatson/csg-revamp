@@ -1,8 +1,8 @@
 <meta>
-	<script src="client.luac" type="client"/>
+	<script src="client.lua" type="client"/>
 	
-	<file	src="images/lock.png"/>
-	<file	src="images/lock2.png"/>
-	<file	src="images/health.png"/>
-	<file	src="images/fuel.png"/>
+	<file src="images/lock.png"/>
+	<file src="images/lock2.png"/>
+	<file src="images/health.png"/>
+	<file src="images/fuel.png"/>
 </meta>

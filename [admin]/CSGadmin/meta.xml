@@ -1,6 +1,6 @@
 <meta>
 	<script src="Admin Mute/server.lua" type="server"/>
-	<script src="Admin Mute/client.luac" type="client" protected="true" />
+	<script src="Admin Mute/client.lua" type="client" protected="true" />
 	
 	<script src="Admin Jail/server.lua" type="server"/>
 	<script src="Admin Jail/client.lua" type="client" protected="true" />

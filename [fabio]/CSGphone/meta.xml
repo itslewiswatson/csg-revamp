@@ -1,32 +1,32 @@
 <meta>
     <info author="[CSG]FabioGNR" name="CSG-Phone" version="1.5" type="script"/>
 	
-    <script src="client.luac" type="client"/>
+    <script src="client.lua" type="client"/>
 	<script src="server.lua" type="server"/>
 		
-    <script src="apps\alarm.luac" type="client"/>
+    <script src="apps\alarm.lua" type="client"/>
 		<file src="apps\alarm.mp3" />
-    <script src="apps\calculator.luac" type="client"/>
-    <script src="apps\settings.luac" type="client"/>
-    <script src="apps\sms.luac" type="client"/>
+    <script src="apps\calculator.lua" type="client"/>
+    <script src="apps\settings.lua" type="client"/>
+    <script src="apps\sms.lua" type="client"/>
 		<file src="apps\ringtones\1.mp3" />
 		<file src="apps\ringtones\2.mp3" />
 		<file src="apps\ringtones\3.mp3" />
 		<file src="apps\ringtones\4.mp3" />
 		
-    <script src="apps\contacts.luac" type="client"/>
-    <script src="apps\clock.luac" type="client"/>
-    <script src="apps\iPod.luac" type="client"/>
-    <script src="apps\phone.luac" type="client"/>
-    <script src="apps\notes.luac" type="client"/>
-	<script src="apps\houses.luac" type="client"/>
-	<script src="apps\weapons.luac" type="client"/>
-	<script src="apps\money.luac" type="client"/>
-	<script src="apps\maps.luac" type="client"/>
-	<script src="apps\backwep.luac" type="client"/>
-	<script src="apps\Games\minesweep.luac" type="client" />
-	<script src="apps\Games\puzzle.luac" type="client" />
-	<script src="apps\music.luac" type="client" />
+    <script src="apps\contacts.lua" type="client"/>
+    <script src="apps\clock.lua" type="client"/>
+    <script src="apps\iPod.lua" type="client"/>
+    <script src="apps\phone.lua" type="client"/>
+    <script src="apps\notes.lua" type="client"/>
+	<script src="apps\houses.lua" type="client"/>
+	<script src="apps\weapons.lua" type="client"/>
+	<script src="apps\money.lua" type="client"/>
+	<script src="apps\maps.lua" type="client"/>
+	<script src="apps\backwep.lua" type="client"/>
+	<script src="apps\Games\minesweep.lua" type="client" />
+	<script src="apps\Games\puzzle.lua" type="client" />
+	<script src="apps\music.lua" type="client" />
 	 
 	<file src= "apps\Games\Images\al.png" />
 	<file src= "apps\Games\Images\ar.png" />
