@@ -1,4 +1,4 @@
-﻿﻿local blockedTasks = 
+﻿local blockedTasks = 
 {
 	"TASK_SIMPLE_IN_AIR", -- We're falling or in a jump.
 	"TASK_SIMPLE_JUMP", -- We're beginning a jump
