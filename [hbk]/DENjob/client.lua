@@ -139,15 +139,15 @@ local theJobsTable = {
 
 for i=1,#theJobsTable do
 	local x, y, z = theJobsTable[i][3], theJobsTable[i][4], theJobsTable[i][5]
-	if ( theJobsTable[i][2] == "Civilian Workers" ) then
-	--	createBlip ( x, y, z, 56, 2, 0, 0, 0, 0, 0, 270 )
-		exports.customblips:createCustomBlip ( x, y, 14, 14, "images/civBlipn.png", 100 )
-	elseif ( theJobsTable[i][1] == "Police Officer" ) then
-		exports.customblips:createCustomBlip ( x, y, 14, 14, "images/policeBlipn.png", 100 )
-	elseif ( theJobsTable[i][2] == "Paramedics" ) then
-		exports.customblips:createCustomBlip ( x, y, 14, 14, "images/medicBlipn.png", 100 )
-	elseif ( theJobsTable[i][2] == "Firefighters" ) then
-		exports.customblips:createCustomBlip ( x, y, 14, 14, "images/fireBlips.png", 100 )
+	if (theJobsTable[i][2] == "Civilian Workers") then
+	--	createBlip (x, y, z, 56, 2, 0, 0, 0, 0, 0, 270)
+		exports.customblips:createCustomBlip (x, y, 14, 14, "images/civBlipn.png", 100)
+	elseif (theJobsTable[i][1] == "Police Officer") then
+		exports.customblips:createCustomBlip (x, y, 14, 14, "images/policeBlipn.png", 100)
+	elseif (theJobsTable[i][2] == "Paramedics") then
+		exports.customblips:createCustomBlip (x, y, 14, 14, "images/medicBlipn.png", 100)
+	elseif (theJobsTable[i][2] == "Firefighters") then
+		exports.customblips:createCustomBlip (x, y, 14, 14, "images/fireBlips.png", 100)
 	end
 end
 
@@ -155,8 +155,8 @@ local jobMarkersTable = {}
 
 local theJobWindow = guiCreateWindow(544,193,321,470,"CSG ~ Job",false)
 local theJobGrid = guiCreateGridList(9,288,322,133,false,theJobWindow)
-local column1 = guiGridListAddColumn( theJobGrid, "  Skin Name:", 0.69 )
-local column2 = guiGridListAddColumn( theJobGrid, "ID:", 0.2 )
+local column1 = guiGridListAddColumn(theJobGrid, "  Skin Name:", 0.69)
+local column2 = guiGridListAddColumn(theJobGrid, "ID:", 0.2)
 local theJobButton1 = guiCreateButton(11,426,149,35,"Take job!",false,theJobWindow)
 local theJobButton2 = guiCreateButton(163,426,149,35,"No thanks!",false,theJobWindow)
 local theJobMemo = guiCreateMemo(9,44,322,217,"",false,theJobWindow)
@@ -178,25 +178,25 @@ guiSetVisible (theJobWindow, false)
 timer=false
 local theHitMarker = nil
 
-function onClientJobMarkerHit( hitElement, matchingDimension )
-	local px,py,pz = getElementPosition ( hitElement )
-	local mx, my, mz = getElementPosition ( source )
-	local markerNumber = getElementData( source, "jobMarkerNumber" )
-	if ( hitElement == localPlayer ) and ( pz-1.5 < mz ) and ( pz+1.5 > mz ) then
-		if (getTeamName(getPlayerTeam(localPlayer)) == "Staff") or ( isElementInGroup ( localPlayer, markerNumber ) ) then
-			if not ( getPedOccupiedVehicle (localPlayer) ) then
+function onClientJobMarkerHit(hitElement, matchingDimension)
+	local px,py,pz = getElementPosition (hitElement)
+	local mx, my, mz = getElementPosition (source)
+	local markerNumber = getElementData(source, "jobMarkerNumber")
+	if (hitElement == localPlayer) and (pz-1.5 < mz) and (pz+1.5 > mz) then
+		if (getTeamName(getPlayerTeam(localPlayer)) == "Staff") or (isElementInGroup (localPlayer, markerNumber)) then
+			if not (getPedOccupiedVehicle (localPlayer)) then
 				local pts = theJobsTable[markerNumber][11]
 				if pts >=10 then pts=math.floor(pts/10) end
 				if getPlayerWantedLevel() >= pts then
-					exports.DENdxmsg:createNewDxMessage( "Your wantedlevel is to high to take this job!", 225, 0, 0 )
+					exports.DENdxmsg:createNewDxMessage("Your wantedlevel is to high to take this job!", 225, 0, 0)
 				else
 					theHitMarker = source
-					setElementData ( localPlayer, "skinBeforeEnter", getElementModel ( localPlayer ), false )
-					guiSetText ( theJobWindow, "CSG ~ "..theJobsTable[markerNumber][1] )
-					guiSetText ( theJobMemo, theJobsTable[markerNumber][13] )
-					loadSkinsIntoGrid( markerNumber )
-					guiSetVisible( theJobWindow, true )
-					showCursor( true, true )
+					setElementData (localPlayer, "skinBeforeEnter", getElementModel (localPlayer), false)
+					guiSetText (theJobWindow, "CSG ~ "..theJobsTable[markerNumber][1])
+					guiSetText (theJobMemo, theJobsTable[markerNumber][13])
+					loadSkinsIntoGrid(markerNumber)
+					guiSetVisible(theJobWindow, true)
+					showCursor(true, true)
 					setElementFrozen(localPlayer,true)
 					timer =  setTimer(function() check() end,500,0)
 				end
@@ -213,22 +213,22 @@ function check()
 	end
 end
 
-function loadSkinsIntoGrid( markerNumber )
+function loadSkinsIntoGrid(markerNumber)
 	local theTable = theJobsTable[markerNumber][10]
-	guiGridListClear( theJobGrid )
-	for k, v in ipairs ( theTable ) do
-		local row = guiGridListAddRow ( theJobGrid )
-		guiGridListSetItemText ( theJobGrid, row, 1, theJobsTable[markerNumber][1].." "..k, false, true )
-		guiGridListSetItemText ( theJobGrid, row, 2, v, false, false )
+	guiGridListClear(theJobGrid)
+	for k, v in ipairs (theTable) do
+		local row = guiGridListAddRow (theJobGrid)
+		guiGridListSetItemText (theJobGrid, row, 1, theJobsTable[markerNumber][1].." "..k, false, true)
+		guiGridListSetItemText (theJobGrid, row, 2, v, false, false)
 	end
 end
 
-function isElementInGroup ( thePlayer, markerNumber )
-	if ( theJobsTable[markerNumber][12] ) then
-		if ( getElementData( thePlayer, "Group" ) == theJobsTable[markerNumber][12] ) then
+function isElementInGroup (thePlayer, markerNumber)
+	if (theJobsTable[markerNumber][12]) then
+		if (getElementData(thePlayer, "Group") == theJobsTable[markerNumber][12]) then
 			return true
 		else
-			exports.DENdxmsg:createNewDxMessage( "You can't take this job!", 225, 0, 0 )
+			exports.DENdxmsg:createNewDxMessage("You can't take this job!", 225, 0, 0)
 			return false
 		end
 	else
@@ -239,41 +239,41 @@ end
 for i=1,#theJobsTable do
 	local x, y, z = theJobsTable[i][3], theJobsTable[i][4], theJobsTable[i][5]
 	local r, g, b = theJobsTable[i][6], theJobsTable[i][7], theJobsTable[i][8]
-	jobMarkersTable[i] = createMarker( x, y, z -1, "cylinder", 2.0, r, g, b, 150)
-	setElementData( jobMarkersTable[i], "jobMarkerNumber", i )
+	jobMarkersTable[i] = createMarker(x, y, z -1, "cylinder", 2.0, r, g, b, 150)
+	setElementData(jobMarkersTable[i], "jobMarkerNumber", i)
 	local theSkin = theJobsTable[i][10][math.random(1,#theJobsTable[i][10])]
-	local thePed = createPed ( theSkin, x, y, z )
-	setElementFrozen ( thePed, true )
-	setPedRotation ( thePed, theJobsTable[i][14] )
-	setElementData( thePed, "showModelPed", true )
-	addEventHandler( "onClientMarkerHit", jobMarkersTable[i], onClientJobMarkerHit )
+	local thePed = createPed (theSkin, x, y, z)
+	setElementFrozen (thePed, true)
+	setPedRotation (thePed, theJobsTable[i][14])
+	setElementData(thePed, "showModelPed", true)
+	addEventHandler("onClientMarkerHit", jobMarkersTable[i], onClientJobMarkerHit)
 end
 
 function onJobSelectSkin ()
-	local theSkin = guiGridListGetItemText ( theJobGrid, guiGridListGetSelectedItem ( theJobGrid ), 2, 1 )
-	if ( theSkin == nil ) or ( theSkin == "" ) then
-		setElementModel ( localPlayer, tonumber( getElementData( localPlayer, "skinBeforeEnter" ) ) )
+	local theSkin = guiGridListGetItemText(theJobGrid, guiGridListGetSelectedItem(theJobGrid), 2, 1)
+	if (not theSkin or theSkin == nil or theSkin == "") then
+		setElementModel(localPlayer, tonumber(getElementData(localPlayer, "skinBeforeEnter")))
 	else
-		setElementModel ( localPlayer, theSkin )
+		setElementModel(localPlayer, theSkin)
 	end
 end
-addEventHandler ( "onClientGUIClick", theJobGrid, onJobSelectSkin )
+addEventHandler("onClientGUIClick", theJobGrid, onJobSelectSkin)
 
-function onJobWindowClose ()
-	guiSetVisible( theJobWindow, false )
-	showCursor( false, false )
-	setElementModel ( localPlayer, tonumber( getElementData( localPlayer, "skinBeforeEnter" ) ), true )
+function onJobWindowClose()
+	guiSetVisible(theJobWindow, false)
+	showCursor(false, false)
+	setElementModel (localPlayer, tonumber(getElementData(localPlayer, "skinBeforeEnter")), true)
 end
-addEventHandler("onClientGUIClick", theJobButton2, onJobWindowClose, false )
+addEventHandler("onClientGUIClick", theJobButton2, onJobWindowClose, false)
 
-function onPlayerTakeJob ()
-	if ( theHitMarker ) then
-		local theSkin = guiGridListGetItemText ( theJobGrid, guiGridListGetSelectedItem ( theJobGrid ), 2, 1 )
-		if ( theSkin == nil ) or ( theSkin == "" ) then
-			exports.DENdxmsg:createNewDxMessage( "Please select a skin before taking the job!", 225, 0, 0 )
+function onPlayerTakeJob()
+	if (theHitMarker) then
+		local theSkin = guiGridListGetItemText(theJobGrid, guiGridListGetSelectedItem (theJobGrid), 2, 1)
+		if (not theSkin or theSkin == nil or theSkin == "") then
+			exports.DENdxmsg:createNewDxMessage("Please select a skin before taking the job!", 225, 0, 0)
 		else
-			guiSetVisible( theJobWindow, false ) showCursor( false, false )
-			local markerNumber = getElementData( theHitMarker, "jobMarkerNumber" )
+			guiSetVisible(theJobWindow, false) showCursor(false, false)
+			local markerNumber = getElementData(theHitMarker, "jobMarkerNumber")
 			local theTeam, theOccupation, theWeapon = theJobsTable[markerNumber][2], theJobsTable[markerNumber][1], theJobsTable[markerNumber][9]
 			if (theJobsTable[markerNumber].inDev) then
 				exports.DENdxmsg:createNewDxMessage("This job is in development and only staff can take it",255,0,0)
@@ -281,18 +281,17 @@ function onPlayerTakeJob ()
 					return
 				end
 			end
-			setElementModel ( localPlayer, tonumber( getElementData( localPlayer, "skinBeforeEnter" ) ) )
-			triggerServerEvent( "onSetPlayerJob", localPlayer, theTeam, theOccupation, tonumber(theSkin), theWeapon,theJobsTable[markerNumber]["nrgb"] or false )
+			setElementModel (localPlayer, tonumber(getElementData(localPlayer, "skinBeforeEnter")))
+			triggerServerEvent("onSetPlayerJob", localPlayer, theTeam, theOccupation, tonumber(theSkin), theWeapon,theJobsTable[markerNumber]["nrgb"] or false)
 
-			if ( theTeam ~= getTeamName( getPlayerTeam( localPlayer ) ) ) then
-				triggerEvent( "onClientPlayerTeamChange", localPlayer, getPlayerTeam( localPlayer ), getTeamFromName( theTeam ) )
+			if (theTeam ~= getTeamName(getPlayerTeam(localPlayer))) then
+				triggerEvent("onClientPlayerTeamChange", localPlayer, getPlayerTeam(localPlayer), getTeamFromName(theTeam))
 			end
-			triggerEvent( "onClientPlayerJobChange", localPlayer, theOccupation, theTeam )
+			triggerEvent("onClientPlayerJobChange", localPlayer, theOccupation, theTeam)
 		end
 	end
 end
-addEventHandler("onClientGUIClick", theJobButton1, onPlayerTakeJob, false )
-
+addEventHandler("onClientGUIClick", theJobButton1, onPlayerTakeJob, false)
 
 --[[
 smurfsTXD = engineLoadTXD("sm.txd")
@@ -342,44 +341,36 @@ function (theFile)
 end)
 --]]
 --[[
-swatTXD = engineLoadTXD ( "swat.txd" )
-engineImportTXD ( swatTXD, 54 )
-swatDFF = engineLoadDFF ( "swat.dff", 54 )
-engineReplaceModel ( swatDFF, 54 )
+swatTXD = engineLoadTXD ("swat.txd")
+engineImportTXD (swatTXD, 54)
+swatDFF = engineLoadDFF ("swat.dff", 54)
+engineReplaceModel (swatDFF, 54)
 
 
-tsfTXD = engineLoadTXD ( "tsf.txd" )
-engineImportTXD ( tsfTXD, 222 )
-tsfDFF = engineLoadDFF ( "tsf.dff", 222 )
-engineReplaceModel ( tsfDFF, 222 )
+tsfTXD = engineLoadTXD ("tsf.txd")
+engineImportTXD (tsfTXD, 222)
+tsfDFF = engineLoadDFF ("tsf.dff", 222)
+engineReplaceModel (tsfDFF, 222)
 
 
-wolfTXD = engineLoadTXD ( "wolf.txd" )
-engineImportTXD ( wolfTXD, 232 )
-wolfDFF = engineLoadDFF ( "wolf.dff", 232 )
-engineReplaceModel ( wolfDFF, 232 )
+wolfTXD = engineLoadTXD ("wolf.txd")
+engineImportTXD (wolfTXD, 232)
+wolfDFF = engineLoadDFF ("wolf.dff", 232)
+engineReplaceModel (wolfDFF, 232)
 
 
-terrorists5TXD = engineLoadTXD ( "terrorists5.txd" )
-engineImportTXD (terrorists5TXD, 136 )
-terrorists5DFF = engineLoadDFF ( "terrorists5.dff", 136 )
-engineReplaceModel ( terrorists5DFF, 136 )
+terrorists5TXD = engineLoadTXD ("terrorists5.txd")
+engineImportTXD (terrorists5TXD, 136)
+terrorists5DFF = engineLoadDFF ("terrorists5.dff", 136)
+engineReplaceModel (terrorists5DFF, 136)
 --]]
 
-
-
-
-
 function Tskin()
-terrorists5TXD = engineLoadTXD ( "terrorists5.txd" )
-engineImportTXD (terrorists5TXD, 136 )
-terrorists5DFF = engineLoadDFF ( "terrorists5.dff", 136 )
-engineReplaceModel ( terrorists5DFF, 136 )
+terrorists5TXD = engineLoadTXD ("terrorists5.txd")
+engineImportTXD (terrorists5TXD, 136)
+terrorists5DFF = engineLoadDFF ("terrorists5.dff", 136)
+engineReplaceModel (terrorists5DFF, 136)
 end
-
-
-
-
 
 local mods = {
 	--{"lamb",503},
@@ -414,7 +405,7 @@ function ()
 		if lambDFF == false then
 			exports.CSGsecrettrans:downloadFile(":"..res.."/"..v[1]..".dff",":"..res.."/"..v[1]..".dff", 150)
 		else
-			engineReplaceModel(lambDFF,v[2])
+			engineReplaceModel(lambDFF, v[2])
 		end
 	end
 end)
