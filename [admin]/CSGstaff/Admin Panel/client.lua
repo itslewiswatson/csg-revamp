@@ -3,13 +3,18 @@
 function onClientSearchPlayerFromEmGrid()
 	guiGridListClear(adminEmPlayerGrid)
 	local name = guiGetText(adminEmPlayerSearch)
-	for _, player in ipairs(Element.getAllByType("player")) do
+	for _, plr in ipairs(Element.getAllByType("player")) do
 		if string.find(plr.name:lower(), name:lower()) then
 			if (plr.team) then
-				local r, g, b = getTeamColor (playerTeam)
-				local row = guiGridListAddRow (adminEmPlayerGrid)
-				guiGridListSetItemText(adminEmPlayerGrid, row, 1, getPlayerName(player), false, false)
-				guiGridListSetItemColor (adminEmPlayerGrid, row, 1, r, g, b)
+				local r, g, b
+				if (plr.team) then
+					r, g, b = plr.team:getColor()
+				else
+					r, g, b = 255, 255, 255
+				end
+				local row = guiGridListAddRow(adminEmPlayerGrid)
+				guiGridListSetItemText(adminEmPlayerGrid, row, 1, plr.name, false, false)
+				guiGridListSetItemColor(adminEmPlayerGrid, row, 1, r, g, b)
 			end
 		end
 	end
@@ -136,7 +141,6 @@ local punishmentReaons = {
 	"#18 - Trolling/griefing",
 	"#19 - Requesting Unfair Advantages",
 	"#20 - Ruining the Event/Deathmatching in the event",
-	"#21 - No DM allowed even in LV when Sensei is hosting the DrugEvent",
 }
 
 -- The window
@@ -205,7 +209,7 @@ adminGUI.GUIbuttons[9] = guiCreateButton(10, 279, 154, 25, "Spectate Player", fa
 adminGUI.GUIbuttons[10] = guiCreateButton(171, 314, 154, 25, "Give Vehicle", false, adminGUI.GUItabs[2])
 adminGUI.GUIbuttons[11] = guiCreateButton(331, 314, 154, 25, "Set Skin", false, adminGUI.GUItabs[2])
 adminGUI.GUIbuttons[12] = guiCreateButton(491, 314, 154, 25, "Rename", false, adminGUI.GUItabs[2])
-adminGUI.GUIedits[4] = guiCreateEdit(10, 314, 156, 26, "Name, ID or New name", false, adminGUI.GUItabs[2])
+adminGUI.GUIedits[4] = guiCreateEdit(10, 314, 156, 26, "Name or ID", false, adminGUI.GUItabs[2])
 adminGUI.GUIbuttons[13] = guiCreateButton(171, 279, 75, 25, "Give Health", false, adminGUI.GUItabs[2])
 adminGUI.GUIbuttons[80] = guiCreateButton(250, 279, 75, 25, "Give Armor", false, adminGUI.GUItabs[2])
 adminGUI.GUIbuttons[14] = guiCreateButton(331, 279, 154, 25, "Give Jetpack", false, adminGUI.GUItabs[2])
@@ -214,7 +218,7 @@ adminGUI.GUIedits[5] = guiCreateEdit(10, 349, 74, 26, "Wep Name", false, adminGU
 adminGUI.GUIedits[6] = guiCreateEdit(85, 349, 79, 26, "Amount", false, adminGUI.GUItabs[2])
 adminGUI.GUIbuttons[16] = guiCreateButton(171, 349, 154, 25, "Give Weapon", false, adminGUI.GUItabs[2])
 adminGUI.GUIbuttons[17] = guiCreateButton(491, 155, 154, 25, "Punish Player", false, adminGUI.GUItabs[2])
-adminGUI.GUIedits[71] = guiCreateEdit(331, 348, 156, 26, "INT or Dimension", false, adminGUI.GUItabs[2])
+adminGUI.GUIedits[71] = guiCreateEdit(331, 348, 156, 26, "Interior or dimension", false, adminGUI.GUItabs[2])
 adminGUI.GUIbuttons[18] = guiCreateButton(491, 347, 75, 25, "Interior", false, adminGUI.GUItabs[2])
 adminGUI.GUIbuttons[20] = guiCreateButton(569, 347, 77, 25, "Dimension", false, adminGUI.GUItabs[2])
 adminGUI.GUIlabels[36] = guiCreateLabel(10, 384, 637, 19, "------------------------------------------------------------------------------------------------------------------------------------------------------------", false, adminGUI.GUItabs[2])
@@ -551,23 +555,21 @@ end
 -- This puts all the players in a grid
 for _, plr in ipairs(Element.getAllByType("player")) do
 	local row = guiGridListAddRow(adminGUI.GUIgrids[1])
-	if (plr.tam) then
-		guiGridListSetItemText(adminGUI.GUIgrids[1], row, 1, plr.name, false, false)
+	guiGridListSetItemText(adminGUI.GUIgrids[1], row, 1, plr.name, false, false)
+	if (plr.team) then
 		guiGridListSetItemColor(adminGUI.GUIgrids[1], row, 1, plr.team:getColor())
-	else
-		guiGridListSetItemText(adminGUI.GUIgrids[1], row, 1, plr.name, false, false)
 	end
 end
 
 -- Add a player when they join
 addEventHandler("onClientPlayerJoin", root,
 	function ()
-		local row = guiGridListAddRow (adminGUI.GUIgrids[1])
-		if (source.team and string.find(getPlayerName(thePlayer):lower(), guiGetText(adminGUI.GUIedits[1]):lower())) then
-			guiGridListSetItemText (adminGUI.GUIgrids[1], row, 1, getPlayerName(source), false, false)
-			guiGridListSetItemColor(adminGUI.GUIgrids[1], row, 1, getTeamColor (getPlayerTeam(source)))
-		else
-			guiGridListSetItemText (adminGUI.GUIgrids[1], row, 1, getPlayerName(source), false, false)
+		local row = guiGridListAddRow(adminGUI.GUIgrids[1])
+		if (thePlayer:lower():find(adminGUI.GUIedits[1].text:lower())) then
+			guiGridListSetItemText(adminGUI.GUIgrids[1], row, 1, source.name, false, false)
+			if (source.team) then
+				guiGridListSetItemColor(adminGUI.GUIgrids[1], row, 1, source.team:getColor())
+			end
 		end
 	end
 )
@@ -576,8 +578,8 @@ addEventHandler("onClientPlayerJoin", root,
 addEventHandler("onClientPlayerQuit", root,
 	function ()
 		for i = 0, guiGridListGetRowCount(adminGUI.GUIgrids[1]) - 1 do
-			if (guiGridListGetItemText (adminGUI.GUIgrids[1], i, 1) == getPlayerName(source)) then
-				guiGridListRemoveRow (adminGUI.GUIgrids[1], i)
+			if (guiGridListGetItemText(adminGUI.GUIgrids[1], i, 1) == getPlayerName(source)) then
+				guiGridListRemoveRow(adminGUI.GUIgrids[1], i)
 			end
 		end
 	end
@@ -606,7 +608,7 @@ addEventHandler("onClientRender", root,
 			end
 		end
 
-		if (getAdminPanelSelectedPlayer ()) then
+		if (getAdminPanelSelectedPlayer()) then
 			local thePlayer = getAdminPanelSelectedPlayer()
 			local x, y, z = getElementPosition(thePlayer)
 			if (getPedOccupiedVehicle(thePlayer)) then theVehicle = getVehicleName (getPedOccupiedVehicle(thePlayer)) vehicleHealth = math.floor(getElementHealth(getPedOccupiedVehicle(thePlayer))) else theVehicle = "Walking" vehicleHealth = "N/A" end
@@ -808,24 +810,24 @@ function onLoadAccountsRender()
 end
 
 function loadAccounts()
-	guiGridListClear(adminGUI.GUIgrids[3]);
-	onAccountGridClick();
-	for i=1,#accounts do
-		local username = "N/A";
-		if accounts[i] and accounts[i]['username'] then
-			username = accounts[i]['username'];
+	guiGridListClear(adminGUI.GUIgrids[3])
+	onAccountGridClick()
+	for i = 1, #accounts do
+		local username = "N/A"
+		if accounts[i] and accounts[i]["username"] then
+			username = accounts[i]["username"]
 		end
-		local row = guiGridListAddRow(adminGUI.GUIgrids[3]);
-		guiGridListSetItemText(adminGUI.GUIgrids[3],row,1,username,false,false);
-		guiGridListSetItemData(adminGUI.GUIgrids[3],row,1,accounts[i]);		
+		local row = guiGridListAddRow(adminGUI.GUIgrids[3])
+		guiGridListSetItemText(adminGUI.GUIgrids[3], row, 1,username, false, false)
+		guiGridListSetItemData(adminGUI.GUIgrids[3], row, 1, accounts[i])
 	end
 end
 
 -- accounts functions
 
 function onAccountGridClick()
-	local selRow,_
-	selRow, _ = guiGridListGetSelectedItem(adminGUI.GUIgrids[3])
+	local selRow
+	selRow = guiGridListGetSelectedItem(adminGUI.GUIgrids[3])
 	-- reset values
 	local username = 'N/A'
 	local playtime = 'N/A'
@@ -837,12 +839,11 @@ function onAccountGridClick()
 	local bankMoney = 'N/A'
 	local score = "N/A"
 	if selRow and selRow ~= -1 then
-	
-		username = guiGridListGetItemText(adminGUI.GUIgrids[3],selRow,1)
-		accInfo = guiGridListGetItemData(adminGUI.GUIgrids[3],selRow,1)
+		username = guiGridListGetItemText(adminGUI.GUIgrids[3], selRow, 1)
+		accInfo = guiGridListGetItemData(adminGUI.GUIgrids[3], selRow, 1)
 		if type(accInfo) == 'table' then
-			playtime = math.ceil(accInfo['playtime']/60)
-			premiumHours = math.ceil(accInfo['premium']/60)
+			playtime = math.ceil(accInfo['playtime'] / 60)
+			premiumHours = math.ceil(accInfo['premium'] / 60)
 			occupation = accInfo['occupation']
 			team = accInfo['team']
 			email = accInfo['email']
@@ -858,25 +859,25 @@ function onAccountGridClick()
 			selectedAccountID = accountID
 		end
 	end
-	guiSetText(adminGUI.GUIedits[8],username)
-	guiSetText(adminGUI.GUIedits[9],playtime)
-	guiSetText(adminGUI.GUIedits[10],premiumHours)
-	guiSetText(adminGUI.GUIedits[11],email)
-	guiSetText(adminGUI.GUIedits[12],occupation)
-	guiSetText(adminGUI.GUIedits[13],team)
-	guiSetText(adminGUI.GUIedits[14],money)
-	guiSetText(adminGUI.GUIedits[15],bankMoney)
-	guiSetText(adminGUI.accountsScoreEdit,score)
-	guiSetText(adminGUI.GUIedits[16],"") -- password
-	guiSetText(adminGUI.GUIedits[17],"") -- confirm password
+	guiSetText(adminGUI.GUIedits[8], username)
+	guiSetText(adminGUI.GUIedits[9], playtime)
+	guiSetText(adminGUI.GUIedits[10], premiumHours)
+	guiSetText(adminGUI.GUIedits[11], email)
+	guiSetText(adminGUI.GUIedits[12], occupation)
+	guiSetText(adminGUI.GUIedits[13], team)
+	guiSetText(adminGUI.GUIedits[14], money)
+	guiSetText(adminGUI.GUIedits[15], bankMoney)
+	guiSetText(adminGUI.accountsScoreEdit, score)
+	guiSetText(adminGUI.GUIedits[16], "") -- password
+	guiSetText(adminGUI.GUIedits[17], "") -- confirm password
 end
-addEventHandler('onClientGUIClick',adminGUI.GUIgrids[3],onAccountGridClick,false)
+addEventHandler('onClientGUIClick', adminGUI.GUIgrids[3], onAccountGridClick, false)
 
 function onAccountsSearch()
-	local text = guiGetText(adminGUI.GUIedits[7]);
-	guiGridListClear(adminGUI.GUIgrids[3]);
-	local exactMatches = guiCheckBoxGetSelected(adminGUI.accountSearchExactMatchCheck);
-	initializeLoadingAccounts(text, exactMatches);
+	local text = guiGetText(adminGUI.GUIedits[7])
+	guiGridListClear(adminGUI.GUIgrids[3])
+	local exactMatches = guiCheckBoxGetSelected(adminGUI.accountSearchExactMatchCheck)
+	initializeLoadingAccounts(text, exactMatches)
 end
 addEventHandler('onClientGUIClick',adminGUI.accountSearchButton,onAccountsSearch,false)
 
@@ -903,31 +904,29 @@ end
 addEventHandler('onClientGUIClick',adminGUI.GUItabbar[1],onAccountsClick)
 
 function deleteSelectedAccount()
-	local selRow, _ = guiGridListGetSelectedItem(adminGUI.GUIgrids[3]);
-
+	local selRow = guiGridListGetSelectedItem(adminGUI.GUIgrids[3])
 	if selRow and selRow ~= -1 then
 		local rowData = guiGridListGetItemData(adminGUI.GUIgrids[3],selRow,1)
-		triggerServerEvent("staffpanel.accounts.delete",localPlayer,tonumber(rowData['id']))
+		triggerServerEvent("staffpanel.accounts.delete", localPlayer, tonumber(rowData["id"]))
 	else
-		exports.dendxmsg:createNewDxMessage('No account selected!',255,0,0)
+		exports.dendxmsg:createNewDxMessage("No account selected!", 255, 0, 0)
 	end
 end
 
 function getUpdatedAccountValues(rowData)
-
 	local updatedValuesTable = {}
 	local selRowData = rowData
-	if selRowData['username'] ~= guiGetText(adminGUI.GUIedits[8]) then
-		if not string.match(guiGetText(adminGUI.GUIedits[8]),"^%s*$") then
+	if selRowData["username"] ~= guiGetText(adminGUI.GUIedits[8]) then
+		if not string.match(guiGetText(adminGUI.GUIedits[8]), "^%s*$") then
 			updatedValuesTable["username"] = guiGetText(adminGUI.GUIedits[8])
 		else
 			exports.dendxmsg:createNewDxMessage("Username invalid!",255,0,0)
 			return false;
 		end
 	end
-	if math.ceil(selRowData['playtime']/60) ~= tonumber(guiGetText(adminGUI.GUIedits[9])) then
+	if math.ceil(selRowData['playtime'] / 60) ~= tonumber(guiGetText(adminGUI.GUIedits[9])) then
 		if tonumber(guiGetText(adminGUI.GUIedits[9])) and tonumber(guiGetText(adminGUI.GUIedits[9])) >= 0 then
-			updatedValuesTable["playtime"] = tonumber(guiGetText(adminGUI.GUIedits[9]))*60
+			updatedValuesTable["playtime"] = tonumber(guiGetText(adminGUI.GUIedits[9])) * 60
 		else
 			exports.dendxmsg:createNewDxMessage("Playtime is not a number, or below 0.",255,0,0)
 			return false;
@@ -935,10 +934,10 @@ function getUpdatedAccountValues(rowData)
 	end
 	if math.ceil(selRowData['premium']/60) ~= tonumber(guiGetText(adminGUI.GUIedits[10])) then
 		if tonumber(guiGetText(adminGUI.GUIedits[10])) and tonumber(guiGetText(adminGUI.GUIedits[10])) >= 0 then
-			updatedValuesTable["premium"] = tonumber(guiGetText(adminGUI.GUIedits[10]))*60
+			updatedValuesTable["premium"] = tonumber(guiGetText(adminGUI.GUIedits[10])) * 60
 		else
-			exports.dendxmsg:createNewDxMessage("Premium hours is not a number, or below 0.",255,0,0)
-			return false;
+			exports.dendxmsg:createNewDxMessage("Premium hours is not a number, or below 0.", 255, 0, 0)
+			return false
 		end
 	end
 	if selRowData['email'] ~= guiGetText(adminGUI.GUIedits[11]) then
@@ -955,7 +954,7 @@ function getUpdatedAccountValues(rowData)
 			updatedValuesTable["money"] = tonumber(guiGetText(adminGUI.GUIedits[14]))
 		else
 			exports.dendxmsg:createNewDxMessage("Money is not a number.",255,0,0)
-			return false;
+			return false
 		end
 	end
 	if not accountBalances[selRowData['id']] or accountBalances[selRowData['id']] ~= tonumber(guiGetText(adminGUI.GUIedits[15])) then
@@ -963,7 +962,7 @@ function getUpdatedAccountValues(rowData)
 			updatedValuesTable["bankmoney"] = tonumber(guiGetText(adminGUI.GUIedits[15]))
 		else
 			exports.dendxmsg:createNewDxMessage("Bank money is not a number.",255,0,0)
-			return false;
+			return false
 		end
 	end
 	if selRowData['score'] ~= tonumber(guiGetText(adminGUI.accountsScoreEdit)) then
@@ -971,7 +970,7 @@ function getUpdatedAccountValues(rowData)
 			updatedValuesTable["score"] = tonumber(guiGetText(adminGUI.accountsScoreEdit))
 		else
 			exports.dendxmsg:createNewDxMessage("Score is not a number.",255,0,0)
-			return false;
+			return false
 		end
 	end
 	if #guiGetText(adminGUI.GUIedits[16]) > 0 then
@@ -980,11 +979,11 @@ function getUpdatedAccountValues(rowData)
 				updatedValuesTable["password"] = guiGetText(adminGUI.GUIedits[16])
 			else
 				exports.dendxmsg:createNewDxMessage("Passwords must match.",255,0,0)
-				return false;			
+				return false			
 			end
 		else
 			exports.dendxmsg:createNewDxMessage("Password must be 4 characters long.",255,0,0)
-			return false;
+			return false
 		end
 	end
 	return updatedValuesTable;
@@ -1022,7 +1021,7 @@ addEventHandler("onRequestBansTable:callBack", root,
 )
 
 function onBanGridClick()
-	local selRow, _ = guiGridListGetSelectedItem(source)
+	local selRow = guiGridListGetSelectedItem(source)
 	local serialUsername = "N/A"
 	local banReason = "N/A"
 	local bannedBy = "N/A"
@@ -1039,10 +1038,10 @@ function onBanGridClick()
 		banDate = tostring(timestampConvert (selectedBanInfo.banstamp))
 		globalBan = selectedBanInfo.global and "Yes" or "No"
 	end
-	guiSetText(adminGUI.GUIlabels.banSerialUsername,"Serial/Username: "..serialUsername)
-	guiSetText(adminGUI.GUIlabels.banReason,"Reason: "..banReason)
-	guiSetText(adminGUI.GUIlabels.banBanner,"Banned by: "..bannedBy)
-	guiSetText(adminGUI.GUIlabels.banDate,"Unbanned on: "..banDate)
+	guiSetText(adminGUI.GUIlabels.banSerialUsername, "Serial/Username: "..serialUsername)
+	guiSetText(adminGUI.GUIlabels.banReason, "Reason: "..banReason)
+	guiSetText(adminGUI.GUIlabels.banBanner, "Banned by: "..bannedBy)
+	guiSetText(adminGUI.GUIlabels.banDate, "Unbanned on: "..banDate)
 end
 addEventHandler('onClientGUIClick',adminGUI.GUIgrids[6],onBanGridClick,false)
 addEventHandler('onClientGUIClick',adminGUI.GUIgrids[7],onBanGridClick,false)
@@ -1083,29 +1082,31 @@ addEventHandler("onRequestPunishlog:callBack", root,
 	end
 )
 
-addEventHandler("onClientGUIDoubleClick", adminGUI.GUIgrids[2],function()
-	if source ~= adminGUI.GUIgrids[2] then return end
-	if getPlayerAdminLevel(localPlayer) >= 5 then
-		local row = guiGridListGetSelectedItem(adminGUI.GUIgrids[2])
-		if row ~= nil and row ~= false and row ~= -1 then
-			local text = guiGridListGetItemText(adminGUI.GUIgrids[2],row,2)
-			local tim = guiGridListGetItemText(adminGUI.GUIgrids[2],row,1)
-			local data = guiGridListGetItemData(adminGUI.GUIgrids[2],row,1)
-			if data.active == 1 then
-				data.active = 0 
-				guiGridListSetItemColor (adminGUI.GUIgrids[2], row, 1, 225, 0, 0)
-				guiGridListSetItemColor (adminGUI.GUIgrids[2], row, 2, 225, 0, 0)
-				triggerServerEvent("CSGstaff.removePunishRequest",localPlayer,data.id,text)
-			else
-				data.active = 1
-				guiGridListSetItemColor (adminGUI.GUIgrids[2], row, 1, 225, 255, 255)
-				guiGridListSetItemColor (adminGUI.GUIgrids[2], row, 2, 225, 255, 255)
-				triggerServerEvent("CSGstaff.enablePunishRequest",localPlayer,data.id,text)			
+addEventHandler("onClientGUIDoubleClick", adminGUI.GUIgrids[2],
+	function ()
+		if (source ~= adminGUI.GUIgrids[2]) then return end
+		if (getPlayerAdminLevel(localPlayer) >= 5) then
+			local row = guiGridListGetSelectedItem(adminGUI.GUIgrids[2])
+			if row ~= nil and row ~= false and row ~= -1 then
+				local text = guiGridListGetItemText(adminGUI.GUIgrids[2],row,2)
+				local tim = guiGridListGetItemText(adminGUI.GUIgrids[2],row,1)
+				local data = guiGridListGetItemData(adminGUI.GUIgrids[2],row,1)
+				if data.active == 1 then
+					data.active = 0 
+					guiGridListSetItemColor (adminGUI.GUIgrids[2], row, 1, 225, 0, 0)
+					guiGridListSetItemColor (adminGUI.GUIgrids[2], row, 2, 225, 0, 0)
+					triggerServerEvent("CSGstaff.removePunishRequest",localPlayer,data.id,text)
+				else
+					data.active = 1
+					guiGridListSetItemColor (adminGUI.GUIgrids[2], row, 1, 225, 255, 255)
+					guiGridListSetItemColor (adminGUI.GUIgrids[2], row, 2, 225, 255, 255)
+					triggerServerEvent("CSGstaff.enablePunishRequest",localPlayer,data.id,text)			
+				end
+				guiGridListSetItemData(adminGUI.GUIgrids[2], row, 1, data )
 			end
-			guiGridListSetItemData(adminGUI.GUIgrids[2], row, 1, data )
 		end
 	end
-end)
+)
 
 -- Event for the buttons in the management tab
 addEventHandler ("onClientGUIClick", root,
@@ -1170,11 +1171,11 @@ addEventHandler ("onClientGUITabSwitched", root,
 -- Event for the buttons in the tab to set player data
 local spamProtection = false
 
-function spamPro () spamProtection = getTickCount() end
+function spamPro() spamProtection = getTickCount() end
 
-addEventHandler ("onClientGUIClick", root,
+addEventHandler("onClientGUIClick", root,
 	function ()
-		if (spamProtection) and (getTickCount()-spamProtection < 2000) then return end
+		if (spamProtection) and (getTickCount() - spamProtection < 2000) then return end
 		if not (getAdminPanelSelectedPlayer ()) then return end
 		local thePlayer = getAdminPanelSelectedPlayer ()
 		if (source == adminGUI.GUIbuttons[1]) then -- Slap Player
@@ -1188,7 +1189,7 @@ addEventHandler ("onClientGUIClick", root,
 		elseif (source == adminGUI.GUIbuttons[5] ) then -- Warp To Player
 			triggerServerEvent("onAdminPlayerActions", localPlayer, thePlayer, "warp")
 		elseif (source == adminGUI.GUIbuttons[6] ) then -- Warp Player To...
-			triggerServerEvent("onAdminPlayerActions",localPlayer,thePlayer,"warpTo")
+			triggerServerEvent("onAdminPlayerActions", localPlayer, thePlayer, "warpTo")
 		elseif (source == adminGUI.GUIbuttons[7] ) then -- Fix Vehicle
 			triggerServerEvent("onAdminPlayerActions", localPlayer, thePlayer, "fixvehicle")
 		elseif (source == adminGUI.GUIbuttons[8] ) then -- Destroy Vehicle
@@ -1197,8 +1198,8 @@ addEventHandler ("onClientGUIClick", root,
 			onPlayerSpecate (thePlayer)
 			triggerServerEvent("onAdminPlayerActions", localPlayer, thePlayer, "spectate")
 		elseif (source == adminGUI.GUIbuttons[10]) then -- Give Vehicle
-			if (getVehicleModelFromName (guiGetText(adminGUI.GUIedits[4])) or getVehicleNameFromModel (tonumber(guiGetText(adminGUI.GUIedits[4])))) then 
-				triggerServerEvent("onAdminPlayerActions", localPlayer, thePlayer, "vehicle", getVehicleModelFromName (guiGetText(adminGUI.GUIedits[4])) or getVehicleNameFromModel (tonumber(guiGetText(adminGUI.GUIedits[4]))) and tonumber(guiGetText(adminGUI.GUIedits[4])))
+			if (getVehicleModelFromName(guiGetText(adminGUI.GUIedits[4])) or getVehicleNameFromModel(tonumber(guiGetText(adminGUI.GUIedits[4])))) then 
+				triggerServerEvent("onAdminPlayerActions", localPlayer, thePlayer, "vehicle", getVehicleModelFromName(guiGetText(adminGUI.GUIedits[4])) or getVehicleNameFromModel(tonumber(guiGetText(adminGUI.GUIedits[4]))) and tonumber(guiGetText(adminGUI.GUIedits[4])))
 			else 
 				exports.DENdxmsg:createNewDxMessage ("No vehicle found with that name!", 0, 225, 0) 
 			end

@@ -447,11 +447,9 @@ addCommandHandler("dmgproof",
 -- Minigun command
 addCommandHandler("minigun",
 	function (thePlayer)
-		if (isPlayerStaff(thePlayer) and Team.getFromName(thePlayer:getTeam()) == "Staff" and getPlayerAdminLevel(thePlayer) == 6) then
-			if (getPlayerAdminLevel(thePlayer) >= 4) then
-				giveWeapon(thePlayer, 38, 9000, true)
-				exports.CSGlogging:createAdminLogRow(thePlayer, thePlayer:getName().." spawned a minigun")
-			end
+		if (isPlayerStaff(thePlayer) and thePlayer.team and Team.getFromName("Staff") == thePlayer.team and getPlayerAdminLevel(thePlayer) >= 4) then
+			giveWeapon(thePlayer, 38, 9000, true)
+			exports.CSGlogging:createAdminLogRow(thePlayer, thePlayer.name.." spawned a minigun")
 		end
 	end
 )

@@ -73,7 +73,7 @@ addEventHandler("onRequestAdminPlayerInfo", root,
 			playerLogins,
 		}
 		
-		triggerClientEvent(source, "onRequestAdminPlayerInfo:callBack", source, theTable)
+		triggerLatentClientEvent(source, "onRequestAdminPlayerInfo:callBack", source, theTable)
 	end
 )
 
@@ -81,14 +81,16 @@ addEventHandler("onRequestAdminPlayerInfo", root,
 addEvent("onRequestAdminTable", true)
 addEventHandler("onRequestAdminTable", root,
 	function ()
-		triggerClientEvent(source, "onRequestAdminTable:callBack", source, getAllAdmins())
+		triggerLatentClientEvent(source, "onRequestAdminTable:callBack", source, getAllAdmins())
 	end
 )
 
-addEvent("CSGstaff.removePunishRequest",true)
-addEventHandler("CSGstaff.removePunishRequest",root,function(id,text)
-	exports.DENmysql:query("UPDATE punishlog SET active=? WHERE punishment=? AND uniqueid=?",0,text,id)
-end)
+addEvent("CSGstaff.removePunishRequest", true)
+addEventHandler("CSGstaff.removePunishRequest", root,	
+	function (id, text)
+		exports.DENmysql:query("UPDATE `punishlog` SET `active`=? WHERE `punishment`=? AND `uniqueid`=?", 0, text, id)
+	end
+)
 
 addEvent("CSGstaff.enablePunishRequest",true)
 addEventHandler("CSGstaff.enablePunishRequest",root,function(id,text)
@@ -141,9 +143,9 @@ addEventHandler("onRequestAccountBalance",root,
 		local info = exports.DENmysql:query("SELECT `balance` FROM `banking` WHERE `userid`=? LIMIT 1", accountID)
 		local balance
 		if type(info[1]) == "table" then
-			balance = info[1]["balance"];
+			balance = info[1]["balance"]
 		end
-		triggerClientEvent(source,"onRequestAccountBalance:callBack",source,accountID,balance or false)
+		triggerClientEvent(source, "onRequestAccountBalance:callBack", source, accountID, balance or false)
 	end
 )
 
@@ -174,7 +176,7 @@ addEventHandler("onServerAdminChange", root,
 			setAdminActive (nickname)
 		end
 		if (nickname) then
-			setTimer (triggerClientEvent, 500, 1, "onRequestAdminTable:callBack", source, getAllAdmins())
+			Timer(triggerClientEvent, 500, 1, "onRequestAdminTable:callBack", source, getAllAdmins())
 			exports.DENdxmsg:createNewDxMessage(source, "Updating staff table... Please wait!", 0, 225, 0)
 		end
 	end
@@ -198,38 +200,40 @@ local theVehicles = {}
 addEvent("onAdminPlayerActions", true)
 addEventHandler("onAdminPlayerActions", root,
 	function (thePlayer, action, arg3, arg4)
-		if (action == "slap") and not (isPedDead(thePlayer)) then
+		if (action == "slap" and not isPedDead(thePlayer)) then
 			killPed(thePlayer)
-			outputChatBox("You have been slapped by " .. getPlayerName(source) .. " (100HP)", thePlayer, 225, 0, 0)
-			onAdminCreatePunishment (thePlayer, source, getPlayerName(source).." slapped " .. getPlayerName(thePlayer) .. " (100HP)", false)
+			outputChatBox("You have been slapped by "..getPlayerName(source), thePlayer, 225, 0, 0)
+			onAdminCreatePunishment(thePlayer, source, getPlayerName(source).." slapped " .. getPlayerName(thePlayer) .. " (100HP)", false)
 		elseif (action == "freeze") then
-			local vehicle = getPedOccupiedVehicle (thePlayer)
-			if (isElementFrozen (thePlayer)) then
-				outputChatBox("You have been unfrozen by " .. getPlayerName(source) .. "", thePlayer, 225, 0, 0)
+			local vehicle = getPedOccupiedVehicle(thePlayer)
+			if (isElementFrozen(thePlayer)) then
+				outputChatBox("You have been unfrozen by "..source.name, thePlayer, 225, 0, 0)
+				onAdminCreatePunishment(thePlayer, source, source.name.." unfroze "..thePlayer.name, false)
 			else
-				outputChatBox("You have been frozen by " .. getPlayerName(source) .. "", thePlayer, 225, 0, 0)
-				onAdminCreatePunishment (thePlayer, source, getPlayerName(source).." froze " .. getPlayerName(thePlayer) .. "", false)
+				outputChatBox("You have been frozen by "..source.name, thePlayer, 225, 0, 0)
+				onAdminCreatePunishment(thePlayer, source, source.name.." froze "..thePlayer.name, false)
 			end
-			if (vehicle) then if (isElementFrozen(vehicle)) then setElementFrozen (vehicle, false) else setElementFrozen (vehicle, true) end end
-			if (isElementFrozen (thePlayer)) then setElementFrozen (thePlayer, false) else setElementFrozen (thePlayer, true) end
+			thePlayer.frozen = not thePlayer.frozen
+			if (vehicle) then
+				vehicle.frozen = not vehicle.frozen
+			end
 		elseif (action == "kick") then
 			outputChatBox(getPlayerName(source).." kicked " .. getPlayerName(thePlayer) .. "", root, 225, 0, 0)
 			onAdminCreatePunishment (thePlayer, source, getPlayerName(source).." kicked " .. getPlayerName(thePlayer) .. "", false)
 			kickPlayer(thePlayer, "You have been kicked by "..getPlayerName(source))
 		elseif (action == "reconnect") then
-			outputChatBox(getPlayerName(source).." reconnected " .. getPlayerName(thePlayer) .. "", root, 225, 0, 0)
-			onAdminCreatePunishment (thePlayer, source, getPlayerName(source).." reconnected " .. getPlayerName(thePlayer) .. "", false)
-			redirectPlayer(thePlayer, "csgmta.net", 22003)
+			outputChatBox(getPlayerName(source).." reconnected "..thePlayer.name, root, 225, 0, 0)
+			onAdminCreatePunishment (thePlayer, source, source.name.." reconnected "..thePlayer.name, false)
+			redirectPlayer(thePlayer, "", 22003)
 		elseif (action == "warp") then
-			onAdminWarpPlayer (source, thePlayer)
-			exports.CSGlogging:createAdminLogRow (source, getPlayerName(source).." warped to "..getPlayerName(thePlayer))
+			if (source == thePlayer) then
+				exports.DENdxmsg:createNewDxMessage(source, "You cannot warp to yourself", 255, 0, 0)
+				return false
+			end
+			onAdminWarpPlayer(source, thePlayer)
+			exports.CSGlogging:createAdminLogRow(source, getPlayerName(source).." warped to "..getPlayerName(thePlayer))
 		elseif (action == "spectate") then
-			if "sensei" == exports.server:getPlayerAccountName(source) then return end
-			exports.CSGlogging:createAdminLogRow (source, getPlayerName(source).." started spectating  "..getPlayerName(thePlayer))
-		elseif (action == "warpto") then
-			onAdminWarpPlayer (thePlayer, arg3)
-			outputChatBox(getPlayerName(source).." warped you to "..getPlayerName(arg3), thePlayer, 225, 0, 0)
-			exports.CSGlogging:createAdminLogRow (source, getPlayerName(source).." warped " .. getPlayerName(thePlayer) .. " to "..getPlayerName(arg3))
+			exports.CSGlogging:createAdminLogRow(source, getPlayerName(source).." started spectating  "..getPlayerName(thePlayer))
 		elseif (action == "fixvehicle") then
 			local vehicle = getPedOccupiedVehicle (thePlayer)
 			if (vehicle) then local rX, rY, rZ = getElementRotation(vehicle) setElementRotation(vehicle, 0, 0, (rX > 90 and rX < 270) and (rZ + 180) or rZ) fixVehicle(vehicle) outputChatBox(getPlayerName(source).." fixed your vehicle", thePlayer, 225, 0, 0) else exports.DENdxmsg:createNewDxMessage(source, "Player is not in a vehicle!", 0, 225, 0) end
@@ -242,7 +246,7 @@ addEventHandler("onAdminPlayerActions", root,
 		elseif (action == "health") then
 			setElementHealth(thePlayer, 200)
 			outputChatBox(getPlayerName(source).." gave you full health", thePlayer, 225, 0, 0)
-			exports.CSGlogging:createAdminLogRow (source, getPlayerName(source).." gave " .. getPlayerName(thePlayer) .. " full health")
+			exports.CSGlogging:createAdminLogRow(source, getPlayerName(source).." gave " .. getPlayerName(thePlayer) .. " full health")
 		elseif (action == "armor") then
 			setPedArmor(thePlayer, 100)
 			outputChatBox(getPlayerName(source).." gave you full armor", thePlayer, 225, 0, 0)
@@ -285,23 +289,28 @@ addEventHandler("onAdminPlayerActions", root,
 			exports.CSGlogging:createAdminLogRow (source, getPlayerName(source).." gave " .. getPlayerName(thePlayer) .. " a " .. getWeaponNameFromID(arg3) .. " (Ammo: " .. arg4 .. ")")
 			giveWeapon (thePlayer, arg3, arg4, true)
 		elseif (action == "warpTo") then
-			outputChatBox(getPlayerName(source).." warped you to him.",thePlayer,255,0,0)
+			if (source == thePlayer) then
+				exports.DENdxmsg:createNewDxMessage(source, "You cannot warp to yourself", 255, 0, 0)
+				return false
+			end
+			outputChatBox(getPlayerName(source).." warped you to them", thePlayer, 255, 0, 0)
 			if (isPedInVehicle(thePlayer)) then
 				removePedFromVehicle(thePlayer)
 			end
-			x,y,z = getElementPosition(source)
+			-- Possibly use matrices and vectors here instead of changing an X coord
+			x, y, z = getElementPosition(source)
 			int = getElementInterior(source)
 			dim = getElementDimension(source)
 			x = x + 1
-			setElementPosition(thePlayer,x,y,z)
-			setElementInterior(thePlayer,int)
-			setElementDimension(thePlayer,dim)
+			setElementPosition(thePlayer, x, y, z)
+			setElementInterior(thePlayer, int)
+			setElementDimension(thePlayer, dim)
 		end
 	end
 )
 
 -- create premium car
-function givePremiumCar (thePlayer)
+function givePremiumCar(thePlayer)
 	if not (isPedInVehicle(thePlayer)) then
 		local x, y, z = getElementPosition(thePlayer)
 		local rx, ry, rz = getElementRotation(thePlayer)
@@ -692,14 +701,15 @@ addEvent("staffpanel.ban", true)
 addEventHandler("staffpanel.ban", root,
 	function (serialOrAccount, banType, reason, duration)
 		-- Get the timestamp
-		local timestamp = getRealTime().timestamp
+		--local timestamp = getRealTime().timestamp
 		
-		-- If it's a permanent ban, we give a duration of 0
+		--[[
 		if (not duration) then
 			banstamp = 0
 		else
-			banstamp = timestamp + duration
+			--banstamp = timestamp + duration
 		end
+		--]]
 		
 		-- Let's sort out the strings for serial or account
 		if banType == "account" then
@@ -711,11 +721,11 @@ addEventHandler("staffpanel.ban", root,
 		end
 		
 		-- Insert the ban into the database
-		exports.DENmysql:exec("INSERT INTO `bans` (serial, account, reason, banstamp, bannedby) VALUES (?,?,?,?,?)", serial, account, reason, banstamp, getPlayerName(source))
+		--exports.DENmysql:exec("INSERT INTO `bans` (serial, account, reason, banstamp, bannedby) VALUES (?,?,?,?,?)", serial, account, reason, banstamp, getPlayerName(source))
 		
 		-- Let's loop through the players to see if that person is online, and kick them if they are online
-		local players = getElementsByType("player")
-		for i=1,#players do
+		local players = Element.getAllByType("player")
+		for i = 1, #players do
 			if banType == "serial" then
 				local pSerial = getPlayerSerial(players[i])
 				if pSerial == serialOrAccount then
@@ -730,10 +740,22 @@ addEventHandler("staffpanel.ban", root,
 		end
 		
 		-- Alert the admin that their ban was successful
+		local theBan
 		if (serial == "") then
-			exports.DENdxmsg:createNewDxMessage(source, "You have successfully banned account: "..account, 200, 200, 0)
+			theBan = exports.CSGadmin:banServerAccount(account, duration, reason, source)
+			
 		else
-			exports.DENdxmsg:createNewDxMessage(source, "You have successfully banned serial: "..serial, 200, 200, 0)
+			theBan = exports.CSGadmin:banServerSerial(serial, duration, reason, source)
+			
+		end
+		if (theBan) then
+			if (serial == "") then
+				exports.DENdxmsg:createNewDxMessage(source, "You have successfully banned account: "..account, 200, 200, 0)
+			else
+				exports.DENdxmsg:createNewDxMessage(source, "You have successfully banned serial: "..serial, 200, 200, 0)
+			end
+		else
+			exports.DENdxmsg:createNewDxMessage(source, "Failed to ban "..serialOrAccount, 200, 200, 0)
 		end
 		
 		-- Send the table to the client to update the gridlist
