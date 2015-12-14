@@ -14,4 +14,5 @@
 	<export function="setDrug" type="server"/>
 	<export function="outputTable" type="server"/>
 	<export function="getDrugsTable" type="client"/>
+	<oop>true</oop>
 </meta>

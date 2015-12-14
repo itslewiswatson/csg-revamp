@@ -445,12 +445,12 @@ end
 addCommandHandler("dropdrug", dropDrugCom)
 
 function checkForLagg()
-	if (exports.server:getPlayerFPS(localPlayer) <= 10) or (getPlayerPing(localPlayer) >= 450) then
-		if (drugsTaken[5] > 0) then
+	if (exports.server:getPlayerFPS(localPlayer) <= 10 or getPlayerPing(localPlayer) >= 450) then
+		if (drugsTaken[5] and drugsTaken[5] > 0) then
 			triggerServerEvent("CSGdrugs.drugEffectStop",localPlayer,5)
 		else	
 			return false
 		end
 	end
 end
-setTimer(checkForLagg,1000,0)
+Timer(checkForLagg,1000,0)
