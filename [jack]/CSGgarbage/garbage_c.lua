@@ -324,7 +324,7 @@ function checkForTrashJob(player,state)
 			if not trashJobInProgress == true then
 				--outputDebugString("No current job progress found, continuing...")
 				x,y,z = getElementPosition(player)
-				city = getZoneName(x,y,z,true)
+				city = getZoneName(x, y, z, true)
 
 				--outputDebugString("[TRASH] Getting City...")
 				if city == "Los Santos" then
@@ -338,12 +338,12 @@ function checkForTrashJob(player,state)
 				end
 				jobCord = math.random(1,t)
 				if type(jobCord) == "number" then
-					trashMarker = createMarker(garbageCollectionLS[jobCord][1],garbageCollectionLS[jobCord][2],garbageCollectionLS[jobCord][3],"cylinder",4,255,255,0)
-					blip = createBlipAttachedTo(trashMarker,0,3,255,0,0,255,0,99999)
+					trashMarker = createMarker(garbageCollectionLS[jobCord][1], garbageCollectionLS[jobCord][2], garbageCollectionLS[jobCord][3],"cylinder",4,255,255,0)
+					blip = createBlipAttachedTo(trashMarker, 0, 3, 255, 0, 0, 255, 0, 99999)
 					--outputDebugString("Trying to create trash marker")
 					trashJobInProgress = true
 					if isElement(trashMarker) == true and isElement(blip) == true then
-						exports.DENdxmsg:createNewDxMessage("HQ: A trash pickup location has been added to your map.",0,255,0)
+						exports.DENdxmsg:createNewDxMessage("HQ: A trash pickup location has been added to your map.", 0, 255, 0)
 						--outputDebugString("trash marker done!")
 						trashElements[trashMarker] = blip --elements table.
 						--exports.DENdxmsg:createNewDxMessage("There was a recent call from HQ that there trash dumped on side of the road, go pick it up.",255,0,0)
@@ -378,8 +378,8 @@ function(hitElement,matchingDim)
 			if driver == hitElement then --check see if we have the right guy..
 				--outputDebugString("Correct guy found, continuing...")
 				if (getElementModel(vehicle) == 408) then
-					setElementFrozen(vehicle,true)
-					exports.CSGprogressbar:createProgressBar("Collecting...",50,"CSGTrash.addTrashUnit")
+					setElementFrozen(vehicle, true)
+					exports.CSGprogressbar:createProgressBar("Collecting...", 50, "CSGTrash.addTrashUnit")
 					--outputDebugString("Proceeding..")
 					--marker
 
@@ -432,34 +432,35 @@ function toggleRenderGUI(state)
 end
 
 addEvent("CSGTrash.Dropjunkoff",true)
-addEventHandler("CSGTrash.Dropjunkoff",root,
-function()
-	vehicle = getPedOccupiedVehicle(localPlayer)
-	if not vehicle then return end
-	player = getVehicleOccupant(vehicle)
-	if player == localPlayer then --its the driver
-		triggerServerEvent("onGarbageDropoff",root,localPlayer,vehicle,totalUnits)
-		setElementFrozen(vehicle,false)
-		setElementFrozen(localPlayer,false)
-		--outputDebugString("[TRASH] Attempting to pay "..getPlayerName(hitElement))
-		totalUnits = 0
-	else
-		outputChatBox("You're not in the vehicle, trash wasn't dumped!",255,0,0)
-		return --stop here because he jumped out.
+addEventHandler("CSGTrash.Dropjunkoff", root,
+	function ()
+		vehicle = getPedOccupiedVehicle(localPlayer)
+		if not vehicle then return end
+		player = getVehicleOccupant(vehicle)
+		if player == localPlayer then --its the driver
+			triggerServerEvent("onGarbageDropoff", root, localPlayer, vehicle, totalUnits)
+			setElementFrozen(vehicle, false)
+			setElementFrozen(localPlayer, false)
+			--outputDebugString("[TRASH] Attempting to pay "..getPlayerName(hitElement))
+			totalUnits = 0
+		else
+			outputChatBox("You're not in the vehicle, trash wasn't dumped!", 255, 0, 0)
+			return --stop here because he jumped out.
+		end
 	end
-end)
+)
 
-function addUnitToVehicle(hitElement,matchingDimension)
+function addUnitToVehicle(hitElement, matchingDimension)
 	--outputDebugString("Marker hit, proceeding...")
 	if not hitElement == localPlayer then return false end
 
 	vehicle = getPedOccupiedVehicle(hitElement)
-	driver = getVehicleOccupant(vehicle,0)
+	driver = getVehicleOccupant(vehicle, 0)
 	if driver == localPlayer then --check see if we have the right guy..
 		--outputDebugString("Correct guy found, continuing...")
 		if (getElementModel(vehicle) == 408) then
-			setElementFrozen(vehicle,true)
-			exports.CSGprogressbar:createProgressBar("Collecting...",50,"CSGTrash.addTrashUnit")
+			setElementFrozen(vehicle, true)
+			exports.CSGprogressbar:createProgressBar("Collecting...", 50, "CSGTrash.addTrashUnit")
 			--outputDebugString("Proceeding..")
 			destroyElement(markers[source])
 			destroyElement(blip)--blip
@@ -470,21 +471,22 @@ function addUnitToVehicle(hitElement,matchingDimension)
 	end
 end
 
-addEvent("CSGTrash.addTrashUnit",true)
-addEventHandler("CSGTrash.addTrashUnit",root,
-function()
-	triggerServerEvent("addTrashUnits",localPlayer,getPlayerOccupiedVehicle(localPlayer),1)
-	trashJobInProgress=false
+addEvent("CSGTrash.addTrashUnit", true)
+addEventHandler("CSGTrash.addTrashUnit", root,
+	function ()
+		triggerServerEvent("addTrashUnits", localPlayer, getPedOccupiedVehicle(localPlayer), 1)
+		trashJobInProgress = false
 
-	totalUnits = totalUnits + 1
-	exports.DENdxmsg:createNewDxMessage("Trash collected, new amount: "..totalUnits,0,255,0)
-	setElementFrozen(getPedOccupiedVehicle(localPlayer),false)
-	setElementFrozen(localPlayer,false)
-	--redrawText()
-end)
+		totalUnits = totalUnits + 1
+		exports.DENdxmsg:createNewDxMessage("Trash collected, new amount: "..totalUnits, 0, 255, 0)
+		setElementFrozen(getPedOccupiedVehicle(localPlayer), false)
+		setElementFrozen(localPlayer, false)
+		--redrawText()
+	end
+)
 
-screenWidth,screenHeight = guiGetScreenSize()
 function drawText()
+	local screenWidth, screenHeight = guiGetScreenSize()
 	local vehicle = getPedOccupiedVehicle(localPlayer)
 	if (vehicle) then
 		if getElementModel(vehicle) == 408 then
@@ -495,6 +497,6 @@ function drawText()
 		return
 	end
 
-	exports.CSGpriyenmisc:dxDrawColorText ( "#00CC99Trash Units: #33FF33"..totalUnits.."", screenWidth*0.08, screenHeight*0.95, screenWidth, screenHeight, tocolor ( 0, 0, 0, 255 ), 1.02, "pricedown" )
+	exports.CSGpriyenmisc:dxDrawColorText("#00CC99Trash Units: #33FF33"..totalUnits.."", screenWidth*0.08, screenHeight*0.95, screenWidth, screenHeight, tocolor ( 0, 0, 0, 255 ), 1.02, "pricedown" )
 end
-addEventHandler("onClientRender",root,drawText)
+addEventHandler("onClientRender", root, drawText)
