@@ -1005,7 +1005,7 @@ addEventHandler("onRequestBansTable:callBack", root,
 		guiGridListClear(adminGUI.GUIgrids[6])
 		guiGridListClear(adminGUI.GUIgrids[7])
 		for i=1,#theTable do
-			if (string.len(theTable[i].serial) > 30) then -- serial ban
+			if (tostring(theTable[i].serial):len() > 30) then -- serial ban [we need to use tostring here because if it's an account ban it defaults to NULL in the MySQL database]
 				local row = guiGridListAddRow(adminGUI.GUIgrids[6])
 				guiGridListSetItemText(adminGUI.GUIgrids[6], row, 1, theTable[i].serial, false, false)
 				guiGridListSetItemData(adminGUI.GUIgrids[6], row, 1, theTable[i])
@@ -1030,7 +1030,7 @@ function onBanGridClick()
 	if selRow and selRow ~= -1 then
 		local selectedBanInfo = guiGridListGetItemData(source,selRow,1)
 		serialUsername = selectedBanInfo.serial
-		if not (string.len(selectedBanInfo.serial) > 30) then 
+		if (tostring(selectedBanInfo.serial):len() < 30) then 
 			serialUsername = selectedBanInfo.account
 		end
 		banReason = tostring(selectedBanInfo.reason)

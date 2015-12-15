@@ -20,4 +20,6 @@
 	<export function="banServerAccount" type="server"/>
 	<export function="banServerSerial" type="server"/>
 	<export function="removeServerBan" type="server"/>
+	
+	<oop>true</oop>
 </meta>
