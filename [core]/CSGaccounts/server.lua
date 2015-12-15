@@ -4,53 +4,49 @@ db = exports.DENmysql:getConnection()
 -- Tables
 local weaponStringTable = {}
 local playerWeaponTable = {}
+local forbiddenWeapons = {[18] = true, [36] = true, [37] = true, [38] = true} -- Minigun, RPG, heatseaker, molotov are all forbidden
 
 -- When the player login
 addEvent("onServerPlayerLogin")
 addEventHandler("onServerPlayerLogin", root,
 	function (userID)
-		db:query(recCB, {source}, "SELECT * FROM `weapons` WHERE `userid`=?", userID)
-		db:query(recCB, {source}, "SELECT * FROM `accounts` WHERE `id`=?", userID)
-		db:query(recCBwep, {source}, "SELECT * FROM `accounts` WHERE `id`=?", userID)
+		db:query(cacheWeapons, {source}, "SELECT `weapons` FROM `accounts` WHERE `id`=?", userID)
 	end
 )
 
-function recCB(qh, source)
-	if isElement(source) then else return end
-	local weaponTable = dbPoll(qh, 0)
-	if (weaponTable) then
-		weaponTable = weaponTable[1]
-		playerWeaponTable[source] = weaponTable
+function cacheWeapons(qh, plr)
+	if (not plr or not isElement(plr) or plr.type ~= "player") then return end
+	local weaponTable = qh:poll(0)
+	if (weaponTable and #weaponTable == 1) then
+		-- Since the weapons column is a JSON string, we need to make it a normal Lua table
+		playerWeaponTable[plr] = fromJSON(weaponTable[1].weapons)
+		
+		-- Call the other functions
+		givePlayerWeapons(plr)
+		setPlayerWeaponString(plr, weaponTable[1].weapons)
 	end
-
 end
 
-function recCBwep(qh,source)
-	if isElement(source) then else return end
-	local weaponTable = dbPoll(qh, 0)
- 	if weaponTable[1] ~= nil then
-		local t = fromJSON(weaponTable[1].weapons)
-
-		for k, v in pairs(t) do
-			if k == 35 and v > 0 then
-				giveWeapon(source, k, v)
-			end
+function givePlayerWeapons(plr)
+	if (not plr or not isElement(plr) or plr.type ~= "player") then return end
+	local weaponTable = playerWeaponTable[plr]
+	for weapon, ammo in pairs(weaponTable) do
+		if (not forbiddenWeapons[tonumber(weapon)] and ammo > 0) then
+			giveWeapon(plr, weapon, ammo)
 		end
 	end
 end
 
-function recCB2(qh,source)
-	if isElement(source) then else return end
-	local weaponTable = dbPoll(qh,0)
-	if(weaponTable) then
-		weaponTable=weaponTable[1]
-		weaponStringTable[ source ] = weaponTable["weapons"]
+function setPlayerWeaponString(plr, weaponString)
+	if (not plr or not weaponString or not isElement(plr) or plr.type ~= "player") then return end
+	if (weaponTable) then
+		weaponStringTable[plr] = weaponString
 	end
 end
 
 -- Function that checks if the player owns this weapons
 function doesPlayerHaveWeapon(thePlayer, theWeapon)
-	if (playerWeaponTable[thePlayer]) and(playerWeaponTable[ thePlayer][tonumber(theWeapon)]) then
+	if (playerWeaponTable[thePlayer]) and(playerWeaponTable[thePlayer][tonumber(theWeapon)]) then
 		if (playerWeaponTable[thePlayer][tonumber(theWeapon)] == 1) then
 			return true
 		else
@@ -112,8 +108,8 @@ addEventHandler("onElementModelChange", root,
 )
 
 -- Function that get the correct weapon string of the player
-function getPlayerWeaponString(thePlayer)
-	return weaponStringTable[thePlayer]
+function getPlayerWeaponString(plr)
+	return weaponStringTable[plr]
 end
 
 -- Event that syncs the correct weapon string with the server
@@ -121,14 +117,13 @@ addEvent("syncPlayerWeaponString", true)
 addEventHandler("syncPlayerWeaponString", root,
 	function (theString, allow)
 		if (allow) then
-			if isPedDead(source) == true then
+			if isPedDead(source) then
 				local t = fromJSON(theString)
 				if #t == 0 then return end
 			end
-
 			weaponStringTable[source] = theString
 			exports.DENmysql:exec("UPDATE `accounts` SET `weapons`=? WHERE `id`=?", theString, exports.server:getPlayerAccountID(source))
-		elseif isPedDead(source) == true then
+		elseif isPedDead(source) then
 			return
 		else
 			weaponStringTable[source] = theString
@@ -203,11 +198,12 @@ addEventHandler("onPlayerWasted", root, doSaveData)
 addEventHandler("onPlayerLogout", root, doSaveData)
 
 -- Ignore anything that tells you to upgade, as it will only break this function
-function getPlayerSkin(p)
-	local t = exports.DENmysql:query("SELECT * FROM `accounts` WHERE `username`=?", exports.server:getPlayerAccountName(p))
+function getPlayerSkin(plr)
+	local t = exports.DENmysql:querySingle("SELECT `skin` FROM `accounts` WHERE `username`=?", exports.server:getPlayerAccountName(plr))
 	return t[1].skin
 end
 
+--[[
 setTimer(
 	function ()
 		for _, plr in pairs(Element.getAllByType("player")) do
@@ -220,6 +216,7 @@ setTimer(
 		end
 	end, 1000, 1
 )
+--]]
 
 function forceWeaponSync(p)
 	triggerClientEvent(p, "forceWepSync", p)
