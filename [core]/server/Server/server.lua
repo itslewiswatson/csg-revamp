@@ -285,7 +285,7 @@ addEventHandler("doPlayerLogin", root,
 				setElementData(source, "playerEmail", accountData[1].email)
 				setElementData(source, "playerIP", getPlayerIP (source))
 				setElementData(source, "joinTick", getTickCount())
-				setElementData(source,"playerScore",accountData[1].score)
+				setElementData(source, "playerScore", accountData[1].score)
 				
 				setElementData(source, "carLicence", true)
 				setElementData(source, "planeLicence", true)
@@ -368,10 +368,10 @@ function createPlayerElementIntoGame(thePlayer, dataTable)
 		showPlayerHudComponent(thePlayer, "radar", true)
 		showPlayerHudComponent(thePlayer, "area_name", true)
 
-		if (dataTable.team == "Criminals") or (dataTable.team == "Unemployed") or (dataTable.team == "Unoccupied") then
-			spawnPlayer(thePlayer, dataTable.x, dataTable.y, dataTable.z +1, dataTable.rotation, dataTable.skin, dataTable.interior, dataTable.dimension, getTeamFromName(dataTable.team))
+		if (dataTable.team == "Criminals" or dataTable.team == "Unemployed" or dataTable.team == "Unoccupied") then
+			spawnPlayer(thePlayer, dataTable.x, dataTable.y, dataTable.z + 1, dataTable.rotation, dataTable.skin, dataTable.interior, dataTable.dimension, Team.getFromName(dataTable.team))
 		else
-			spawnPlayer(thePlayer, dataTable.x, dataTable.y, dataTable.z +1, dataTable.rotation, dataTable.jobskin, dataTable.interior, dataTable.dimension, getTeamFromName(dataTable.team))
+			spawnPlayer(thePlayer, dataTable.x, dataTable.y, dataTable.z + 1, dataTable.rotation, dataTable.jobskin, dataTable.interior, dataTable.dimension, Team.getFromName(dataTable.team))
 		end
 
 		local CJCLOTTable = fromJSON(tostring(dataTable.cjskin))
@@ -382,6 +382,8 @@ function createPlayerElementIntoGame(thePlayer, dataTable)
 			end
 		end
 		
+		-- Handled in CSGaccounts/server.lua
+		--[[
 		local weapons = fromJSON(dataTable.weapons)
 		if (weapons) then
 			for weapon, ammo in pairs(weapons) do
@@ -390,6 +392,7 @@ function createPlayerElementIntoGame(thePlayer, dataTable)
 				end
 			end
 		end
+		]]
 
 		local playerStatus = exports.DENmysql:querySingle("SELECT * FROM `playerstats` WHERE `userid`=? LIMIT 1", playerID)
 		if (playerStatus) then
@@ -415,7 +418,7 @@ function createPlayerElementIntoGame(thePlayer, dataTable)
 
 		setPedArmor(thePlayer, tonumber(dataTable.armor))
 		setPlayerMoney(thePlayer, tonumber(dataTable.money))
-		setPedFightingStyle (thePlayer, tonumber(dataTable.fightstyle))
+		setPedFightingStyle(thePlayer, tonumber(dataTable.fightstyle))
 
 		setElementData(thePlayer, "isPlayerLoggedin", true)
 		setElementData(thePlayer, "wantedPoints", tonumber(dataTable.wanted))

@@ -92,4 +92,6 @@
 	<export function="getPlayerFPS" type="server"/>
 	<export function="isPlayerJailed" type="server"/>
 	<export function="isAllowedToSave" type="server"/> <!-- Security related -->
+	
+	<oop>true</oop>
 </meta>
