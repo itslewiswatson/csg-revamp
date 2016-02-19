@@ -730,15 +730,16 @@ addEventHandler("staffpanel.ban", root,
 		
 		if (theBan == true and type(theBan) ~= "string") then
 			-- Let's loop through the players to see if that person is online, and kick them if they are online
-			local players = Element.getAllByType("player")
-			for i = 1, #players do
-				if banType == "serial" then
-					if (getPlayerSerial(players[i]) == serial) then
-						kickPlayer(players[i], source, reason)
+			for _, plr in ipairs(Element.getAllByType("player")) do
+				if (banType == "serial") then
+					if (plr.serial == serial) then
+						plr:kick(source, reason)
+						break
 					end
 				else
-					if (exports.server:getPlayerAccountName(players[i]) == account) then
-						kickPlayer(players[i], source, reason)
+					if (exports.server:getPlayerAccountName(plr) == account) then
+						plr:kick(source, reason)
+						break
 					end
 				end
 			end
@@ -766,18 +767,18 @@ addEventHandler("staffpanel.unban", root,
 	end
 )
 
-addEvent('staffpanel.accounts.delete', true)
-addEventHandler('staffpanel.accounts.delete', root,
+addEvent("staffpanel.accounts.delete", true)
+addEventHandler("staffpanel.accounts.delete", root,
 	function (id)
-		if not tonumber(id) then return false; end
-		local playerAccount = isAccountLoggedIn(tonumber(ID))
-		if playerAccount then
-			exports.dendxmsg:createNewDxMessage(source,"Account logged in as "..getPlayerName(playerAccount)..", please wait till user logs out.",255,0,0)
-			return false;
+		if (not tonumber(id)) then return false end
+		local playerAccount = isAccountLoggedIn(id)
+		if (playerAccount) then
+			exports.DENdxmsg:createNewDxMessage(source, "Account logged in as "..tostring(getPlayerName(playerAccount))..", please wait until the user logs out.", 255, 0, 0)
+			return false
 		end
-		exports.denmysql:exec("DELETE FROM accounts WHERE id=?",id)
-		exports.denmysql:exec("DELETE FROM banking WHERE userid=?",id)
-		exports.dendxmsg:createNewDxMessage(source, "Account deleted!", 0, 255, 0)
+		exports.DENmysql:exec("DELETE FROM `accounts` WHERE `id`=?", id)
+		exports.DENmysql:exec("DELETE FROM `banking` WHERE `userid`=?", id)
+		exports.DENdxmsg:createNewDxMessage(source, "Account deleted!", 0, 255, 0)
 	end
 )
 
