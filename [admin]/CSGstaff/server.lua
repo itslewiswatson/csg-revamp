@@ -10,8 +10,6 @@ local staffRanks = {
 	[4] = "Experienced Staff",
 	[5] = "Important Staff",
 	[6] = "Leading Staff",
-	[7] = "CSG Leader",
-	[8] = "Yokozuna",
 }
 
 -- Staff passwords for MTA account system
@@ -28,11 +26,11 @@ local devPlayers = {
 -- Log staff and devs in with their respective MTA accounts
 addEventHandler("onPlayerLogin", root,
 	function (a, b)
-		if (not a) and (not b) and (devPlayers[exports.server:getPlayerAccountName(source)]) then
+		if (not a and not b and devPlayers[exports.server:getPlayerAccountName(source)]) then
 			logIn(source, getAccount(exports.server:getPlayerAccountName(source)), devPlayers[exports.server:getPlayerAccountName(source)])
 		end
 		
-		if (not a) and (not b) and (staffPlayers[exports.server:getPlayerAccountName(source)]) then
+		if (not a and not b and staffPlayers[exports.server:getPlayerAccountName(source)]) then
 			logIn(source, getAccount(exports.server:getPlayerAccountName(source)), staffPlayers[exports.server:getPlayerAccountName(source)])
 		end
 	end
@@ -107,16 +105,18 @@ addCommandHandler("staff",
 			-- setElementData(thePlayer, "Rank", staffRanks[getPlayerAdminLevel (thePlayer)], true)
 
 			if (adminTable[thePlayer].gender == 0) then skin = 217 else skin = 211 end
-			setElementModel(thePlayer, skin)
+			thePlayer.model = skin
 			exports.server:updatePlayerJobSkin(thePlayer, skin)
-
 			thePlayer:setHealth(100)
 
 			exports.DENvehicles:reloadFreeVehicleMarkers(thePlayer, true)
 
 			triggerEvent("onPlayerJobChange", thePlayer, staffRanks[getPlayerAdminLevel(thePlayer)], false, getPlayerTeam(thePlayer))
-			exports.CSGlogging:createAdminLogRow(thePlayer, getPlayerName(thePlayer).." entered staff job with " .. getPlayerWantedLevel(thePlayer).." stars")
-
+			
+			if (thePlayer.wantedLevel > 0) then
+				exports.CSGlogging:createAdminLogRow(thePlayer, tostring(thePlayer.name).." entered staff job with "..tostring(thePlayer.wantedLevel).." stars")
+			end
+			
 			thePlayer:setData("wantedPoints", 0, true)
 			setPlayerWantedLevel(thePlayer, 0)
 			exports.DENlaw:updatedWantedLevel(thePlayer, 0)
